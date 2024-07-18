@@ -1,0 +1,36 @@
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-bottom: 0.1rem;
+
+    font-size: 1.4rem;
+    color: var(--light-font-colour);
+    
+    border: 0rem solid var(--border-colour-2);
+    border-radius: 0.4rem;
+    box-shadow: 0.3rem 0.5rem 0.6rem 0 rgba(36, 14, 25, 0.25);
+    background-color: var(--button-colour);
+
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.05s;
+    outline: none;
+}
+
+.button-grow {
+    border: 1px solid var(--border-colour-2);
+}
+
+.button:hover {
+    background-color: var(--panel-colour-4);
+}
+
+.button:active {
+    background-color: var(--hover-colour-light);
+}
+
+.button-grow:hover {
+    border: var(--border-colour-5);
+}

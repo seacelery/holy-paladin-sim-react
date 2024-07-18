@@ -1,0 +1,148 @@
+.header-container {
+  display: flex;
+  justify-content: right;
+  height: 7rem;
+  padding-top: 1rem;
+  margin-top: 0.6rem;
+  margin-left: auto;
+}
+
+.version-toggle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+  width: 14rem;
+  height: 3.2rem;
+  padding-bottom: 0.2rem;
+  border: 0.1rem solid var(--border-colour-3);
+  border-radius: 0.3rem;
+  background-color: var(--panel-colour-2);
+  cursor: pointer;
+}
+.version-toggle-container .version-input {
+  position: relative;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding-left: 0.1rem;
+  height: 3.2rem;
+  width: 100%;
+  font-size: 1.3rem;
+  padding-left: 0.5rem;
+}
+.version-toggle-container .version-input .version-selected-version {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  position: absolute;
+  padding-left: 0.8rem;
+  padding-top: 0.4rem;
+  top: -0.2rempx;
+  left: -0.1px;
+  height: 3.2rem;
+  width: 100%;
+  color: var(--light-font-colour);
+  font-size: 1.4rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.version-toggle-container .version-input .custom-version-select-arrow-down {
+  position: absolute;
+  top: 1rem;
+  left: 12rem;
+  font-size: 1.2rem;
+  color: var(--light-font-colour);
+}
+.version-toggle-container .version-suggestions {
+  display: none;
+  position: absolute;
+  top: 3.1rem;
+  left: -0.1rem;
+  text-align: left;
+  width: 14rem;
+  overflow: hidden;
+  background-color: var(--panel-colour-2);
+  border-left: 0.1rem solid var(--border-colour-3);
+  border-right: 0.1rem solid var(--border-colour-3);
+  border-bottom: 0.1rem solid var(--border-colour-3);
+  z-index: 100;
+  color: var(--light-font-colour);
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.version-toggle-container .version-suggestions .version-option {
+  display: flex;
+  align-items: center;
+  padding-left: 0.6rem;
+  padding-bottom: 0.1rem;
+  border-radius: 0.3rem;
+  height: 3rem;
+  width: 100%;
+}
+.version-toggle-container .version-suggestions .version-option:hover {
+  background-color: var(--panel-colour-5);
+}
+
+.theme-toggle-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4rem;
+  margin-right: 1.5rem;
+  padding-top: 1.2rem;
+  width: 6rem;
+  color: var(--light-font-colour);
+  transition: all 0.4s ease-out;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.theme-toggle-container .theme-toggle {
+  display: flex;
+  align-items: center;
+  position: relative;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 6rem;
+  height: 3.1rem;
+  border-radius: 3rem;
+  background-color: var(--info-circle-colour);
+  cursor: pointer;
+}
+.theme-toggle-container .theme-toggle .theme-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  position: absolute;
+  left: 0.3rem;
+  border-radius: 50%;
+  background: var(--info-circle-colour-2);
+  transition: all 0.1s ease-in;
+}
+.theme-toggle-container .theme-toggle .theme-circle .theme-moon-icon {
+  position: absolute;
+  font-size: 2rem;
+  color: var(--info-circle-colour);
+  transform: rotate(-15deg);
+  transition: opacity 0.15s ease-in-out;
+}
+.theme-toggle-container .theme-toggle .theme-circle .theme-paladin-icon {
+  position: absolute;
+  height: 2.8rem;
+  width: 2.8rem;
+  border-radius: 50%;
+  transition: opacity 0.15s ease-in-out;
+}
+.theme-toggle-container .theme-toggle .theme-circle .theme-icon-hidden {
+  opacity: 0;
+}
+.theme-toggle-container .theme-toggle .theme-circle .theme-circle.theme-checked {
+  left: 3.2rem;
+}/*# sourceMappingURL=Header.css.map */

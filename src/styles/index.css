@@ -1,0 +1,133 @@
+:root {
+  --background-colour: rgb(4, 1, 2);
+  --panel-colour: #070506;
+  --panel-colour-2: rgb(20, 9, 16);
+  --panel-colour-3: rgb(46, 24, 39);
+  --panel-colour-4: #79485d;
+  --panel-colour-5: rgb(51, 29, 42);
+  --panel-colour-6: rgb(19, 9, 15);
+  --panel-colour-7: rgb(12, 6, 10);
+  --panel-colour-background: #070506;
+  --panel-colour-table: rgb(20, 8, 15);
+  --panel-colour-table-2: rgb(10, 4, 7);
+  --panel-colour-table-3: rgb(7, 3, 5);
+  --panel-colour-table-4: rgb(6, 2, 4);
+  --panel-colour-table-5: rgb(15, 7, 12);
+  --panel-colour-table-6: rgb(11, 6, 10);
+  --button-colour: #64384B;
+  --border-colour: #3c3241;
+  --border-colour-2: rgb(17, 8, 14);
+  --transparent-border-colour-2: #1b1a1fd7;
+  --border-colour-3: #4e3546;
+  --border-colour-4: rgb(133, 10, 94);
+  --border-colour-5: #1b1a1f;
+  --tooltip-colour: rgba(36, 36, 36, 0.034);
+  --tooltip-colour-hover: rgba(51, 29, 42, 0.651);
+  --tooltip-opaque-colour: rgb(20, 20, 20);
+  --tooltip-colour-2: rgba(54, 36, 50, 0.075);
+  --hover-colour-dark: rgb(18, 18, 21);
+  --hover-colour-light: rgb(85, 50, 71);
+  --subrow-arrow-colour: #cca1ddef;
+  --subrow-arrow-colour-hover: #c8add3c9;
+  --subrow-arrow-colour-active: #c790ddc9;
+  --sorting-arrow-colour: #91fcd8c9;
+  --light-font-colour: #fff3f8;
+  --dark-font-colour: rgb(0, 0, 0);
+  --info-circle-colour: #79475d;
+  --info-circle-colour-2: #e7afc7;
+  --highlight-font: rgba(255, 255, 255, 0.877);
+  --green-font: rgb(101, 214, 129);
+  --red-font: rgb(214, 96, 96);
+  --red-font-hover: rgb(209, 119, 119);
+  --red-font-active: rgb(214, 75, 75);
+  --red-font-cancelled: rgb(230, 58, 58);
+  --progress-bar-font: rgb(92, 172, 76);
+  --healing-font: #d8fdd8;
+  --holy-font: #f4f8cd;
+  --gold-font: rgb(243, 203, 130);
+  --paladin-font: #e7afc7;
+  --dark-paladin-font: #79475d;
+  --holy-power-gain: rgb(101, 214, 129);
+  --holy-power-loss: rgb(214, 101, 101);
+  --mana: #76afdd;
+  --leech-font: #8ddb84;
+  --stat-intellect: #f5b3f4;
+  --stat-health:var(--background-colour);
+  --stat-haste: #5be99b;
+  --stat-crit: #fc8f8f;
+  --stat-mastery: #c1a1fd;
+  --stat-versatility: #A3EDFF;
+  --rarity-legendary: #ff8000;
+  --rarity-epic: #a335ee;
+  --rarity-rare: #0070dd;
+  --rarity-uncommon: #1eff00;
+  --rarity-common: #fff;
+  --rarity-poor: var(--border-colour-3);
+  --rarity-legendary-dark: #0f0800;
+  --rarity-epic-dark: #08030c;
+  --rarity-rare-dark: #020507;
+  --rarity-uncommon-dark: #020803;
+  --rarity-common-dark: #0c0c0c0e;
+  --rarity-poor-dark: #0c0c0c0e;
+}
+
+[data-theme=plain] {
+  --background-colour: #070707;
+  --panel-colour: #0B0B0B;
+  --panel-colour-2: #141414;
+  --panel-colour-3: #111111;
+  --panel-colour-4: #646464;
+  --panel-colour-5: #272727;
+  --panel-colour-6: #121212;
+  --panel-colour-7: #2E2E2E;
+  --panel-colour-background: #0B0B0B;
+  --panel-colour-table: #1f1f1f;
+  --panel-colour-table-2: #0E0E0E;
+  --panel-colour-table-3: #0D0D0D;
+  --panel-colour-table-4: rgba(0, 0, 0, 0);
+  --panel-colour-table-5: #202020;
+  --panel-colour-table-6: #0e0e0e;
+  --button-colour: #5c5c5c;
+  --border-colour: #3c3241;
+  --border-colour-2: #1b1a1f;
+  --transparent-border-colour-2: #1b1a1fd7;
+  --border-colour-3: #56545a;
+  --border-colour-4: #56545a;
+  --tooltip-colour: rgba(0, 0, 0, 0.233);
+  --tooltip-colour-hover: rgba(255, 255, 255, 0.096);
+  --tooltip-opaque-colour: rgb(20, 20, 20);
+  --tooltip-colour-2: rgba(0, 0, 0, 0.233);
+  --hover-colour-dark: rgb(255, 255, 255);
+  --hover-colour-light: #4b4b4b;
+  --subrow-arrow-colour: #cca1ddef;
+  --subrow-arrow-colour-hover: #c8add3c9;
+  --subrow-arrow-colour-active: #c790ddc9;
+  --sorting-arrow-colour: #91fcd8c9;
+  --light-font-colour: white;
+  --dark-font-colour: rgb(0, 0, 0);
+  --info-circle-colour: #9c9597;
+  --info-circle-colour-2: rgb(18, 18, 21);
+  --rarity-epic-dark: #0f0616;
+  --rarity-rare-dark: #050b0f;
+  --rarity-uncommon-dark: #041106;
+  --rarity-common-dark: #0c0c0c0e;
+  --rarity-poor-dark: #0c0c0c0e;
+}
+
+* {
+  font-family: "Inter";
+  font-weight: 400;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0 auto;
+  background-color: var(--background-colour);
+  font-size: 1.6rem;
+}/*# sourceMappingURL=index.css.map */

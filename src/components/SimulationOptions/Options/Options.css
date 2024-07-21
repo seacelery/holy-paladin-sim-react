@@ -1,1 +1,48 @@
-/*# sourceMappingURL=Options.css.map */
+.options-container {
+  display: flex;
+  position: relative;
+  padding: 1.3rem 0 0 3.5rem;
+  font-size: 1.5rem;
+}
+
+.options-section {
+  flex: 1;
+  padding: 1rem;
+  width: 33.3%;
+}
+
+.options-right {
+  position: relative;
+  height: 100%;
+}
+
+.option-container input {
+  flex-grow: 1;
+}
+
+.options-header {
+  margin-bottom: 1rem;
+  font-size: 1.9rem;
+  color: var(--light-font-colour);
+}
+
+.options-divider {
+  height: 0.1rem;
+  margin-left: -0.1rem;
+  margin-bottom: 2.5rem;
+  width: 93%;
+  background-color: var(--border-colour-3);
+}
+
+.option-info-circle {
+  position: absolute;
+  top: 0.4rem;
+  left: 7rem;
+  font-size: 1.8rem;
+  color: var(--info-circle-colour);
+}
+
+.option-info-circle:hover {
+  color: var(--paladin-font);
+  transition: color 0.1s ease-in-out;
+}/*# sourceMappingURL=Options.css.map */

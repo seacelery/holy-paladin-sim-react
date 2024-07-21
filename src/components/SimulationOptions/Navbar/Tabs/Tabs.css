@@ -1,0 +1,43 @@
+.options-navbar {
+  display: inline-flex;
+  border-radius: 0.3rem;
+  border-bottom-right-radius: 0rem;
+  background-color: var(--background-colour);
+}
+
+.options-tab {
+  padding: 1rem;
+  min-width: 8rem;
+  border-top: 0.1rem solid var(--border-colour-3);
+  border-right: 0.1rem solid var(--border-colour-3);
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--light-font-colour);
+  background-color: var(--panel-colour-table-2);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.options-tab:last-child {
+  border-top-right-radius: 0.3rem;
+}
+
+.options-tab.active {
+  background-color: var(--panel-colour-4);
+  text-shadow: 0.05rem 0 0 var(--light-font-colour);
+}
+
+.options-tab.inactive {
+  background-color: var(--panel-colour-2);
+  text-shadow: none;
+}
+
+.options-tab.inactive:hover {
+  cursor: pointer;
+  background-color: var(--hover-colour-light);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}/*# sourceMappingURL=Tabs.css.map */

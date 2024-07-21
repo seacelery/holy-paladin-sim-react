@@ -1,0 +1,90 @@
+.import-character-container {
+    margin-left: auto;
+    display: flex;
+    align-items:end;
+
+    height: 4.5rem;
+}
+
+.import-character-options-container {
+    display: flex;
+    justify-content: right;
+
+    border-top: 0.1rem solid var(--panel-colour-4);
+    border-top-left-radius: 0.2rem;
+    border-top-right-radius: 0.2rem;
+}
+
+.character-input-field {
+    padding-left: 0.5rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+
+    border: 0.1rem solid var(--panel-colour-4);
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+
+    font-size: 1.7rem;
+    color: var(--light-font-colour);
+    background-color: var(--panel-colour-2);
+}
+
+.character-name-input, .character-realm-input {
+    width: 14rem;
+    height: 2.7rem;
+}
+
+.character-realm-input {
+    padding-left: 0.2rem;
+}
+
+.character-region-input {
+    width: 5rem;
+    padding-left: 0.1rem;
+    height: 2.7rem;
+}
+
+.character-region-input, .character-name-input, .character-realm-input {
+    font-size: 1.4rem;
+
+    outline: none;
+}
+
+.character-realm-input::-webkit-scrollbar-thumb {
+    border-left: 0.rem solid var(--panel-colour-2);
+}
+
+.character-realm-input::-webkit-scrollbar-track {
+    background-color: var(--panel-colour-2);
+}
+
+.import-button {
+    padding-bottom: 0.2rem;
+
+    color: var(--light-font-colour);
+    font-size: 1.4rem;
+
+    background-color: var(--button-colour);
+    box-shadow: 0.3rem 0.5rem 0.6rem 0 rgba(36, 14, 25, 0.25);
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.05s;
+    border: none;
+
+    outline: none;
+}
+
+.import-button:hover {
+    background-color: var(--panel-colour-4);
+    border: var(--border-colour-5);
+}
+
+.import-button:active {
+    background-color: var(--hover-colour-light);
+    border: var(--border-colour-5);
+}
+
+.character-name-input {
+    color: var(--paladin-font) !important;
+}

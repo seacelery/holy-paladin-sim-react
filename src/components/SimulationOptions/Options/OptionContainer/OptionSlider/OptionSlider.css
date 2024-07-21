@@ -1,0 +1,74 @@
+.option-slider-label {
+  display: flex;
+  margin-right: 1rem;
+  padding-top: 0.1rem;
+  padding-right: 0.5rem;
+  min-width: 16rem;
+  height: 3rem;
+  font-size: 1.4rem;
+  color: var(--light-font-colour);
+}
+
+.option-slider {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  height: 0.8rem;
+  margin-left: 0.4rem;
+  width: 20rem;
+  background: var(--background-colour);
+}
+
+.option-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.2rem;
+  height: 1.2rem;
+  background: var(--paladin-font);
+  cursor: pointer;
+  border-radius: 2rem;
+}
+
+.option-slider::-moz-range-thumb {
+  width: 1rem;
+  height: 1rem;
+  background: var(--paladin-font);
+  cursor: pointer;
+  border-radius: 2rem;
+}
+
+.slider-container, .options-option-container {
+  width: 100%;
+}
+
+.slider-value-container {
+  display: flex;
+  justify-content: center;
+  margin-left: 0.4rem;
+  width: 20rem;
+  margin-bottom: 0.2rem;
+}
+
+.slider-value {
+  margin-top: -0.8rem;
+  margin-bottom: 0.5rem;
+  width: 5rem;
+  text-align: center;
+  font-size: 1.4rem;
+  color: var(--light-font-colour);
+  transform: translateX(0.3rem);
+}
+
+.slider-value-time, .slider-value-time-divider {
+  margin-top: -0.8rem;
+  margin-bottom: 0.5rem;
+  transform: translateX(-0.2rem);
+  text-align: center;
+  font-size: 1.4rem;
+  color: var(--light-font-colour);
+}
+
+.slider-value-minutes {
+  min-width: 1.8rem;
+  text-align: right;
+}/*# sourceMappingURL=OptionSlider.css.map */

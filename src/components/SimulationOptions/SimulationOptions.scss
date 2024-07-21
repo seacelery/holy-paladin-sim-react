@@ -1,0 +1,20 @@
+.simulation-options-container {
+    margin: 3rem auto 6rem auto;
+
+    width: 132rem;
+
+    border-left: 0.1rem solid var(--border-colour-3);
+    border-bottom: 0.1rem solid var(--border-colour-3);
+    border-top: none;
+    border-radius: 0.3rem;
+}
+
+.options-window {
+    height: 60.3rem;
+
+    border-right: 0.1rem solid var(--border-colour-3);
+    border-top: 0.1rem solid var(--border-colour-3);
+    border-radius: 0.3rem;
+
+    background-color: var(--panel-colour);
+}

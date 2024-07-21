@@ -1,0 +1,46 @@
+.option-icons-label {
+    display: flex;
+
+    margin-right: 1.0rem;
+    padding-top: 0.1rem;
+    padding-right: 0.5rem;
+    min-width: 16rem;
+
+    height: 3.0rem;
+    font-size: 1.4rem;
+
+    color: var(--light-font-colour);
+}
+
+.option-icons-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 4.9rem 4.9rem 4.9rem 4.9rem;
+    gap: 0.4rem;
+}
+
+.option-image {
+    width: 4.9rem;
+    height: 4.9rem;
+
+    border: 0.1rem solid var(--border-colour-4);
+    border-radius: 0.2rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.option-image:hover {
+    box-shadow: 0.0rem 0.0rem 0.3rem 0.1rem var(--paladin-font);
+    filter: saturate(1);
+    transition: all 0.05s ease-in-out;
+}
+
+.option-image-selected {
+    box-shadow: 0.0rem 0.0rem 0.3rem 0.1rem var(--paladin-font);
+    filter: grayscale(0);
+}
+
+.option-image-unselected {
+    border: 0.1rem solid var(--border-colour-4);
+    filter: grayscale(0.7) !important;
+}

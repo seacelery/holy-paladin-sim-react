@@ -20,7 +20,7 @@ const Header = ({ theme, toggleTheme }) => {
 
     return (
         <div className="header-container">
-            <Button width="140px" height="32px" grow={false}>
+            <Button width="14rem" height="3.2rem" grow={false}>
                 Import Template
             </Button>
 

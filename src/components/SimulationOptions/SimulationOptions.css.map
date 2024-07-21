@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"SimulationOptions.css"}
+{"version":3,"sources":["SimulationOptions.scss","SimulationOptions.css"],"names":[],"mappings":"AAAA;EACI,2BAAA;EAEA,aAAA;EAEA,gDAAA;EACA,kDAAA;EACA,gBAAA;EACA,qBAAA;ACDJ;;ADIA;EACI,eAAA;EAEA,iDAAA;EACA,+CAAA;EACA,qBAAA;EAEA,qCAAA;ACHJ","file":"SimulationOptions.css"}

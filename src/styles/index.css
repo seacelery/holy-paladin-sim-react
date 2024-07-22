@@ -130,5 +130,31 @@ body {
   margin: 0 auto;
   background-color: var(--background-colour);
   font-size: 1.6rem;
-  line-height: 2.3rem;
+  line-height: 2.4rem;
+}
+
+::-webkit-scrollbar {
+  width: 1rem;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 0.2rem solid var(--background-colour);
+  border-left: 0.4rem solid var(--background-colour);
+  border-radius: 0.2rem;
+  background: var(--border-colour-3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--panel-colour-3);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--panel-colour-2) inset !important;
+}
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: var(--light-font-colour) !important;
 }/*# sourceMappingURL=index.css.map */

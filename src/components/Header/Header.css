@@ -1,9 +1,8 @@
 .header-container {
   display: flex;
   justify-content: right;
+  align-items: center;
   height: 7rem;
-  padding-top: 1rem;
-  margin-top: 0.6rem;
   margin-left: auto;
 }
 
@@ -89,9 +88,7 @@
 .theme-toggle-container {
   display: flex;
   align-items: center;
-  margin-bottom: 4rem;
   margin-right: 1.5rem;
-  padding-top: 1.2rem;
   width: 6rem;
   color: var(--light-font-colour);
   transition: all 0.4s ease-out;

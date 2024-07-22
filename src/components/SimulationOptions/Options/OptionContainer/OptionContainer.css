@@ -1,8 +1,8 @@
 .option-container {
   position: relative;
   display: flex;
-  margin-bottom: 3.3rem;
   justify-content: space-between;
+  margin-bottom: 0.5rem;
 }
 
 .options-option {
@@ -14,4 +14,17 @@
   border: 0.1rem solid var(--border-colour-3);
   border-radius: 0.3rem;
   font-size: 1.5rem;
+}
+
+.option-info-circle {
+  position: absolute;
+  top: 0.5rem;
+  left: 0rem;
+  font-size: 1.8rem;
+  color: var(--info-circle-colour);
+}
+
+.option-info-circle:hover {
+  color: var(--paladin-font);
+  transition: color 0.1s ease-in-out;
 }/*# sourceMappingURL=OptionContainer.css.map */

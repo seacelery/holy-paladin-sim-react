@@ -1,0 +1,60 @@
+.simulate-button-container {
+    display: flex;
+    align-items: center;
+    margin: 0 0.6rem 0 auto;
+
+    position: relative;
+
+    height: 3.9rem;
+}
+
+.simulate-button-container:hover {
+    user-select: none;
+    cursor: pointer;
+}
+
+.simulation-name-text-input {
+    margin-right: 0.6rem;
+    padding-left: .8rem;
+
+    height: 3.8rem;
+    width: 25rem;
+
+    border: .1rem solid var(--border-colour-3);
+    border-radius: .3rem;
+
+    font-size: 1.6rem;
+    background-color: var(--panel-colour-table-2);
+    outline: none;
+
+    color: var(--light-font-colour);
+}
+
+.simulate-button {
+    width: 20rem;
+    height: 3.8rem;
+    
+    border: 0rem solid var(--border-colour-3);
+    border-radius: .3rem;
+
+    font-size: 2.0rem;
+    color: var(--light-font-colour);
+
+    background-color: var(--panel-colour-table-2);
+    box-shadow: .3rem .5rem .6rem 0 rgba(36, 14, 25, 0.15);
+    transition: opacity 0.4s ease-in;
+
+    background-color: var(--button-colour);
+
+    border-radius: .3rem;
+    user-select: none;
+    cursor: pointer;
+}
+
+.simulate-button:hover, #simulation-progress-bar-check-container:active {
+    background-color: var(--panel-colour-4);
+}
+
+.simulate-button:active {
+    background-color: var(--hover-colour-light);
+}

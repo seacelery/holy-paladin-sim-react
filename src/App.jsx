@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import SimulationOptions from "./components/SimulationOptions/SimulationOptions";
+import Footer from "./components/Footer/Footer";
 import { VersionProvider } from "./context/VersionContext";
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
             <VersionProvider>
                 <Header theme={theme} toggleTheme={toggleTheme} />
                 <SimulationOptions />
+                <Footer />
             </VersionProvider>
         </>
     );

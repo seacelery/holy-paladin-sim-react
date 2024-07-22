@@ -32,17 +32,4 @@
   margin-bottom: 2.5rem;
   width: 93%;
   background-color: var(--border-colour-3);
-}
-
-.option-info-circle {
-  position: absolute;
-  top: 0.4rem;
-  left: 7rem;
-  font-size: 1.8rem;
-  color: var(--info-circle-colour);
-}
-
-.option-info-circle:hover {
-  color: var(--paladin-font);
-  transition: color 0.1s ease-in-out;
 }/*# sourceMappingURL=Options.css.map */

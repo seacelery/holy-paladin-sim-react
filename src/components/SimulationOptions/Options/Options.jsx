@@ -2,6 +2,7 @@ import React from "react";
 import "./Options.scss";
 import OptionContainer from "./OptionContainer/OptionContainer";
 import races from "../../../data/races";
+import { seasons } from "../../../data/buffs-consumables-data";
 
 const Options = () => {
     return (
@@ -54,6 +55,8 @@ const Options = () => {
                             max: 0.1,
                             step: 0.01,
                             defaultValue: 0.05,
+                            showInfo: true,
+                            tooltipText: "Reducing this will increase HoT accuracy, but it will be much slower."
                         }}
                     />
                 </div>
@@ -66,7 +69,12 @@ const Options = () => {
                         type="icons"
                         props={{
                             icons: races,
-                            dataType: "race"
+                            label: "Race",
+                            dataType: "race",
+                            showTooltip: true,
+                            exclusiveSelection: true,
+                            allowDeselection: false,
+                            defaultSelectedIcons: []
                         }}
                     />
                     <OptionContainer
@@ -89,6 +97,8 @@ const Options = () => {
                             max: 100,
                             step: 1,
                             defaultValue: 70,
+                            showInfo: true,
+                            tooltipText: "This affects Reclamation and Extrication."
                         }}
                     />
                     <OptionContainer
@@ -126,7 +136,72 @@ const Options = () => {
                     />
                 </div>
 
-                <div className="options-section options-right"></div>
+                <div className="options-section options-right">
+                    <OptionContainer
+                        type="checkbox"
+                        props={{
+                            label: "Enable Overhealing",
+                            buttonEnabled: true,
+                            buttonText: "Abilities",
+                        }}
+                    />
+                    <OptionContainer
+                        type="slider"
+                        props={{
+                            sliderType: "integer",
+                            name: "Dawnlight Targets",
+                            min: 1,
+                            max: 20,
+                            step: 1,
+                            defaultValue: 12,
+                        }}
+                    />
+                    <OptionContainer
+                        type="slider"
+                        props={{
+                            sliderType: "integer",
+                            name: "Sun's Avatar Targets",
+                            min: 1,
+                            max: 20,
+                            step: 1,
+                            defaultValue: 10,
+                        }}
+                    />
+                    <OptionContainer
+                        type="slider"
+                        props={{
+                            sliderType: "percentage",
+                            name: "Light of the Martyr Uptime",
+                            min: 0,
+                            max: 100,
+                            step: 1,
+                            defaultValue: 80,
+                        }}
+                    />
+                    <OptionContainer
+                        type="slider"
+                        props={{
+                            sliderType: "percentage",
+                            name: "Potion Bomb of Power Uptime",
+                            min: 0,
+                            max: 100,
+                            step: 1,
+                            defaultValue: 30,
+                        }}
+                    />
+                    <OptionContainer
+                        type="icons"
+                        props={{
+                            icons: seasons,
+                            label: "Blessing of the Seasons",
+                            dataType: "season",
+                            showTooltip: true,
+                            exclusiveSelection: false,
+                            allowDeselection: true,
+                            defaultSelectedIcons: ["Blessing of Winter", "Blessing of Spring", "Blessing of Autumn"]
+                        }}
+                    />                 
+                </div>
             </div>
         </div>
     );

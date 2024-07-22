@@ -87,4 +87,11 @@ const ptrPotions = {
     "Tempered Potion": {effect: "Gain the effects of all inactive Tempered Flasks, increasing their associated secondary stats by 2168 for 30 sec.", image: "https://render.worldofwarcraft.com/eu/icons/56/trade_alchemy_potiona4.jpg"},
 }
 
-export { flasks, ptrFlasks, foodItems, weaponImbues, ptrWeaponImbues, augmentRunes, ptrAugmentRunes, raidBuffs, ptrRaidBuffs, externalBuffs, potions, ptrPotions };
+const seasons = [
+    {name: "Blessing of Summer", image: "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_summer.jpg"},
+    {name: "Blessing of Autumn", image: "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_autumn.jpg"},
+    {name: "Blessing of Winter", image: "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_winter.jpg"},
+    {name: "Blessing of Spring", image: "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_spring.jpg"},
+]
+
+export { flasks, ptrFlasks, foodItems, weaponImbues, ptrWeaponImbues, augmentRunes, ptrAugmentRunes, raidBuffs, ptrRaidBuffs, externalBuffs, potions, ptrPotions, seasons };

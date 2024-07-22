@@ -1,0 +1,53 @@
+.simulate-button-container {
+  display: flex;
+  align-items: center;
+  margin: 0 0.6rem 0 auto;
+  position: relative;
+  height: 3.9rem;
+}
+
+.simulate-button-container:hover {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+}
+
+.simulation-name-text-input {
+  margin-right: 0.6rem;
+  padding-left: 0.8rem;
+  height: 3.8rem;
+  width: 25rem;
+  border: 0.1rem solid var(--border-colour-3);
+  border-radius: 0.3rem;
+  font-size: 1.6rem;
+  background-color: var(--panel-colour-table-2);
+  outline: none;
+  color: var(--light-font-colour);
+}
+
+.simulate-button {
+  width: 20rem;
+  height: 3.8rem;
+  border: 0rem solid var(--border-colour-3);
+  border-radius: 0.3rem;
+  font-size: 2rem;
+  color: var(--light-font-colour);
+  background-color: var(--panel-colour-table-2);
+  box-shadow: 0.3rem 0.5rem 0.6rem 0 rgba(36, 14, 25, 0.15);
+  transition: opacity 0.4s ease-in;
+  background-color: var(--button-colour);
+  border-radius: 0.3rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+}
+
+.simulate-button:hover, #simulation-progress-bar-check-container:active {
+  background-color: var(--panel-colour-4);
+}
+
+.simulate-button:active {
+  background-color: var(--hover-colour-light);
+}/*# sourceMappingURL=SimulateButton.css.map */

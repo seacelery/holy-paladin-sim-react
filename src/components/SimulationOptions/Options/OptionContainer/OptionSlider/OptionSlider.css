@@ -1,12 +1,23 @@
+.option-slider-label-container {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 0.5rem;
+  min-width: 17rem;
+}
+
 .option-slider-label {
   display: flex;
-  margin-right: 1rem;
+  position: relative;
+  margin-right: 1.2rem;
   padding-top: 0.1rem;
-  padding-right: 0.5rem;
-  min-width: 16rem;
   height: 3rem;
   font-size: 1.4rem;
   color: var(--light-font-colour);
+}
+
+.option-slider-info {
+  position: relative;
+  min-width: 0rem;
 }
 
 .option-slider {
@@ -39,6 +50,7 @@
 
 .slider-container, .options-option-container {
   width: 100%;
+  margin-bottom: 3.8rem;
 }
 
 .slider-value-container {
@@ -51,10 +63,13 @@
 
 .slider-value {
   margin-top: -0.8rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.7rem;
   width: 5rem;
   text-align: center;
   font-size: 1.4rem;
+  background: var(--panel-colour);
+  outline: none;
+  border: none;
   color: var(--light-font-colour);
   transform: translateX(0.3rem);
 }

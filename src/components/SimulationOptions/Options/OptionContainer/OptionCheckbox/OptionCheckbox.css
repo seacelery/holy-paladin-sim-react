@@ -1,0 +1,63 @@
+.option-checkbox-button-container {
+  width: 93%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  margin-top: 2rem;
+}
+
+.option-checkbox-container {
+  display: flex;
+  position: relative;
+  padding-left: 3.7rem;
+  padding-top: 0.1rem;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: var(--light-font-colour);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.option-checkbox-container input {
+  display: none;
+}
+
+.options-checkbox-checkmark {
+  position: absolute;
+  top: 0.1rem;
+  left: 0;
+  height: 2.4rem;
+  width: 2.4rem;
+  background-color: var(--panel-colour-2);
+  border: 0.1rem solid var(--border-colour-3);
+}
+
+.option-checkbox-container:hover input ~ .options-checkbox-checkmark {
+  background-color: var(--panel-colour-3);
+}
+
+.option-checkbox-container input:checked ~ .options-checkbox-checkmark {
+  background-color: var(--dark-paladin-font);
+  border: 0.1rem solid var(--paladin-font);
+}
+
+.options-checkbox-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.option-checkbox-container input:checked ~ .options-checkbox-checkmark:after {
+  display: block;
+}
+
+.option-checkbox-container .options-checkbox-checkmark:after {
+  left: 0.7rem;
+  top: 0.1rem;
+  width: 0.6rem;
+  height: 1.3rem;
+  border: 0.1rem solid var(--light-font-colour);
+  border-width: 0 0.3rem 0.3rem 0;
+  transform: rotate(45deg);
+}/*# sourceMappingURL=OptionCheckbox.css.map */

@@ -1,0 +1,59 @@
+.import-overlay {
+  position: absolute;
+  width: 132rem;
+  height: 70rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.3411764706);
+}
+
+.import-character-container-main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 39rem;
+  transform: translate(0rem, -0.7rem);
+  color: var(--light-font-colour);
+  font-size: 1.8rem;
+  text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  background-color: var(--panel-colour);
+  border: 0.1rem solid var(--border-colour-3);
+}
+
+.import-character-reminder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 1rem;
+  height: 6rem;
+  color: var(--light-font-colour);
+  font-size: 2rem;
+}
+
+.character-input-label-main {
+  padding: 0.9rem 1rem 1rem 0.2rem;
+  width: 27.5rem;
+  text-align: left;
+  font-size: 1.6rem;
+  color: var(--light-font-colour);
+}
+
+.character-input-field-main {
+  margin: -0.6rem 0 0.5rem 0;
+  padding: 0 0.5rem 0.1rem 1rem;
+  height: 4rem;
+  width: 27.5rem;
+  font-size: 1.6rem;
+  outline: none;
+  border: 0.1rem solid var(--panel-colour-4);
+  border-radius: 0.3rem;
+  color: var(--light-font-colour);
+  background-color: var(--panel-colour-2);
+}/*# sourceMappingURL=ImportCharacterMain.css.map */

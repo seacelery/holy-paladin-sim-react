@@ -1,0 +1,16 @@
+.tooltip {
+  display: none;
+  padding: 0.8rem;
+  position: fixed;
+  word-wrap: break-word;
+  background-color: var(--panel-colour-2);
+  color: var(--light-font-colour);
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  max-width: 30rem;
+  border: 0.1rem solid var(--border-colour-3);
+  z-index: 1000;
+}/*# sourceMappingURL=Tooltip.css.map */

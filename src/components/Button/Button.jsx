@@ -1,10 +1,12 @@
 import React from "react";
 import "./Button.scss";
 
-const Button = ({ children, width, height, grow, onClick, ...props }) => {
+const Button = ({ children, width, height, margin, fontSize, grow, onClick, ...props }) => {
     const styles = {
         width: width,
         height: height,
+        margin: margin,
+        fontSize: fontSize
     };
 
     return (

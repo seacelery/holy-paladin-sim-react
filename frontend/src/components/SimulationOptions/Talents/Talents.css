@@ -1,1 +1,4 @@
-/*# sourceMappingURL=Talents.css.map */
+.talents-container {
+  display: flex;
+  justify-content: space-evenly;
+}/*# sourceMappingURL=Talents.css.map */

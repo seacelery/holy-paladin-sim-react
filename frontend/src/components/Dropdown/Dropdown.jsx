@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import "./Dropdown.css";
 import { FaChevronDown } from "react-icons/fa";
 
-const Dropdown = ({ dropdownOptions, isOpen, toggleDropdown, ...props }) => {
+const Dropdown = ({ dropdownOptions, isOpen, toggleDropdown, customClassName, ...props }) => {
     const { selectedOption, setSelectedOption } = props;
     const selectedOptionRef = useRef(null);
 
@@ -92,7 +92,7 @@ const Dropdown = ({ dropdownOptions, isOpen, toggleDropdown, ...props }) => {
         <>
             <div
                 type="text"
-                className="dropdown-input-field"
+                className={`dropdown-input-field ${customClassName}`}
                 translate="no"
                 tabIndex="0"
                 onKeyDown={handleKeypress}

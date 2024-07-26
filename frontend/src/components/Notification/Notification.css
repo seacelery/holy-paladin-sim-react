@@ -1,0 +1,20 @@
+.notification {
+  position: fixed;
+  top: 6.5rem;
+  left: 50%;
+  transform: translate(-46%, -50%);
+  padding: 5px 3px;
+  width: 250px;
+  border: 1px solid var(--border-colour-3);
+  border-radius: 4px;
+  text-align: center;
+  color: var(--light-font-colour);
+  font-size: 14px;
+  background-color: var(--panel-colour-2);
+  z-index: 1000;
+  transition: 0.1s all ease-out;
+}
+
+.notification-fade {
+  opacity: 0;
+}/*# sourceMappingURL=Notification.css.map */

@@ -37,9 +37,10 @@
 .dropdown-arrow-down {
     position: absolute;
     top: 1.1rem;
-    left: 25.0rem;
+    right: 0.7rem;
 
     font-size: 1.4rem;
+    pointer-events: none;
 }
 
 .dropdown-options-container {
@@ -89,4 +90,70 @@
 
 .dropdown-option-highlighted {
     background-color: var(--panel-colour-5);
+}
+
+.region-dropdown, .realm-dropdown {
+    padding-left: 0rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+    margin: 0 auto;
+
+    border: 0.1rem solid var(--panel-colour-4);
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    border-radius: 0;
+
+    height: 2.7rem;
+    color: var(--light-font-colour);
+    background-color: var(--panel-colour-2);
+    user-select: none;
+
+    .dropdown-selected-input {
+        width: 16rem;
+        height: 2.7rem;
+        font-size: 1.4rem;
+        left: -0.5rem;
+        top: 0rem;
+    }
+
+    .dropdown-arrow-down {
+        top: 0.7rem;
+        right: 0.4rem;
+    }
+}
+
+.region-dropdown {
+    width: 5rem;
+}
+
+.realm-dropdown {
+    width: 16rem;
+}
+
+.region-dropdown .dropdown-options-container, .realm-dropdown .dropdown-options-container {
+    top: 2.8rem;
+    overflow-x: hidden;
+
+    .dropdown-option {
+        font-size: 1.4rem;
+        height: 2.7rem;
+        padding-left: 0.4rem;
+    }
+}
+
+.region-dropdown .dropdown-options-container {
+    width: 5.1rem;
+
+    .dropdown-option {
+        width: 4.7rem;
+    }
+}
+
+.realm-dropdown .dropdown-options-container {
+    width: 16.1rem;
+
+    .dropdown-option {
+        width: 16rem;
+    }
 }

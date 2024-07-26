@@ -31,4 +31,8 @@
 
 .button-grow:hover {
   border: var(--border-colour-5);
+}
+
+.button-loading {
+  pointer-events: none;
 }/*# sourceMappingURL=Button.css.map */

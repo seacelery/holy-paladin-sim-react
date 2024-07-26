@@ -2,6 +2,7 @@
   width: 93%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 2.5rem;
   margin-top: 2rem;
 }

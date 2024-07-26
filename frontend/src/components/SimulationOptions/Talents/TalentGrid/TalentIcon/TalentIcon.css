@@ -1,1 +1,37 @@
-/*# sourceMappingURL=TalentIcon.css.map */
+.talent-icon {
+  position: relative;
+  border: 0.1rem solid var(--panel-colour-2);
+  box-shadow: 0.1rem 0.1rem 0.1rem var(--border-colour-2);
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.talent-selected {
+  box-shadow: 0rem 0rem 0.4rem var(--gold-font);
+}
+
+.talent-icon-small {
+  width: 4rem;
+  height: 4rem;
+}
+
+.talent-icon-image {
+  width: 100%;
+  height: 100%;
+  filter: saturate(0);
+}
+
+.talent-icon-selected {
+  filter: saturate(1);
+}
+
+.talent-empty {
+  border: none;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+.talent-icon:hover {
+  box-shadow: 0rem 0rem 0.3rem 0.1rem var(--holy-font) !important;
+  transition: box-shadow 0.01s ease-in-out;
+}/*# sourceMappingURL=TalentIcon.css.map */

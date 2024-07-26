@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"TalentIcon.css"}
+{"version":3,"sources":["TalentIcon.scss","TalentIcon.css"],"names":[],"mappings":"AAAA;EACI,kBAAA;EAEA,0CAAA;EACA,uDAAA;EACA,qBAAA;EAEA,eAAA;ACDJ;;ADIA;EACI,6CAAA;ACDJ;;ADIA;EACI,WAAA;EACA,YAAA;ACDJ;;ADIA;EACI,WAAA;EACA,YAAA;EAEA,mBAAA;ACFJ;;ADKA;EACI,mBAAA;ACFJ;;ADKA;EACI,YAAA;EACA,gBAAA;EACA,oBAAA;ACFJ;;ADKA;EACI,+DAAA;EACA,wCAAA;ACFJ","file":"TalentIcon.css"}

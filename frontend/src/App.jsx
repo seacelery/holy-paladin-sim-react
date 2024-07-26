@@ -3,6 +3,9 @@ import Header from "./components/Header/Header";
 import SimulationOptions from "./components/SimulationOptions/SimulationOptions";
 import Footer from "./components/Footer/Footer";
 import { VersionProvider } from "./context/VersionContext";
+import { CharacterDataProvider } from "./context/CharacterDataContext"; 
+import { SimulationParametersProvider } from "./context/SimulationParametersContext";
+import { SocketProvider } from "./context/SocketContext";
 
 const App = () => {
     const [theme, setTheme] = useState("paladin");
@@ -20,11 +23,17 @@ const App = () => {
 
     return (
         <>
-            <VersionProvider>
-                <Header theme={theme} toggleTheme={toggleTheme} />
-                <SimulationOptions />
-                <Footer />
-            </VersionProvider>
+            <SocketProvider>
+                <VersionProvider>               
+                    <Header theme={theme} toggleTheme={toggleTheme} />
+                    <SimulationParametersProvider>
+                        <CharacterDataProvider>
+                            <SimulationOptions />
+                        </CharacterDataProvider>
+                    </SimulationParametersProvider>
+                    <Footer />            
+                </VersionProvider>
+            </SocketProvider>
         </>
     );
 };

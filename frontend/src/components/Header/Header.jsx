@@ -12,7 +12,7 @@ const Header = ({ theme, toggleTheme }) => {
     const toggleDropdown = () => setDropdownOpen(prevState => !prevState);
 
     const versionOptions = [
-        { id: "live", name: "Patch 10.2.7" },
+        { id: "live", name: "Patch 11.0.0" },
         { id: "ptr", name: "The War Within" }
     ];
 

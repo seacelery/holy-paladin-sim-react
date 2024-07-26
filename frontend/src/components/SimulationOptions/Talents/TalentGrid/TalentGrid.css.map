@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"TalentGrid.css"}
+{"version":3,"sources":["TalentGrid.scss","TalentGrid.css"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,WAAA;EAEA,qBAAA;EACA,mBAAA;EAEA,kBAAA;EACA,kBAAA;EACA,kCAAA;EACA,mBAAA;EAEA,yBAAA;KAAA,sBAAA;UAAA,iBAAA;EACA,sBAAA;EACA,wBAAA;EAEA,wDAAA;EACA,8DAAA;ACHJ","file":"TalentGrid.css"}

@@ -1,0 +1,44 @@
+.talent-icon {
+    position: relative;
+
+    border: .1rem solid var(--panel-colour-2);
+    box-shadow: .1rem .1rem .1rem var(--border-colour-2);
+    border-radius: .2rem;
+
+    cursor: pointer;
+}
+
+.talent-selected {
+    box-shadow: 0rem 0rem .4rem var(--gold-font);
+}
+
+.talent-icon-small {
+    width: 4rem;
+    height: 4rem;
+}
+
+.talent-icon-image {
+    width: 100%;
+    height: 100%;
+
+    filter: saturate(0);
+}
+
+.talent-icon-selected {
+    filter: saturate(1);
+}
+
+.talent-empty {
+    border: none;
+    box-shadow: none;
+    pointer-events: none;
+}
+
+.talent-icon:hover {
+    box-shadow: 0rem 0rem .3rem .1rem var(--holy-font) !important;
+    transition: box-shadow 0.01s ease-in-out;
+}
+
+// .talent-split-right:hover {
+//     border-bottom: 1px solid var(--paladin-font)
+// }

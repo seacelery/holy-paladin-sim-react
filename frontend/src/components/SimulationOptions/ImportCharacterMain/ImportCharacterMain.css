@@ -15,7 +15,7 @@
   flex-direction: column;
   align-items: center;
   width: 39rem;
-  transform: translate(0rem, -0.7rem);
+  transform: translate(0rem, -0.2rem);
   color: var(--light-font-colour);
   font-size: 1.8rem;
   text-align: center;
@@ -38,7 +38,7 @@
 }
 
 .character-input-label-main {
-  padding: 0.9rem 1rem 1rem 0.2rem;
+  padding: 1.2rem 1rem 1.2rem 0.2rem;
   width: 27.5rem;
   text-align: left;
   font-size: 1.6rem;

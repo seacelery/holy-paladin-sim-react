@@ -10,11 +10,14 @@ import ImportCharacterMain from "./ImportCharacterMain/ImportCharacterMain";
 import "./SimulationOptions.css";
 
 const SimulationOptions = () => {
+    const [characterImported, setCharacterImported] = useState(false);
     const [activeTab, setActiveTab] = useState("Options");
 
     return <div className="simulation-options-container">
-        <ImportCharacterMain />
-        <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
+        {!characterImported && (
+            <ImportCharacterMain setCharacterImported={setCharacterImported} />
+        )}
+        <Navbar activeTab={activeTab} setActiveTab={setActiveTab} characterImported={characterImported} />
         <div className="options-window">
             {activeTab === "Options" && <Options />}
             {activeTab === "Talents" && <Talents />}

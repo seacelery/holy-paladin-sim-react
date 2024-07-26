@@ -1,1 +1,17 @@
-/*# sourceMappingURL=TalentGrid.css.map */
+.talent-grid {
+  display: grid;
+  gap: 1.6rem;
+  justify-items: center;
+  align-items: center;
+  position: relative;
+  margin-top: 0.8rem;
+  padding: 2rem 1.4rem 1.8rem 0.2rem;
+  margin-left: 0.6rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  --talent-grid-rows: 10;
+  --talent-grid-columns: 7;
+  grid-template-rows: repeat(var(--talent-grid-rows), 1fr);
+  grid-template-columns: repeat(var(--talent-grid-columns), 1fr);
+}/*# sourceMappingURL=TalentGrid.css.map */

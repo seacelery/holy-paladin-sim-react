@@ -1,0 +1,34 @@
+.talent-choice-left,
+.talent-choice-right {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.talent-choice-left {
+  left: 0;
+  -webkit-clip-path: polygon(0 0, 100% 0, 0 100%);
+          clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.talent-choice-right {
+  right: 0;
+  -webkit-clip-path: polygon(100% 100%, 0 100%, 100% 0);
+          clip-path: polygon(100% 100%, 0 100%, 100% 0);
+}
+
+.talent-icon-divider {
+  content: "";
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 138%;
+  height: 0;
+  border-top: 1px solid var(--dark-font-colour);
+  transform: rotate(-45deg);
+  transform-origin: 0 0;
+  z-index: 2;
+}/*# sourceMappingURL=TalentIconChoice.css.map */

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
+import "./Loader.css";
 
-const Loader = () => {
-    const [loading, setLoading] = useState(true);
-
+const Loader = ({ loading }) => {
     return (
         <>
             {loading && (

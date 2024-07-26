@@ -1,0 +1,38 @@
+.error-modal {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.5rem;
+
+    border: 0.1rem solid var(--border-colour-3);
+    background-color: var(--panel-colour-table);
+    cursor: auto;
+    z-index: 1000;
+    --before-bottom: 1.9rem;
+    --before-left: -1.7rem
+    --after-bottom: -1.9rem;
+    --after-left: 9rem;
+}
+
+.error-modal::before {
+    content: "";
+    position: absolute;
+    bottom: var(--before-bottom);
+    left: var(--before-left);
+    
+    border-left: 1.1rem solid transparent;
+    border-right: 1.1rem solid transparent;
+    border-bottom: 1.1rem solid var(--panel-colour-4);
+
+    transform: rotate(-90deg);
+    z-index: 1001;
+}
+
+.error-modal-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}

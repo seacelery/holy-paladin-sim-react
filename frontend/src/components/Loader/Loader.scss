@@ -1,0 +1,56 @@
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+
+    width: 100%;
+}
+
+.loader, .loader-import-main {
+    width: 25px;
+    aspect-ratio: 1;
+    display:grid;
+    mask: conic-gradient(from 15deg,#0000,#000);
+    animation: l26 1s infinite steps(12);
+}
+.loader,
+.loader:before,
+.loader:after {
+    background:
+        radial-gradient(closest-side at 50% 12.5%,
+        #ff98ab 96%,#0000) 50% 0/20% 80% repeat-y,
+        radial-gradient(closest-side at 12.5% 50%,
+        #ff98ab 96%,#0000) 0 50%/80% 20% repeat-x;
+}
+.loader:before,
+.loader:after,
+.loader-import-main:before,
+.loader-import-main:after {
+    content: "";
+    grid-area: 1/1;
+    transform: rotate(30deg);
+}
+.loader:after,
+.loader-import-main:after {
+    transform: rotate(60deg);
+}
+
+.loader-import-main,
+.loader-import-main:before,
+.loader-import-main:after{
+    background:
+        radial-gradient(closest-side at 50% 12.5%,
+        #FFCBD5 96%,#0000) 50% 0/20% 80% repeat-y,
+        radial-gradient(closest-side at 12.5% 50%,
+        #FFCBD5 96%,#0000) 0 50%/80% 20% repeat-x;
+}
+
+@keyframes l26 {
+    100% {transform:rotate(1turn)}
+}
+
+.loader-large {
+    width: 70px;
+}

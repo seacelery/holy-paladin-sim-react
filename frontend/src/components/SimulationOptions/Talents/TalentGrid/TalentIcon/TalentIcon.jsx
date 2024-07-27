@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import "./TalentIcon.scss";
 import TalentArrow from "../TalentArrow/TalentArrow";
 import HeroTalentArrow from "../HeroTalentArrow/HeroTalentArrow";
+import Tooltip from "../../../../Tooltip/Tooltip";
 import { talentsToIcons } from "../../../../../utils/talents-to-icons-map";
 import { CharacterDataContext } from "../../../../../context/CharacterDataContext";
 
@@ -9,6 +10,12 @@ const TalentIcon = ({ name, size = "talent-icon-small", talentData, arrowsData, 
     if (!name) return <div className={`talent-icon ${size} ${!name ? "talent-empty" : ""}`}></div>;
 
     const { characterData, setCharacterData } = useContext(CharacterDataContext);
+
+    const [hoverElement, setHoverElement] = useState(null);
+    const iconRef = useRef(null);
+    useEffect(() => {
+        setHoverElement(iconRef.current);
+    }, []);
 
     const maxRank = talentData.ranks["max rank"];
     const currentRank = talentData.ranks["current rank"];
@@ -98,14 +105,22 @@ const TalentIcon = ({ name, size = "talent-icon-small", talentData, arrowsData, 
                     <img
                         src={talentsToIcons[name]}
                         alt={name}
-                        className={`talent-icon-image ${currentRank > 0 ? "talent-icon-selected" : ""}`}
+                        className={`talent-icon-image ${currentRank > 0 ? "talent-icon-selected" : ""} ${isHeroTalent ? "" : "talent-icon-border"}`}
                         draggable="false"
                         onClick={handleLeftClick}
                         onContextMenu={(e) => {
                             e.preventDefault();
                             handleRightClick();
                         }}
+                        ref={iconRef}
                     />
+
+                    {maxRank > 1 && (
+                        <div className="talent-rank-display">{currentRank} / {maxRank}</div>
+                    )}
+            
+                    <Tooltip text={name} hoverElement={hoverElement} />
+
                     {createArrows()}
                 </>
             )}

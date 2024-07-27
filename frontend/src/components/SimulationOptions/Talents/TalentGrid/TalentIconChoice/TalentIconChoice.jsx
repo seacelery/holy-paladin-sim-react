@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import "./TalentIconChoice.css";
 import TalentArrow from "../TalentArrow/TalentArrow";
 import HeroTalentArrow from "../HeroTalentArrow/HeroTalentArrow";
+import Tooltip from "../../../../Tooltip/Tooltip";
 import { talentsToIcons } from "../../../../../utils/talents-to-icons-map";
 import { CharacterDataContext } from "../../../../../context/CharacterDataContext";
 
@@ -10,6 +11,15 @@ const TalentIconChoice = ({ names = {}, size = "talent-icon-small", talentData, 
 
     const { nameLeft, nameRight } = names;
     const { talentDataLeft, talentDataRight } = talentData;
+
+    const [hoverElementLeft, setHoverElementLeft] = useState(null);
+    const [hoverElementRight, setHoverElementRight] = useState(null);
+    const iconRefLeft = useRef(null);
+    const iconRefRight = useRef(null);
+    useEffect(() => {
+        setHoverElementLeft(iconRefLeft.current);
+        setHoverElementRight(iconRefRight.current);
+    }, []);
 
     const currentRankLeft = talentDataLeft.ranks["current rank"];
     const maxRankLeft = talentDataLeft.ranks["max rank"];
@@ -92,7 +102,7 @@ const TalentIconChoice = ({ names = {}, size = "talent-icon-small", talentData, 
                     return <HeroTalentArrow key={arrowDirection} direction={arrowDirection} talentSelected={currentRankLeft > 0 || currentRankRight > 0} />;
                 } else {
                     return <TalentArrow key={arrowDirection} direction={arrowDirection} talentSelected={currentRankLeft > 0 || currentRankRight > 0} />;
-                }
+                };
             };
             return null;
         });
@@ -110,7 +120,9 @@ const TalentIconChoice = ({ names = {}, size = "talent-icon-small", talentData, 
                     e.preventDefault();
                     handleRightClick(nameLeft, currentRankLeft)
                 }}
+                ref={iconRefLeft}
             />
+            <Tooltip text={nameLeft} hoverElement={hoverElementLeft} />
             <div className="talent-icon-divider"></div>
             <img
                 src={talentsToIcons[nameRight]}
@@ -122,7 +134,9 @@ const TalentIconChoice = ({ names = {}, size = "talent-icon-small", talentData, 
                     e.preventDefault();
                     handleRightClick(nameRight, currentRankRight)
                 }}
+                ref={iconRefRight}
             />
+            <Tooltip text={nameRight} hoverElement={hoverElementRight} />
             {createArrows()}
         </div>
     );

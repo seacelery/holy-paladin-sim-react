@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Options.scss";
 import OptionContainer from "./OptionContainer/OptionContainer";
 import races from "../../../data/races";
 import { seasons } from "../../../data/buffs-consumables-data";
+import { CharacterDataContext } from "../../../context/CharacterDataContext";
+import { SimulationParametersContext } from "../../../context/SimulationParametersContext";
 
 const Options = () => {
+    const isTalentActive = (talent, talentData) => {
+        if (!talentData) return false;
+
+        for (const row in talentData) {
+            for (const talentName in talentData[row]) {
+                if (talent === talentName && talentData[row][talentName].ranks["current rank"] > 0) {
+                    return true;
+                };
+            };
+        };
+    };
+
+    const { characterData } = useContext(CharacterDataContext);
+    const { setSimulationParameters } = useContext(SimulationParametersContext);
+
     return (
         <div className="options-tab-content options-content">
             <div className="options-container">
@@ -13,6 +30,7 @@ const Options = () => {
                 <div className="options-section options-left">
                     <div className="options-header">Encounter</div>
                     <div className="options-divider"></div>
+
                     <OptionContainer
                         type="slider"
                         props={{
@@ -24,6 +42,7 @@ const Options = () => {
                             defaultValue: 1,
                         }}
                     />
+
                     <OptionContainer
                         type="slider"
                         props={{
@@ -35,6 +54,7 @@ const Options = () => {
                             defaultValue: 300,
                         }}
                     />
+
                     <OptionContainer
                         type="slider"
                         props={{
@@ -46,6 +66,7 @@ const Options = () => {
                             defaultValue: 0,
                         }}
                     />
+
                     <OptionContainer
                         type="slider"
                         props={{
@@ -77,6 +98,7 @@ const Options = () => {
                             defaultSelectedIcons: []
                         }}
                     />
+
                     <OptionContainer
                         type="slider"
                         props={{
@@ -88,41 +110,51 @@ const Options = () => {
                             defaultValue: 95,
                         }}
                     />
-                    <OptionContainer
-                        type="slider"
-                        props={{
-                            sliderType: "percentage",
-                            name: "Raid Health",
-                            min: 0,
-                            max: 100,
-                            step: 1,
-                            defaultValue: 70,
-                            showInfo: true,
-                            tooltipText: "This affects Reclamation and Extrication."
-                        }}
-                    />
-                    <OptionContainer
-                        type="slider"
-                        props={{
-                            sliderType: "integer",
-                            name: "Light of Dawn Targets",
-                            min: 1,
-                            max: 5,
-                            step: 1,
-                            defaultValue: 5,
-                        }}
-                    />
-                    <OptionContainer
-                        type="slider"
-                        props={{
-                            sliderType: "integer",
-                            name: "Resplendent Light Targets",
-                            min: 1,
-                            max: 5,
-                            step: 1,
-                            defaultValue: 5,
-                        }}
-                    />
+
+                    {characterData && (isTalentActive("Reclamation", characterData.specTalents) || (isTalentActive("Extrication", characterData.specTalents))) && (
+                        <OptionContainer
+                            type="slider"
+                            props={{
+                                sliderType: "percentage",
+                                name: "Raid Health",
+                                min: 0,
+                                max: 100,
+                                step: 1,
+                                defaultValue: 70,
+                                showInfo: true,
+                                tooltipText: "This affects Reclamation and Extrication."
+                            }}
+                        />
+                    )}                  
+
+                    {characterData && isTalentActive("Light of Dawn", characterData.specTalents) && (
+                        <OptionContainer
+                            type="slider"
+                            props={{
+                                sliderType: "integer",
+                                name: "Light of Dawn Targets",
+                                min: 1,
+                                max: 5,
+                                step: 1,
+                                defaultValue: 5,
+                            }}
+                        />
+                    )}
+
+                    {characterData && isTalentActive("Resplendent Light", characterData.specTalents) && (
+                        <OptionContainer
+                            type="slider"
+                            props={{
+                                sliderType: "integer",
+                                name: "Resplendent Light Targets",
+                                min: 1,
+                                max: 5,
+                                step: 1,
+                                defaultValue: 5,
+                            }}
+                        />
+                    )}
+
                     <OptionContainer
                         type="slider"
                         props={{
@@ -145,39 +177,49 @@ const Options = () => {
                             buttonText: "Abilities",
                         }}
                     />
-                    <OptionContainer
-                        type="slider"
-                        props={{
-                            sliderType: "integer",
-                            name: "Dawnlight Targets",
-                            min: 1,
-                            max: 20,
-                            step: 1,
-                            defaultValue: 12,
-                        }}
-                    />
-                    <OptionContainer
-                        type="slider"
-                        props={{
-                            sliderType: "integer",
-                            name: "Sun's Avatar Targets",
-                            min: 1,
-                            max: 20,
-                            step: 1,
-                            defaultValue: 10,
-                        }}
-                    />
-                    <OptionContainer
-                        type="slider"
-                        props={{
-                            sliderType: "percentage",
-                            name: "Light of the Martyr Uptime",
-                            min: 0,
-                            max: 100,
-                            step: 1,
-                            defaultValue: 80,
-                        }}
-                    />
+
+                    {characterData && isTalentActive("Dawnlight", characterData.heraldOfTheSunTalents) && (
+                        <OptionContainer
+                            type="slider"
+                            props={{
+                                sliderType: "integer",
+                                name: "Dawnlight Targets",
+                                min: 1,
+                                max: 20,
+                                step: 1,
+                                defaultValue: 12,
+                            }}
+                        />
+                    )}
+
+                    {characterData && isTalentActive("Sun's Avatar", characterData.heraldOfTheSunTalents) && (
+                        <OptionContainer
+                            type="slider"
+                            props={{
+                                sliderType: "integer",
+                                name: "Sun's Avatar Targets",
+                                min: 1,
+                                max: 20,
+                                step: 1,
+                                defaultValue: 10,
+                            }}
+                        />
+                    )}
+
+                    {characterData && isTalentActive("Light of the Martyr", characterData.specTalents) && (
+                        <OptionContainer
+                            type="slider"
+                            props={{
+                                sliderType: "percentage",
+                                name: "Light of the Martyr Uptime",
+                                min: 0,
+                                max: 100,
+                                step: 1,
+                                defaultValue: 80,
+                            }}
+                        />
+                    )}       
+
                     <OptionContainer
                         type="slider"
                         props={{
@@ -189,18 +231,22 @@ const Options = () => {
                             defaultValue: 30,
                         }}
                     />
-                    <OptionContainer
-                        type="icons"
-                        props={{
-                            icons: seasons,
-                            label: "Blessing of the Seasons",
-                            dataType: "season",
-                            showTooltip: true,
-                            exclusiveSelection: false,
-                            allowDeselection: true,
-                            defaultSelectedIcons: ["Blessing of Winter", "Blessing of Spring", "Blessing of Autumn"]
-                        }}
-                    />                 
+
+                    {characterData && isTalentActive("Blessing of Summer", characterData.specTalents) && (
+                        <OptionContainer
+                            type="icons"
+                            props={{
+                                icons: seasons,
+                                label: "Blessing of the Seasons",
+                                dataType: "season",
+                                showTooltip: true,
+                                exclusiveSelection: false,
+                                allowDeselection: true,
+                                defaultSelectedIcons: ["Blessing of Winter", "Blessing of Spring", "Blessing of Autumn"]
+                            }}
+                        />   
+                    )}
+                                  
                 </div>
             </div>
         </div>

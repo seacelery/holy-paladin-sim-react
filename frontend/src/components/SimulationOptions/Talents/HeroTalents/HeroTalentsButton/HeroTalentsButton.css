@@ -56,5 +56,5 @@
 
 .hero-talents-button-icon-highlighted {
   filter: grayscale(0);
-  box-shadow: 0px 0px 3px 1px var(--paladin-font);
+  box-shadow: 0rem 0rem 0.3rem 0.1rem var(--paladin-font);
 }/*# sourceMappingURL=HeroTalentsButton.css.map */

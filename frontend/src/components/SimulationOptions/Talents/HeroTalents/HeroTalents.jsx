@@ -94,6 +94,7 @@ const HeroTalents = () => {
                     calculateCount(lightsmithTalents.talentsData, 0),
                     calculateCount(heraldOfTheSunTalents.talentsData, 0)
                 )}
+                maxCount={11}
                 currentHeroTalentSpec={currentHeroTalentSpec}
                 onClick={handleButtonClick}
             />

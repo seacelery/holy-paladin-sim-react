@@ -9,7 +9,7 @@
 }
 
 .loader, .loader-import-main {
-    width: 25px;
+    width: 2.5rem;
     aspect-ratio: 1;
     display:grid;
     mask: conic-gradient(from 15deg,#0000,#000);
@@ -52,5 +52,5 @@
 }
 
 .loader-large {
-    width: 70px;
+    width: 7.0rem;
 }

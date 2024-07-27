@@ -24,9 +24,9 @@
 }
 
 .talents-count-perfect {
-  color: var(--healing-font);
+  color: var(--healing-font) !important;
 }
 
 .talents-count-exceeded {
-  color: var(--red-font-hover);
+  color: var(--red-font-hover) !important;
 }/*# sourceMappingURL=TalentsCounter.css.map */

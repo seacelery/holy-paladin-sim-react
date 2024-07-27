@@ -35,12 +35,12 @@ const TalentGrid = ({ width, rows, columns, talents = {}, freeTalentPoints = 0, 
         };
     };
 
-    const calculateCount = (type, talentsData, freePoints) => {
+    const calculateCount = (talentsData, freePoints) => {
         let count = 0;
 
         for (const row in talentsData) {
             for (const talent in talentsData[row]) {
-                count += talentsData[row][talent].ranks[type];
+                count += talentsData[row][talent].ranks["current rank"];
             };
         };
 
@@ -76,7 +76,7 @@ const TalentGrid = ({ width, rows, columns, talents = {}, freeTalentPoints = 0, 
                     );
                 };
             })}
-            <TalentsCounter currentCount={calculateCount("current rank", talentsData, freeTalentPoints)} maxCount={maxTalentPoints} />
+            <TalentsCounter currentCount={calculateCount(talentsData, freeTalentPoints)} maxCount={maxTalentPoints} />
         </div>
     );
 };

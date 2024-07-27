@@ -2,7 +2,12 @@ import React from "react";
 import "./HeroTalentsButton.scss";
 import { talentsToIcons } from "../../../../../utils/talents-to-icons-map";
 
-const HeroTalentsButton = ({ currentCount, currentHeroTalentSpec, onClick }) => {
+const HeroTalentsButton = ({
+    currentCount,
+    maxCount,
+    currentHeroTalentSpec,
+    onClick,
+}) => {
     return (
         <div className="hero-talents-button" onClick={onClick}>
             <div className="hero-talents-button-header">Hero Talents</div>
@@ -32,7 +37,17 @@ const HeroTalentsButton = ({ currentCount, currentHeroTalentSpec, onClick }) => 
                     />
                 </div>
             </div>
-            <div className="hero-talents-button-info">{currentCount} / 11</div>
+            <div
+                className={`hero-talents-button-info ${
+                    currentCount === maxCount
+                        ? "talents-count-perfect"
+                        : currentCount > maxCount
+                        ? "talents-count-exceeded"
+                        : ""
+                }`}
+            >
+                {currentCount} / {maxCount}
+            </div>
         </div>
     );
 };

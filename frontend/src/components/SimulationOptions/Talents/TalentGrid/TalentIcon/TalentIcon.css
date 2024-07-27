@@ -1,8 +1,6 @@
 .talent-icon {
   position: relative;
-  border: 0.1rem solid var(--panel-colour-2);
   box-shadow: 0.1rem 0.1rem 0.1rem var(--border-colour-2);
-  border-radius: 0.2rem;
   cursor: pointer;
 }
 
@@ -18,7 +16,7 @@
 .talent-icon-large {
   width: 4.5rem;
   height: 4.5rem;
-  border: 1px solid var(--border-colour-3);
+  border: 0.1rem solid var(--border-colour-3);
 }
 
 .talent-icon-image {
@@ -27,6 +25,11 @@
   position: absolute;
   z-index: 1;
   filter: saturate(0);
+}
+
+.talent-icon-border {
+  box-shadow: 0rem 0rem 0.1rem var(--border-colour-2);
+  border: 0.1rem solid var(--panel-colour-2);
 }
 
 .talent-icon-selected {
@@ -42,4 +45,22 @@
 .talent-icon:hover {
   box-shadow: 0rem 0rem 0.3rem 0.1rem var(--holy-font) !important;
   transition: box-shadow 0.01s ease-in-out;
+}
+
+.talent-rank-display {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.1rem;
+  bottom: 0rem;
+  right: 0.1rem;
+  width: 3.8rem;
+  height: 1.2rem;
+  font-size: 1rem;
+  border: 0.1rem solid var(--background-colour);
+  background-color: var(--transparent-border-colour-2);
+  color: var(--light-font-colour);
+  z-index: 10;
+  pointer-events: none;
 }/*# sourceMappingURL=TalentIcon.css.map */

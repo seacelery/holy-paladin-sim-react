@@ -1,4 +1,4 @@
-import { act, useState } from "react";
+import { useState } from "react";
 import Navbar from "./Navbar/Navbar";
 import Options from "./Options/Options";
 import Talents from "./Talents/Talents";

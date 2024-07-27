@@ -3,13 +3,13 @@
   top: 6.5rem;
   left: 50%;
   transform: translate(-46%, -50%);
-  padding: 5px 3px;
-  width: 250px;
-  border: 1px solid var(--border-colour-3);
-  border-radius: 4px;
+  padding: 0.5rem 0.3rem;
+  width: 25rem;
+  border: 0.1rem solid var(--border-colour-3);
+  border-radius: 0.4rem;
   text-align: center;
   color: var(--light-font-colour);
-  font-size: 14px;
+  font-size: 1.4rem;
   background-color: var(--panel-colour-2);
   z-index: 1000;
   transition: 0.1s all ease-out;

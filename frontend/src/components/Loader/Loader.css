@@ -7,7 +7,7 @@
 }
 
 .loader, .loader-import-main {
-  width: 25px;
+  width: 2.5rem;
   aspect-ratio: 1;
   display: grid;
   -webkit-mask: conic-gradient(from 15deg, rgba(0, 0, 0, 0), #000);
@@ -47,5 +47,5 @@
   }
 }
 .loader-large {
-  width: 70px;
+  width: 7rem;
 }/*# sourceMappingURL=Loader.css.map */

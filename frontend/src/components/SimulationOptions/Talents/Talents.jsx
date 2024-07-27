@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
-import "./Talents.css";
+import "./Talents.scss";
 import TalentGrid from "./TalentGrid/TalentGrid";
+import HeroTalents from "./HeroTalents/HeroTalents";
 import {
     classTalentsLive,
     classTalentsPTR,
@@ -10,22 +11,17 @@ import {
     classTalentsArrowsPTR,
     specTalentsArrowsLive,
     specTalentsArrowsPTR,
-    baseClassTalentsLive,
-    baseClassTalentsPTR,
-    baseSpecTalentsLive,
-    baseSpecTalentsPTR,
 } from "../../../utils/base-talents";
 import { CharacterDataContext } from "../../../context/CharacterDataContext";
 
 const Talents = () => {
-    const { characterData, setCharacterData } = useContext(CharacterDataContext);
+    const { characterData, setCharacterData } =
+        useContext(CharacterDataContext);
 
     const classTalents = {
         talentsData: characterData.classTalents,
         liveTalents: classTalentsLive,
         ptrTalents: classTalentsPTR,
-        baseLiveTalents: baseClassTalentsLive,
-        basePtrTalents: baseClassTalentsPTR,
         arrowsLive: classTalentsArrowsLive,
         arrowsPtr: classTalentsArrowsPTR,
     };
@@ -34,20 +30,32 @@ const Talents = () => {
         talentsData: characterData.specTalents,
         liveTalents: specTalentsLive,
         ptrTalents: specTalentsPTR,
-        baseLiveTalents: baseSpecTalentsLive,
-        basePtrTalents: baseSpecTalentsPTR,
         arrowsLive: specTalentsArrowsLive,
         arrowsPtr: specTalentsArrowsPTR,
     };
 
     return (
         <div className="options-tab-content talents-content">
-            <div className="hero-talents-overlay"></div>
-
             <div className="talents-container">
-                <TalentGrid rows="10" columns="7" talents={classTalents} width="43.5%" />
-                <TalentGrid rows="10" columns="9" talents={specTalents} width="53%" />
+                <TalentGrid
+                    rows="10"
+                    columns="7"
+                    talents={classTalents}
+                    width="43.5%"
+                    freeTalentPoints={3}
+                    maxTalentPoints={31}
+                />
+                <TalentGrid
+                    rows="10"
+                    columns="9"
+                    talents={specTalents}
+                    width="53%"
+                    freeTalentPoints={0}
+                    maxTalentPoints={30}
+                />
             </div>
+
+            <HeroTalents />
         </div>
     );
 };

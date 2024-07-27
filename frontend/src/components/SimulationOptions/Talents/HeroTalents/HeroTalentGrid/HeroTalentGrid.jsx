@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
-import "./TalentGrid.css";
-import TalentIcon from "./TalentIcon/TalentIcon";
-import TalentIconChoice from "./TalentIconChoice/TalentIconChoice";
-import TalentsCounter from "./TalentsCounter/TalentsCounter";
-import { VersionContext } from "../../../../context/VersionContext";
+import "./HeroTalentGrid.scss";
+import TalentIcon from "../../TalentGrid/TalentIcon/TalentIcon";
+import TalentIconChoice from "../../TalentGrid/TalentIconChoice/TalentIconChoice";
+import { VersionContext } from "../../../../../context/VersionContext";
 
-const TalentGrid = ({ width, rows, columns, talents = {}, freeTalentPoints = 0, maxTalentPoints }) => {
+const HeroTalentGrid = ({ width, rows, columns, talents = {} }) => {
     const { version } = useContext(VersionContext);
 
     const {
@@ -35,20 +34,8 @@ const TalentGrid = ({ width, rows, columns, talents = {}, freeTalentPoints = 0, 
         };
     };
 
-    const calculateCount = (type, talentsData, freePoints) => {
-        let count = 0;
-
-        for (const row in talentsData) {
-            for (const talent in talentsData[row]) {
-                count += talentsData[row][talent].ranks[type];
-            };
-        };
-
-        return count - freePoints;
-    };
-
     return (
-        <div className="talents-grid" style={styles}>
+        <div className="hero-talents-grid" style={styles}>
             {talentSet.map((talent, index) => {
                 const talentData = findTalentInTalentData(talent, talentsData);
                 const [nameLeft, nameRight] = talent.split("/");
@@ -60,7 +47,8 @@ const TalentGrid = ({ width, rows, columns, talents = {}, freeTalentPoints = 0, 
                             names={{nameLeft, nameRight}}
                             talentData={{talentDataLeft: findTalentInTalentData(nameLeft, talentsData), talentDataRight: findTalentInTalentData(nameRight, talentsData)}}
                             arrowsData={arrowsData}
-                            size={columns <= 3 ? "talent-icon-large" : "talent-icon-small"}
+                            size={columns < 5 ? "talent-icon-large" : "talent-icon-small"}
+                            isHeroTalent={true}
                         />
                     );
                 } else {
@@ -71,14 +59,14 @@ const TalentGrid = ({ width, rows, columns, talents = {}, freeTalentPoints = 0, 
                             talentData={talentData}
                             talentsData={talentsData}
                             arrowsData={arrowsData}
-                            size={columns <= 3 ? "talent-icon-large" : "talent-icon-small"}
+                            size={columns < 5 ? "talent-icon-large" : "talent-icon-small"}
+                            isHeroTalent={true}
                         />
                     );
                 };
             })}
-            <TalentsCounter currentCount={calculateCount("current rank", talentsData, freeTalentPoints)} maxCount={maxTalentPoints} />
         </div>
     );
 };
 
-export default TalentGrid;
+export default HeroTalentGrid;

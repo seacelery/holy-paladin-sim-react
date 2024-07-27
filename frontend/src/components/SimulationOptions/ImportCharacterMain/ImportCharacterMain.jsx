@@ -8,6 +8,7 @@ import Notification from "../../Notification/Notification";
 import { realmList } from "../../../data/realm-list";
 import { CharacterDataContext } from "../../../context/CharacterDataContext";
 import { VersionContext } from "../../../context/VersionContext";
+import { baseLightsmithTalents, baseHeraldOfTheSunTalents } from "../../../utils/base-talents";
 
 const ImportCharacterMain = ({ setCharacterImported }) => {
     const { characterData, setCharacterData } = useContext(CharacterDataContext);
@@ -59,6 +60,7 @@ const ImportCharacterMain = ({ setCharacterImported }) => {
                 // initialiseEquipment();
 
                 setCharacterData({
+                    ...prevCharacterData,
                     characterRegion: data.character_region,
                     characterRealm: data.character_realm,
                     characterName: data.character_name,
@@ -66,6 +68,8 @@ const ImportCharacterMain = ({ setCharacterImported }) => {
                     ptr: data.ptr,
                     classTalents: data.class_talents,
                     specTalents: data.spec_talents,
+                    lightsmithTalents: { ...baseLightsmithTalents },
+                    heraldOfTheSunTalents: { ...baseHeraldOfTheSunTalents },
                     equipment: data.equipment,
                     consumables: data.consumable,
                     stats: data.stats

@@ -11,6 +11,8 @@ const CharacterDataProvider = ({ children }) => {
         ptr: false,
         classTalents: {},
         specTalents: {},
+        heraldOfTheSunTalents: {},
+        lightsmithTalents: {},
         equipment: {},
         consumables: {},
         stats: {}

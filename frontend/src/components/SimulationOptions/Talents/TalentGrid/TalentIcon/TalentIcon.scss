@@ -17,9 +17,17 @@
     height: 4rem;
 }
 
+.talent-icon-large {
+    width: 4.5rem;
+    height: 4.5rem;
+    border: 1px solid var(--border-colour-3);
+}
+
 .talent-icon-image {
     width: 100%;
     height: 100%;
+    position: absolute;
+    z-index: 1;
 
     filter: saturate(0);
 }
@@ -38,7 +46,3 @@
     box-shadow: 0rem 0rem .3rem .1rem var(--holy-font) !important;
     transition: box-shadow 0.01s ease-in-out;
 }
-
-// .talent-split-right:hover {
-//     border-bottom: 1px solid var(--paladin-font)
-// }

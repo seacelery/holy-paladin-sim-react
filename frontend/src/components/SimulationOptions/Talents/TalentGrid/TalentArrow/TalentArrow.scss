@@ -1,0 +1,111 @@
+.talent-arrow-down::before {
+    content: "";
+    position: absolute;
+    width: 0.2rem;
+    height: 1.6rem;
+    background-color: var(--border-colour-3);
+    left: 50%;
+    top: 99%; 
+    transform: translateX(-50%);
+    z-index: 4;
+    box-shadow: 0.0rem 0.0rem 0.1rem var(--holy-font);
+}
+
+.talent-arrow-down::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 0.9rem);
+    border: solid var(--border-colour-3);
+    border-width: 0 0.2rem 0.2rem 0;
+    display: inline-block;
+    padding: 0.2rem;
+    transform: translateX(-50%) rotate(45deg);
+    z-index: 5;
+    box-shadow: 0.0rem 0.0rem 0.0rem var(--holy-font);
+}
+
+.talent-arrow-down-long::before {
+    content: "";
+    position: absolute;
+    width: 0.2rem;
+    height: 7.0rem;
+    background-color: var(--border-colour-3);
+    left: 50%;
+    top: 99%; 
+    transform: translateX(-50%);
+    z-index: 4;
+    box-shadow: 0.0rem 0.0rem 0.1rem var(--holy-font);
+}
+
+.talent-arrow-down-long::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: calc(240% + 0.9rem);
+    border: solid var(--border-colour-3);
+    border-width: 0 0.2rem 0.2rem 0;
+    display: inline-block;
+    padding: 0.2rem;
+    transform: translateX(-50%) rotate(45deg);
+    z-index: 5;
+}
+
+.talent-arrow-left::before {
+    content: "";
+    position: absolute;
+    width: 0.2rem;
+    height: 4.5rem;
+    background-color: var(--border-colour-3);
+    left: -53%;
+    top: 60%; 
+    transform: rotate(68deg);
+    z-index: 0;
+    box-shadow: 0.0rem 0.0rem 0.1rem var(--holy-font);
+}
+
+.talent-arrow-left::after {
+    content: "";
+    position: absolute;
+    left: -98%;
+    top: calc(109% + 0.9rem);
+    border: solid var(--border-colour-3);
+    border-width: 0 0.2rem 0.2rem 0;
+    padding: 0.2rem;
+    transform: translateX(-50%) rotate(110deg);
+    z-index: 5;
+}
+
+.talent-arrow-right::before {
+    content: "";
+    position: absolute;
+    width: 0.2rem;
+    height: 4.5rem;
+    background-color: var(--border-colour-3);
+    left: 148%;
+    top: 60%; 
+    transform: rotate(-68deg);
+    z-index: 0;
+    box-shadow: 0.0rem 0.0rem 0.1rem var(--holy-font);
+}
+
+.talent-arrow-right::after {
+    content: "";
+    position: absolute;
+    left: 198%;
+    top: calc(109% + 0.9rem);
+    border: solid var(--border-colour-3);
+    border-width: 0 0.2rem 0.2rem 0;
+    padding: 0.2rem;
+    transform: translateX(-50%) rotate(-15deg);
+    z-index: 5;
+}
+
+.talent-arrow-selected::before {
+    background-color:  var(--gold-font);
+}
+
+.talent-arrow-selected::after {
+    border: solid var(--gold-font);
+    border-width: 0 0.2rem 0.2rem 0;
+}

@@ -1,0 +1,58 @@
+.hero-talents-button {
+    position: absolute;
+    right: 2.1rem;
+    top: 2.1rem;
+    background-color: var(--panel-colour-2);
+    border: 0.1rem solid var(--border-colour-3);
+    border-bottom: none;
+    border-radius: 0.2rem;
+    width: 11.2rem;
+    cursor: pointer;
+    z-index: 1000;
+    user-select: none;
+}
+
+.hero-talents-button:hover {
+    box-shadow: .0rem .0rem .3rem .1rem var(--paladin-font);
+}
+
+.hero-talents-button-header, .hero-talents-button-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 11.2rem;
+    height: 2.7rem;
+    margin-left: -0.1rem;
+    background-color: var(--panel-colour-2);
+    border: 0.1rem solid var(--border-colour-3);
+    border-radius: 0.2rem;
+    color: var(--light-font-colour);
+    font-size: 1.5rem;
+}
+
+.hero-talents-button-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2rem;
+}
+
+.hero-talents-button-icon-container {
+    padding: 0.2rem;
+    transition: all 0.05s ease-in-out;
+    display: flex;
+    align-items: center;
+}
+
+.hero-talents-button-icon {
+    width: 5.0rem;
+    height: 5.0rem;
+    border: 0.1rem solid var(--border-colour-3);
+    filter: grayscale(1);
+    box-shadow: none;
+}
+
+.hero-talents-button-icon-highlighted {
+    filter: grayscale(0);
+    box-shadow: 0px 0px 3px 1px var(--paladin-font);
+}

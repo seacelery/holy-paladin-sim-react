@@ -1,0 +1,85 @@
+.hero-talent-arrow-down::before {
+  content: "";
+  position: absolute;
+  width: 0.2rem;
+  height: 3.5rem;
+  background-color: var(--border-colour-3);
+  left: 50%;
+  top: 99%;
+  transform: translateX(-50%);
+  z-index: 4;
+  box-shadow: 0rem 0rem 0.1rem var(--holy-font);
+}
+
+.hero-talent-arrow-down::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 2.9rem);
+  border: solid var(--border-colour-3);
+  border-width: 0 0.3rem 0.3rem 0;
+  display: inline-block;
+  padding: 0.3rem;
+  transform: translateX(-50%) rotate(45deg);
+  z-index: 5;
+  box-shadow: 0rem 0rem 0rem var(--holy-font);
+}
+
+.hero-talent-arrow-left::before {
+  content: "";
+  position: absolute;
+  width: 0.2rem;
+  height: 7.7rem;
+  background-color: var(--border-colour-3);
+  left: -78%;
+  top: 55%;
+  transform: rotate(58deg);
+  z-index: 0;
+  box-shadow: 0rem 0rem 0.1rem var(--holy-font);
+}
+
+.hero-talent-arrow-left::after {
+  content: "";
+  position: absolute;
+  left: -150%;
+  top: calc(109% + 3rem);
+  border: solid var(--border-colour-3);
+  border-width: 0 0.3rem 0.3rem 0;
+  padding: 0.3rem;
+  transform: translateX(-50%) rotate(100deg);
+  z-index: 5;
+}
+
+.hero-talent-arrow-right::before {
+  content: "";
+  position: absolute;
+  width: 0.2rem;
+  height: 7.7rem;
+  background-color: var(--border-colour-3);
+  left: 177%;
+  top: 55%;
+  transform: rotate(-58deg);
+  z-index: 0;
+  box-shadow: 0rem 0rem 0.1rem var(--holy-font);
+}
+
+.hero-talent-arrow-right::after {
+  content: "";
+  position: absolute;
+  left: 250%;
+  top: calc(109% + 3rem);
+  border: solid var(--border-colour-3);
+  border-width: 0 0.3rem 0.3rem 0;
+  padding: 0.3rem;
+  transform: translateX(-50%) rotate(-7deg);
+  z-index: 5;
+}
+
+.talent-arrow-selected::before {
+  background-color: var(--gold-font);
+}
+
+.talent-arrow-selected::after {
+  border: solid var(--gold-font);
+  border-width: 0 0.2rem 0.2rem 0;
+}/*# sourceMappingURL=HeroTalentArrow.css.map */

@@ -1,0 +1,36 @@
+.talents-counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0.7rem;
+    top: 52.7rem;
+
+    width: 7.0rem;
+    height: 4.0rem;
+    border-radius: 0.3rem;
+
+    font-size: 1.6rem;
+    text-align: right;
+
+    border: 0.1rem solid var(--border-colour-3);
+
+    background-color: var(--panel-colour-6);
+}
+
+.talents-count {
+    color: var(--light-font-colour)
+}
+
+.talents-total {
+    margin-left: 0.5rem;
+    color: var(--light-font-colour)
+}
+
+.talents-count-perfect {
+    color: var(--healing-font);
+}
+
+.talents-count-exceeded {
+    color: var(--red-font-hover);
+}

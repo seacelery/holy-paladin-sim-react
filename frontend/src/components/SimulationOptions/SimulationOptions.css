@@ -8,6 +8,7 @@
 }
 
 .options-window {
+  position: relative;
   height: 60.3rem;
   border-right: 0.1rem solid var(--border-colour-3);
   border-top: 0.1rem solid var(--border-colour-3);

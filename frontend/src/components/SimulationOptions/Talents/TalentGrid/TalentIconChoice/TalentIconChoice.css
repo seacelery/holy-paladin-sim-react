@@ -23,12 +23,13 @@
 .talent-icon-divider {
   content: "";
   position: absolute;
-  top: 40px;
+  top: 4rem;
   left: 0;
   width: 138%;
   height: 0;
-  border-top: 1px solid var(--dark-font-colour);
+  border-top: 0.1rem solid var(--dark-font-colour);
   transform: rotate(-45deg);
   transform-origin: 0 0;
   z-index: 2;
+  pointer-events: none;
 }/*# sourceMappingURL=TalentIconChoice.css.map */

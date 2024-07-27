@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
 import "./TalentIconChoice.css";
+import TalentArrow from "../TalentArrow/TalentArrow";
+import HeroTalentArrow from "../HeroTalentArrow/HeroTalentArrow";
 import { talentsToIcons } from "../../../../../utils/talents-to-icons-map";
 import { CharacterDataContext } from "../../../../../context/CharacterDataContext";
 
-const TalentIconChoice = ({ names = {}, size = "talent-icon-small", talentData }) => {
+const TalentIconChoice = ({ names = {}, size = "talent-icon-small", talentData, arrowsData, isHeroTalent = false }) => {
+    const { characterData, setCharacterData } = useContext(CharacterDataContext);
+
     const { nameLeft, nameRight } = names;
     const { talentDataLeft, talentDataRight } = talentData;
-
-    const { characterData, setCharacterData } = useContext(CharacterDataContext);
 
     const currentRankLeft = talentDataLeft.ranks["current rank"];
     const maxRankLeft = talentDataLeft.ranks["max rank"];
@@ -16,26 +18,55 @@ const TalentIconChoice = ({ names = {}, size = "talent-icon-small", talentData }
     const maxRankRight = talentDataRight.ranks["max rank"];
 
     const updateTalentRank = (name, newRank) => {
-        const updatedClassTalents = { ...characterData.classTalents };
-        for (const row in updatedClassTalents) {
-            if (updatedClassTalents[row][name]) {
-                updatedClassTalents[row][name].ranks["current rank"] = newRank;
-                break;
+        const updateCurrentRank = (talents) => {
+            for (const row in talents) {
+                if (talents[row][name]) {
+                    talents[row][name].ranks["current rank"] = newRank;
+                    break;
+                };
             };
         };
 
-        const updatedSpecTalents = { ...characterData.specTalents };
-        for (const row in updatedSpecTalents) {
-            if (updatedSpecTalents[row][name]) {
-                updatedSpecTalents[row][name].ranks["current rank"] = newRank;
-                break;
+        const resetTalents = (talents) => {
+            for (const row in talents) {
+                for (const talent in talents[row]) {
+                    talents[row][talent].ranks["current rank"] = 0;
+                };
             };
+        };
+
+        const findTalentInTalentData = (talent, talentData) => {
+            for (const row in talentData) {
+                for (const talentName in talentData[row]) {
+                    if (talent === talentName) {
+                        return talentData[row][talentName];
+                    };
+                };
+            };
+        };
+
+        const updatedClassTalents = { ...characterData.classTalents };
+        const updatedSpecTalents = { ...characterData.specTalents };
+        let updatedLightsmithTalents = { ...characterData.lightsmithTalents };
+        let updatedHeraldOfTheSunTalents = { ...characterData.heraldOfTheSunTalents };
+
+        updateCurrentRank(updatedClassTalents);
+        updateCurrentRank(updatedSpecTalents);
+        updateCurrentRank(updatedLightsmithTalents);
+        updateCurrentRank(updatedHeraldOfTheSunTalents);
+
+        if (findTalentInTalentData(name, updatedLightsmithTalents)) {
+            resetTalents(updatedHeraldOfTheSunTalents);
+        } else if (findTalentInTalentData(name, updatedHeraldOfTheSunTalents)) {
+            resetTalents(updatedLightsmithTalents);
         };
 
         setCharacterData({
             ...characterData,
             classTalents: updatedClassTalents,
             specTalents: updatedSpecTalents,
+            lightsmithTalents: updatedLightsmithTalents,
+            heraldOfTheSunTalents: updatedHeraldOfTheSunTalents
         });
     };
 
@@ -52,6 +83,19 @@ const TalentIconChoice = ({ names = {}, size = "talent-icon-small", talentData }
         if (currentRank > 0) {
             updateTalentRank(name, currentRank - 1);
         };
+    };
+
+    const createArrows = () => {
+        return Object.keys(arrowsData).map((arrowDirection) => {
+            if (arrowsData[arrowDirection].includes(nameLeft + "/" + nameRight)) {
+                if (isHeroTalent) {
+                    return <HeroTalentArrow key={arrowDirection} direction={arrowDirection} talentSelected={currentRankLeft > 0 || currentRankRight > 0} />;
+                } else {
+                    return <TalentArrow key={arrowDirection} direction={arrowDirection} talentSelected={currentRankLeft > 0 || currentRankRight > 0} />;
+                }
+            };
+            return null;
+        });
     };
 
     return (
@@ -79,6 +123,7 @@ const TalentIconChoice = ({ names = {}, size = "talent-icon-small", talentData }
                     handleRightClick(nameRight, currentRankRight)
                 }}
             />
+            {createArrows()}
         </div>
     );
 };

@@ -1,0 +1,100 @@
+.item-slot {
+    position: relative;
+    display: flex;
+    user-select: none;
+}
+
+.item-slot-hover {
+    z-index: 1;
+    position: absolute;
+    top: -7.5px;
+    left: -7.5px;
+    right: 0;
+    bottom: 0;
+    width: 226px;
+    height: 90px;
+    background-color: var(--panel-colour-table-2);
+    border: 1px solid var(--border-colour-3);
+}
+
+.item-slot-hover:hover {
+    background-color: var(--tooltip-colour-hover) !important;
+}
+
+.item-slot-selected {
+    border: 1px solid var(--paladin-font);
+    background-color: var(--panel-colour-5) !important;
+}
+
+.item-slot-icon-container {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+
+    .item-slot-icon {
+        width: 5.6rem;
+        height: 5.5rem;
+    }
+
+    .item-slot-item-level {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 2px;
+        height: 20px;
+        width: 100%;
+
+        border-top: none;
+
+        font-size: 14px;
+    }
+}
+
+.item-slot-info {
+    position: relative;
+    padding-left: 5px;
+    height: 87px;
+    width: 160px;
+    margin-top: -6px;
+    color: #999999;
+    font-size: 15px;
+    overflow: auto;
+    z-index: 5;
+    pointer-events: none;
+    line-height: 1.7rem;
+
+    .item-slot-info-container {
+        position: relative;
+
+        .item-slot-name {
+            font-size: 11px;
+            padding-top: 5px;
+            width: 150px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .item-slot-enchants {
+            color: var(--rarity-uncommon);
+            font-size: 11px;
+        }
+
+        .item-slot-gems-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .item-slot-category {
+            font-size: 11px;
+            color: var(--mana);
+            padding-bottom: 5px;
+        }
+
+        .item-slot-bonuses {
+            color: var(--paladin-font);
+            font-size: 11px;
+        }
+    }
+}

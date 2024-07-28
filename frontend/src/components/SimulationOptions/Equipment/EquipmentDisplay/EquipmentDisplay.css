@@ -1,0 +1,15 @@
+.equipment-display {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.8rem;
+  width: 101%;
+  height: 100%;
+}
+.equipment-display .item-row {
+  display: flex;
+  justify-content: space-evenly;
+  height: 7.5rem;
+}/*# sourceMappingURL=EquipmentDisplay.css.map */

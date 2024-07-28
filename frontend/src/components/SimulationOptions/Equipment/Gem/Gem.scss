@@ -1,0 +1,19 @@
+.item-gem-container {
+    padding-right: 0.2rem;
+
+    .item-gem-icon {
+        border: 0.1rem solid var(--border-colour-3);
+        vertical-align: middle;
+    }
+
+    .item-gem-icon-small {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .item-gem-icon-large {
+        width: 2.9rem;
+        height: 2.9rem;
+        margin-left: 0.3rem;
+    }
+}

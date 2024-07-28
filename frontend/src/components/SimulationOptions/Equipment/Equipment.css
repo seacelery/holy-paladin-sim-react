@@ -1,1 +1,16 @@
-/*# sourceMappingURL=Equipment.css.map */
+.equipment-content {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.equipment-left {
+  width: 54%;
+  height: 100%;
+  margin: 0.8rem 0 0 -1rem;
+}
+
+.equipment-right {
+  width: 45%;
+  height: 100%;
+  margin-top: 0.8rem;
+}/*# sourceMappingURL=Equipment.css.map */

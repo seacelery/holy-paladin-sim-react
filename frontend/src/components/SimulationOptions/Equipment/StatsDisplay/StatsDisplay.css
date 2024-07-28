@@ -1,1 +1,18 @@
-/*# sourceMappingURL=StatsDisplay.css.map */
+.stats-display {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 13.5rem;
+  margin-bottom: 0.9rem;
+  color: var(--light-font-colour);
+}
+.stats-display .stats-display-row {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 5rem;
+}
+.stats-display .stats-display-row:first-of-type {
+  margin-bottom: 0.5rem;
+}/*# sourceMappingURL=StatsDisplay.css.map */

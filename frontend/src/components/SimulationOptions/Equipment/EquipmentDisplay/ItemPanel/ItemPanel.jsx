@@ -1,7 +1,7 @@
 import React from "react";
 import "./ItemPanel.scss";
 import Gem from "../../Gem/Gem";
-import { formatEnchantName } from "../../formatEquipment";
+import { formatEnchantName, formatEmbellishment } from "../../formatEquipment";
 
 const ItemPanel = ({ itemData, selectedItem, onClick }) => {
     if (!itemData) return;
@@ -11,8 +11,8 @@ const ItemPanel = ({ itemData, selectedItem, onClick }) => {
     const itemRarityStyle = `var(--rarity-${itemData.quality.toLowerCase()})`;
 
     return (
-        <div className="item-slot">
-            <div className={`item-slot-hover ${selectedItem === itemData ? "item-slot-selected" : ""}`} onClick={() => onClick(itemData)}></div>
+        <div className="item-slot" onClick={() => onClick(itemData)}>
+            <div className={`item-slot-hover ${selectedItem === itemData ? "item-slot-selected" : ""}`}></div>
 
             <div className="item-slot-icon-container">
                 <img
@@ -63,7 +63,12 @@ const ItemPanel = ({ itemData, selectedItem, onClick }) => {
                               })
                             : null}
                     </div>
-                    <div className="item-slot-category"></div>
+                    <div className="item-slot-category">
+                        {itemData.limit && itemData.effects.length > 0
+                            ? formatEmbellishment(itemData.effects)
+                            : null
+                        } 
+                    </div>
                     <div className="item-slot-bonuses"></div>
                 </div>
             </div>

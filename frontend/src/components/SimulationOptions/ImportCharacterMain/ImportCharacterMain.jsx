@@ -59,6 +59,7 @@ const ImportCharacterMain = ({ setCharacterImported }) => {
                 // updateUIAfterImport(data, isFirstImport);
                 // initialiseEquipment();
 
+
                 setCharacterData({
                     ...prevCharacterData,
                     characterRegion: data.character_region,

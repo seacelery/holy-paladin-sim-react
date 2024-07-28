@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"StatPanel.css"}
+{"version":3,"sources":["StatPanel.scss","StatPanel.css"],"names":[],"mappings":"AAAA;EACI,YAAA;EACA,YAAA;ACCJ;ADCI;EACI,aAAA;EACA,uBAAA;EACA,gBAAA;EACA,eAAA;ACCR;ADEI;EACI,aAAA;EACA,uBAAA;EACA,eAAA;ACAR","file":"StatPanel.css"}

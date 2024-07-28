@@ -7,14 +7,18 @@
 .item-slot-hover {
     z-index: 1;
     position: absolute;
-    top: -7.5px;
-    left: -7.5px;
+    top: -0.75rem;
+    left: -0.75rem;
     right: 0;
     bottom: 0;
-    width: 226px;
-    height: 90px;
+    width: 22.6rem;
+    height: 9.0rem;
     background-color: var(--panel-colour-table-2);
-    border: 1px solid var(--border-colour-3);
+    border: 0.1rem solid var(--border-colour-3);
+}
+
+.item-slot:hover .item-slot-hover {
+    background-color: var(--tooltip-colour-hover) !important;
 }
 
 .item-slot-hover:hover {
@@ -22,7 +26,7 @@
 }
 
 .item-slot-selected {
-    border: 1px solid var(--paladin-font);
+    border: 0.1rem solid var(--paladin-font);
     background-color: var(--panel-colour-5) !important;
 }
 
@@ -41,36 +45,36 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-bottom: 2px;
-        height: 20px;
+        padding-bottom: 0.2rem;
+        height: 2.0rem;
         width: 100%;
 
         border-top: none;
 
-        font-size: 14px;
+        font-size: 1.4rem;
     }
 }
 
 .item-slot-info {
     position: relative;
-    padding-left: 5px;
-    height: 87px;
-    width: 160px;
-    margin-top: -6px;
+    padding-left: 0.5rem;
+    height: 8.7rem;
+    width: 16.0rem;
+    margin-top: -0.6rem;
     color: #999999;
-    font-size: 15px;
+    font-size: 1.5rem;
     overflow: auto;
-    z-index: 5;
-    pointer-events: none;
+    z-index: 2;
+    // pointer-events: none;
     line-height: 1.7rem;
 
     .item-slot-info-container {
         position: relative;
 
         .item-slot-name {
-            font-size: 11px;
-            padding-top: 5px;
-            width: 150px;
+            font-size: 1.1rem;
+            padding-top: 0.5rem;
+            width: 14.5rem;
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
@@ -78,7 +82,7 @@
 
         .item-slot-enchants {
             color: var(--rarity-uncommon);
-            font-size: 11px;
+            font-size: 1.1rem;
         }
 
         .item-slot-gems-container {
@@ -87,14 +91,29 @@
         }
 
         .item-slot-category {
-            font-size: 11px;
+            font-size: 1.1rem;
             color: var(--mana);
-            padding-bottom: 5px;
+            padding-bottom: 0.5rem;
         }
 
         .item-slot-bonuses {
             color: var(--paladin-font);
-            font-size: 11px;
+            font-size: 1.1rem;
         }
     }
+}
+
+.item-slot-info:hover .item-slot-hover {
+    background-color: var(--tooltip-colour-hover) !important;
+}
+
+.item-slot-info::-webkit-scrollbar {
+    width: 0.4rem;
+}
+
+.item-slot-info::-webkit-scrollbar-thumb {
+    border: 0.0rem solid var(--panel-colour-6);
+    border-radius: 0.2rem;
+
+    background: var(--border-colour-3);
 }

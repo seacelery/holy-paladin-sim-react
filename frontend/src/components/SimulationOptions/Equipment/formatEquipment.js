@@ -26,4 +26,8 @@ const formatEnchantName = (name) => {
     return formattedEnchantName;
 };
 
-export { formatEnchantName };
+const formatEmbellishment = (effects) => {
+    return `Embellishment: ${effects[0].name}`
+};
+
+export { formatEnchantName, formatEmbellishment };

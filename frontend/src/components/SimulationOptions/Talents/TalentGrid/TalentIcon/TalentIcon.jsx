@@ -7,7 +7,7 @@ import { talentsToIcons } from "../../../../../utils/talents-to-icons-map";
 import { CharacterDataContext } from "../../../../../context/CharacterDataContext";
 
 const TalentIcon = ({ name, size = "talent-icon-small", talentData, arrowsData, isHeroTalent =  false }) => {
-    if (!name) return <div className={`talent-icon ${size} ${!name ? "talent-empty" : ""}`}></div>;
+    if (!talentData) return <div className={`talent-icon ${size} ${!name ? "talent-empty" : ""}`}></div>;
 
     const { characterData, setCharacterData } = useContext(CharacterDataContext);
 

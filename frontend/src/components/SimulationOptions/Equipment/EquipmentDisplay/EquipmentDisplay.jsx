@@ -1,14 +1,24 @@
 import React, { useState, useContext, useEffect } from "react";
 import "./EquipmentDisplay.scss";
 import ItemPanel from "./ItemPanel/ItemPanel";
+import { itemSlotsMap } from "../../../../utils/item-slots-map";
 
-const EquipmentDisplay = ({ equipmentData, selectedItem, setSelectedItem }) => {
+const EquipmentDisplay = ({ equipmentData, selectedItem, setSelectedItem, setSelectedSlot }) => {
     const [equippedItemLevel, setEquippedItemLevel] = useState(0);
     const [embellishmentCounter, setEmbellishmentCounter] = useState(0);
     const [tierSetCounters, setTierSetCounters] = useState({});
 
-    const handleItemPanelClick = (item) => {
-        setSelectedItem(item);
+    const reversedItemSlotsMap = {};
+    for (const [key, value] of Object.entries(itemSlotsMap)) {
+        reversedItemSlotsMap[value] = key;
+    };
+
+    const handleItemPanelClick = (itemData, slot) => {
+        setSelectedItem(itemData);
+        const formattedSlot = reversedItemSlotsMap[slot].split(" ")
+                                                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                                        .join(" ")
+        setSelectedSlot(formattedSlot);
     };
 
     const countEmbellishments = (equipmentData) => {
@@ -62,6 +72,15 @@ const EquipmentDisplay = ({ equipmentData, selectedItem, setSelectedItem }) => {
         countTierSets(equipmentData);
     }, [equipmentData]);
 
+    const slotOrder = [
+        ["head"],
+        ["shoulder", "neck", "back"],
+        ["hands", "chest", "wrist"],
+        ["main_hand", "waist", "off_hand"],
+        ["finger_1", "legs", "finger_2"],
+        ["trinket_1", "feet", "trinket_2"],
+    ];
+
     return (
         <div className="equipment-display">
             <div className="equipment-item-level-display">
@@ -107,103 +126,18 @@ const EquipmentDisplay = ({ equipmentData, selectedItem, setSelectedItem }) => {
                 </div>
             </div>
 
-            <div className="item-row">
-                <ItemPanel
-                    itemData={equipmentData.head}
-                    selectedItem={selectedItem}
-                    onClick={handleItemPanelClick}
-                />
-            </div>
-
-            <div className="item-row">
-                <ItemPanel
-                    itemData={equipmentData.shoulder}
-                    selectedItem={selectedItem}
-                    onClick={handleItemPanelClick}
-                />
-                <ItemPanel
-                    itemData={equipmentData.neck}
-                    selectedItem={selectedItem}
-                    onClick={handleItemPanelClick}
-                />
-                <ItemPanel
-                    itemData={equipmentData.back}
-                    selectedItem={selectedItem}
-                    onClick={handleItemPanelClick}
-                />
-            </div>
-
-            <div className="item-row">
-                <ItemPanel
-                    itemData={equipmentData.hands}
-                    selectedItem={selectedItem}
-                    onClick={handleItemPanelClick}
-                />
-                <ItemPanel
-                    itemData={equipmentData.chest}
-                    selectedItem={selectedItem}
-                    onClick={handleItemPanelClick}
-                />
-                <ItemPanel
-                    itemData={equipmentData.wrist}
-                    selectedItem={selectedItem}
-                    onClick={handleItemPanelClick}
-                />
-            </div>
-
-            <div className="item-row">
-                <ItemPanel
-                    itemData={equipmentData.main_hand}
-                    selectedItem={selectedItem}
-                    onClick={handleItemPanelClick}
-                />
-                <ItemPanel
-                    itemData={equipmentData.waist}
-                    selectedItem={selectedItem}
-                    onClick={handleItemPanelClick}
-                />
-                <ItemPanel
-                    itemData={equipmentData.off_hand}
-                    selectedItem={selectedItem}
-                    onClick={handleItemPanelClick}
-                />
-            </div>
-
-            <div className="item-row">
-                <ItemPanel
-                    itemData={equipmentData.finger_1}
-                    selectedItem={selectedItem}
-                    onClick={handleItemPanelClick}
-                />
-                <ItemPanel
-                    itemData={equipmentData.legs}
-                    selectedItem={selectedItem}
-                    onClick={handleItemPanelClick}
-                />
-                <ItemPanel
-                    itemData={equipmentData.finger_2}
-                    selectedItem={selectedItem}
-                    onClick={handleItemPanelClick}
-                />
-            </div>
-
-            <div className="item-row">
-                <ItemPanel
-                    itemData={equipmentData.trinket_1}
-                    selectedItem={selectedItem}
-                    onClick={handleItemPanelClick}
-                />
-                <ItemPanel
-                    itemData={equipmentData.feet}
-                    selectedItem={selectedItem}
-                    onClick={handleItemPanelClick}
-                />
-                <ItemPanel
-                    itemData={equipmentData.trinket_2}
-                    selectedItem={selectedItem}
-                    onClick={handleItemPanelClick}
-                />
-            </div>
+            {slotOrder.map((row, rowIndex) => (
+                <div key={rowIndex} className="item-row">
+                    {row.map((slot) => (
+                        <ItemPanel
+                            key={slot}
+                            itemData={equipmentData[slot]}
+                            selectedItem={selectedItem}
+                            onClick={() => handleItemPanelClick(equipmentData[slot], slot)}
+                        />
+                    ))}
+                </div>
+            ))}
         </div>
     );
 };

@@ -1,0 +1,22 @@
+.edit-item {
+  display: flex;
+  height: 14.5rem;
+  border: 1px solid var(--border-colour-3);
+  background-color: var(--tooltip-colour-2);
+}
+
+.edit-item-icon-container .edit-item-icon {
+  width: 110px;
+  height: 107px;
+  transform: scale(1);
+  border-bottom: 1px solid var(--border-colour-3);
+}
+.edit-item-icon-container .edit-item-item-level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  border-top: 1px solid var(--border-colour-3);
+  padding-top: 3px;
+  font-size: 19px;
+}/*# sourceMappingURL=EditItem.css.map */

@@ -52,7 +52,7 @@
   --mana: #76afdd;
   --stat-leech: #8ddb84;
   --stat-intellect: #f5b3f4;
-  --stat-health: var(--background-colour);
+  --stat-health: var(--healing-font);
   --stat-haste: #5be99b;
   --stat-crit: #fc8f8f;
   --stat-mastery: #c1a1fd;

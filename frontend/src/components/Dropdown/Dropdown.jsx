@@ -27,6 +27,10 @@ const Dropdown = ({ dropdownOptions, isOpen, toggleDropdown, customClassName, ..
     }, [isOpen]);
 
     const formatOption = (option) => {
+        if (!option) {
+            return "";
+        };
+
         const capitalisedOption = searchString
             .split(" ")
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))

@@ -6,8 +6,6 @@ import { formatEnchantName, formatEmbellishment } from "../../formatEquipment";
 const ItemPanel = ({ itemData, selectedItem, onClick }) => {
     if (!itemData) return;
 
-    console.log(itemData);
-
     const itemRarityStyle = `var(--rarity-${itemData.quality.toLowerCase()})`;
 
     return (

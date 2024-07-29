@@ -12,6 +12,9 @@
   font-size: 1.6rem;
   padding-left: 0.5rem;
   outline: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .highlighted-text {
@@ -141,4 +144,23 @@
 }
 .realm-dropdown .dropdown-options-container .dropdown-option {
   width: 16rem;
+}
+
+.edit-equipment-dropdown {
+  margin-left: -0.1rem;
+  width: 59.3rem;
+}
+.edit-equipment-dropdown .dropdown-selected-input {
+  width: 59.3rem;
+  padding-bottom: 0.1rem;
+}
+
+.edit-equipment-dropdown .dropdown-options-container {
+  width: 59.3rem;
+  min-height: 39.8rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+.edit-equipment-dropdown .dropdown-options-container .dropdown-option {
+  width: 58.1rem;
 }/*# sourceMappingURL=Dropdown.css.map */

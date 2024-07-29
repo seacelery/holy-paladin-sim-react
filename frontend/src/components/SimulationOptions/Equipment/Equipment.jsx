@@ -10,18 +10,18 @@ const Equipment = () => {
     const equipmentData = characterData.equipment;
     const statsData = characterData.stats;
 
-    const [selectedItem, setSelectedItem] = useState(null);
-    console.log(selectedItem)
+    const [selectedSlot, setSelectedSlot] = useState("Head");
+    const [selectedItem, setSelectedItem] = useState(equipmentData.head);
 
     return (
         <div className="options-tab-content equipment-content">
             <div className="equipment-left">
-                <EquipmentDisplay equipmentData={equipmentData} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
+                <EquipmentDisplay equipmentData={equipmentData} selectedItem={selectedItem} setSelectedItem={setSelectedItem} setSelectedSlot={setSelectedSlot} />
             </div>
 
             <div className="equipment-right">
                 <StatsDisplay statsData={statsData} />
-                <EditEquipment />
+                <EditEquipment equipmentData={equipmentData} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
             </div>
         </div>
     );

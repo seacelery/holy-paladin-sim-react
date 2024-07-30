@@ -6,7 +6,7 @@ import EditEquipment from "./EditEquipment/EditEquipment";
 import { CharacterDataContext } from "../../../context/CharacterDataContext";
 
 const Equipment = () => {
-    const { characterData } = useContext(CharacterDataContext);
+    const { characterData, setCharacterData } = useContext(CharacterDataContext);
     const equipmentData = characterData.equipment;
     const statsData = characterData.stats;
 
@@ -21,7 +21,7 @@ const Equipment = () => {
 
             <div className="equipment-right">
                 <StatsDisplay statsData={statsData} />
-                <EditEquipment equipmentData={equipmentData} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
+                <EditEquipment setCharacterData={setCharacterData} equipmentData={equipmentData} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
             </div>
         </div>
     );

@@ -23,7 +23,7 @@ const formatEnchantName = (name) => {
         return;
     };
 
-    return formattedEnchantName;
+    return formattedEnchantName.trim();
 };
 
 const formatEmbellishment = (effects) => {

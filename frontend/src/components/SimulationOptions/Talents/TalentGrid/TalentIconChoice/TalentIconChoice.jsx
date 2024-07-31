@@ -122,7 +122,7 @@ const TalentIconChoice = ({ names = {}, size = "talent-icon-small", talentData, 
                 }}
                 ref={iconRefLeft}
             />
-            <Tooltip text={nameLeft} hoverElement={hoverElementLeft} />
+            <Tooltip children={nameLeft} hoverElement={hoverElementLeft} />
             <div className="talent-icon-divider"></div>
             <img
                 src={talentsToIcons[nameRight]}
@@ -136,7 +136,7 @@ const TalentIconChoice = ({ names = {}, size = "talent-icon-small", talentData, 
                 }}
                 ref={iconRefRight}
             />
-            <Tooltip text={nameRight} hoverElement={hoverElementRight} />
+            <Tooltip children={nameRight} hoverElement={hoverElementRight} />
             {createArrows()}
         </div>
     );

@@ -53,7 +53,7 @@ const OptionIcons = ({ icons, label, dataType, showTooltip = false, exclusiveSel
                 {hoverElement && showTooltip && (
                     <Tooltip
                         type="option"
-                        text={tooltipText}
+                        children={tooltipText}
                         hoverElement={hoverElement}
                     />
                 )}

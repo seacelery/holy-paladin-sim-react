@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Tooltip.scss";
 
-const Tooltip = ({ type, text, hoverElement }) => {
+const Tooltip = ({ type, children, hoverElement, customClassName = "" }) => {
     const [visible, setVisible] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -39,8 +39,8 @@ const Tooltip = ({ type, text, hoverElement }) => {
     };
 
     return (
-        <div className="tooltip" style={style}>
-            {text}
+        <div className={`tooltip ${customClassName}`} style={style}>
+            {children}
         </div>
     );
 };

@@ -1,4 +1,8 @@
 const formatEnchantName = (name) => {
+    if (!name) {
+        return "No enchant";
+    };
+
     let formattedEnchantName = name.split(":");
 
     if (formattedEnchantName.length > 1) {

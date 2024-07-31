@@ -1,0 +1,73 @@
+.edit-enchants-dropdown {
+  width: 32.2rem;
+  height: 3.6rem;
+  margin: 0 auto;
+  border: none;
+  border-bottom: 0.1rem solid var(--border-colour-3);
+  padding: 0rem 0rem 0rem 0rem;
+  border-radius: 0rem;
+  font-size: 1.35rem;
+  background-color: transparent;
+}
+.edit-enchants-dropdown .dropdown-selected-input {
+  width: 32.2rem;
+  height: 3.6rem;
+  padding-left: 0.5rem;
+  left: 0;
+}
+
+.edit-enchants-dropdown .dropdown-options-container {
+  max-height: 10.8rem;
+  width: 32.2rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  top: 3.6rem;
+  left: -0.1rem;
+  padding-top: 0rem;
+  border: none;
+  border-radius: 0rem;
+  background-color: transparent;
+  border-left: 0.1rem solid var(--border-colour-3);
+  border-bottom: 0.1rem solid var(--border-colour-3);
+}
+.edit-enchants-dropdown .dropdown-options-container .dropdown-option {
+  height: 3.6rem;
+  border: none;
+  border-radius: 0rem;
+  padding-left: 0.5rem;
+}
+.edit-enchants-dropdown .dropdown-options-container .dropdown-option:last-of-type {
+  height: 3.5rem;
+}
+
+.edit-enchants-dropdown-narrow .dropdown-selected-input {
+  width: 31.1rem;
+}
+
+.edit-enchants-dropdown-narrow .dropdown-options-container .dropdown-option {
+  width: 31.1rem;
+}
+
+.border-bottom-epic .dropdown-options-container {
+  border-bottom: 0.1rem solid var(--rarity-epic);
+}
+
+.border-bottom-rare .dropdown-options-container {
+  border-bottom: 0.1rem solid var(--rarity-rare);
+}
+
+.border-bottom-uncommon .dropdown-options-container {
+  border-bottom: 0.1rem solid var(--rarity-uncommon);
+}
+
+.border-bottom-common .dropdown-options-container {
+  border-bottom: 0.1rem solid var(--rarity-common);
+}
+
+.enchanted-text .dropdown-selected-input {
+  color: var(--rarity-uncommon);
+}
+
+.no-enchants-text .dropdown-selected-input {
+  color: var(--rarity-poor);
+}/*# sourceMappingURL=EditItemEnchants.css.map */

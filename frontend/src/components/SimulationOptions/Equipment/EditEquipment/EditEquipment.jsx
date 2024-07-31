@@ -6,6 +6,7 @@ import { itemSlotsMap } from "../../../../utils/item-slots-map";
 
 const EditEquipment = ({
     setCharacterData,
+    updateStats,
     equipmentData,
     selectedSlot,
     setSelectedSlot,
@@ -69,6 +70,7 @@ const EditEquipment = ({
                         borderLeft: `0.1rem solid ${selectedItemRarityStyle}`,
                         borderRight: `0.1rem solid ${selectedItemRarityStyle}`,
                         borderTop: `0.1rem solid ${selectedItemRarityStyle}`,
+                        backgroundColor: `var(--rarity-${selectedItem?.quality.toLowerCase()}-dark)`,
                     }}>
                         Currently equipped:{" "}
                         <span
@@ -79,7 +81,7 @@ const EditEquipment = ({
                             {selectedItem.name}
                         </span>
                     </div>
-                    <EditItem setCharacterData={setCharacterData} item={selectedItem} selectedSlot={selectedSlot} updateEquipment={true} />
+                    <EditItem setCharacterData={setCharacterData} updateStats={updateStats} item={selectedItem} selectedSlot={selectedSlot} updateEquipment={true} />
                 </div>
 
                 <div className="edit-item-container">
@@ -90,6 +92,7 @@ const EditEquipment = ({
                             borderLeft: `0.1rem solid ${newItemRarityStyle}`,
                             borderRight: `0.1rem solid ${newItemRarityStyle}`,
                             borderTop: `0.1rem solid ${newItemRarityStyle}`,
+                            backgroundColor: `var(--rarity-${newItem?.quality.toLowerCase()}-dark)`,
                         }}
                     >
                         {newItem?.name}

@@ -1,6 +1,6 @@
-.edit-enchants-dropdown {
+.edit-embellishments-dropdown {
     width: 32.2rem;
-    height: 3.6rem;
+    height: 7.1rem;
     margin: 0 auto;
     border: none;
     border-bottom: 0.1rem solid var(--border-colour-3);
@@ -11,18 +11,20 @@
 
     .dropdown-selected-input {
         width: 32.2rem;
-        height: 3.6rem;
+        height: 7.2rem;
         padding-left: 0.5rem;
         left: 0;
+        align-items: start;
+        padding-top: 0.4rem;
     }
 }
 
-.edit-enchants-dropdown .dropdown-options-container {
+.edit-embellishments-dropdown .dropdown-options-container {
     max-height: 10.8rem;
     width: 32.5rem;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
-    top: 3.6rem;
+    top: 7.2rem;
     left: -0.1rem;
     padding-top: 0rem;
     border: none;
@@ -30,6 +32,7 @@
     background-color: transparent;
     border-left: 0.1rem solid var(--border-colour-3);
     border-bottom: 0.1rem solid var(--border-colour-3);
+    border-right: 0.1rem solid var(--border-colour-3);
 
     .dropdown-option {
         height: 3.6rem;
@@ -43,24 +46,11 @@
     }
 }
 
-.edit-enchants-dropdown-narrow {
-    .dropdown-selected-input {
-        width: 31.3rem;
-    }
-}
-
-.edit-enchants-dropdown-narrow .dropdown-options-container {
-    .dropdown-option {
-        width: 31.3rem;
-    }
-}
-
 .item-rarity-epic {
     .dropdown-options-container {
         border-bottom: 0.1rem solid var(--rarity-epic);
-    }
-
-    .dropdown-options-container {
+        border-right: 0.1rem solid var(--rarity-epic);
+        border-left: 0.1rem solid var(--rarity-epic);
         background-color: var(--rarity-epic-dark);
     }
 }
@@ -68,9 +58,8 @@
 .item-rarity-rare {
     .dropdown-options-container {
         border-bottom: 0.1rem solid var(--rarity-rare);
-    }
-
-    .dropdown-options-container {
+        border-right: 0.1rem solid var(--rarity-rare);
+        border-left: 0.1rem solid var(--rarity-rare);
         background-color: var(--rarity-rare-dark);
     }
 }
@@ -78,9 +67,8 @@
 .item-rarity-uncommon {
     .dropdown-options-container {
         border-bottom: 0.1rem solid var(--rarity-uncommon);
-    }
-
-    .dropdown-options-container {
+        border-right: 0.1rem solid var(--rarity-uncommon);
+        border-left: 0.1rem solid var(--rarity-uncommon);
         background-color: var(--rarity-uncommon-dark);
     }
 }
@@ -88,20 +76,19 @@
 .item-rarity-common {
     .dropdown-options-container {
         border-bottom: 0.1rem solid var(--rarity-common);
-    }
-
-    .dropdown-options-container {
+        border-right: 0.1rem solid var(--rarity-common);
+        border-left: 0.1rem solid var(--rarity-common);
         background-color: var(--rarity-common-dark);
     }
 }
 
-.enchanted-text {
+.effect-text {
     .dropdown-selected-input {
-        color: var(--rarity-uncommon)
+        color: var(--mana)
     }
 }
 
-.no-enchants-text {
+.no-effect-text {
     .dropdown-selected-input {
         color: var(--rarity-poor)
     }

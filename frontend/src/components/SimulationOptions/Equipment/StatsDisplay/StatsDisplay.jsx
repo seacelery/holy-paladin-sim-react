@@ -15,7 +15,7 @@ const StatsDisplay = ({ statsData }) => {
             <StatPanel statName="Haste" statRating={statsData.haste} statPercentage={statsData.haste_percent} statColour={"var(--stat-haste)"}/>
             <StatPanel statName="Critical Strike" statRating={statsData.crit} statPercentage={statsData.crit_percent} statColour={"var(--stat-crit)"}/>
             <StatPanel statName="Mastery" statRating={statsData.mastery} statPercentage={statsData.mastery_percent} statColour={"var(--stat-mastery)"}/>
-            <StatPanel statName="Versatility" statRating={statsData.versatility} statPercentage={statsData.versatility_percent} statColour={"var(--stat-versatiility)"}/>
+            <StatPanel statName="Versatility" statRating={statsData.versatility} statPercentage={statsData.versatility_percent} statColour={"var(--stat-versatility)"}/>
         </div>
     </div>;
 };

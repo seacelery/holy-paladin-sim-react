@@ -1,0 +1,65 @@
+.gem-picker-modal {
+  z-index: 1;
+  position: absolute;
+  top: 35px;
+  left: -1px;
+  padding: 5px;
+  padding-bottom: 8px;
+  width: calc(100% + 2px);
+  background-color: var(--panel-colour-7);
+  border: 1px solid var(--border-colour-3);
+  cursor: default;
+}
+
+.gem-picker-grid-container {
+  display: flex;
+  justify-content: space-between;
+}
+.gem-picker-grid-container .gem-picker-stat-column {
+  width: 15rem;
+  padding-top: 4rem;
+}
+.gem-picker-grid-container .gem-picker-stat-column .stat-column-label {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 3.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  margin-left: 0.75rem;
+}
+.gem-picker-grid-container .gem-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+.gem-picker-grid-container .gem-picker-grid .item-gem-container {
+  margin-bottom: 1rem;
+}
+.gem-picker-grid-container .gem-picker-grid .stat-row-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4.3rem;
+  transform: translateX(-0.1rem);
+  margin-bottom: 0.8rem;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+.gem-picker-grid-container .gem-picker-grid .gem-border-crit .item-gem-icon {
+  border: 0.1rem solid var(--stat-crit);
+}
+.gem-picker-grid-container .gem-picker-grid .gem-border-haste .item-gem-icon {
+  border: 0.1rem solid var(--stat-haste);
+}
+.gem-picker-grid-container .gem-picker-grid .gem-border-mastery .item-gem-icon {
+  border: 0.1rem solid var(--stat-mastery);
+}
+.gem-picker-grid-container .gem-picker-grid .gem-border-versatility .item-gem-icon {
+  border: 0.1rem solid var(--stat-versatility);
+}
+.gem-picker-grid-container .gem-picker-grid .gem-border-intellect .item-gem-icon {
+  border: 0.1rem solid var(--stat-intellect);
+}/*# sourceMappingURL=GemPickerModal.css.map */

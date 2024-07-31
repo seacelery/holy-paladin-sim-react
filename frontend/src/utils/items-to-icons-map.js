@@ -62,7 +62,7 @@ const groupedGems = {
             ["Crafty Ysemerald", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_fire_cut_green.jpg", "+70 Haste", "+33 Crit"],
             ["Keen Ysemerald", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_earth_cut_green.jpg", "+70 Haste", "+33 Mastery"],
             ["Energized Ysemerald", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_frost_cut_green.jpg", "+70 Haste", "+33 Versatility"],
-            ["Fierce Illimited Diamond", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem3primal_cut_green.jpg", "+66 Haste", "+75 Intellect"],
+            ["Fierce Illimited Diamond", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem3primal_cut_green.jpg", "+75 Intellect", "+66 Haste"],
         ]
     },
     "Alexstraszite": {
@@ -72,7 +72,7 @@ const groupedGems = {
             ["Deadly Alexstraszite", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_fire_cut_red.jpg", "+88 Crit"],
             ["Sensei's Alexstraszite", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_earth_cut_red.jpg", "+70 Crit", "+33 Mastery"],  
             ["Radiant Alexstraszite", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_frost_cut_red.jpg", "+70 Crit", "+33 Versatility"],            
-            ["Inscribed Illimited Diamond", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem3primal_cut_red.jpg", "+66 Crit", "+75 Intellect"],
+            ["Inscribed Illimited Diamond", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem3primal_cut_red.jpg", "+75 Intellect", "+66 Crit"],
         ]
     },
     "Neltharite": {
@@ -82,7 +82,7 @@ const groupedGems = {
             ["Sensei's Neltharite", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_fire_cut_black.jpg", "+70 Mastery", "+33 Crit"],
             ["Fractured Neltharite", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_earth_cut_black.jpg", "+88 Mastery"],
             ["Zen Neltharite", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_frost_cut_black.jpg", "+70 Mastery", "+33 Versatility"],
-            ["Skillful Illimited Diamond", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem3primal_cut_black.jpg", "+66 Mastery", "+75 Intellect"],           
+            ["Skillful Illimited Diamond", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem3primal_cut_black.jpg", "+75 Intellect","+66 Mastery"],           
         ]
     },
     "Malygite": {
@@ -92,7 +92,7 @@ const groupedGems = {
             ["Radiant Malygite", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_fire_cut_blue.jpg", "+70 Versatility", "+33 Crit"],
             ["Zen Malygite", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_earth_cut_blue.jpg", "+70 Versatility", "+33 Mastery"],
             ["Stormy Malygite", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem2standard_frost_cut_blue.jpg", "+88 Versatility"],
-            ["Resplendent Illimited Diamond", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem3primal_cut_blue.jpg", "+66 Versatility", "+75 Intellect"],
+            ["Resplendent Illimited Diamond", "https://render.worldofwarcraft.com/eu/icons/56/inv_10_jewelcrafting_gem3primal_cut_blue.jpg", "+75 Intellect", "+66 Versatility"],
         ]
     },
 };

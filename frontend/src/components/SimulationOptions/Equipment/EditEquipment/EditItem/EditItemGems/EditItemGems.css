@@ -1,0 +1,42 @@
+.edit-item-gems {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 3.6rem;
+  border-bottom: 0.1rem solid var(--border-colour-3);
+}
+.edit-item-gems .edit-gems-container {
+  display: flex;
+  align-items: center;
+  margin-left: 0.3rem;
+}
+.edit-item-gems .edit-gems-container .item-gem-container .item-gem-icon-large {
+  margin-left: 0rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.edit-item-gems .edit-gems-container .gem-hover-opacity:hover .item-gem-icon-medium {
+  opacity: 0.7;
+}
+.edit-item-gems .edit-gems-container .gem-clickable {
+  cursor: pointer;
+}
+
+.add-gem-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.9rem;
+  width: 3rem;
+  border: 0.1rem solid var(--border-colour-3);
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.add-gem-container .add-gem-icon {
+  font-size: 2.3rem;
+  color: var(--border-colour-3);
+}/*# sourceMappingURL=EditItemGems.css.map */

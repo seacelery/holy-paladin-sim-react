@@ -153,7 +153,8 @@ const craftedItems = {
     "Primal Molten Sabatons": embellishmentsData,
     "Primal Molten Breastplate": embellishmentsData,
     "Torc of Passed Time": embellishmentsData,
-    "Elemental Lariat": ""
+    "Elemental Lariat": "",
+    "Heartfire Sentinel's Protectors": embellishmentsData,
 };
 
 const ptrCraftedItems = {

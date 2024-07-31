@@ -1,5 +1,8 @@
 .item-gem-container {
   padding-right: 0.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .item-gem-container .item-gem-icon {
   border: 0.1rem solid var(--border-colour-3);
@@ -9,8 +12,41 @@
   width: 2rem;
   height: 2rem;
 }
-.item-gem-container .item-gem-icon-large {
+.item-gem-container .item-gem-icon-medium {
   width: 2.9rem;
   height: 2.9rem;
+}
+.item-gem-container .item-gem-icon-large {
+  width: 3.5rem;
+  height: 3.5rem;
   margin-left: 0.3rem;
+}
+
+.gem-tooltip {
+  font-size: 1.3rem;
+  padding: 0.7rem;
+}
+
+.gem-tooltip-stat {
+  font-size: 1.2rem;
+}
+
+.border-crit {
+  border: 0.1rem solid var(--stat-crit);
+}
+
+.border-haste {
+  border: 0.1rem solid var(--stat-haste);
+}
+
+.border-mastery {
+  border: 0.1rem solid var(--stat-mastery);
+}
+
+.border-versatility {
+  border: 0.1rem solid var(--stat-versatility);
+}
+
+.border-intellect {
+  border: 0.1rem solid var(--stat-intellect);
 }/*# sourceMappingURL=Gem.css.map */

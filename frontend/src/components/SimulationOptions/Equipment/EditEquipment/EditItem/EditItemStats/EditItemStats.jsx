@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./EditItemStats.scss";
 import { itemSlotsMap } from "../../../../../../utils/item-slots-map";
 
-const EditItemStats = ({ setCharacterData, item, updateEquipment, selectedSlot }) => {
+const EditItemStats = ({ setCharacterData, updateStats, item, updateEquipment, selectedSlot }) => {
     const [itemStats, setItemStats] = useState(item.stats);
     const [displayedStats, setDisplayedStats] = useState([]);
     const [inputValues, setInputValues] = useState([]);
@@ -16,6 +16,8 @@ const EditItemStats = ({ setCharacterData, item, updateEquipment, selectedSlot }
                 return newCharacterData;
             });
         };
+
+        updateStats();
     }, [displayedStats]);
 
     useEffect(() => {

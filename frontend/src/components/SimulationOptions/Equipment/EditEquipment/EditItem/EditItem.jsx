@@ -3,10 +3,12 @@ import "./EditItem.scss";
 import { itemSlotToDefaultIcon } from "../../../../../utils/item-slots-map";
 import EditItemStats from "./EditItemStats/EditItemStats";
 import EditItemEnchants from "./EditItemEnchants/EditItemEnchants";
+import EditItemGems from "./EditItemGems/EditItemGems";
+import EditItemEmbellishments from "./EditItemEmbellishments/EditItemEmbellishments";
 
-const EditItem = ({ setCharacterData, item, selectedSlot, updateEquipment = false, setNewItem = null }) => {
+const EditItem = ({ setCharacterData, updateStats, item, selectedSlot, updateEquipment = false, setNewItem = null }) => {
     const itemIcon = item ? item.item_icon : itemSlotToDefaultIcon[selectedSlot];
-    console.log(item)
+    // console.log(item)
 
     if (!item) {
         return (
@@ -27,7 +29,7 @@ const EditItem = ({ setCharacterData, item, selectedSlot, updateEquipment = fals
     return (
         <div
             className="edit-item"
-            style={{ border: `0.1rem solid ${itemRarityStyle}` }}
+            style={{ border: `0.1rem solid ${itemRarityStyle}`, backgroundColor: `var(--rarity-${item.quality.toLowerCase()}-dark)` }}
         >
             <div className="edit-item-icon-container">
                 <img className="edit-item-icon" src={itemIcon} alt="item icon" />
@@ -39,9 +41,11 @@ const EditItem = ({ setCharacterData, item, selectedSlot, updateEquipment = fals
                 </div>
             </div>
             <div className="edit-item-info">
-                <EditItemStats setCharacterData={setCharacterData} item={item} selectedSlot={selectedSlot} updateEquipment={updateEquipment} />
+                <EditItemStats setCharacterData={setCharacterData} updateStats={updateStats} item={item} selectedSlot={selectedSlot} updateEquipment={updateEquipment} />
                 <div className="edit-item-info-bonuses">
-                    <EditItemEnchants setCharacterData={setCharacterData} item={item} selectedSlot={selectedSlot} updateEquipment={updateEquipment} />
+                    <EditItemEnchants setCharacterData={setCharacterData} updateStats={updateStats} item={item} selectedSlot={selectedSlot} updateEquipment={updateEquipment} />
+                    <EditItemGems setCharacterData={setCharacterData} updateStats={updateStats} item={item} selectedSlot={selectedSlot} updateEquipment={updateEquipment} />
+                    <EditItemEmbellishments setCharacterData={setCharacterData} updateStats={updateStats} item={item} selectedSlot={selectedSlot} updateEquipment={updateEquipment} />
                 </div>
             </div>
         </div>

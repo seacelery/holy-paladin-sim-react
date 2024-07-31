@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import "./Dropdown.css";
 import { FaChevronDown } from "react-icons/fa";
 
-const Dropdown = ({ dropdownOptions, isOpen, toggleDropdown, customClassName, ...props }) => {
+const Dropdown = ({ dropdownOptions, isOpen, toggleDropdown, customClassName, hideArrow = false, ...props }) => {
     const { selectedOption, setSelectedOption } = props;
     const selectedOptionRef = useRef(null);
 
@@ -107,7 +107,9 @@ const Dropdown = ({ dropdownOptions, isOpen, toggleDropdown, customClassName, ..
                 >
                     {formatOption(selectedOption)}
                 </div>
-                <FaChevronDown className="dropdown-arrow-down"></FaChevronDown>
+                {!hideArrow && (
+                    <FaChevronDown className="dropdown-arrow-down"></FaChevronDown>
+                )}                  
                 {isOpen && (
                     <div className="dropdown-options-container">
                         {dropdownOptions.map((option, index) => {

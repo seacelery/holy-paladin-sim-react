@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ItemPanel.scss";
 import Gem from "../../Gem/Gem";
 import { formatEnchantName, formatEmbellishment } from "../../formatEquipment";
 
-const ItemPanel = ({ itemData, selectedItem, onClick }) => {
+const ItemPanel = ({ characterData, itemData, selectedItem, onClick }) => {
     if (!itemData) return;
 
     const itemRarityStyle = `var(--rarity-${itemData.quality.toLowerCase()})`;
+
+    const tierSets = {
+        "Heartfire Sentinel": "Dragonflight Tier Season 2",
+        "Entombed Seraph": "Tier Season 1",
+    };
+
+    const getTierSet = (itemName) => {
+        for (const tierSet in tierSets) {
+            if (itemName.includes(tierSet)) {
+                return tierSets[tierSet];
+            };
+        };
+
+        return null;
+    };
 
     return (
         <div className="item-slot" onClick={() => onClick(itemData)}>
@@ -62,10 +77,13 @@ const ItemPanel = ({ itemData, selectedItem, onClick }) => {
                             : null}
                     </div>
                     <div className="item-slot-category">
-                        {itemData.limit && itemData.effects.length > 0
+                        {itemData.limit && itemData.limit.includes("Embellished") && itemData.effects.length > 0
                             ? formatEmbellishment(itemData.effects)
                             : null
                         } 
+                        <span className="item-panel-tier-bonus">
+                            {getTierSet(itemData.name)}
+                        </span>
                     </div>
                     <div className="item-slot-bonuses"></div>
                 </div>

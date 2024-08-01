@@ -11,16 +11,22 @@ import { itemSlotsMap } from "../../../../../../utils/item-slots-map";
 
 const EditItemEnchants = ({ setCharacterData, updateStats, item, selectedSlot, updateEquipment }) => {
     const { version } = useContext(VersionContext);
-    const [selectedEnchant, setSelectedEnchant] = useState(
-        item.enchantments
-            ? formatEnchantName(item.enchantments[0])
-            : "No enchants available"
-    );
-    const [dropdownOpen, setDropdownOpen] = useState(false);
+
     const enchants =
         version === "live"
             ? itemSlotBonuses[selectedSlot].enchants
             : ptrItemSlotBonuses[selectedSlot].enchants;
+
+    const [selectedEnchant, setSelectedEnchant] = useState(
+        item.enchantments && item.enchantments.length > 0
+            ? formatEnchantName(item.enchantments[0])
+            : enchants.length > 0
+                ? "No enchant"
+                : ""
+    );
+
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    
 
     const toggleDropdown = () => {
         if (enchants.length > 1) {
@@ -30,8 +36,10 @@ const EditItemEnchants = ({ setCharacterData, updateStats, item, selectedSlot, u
 
     useEffect(() => {
         setSelectedEnchant(
-            item.enchantments
-                ? formatEnchantName(item.enchantments[0])
+            item.enchantments && item.enchantments.length > 0
+            ? formatEnchantName(item.enchantments[0])
+            : enchants.length > 0
+                ? "No enchant"
                 : ""
         );
         setDropdownOpen(false);
@@ -68,7 +76,7 @@ const EditItemEnchants = ({ setCharacterData, updateStats, item, selectedSlot, u
                 customClassName={`
                     ${enchants.length > 3 ? "edit-enchants-dropdown-narrow" : ""} 
                     edit-enchants-dropdown
-                    ${enchants.length >= 3 ? `item-rarity-${item.quality.toLowerCase()}` : ""}
+                    ${`item-rarity-${item.quality.toLowerCase()}`}
                     ${selectedEnchant === "No enchant" ? "" : selectedEnchant === "" ? "no-enchants-text" : "enchanted-text"}`
                 }
                 hideArrow={enchants.length <= 1}

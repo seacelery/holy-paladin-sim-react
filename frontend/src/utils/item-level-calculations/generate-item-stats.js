@@ -1,11 +1,7 @@
 import { ratingMultiplierByItemLevel, ratingMultiplierByItemLevelRingsNeck, ratingMultiplierStamina } from "./rating-multipliers.js";
 import { itemSlotAllocations } from "./item-slot-allocations.js";
-import { futurePatchSelected } from "../../components/config/version-config.js";
 
 const calculateStatAllocations = (stats, itemSlot) => {
-    console.log(itemSlot)
-    // console.log(stats)
-
     let intellectAllocated = 0;
     let staminaAllocated = 0;
     let totalSecondariesAllocated = 0;
@@ -95,16 +91,25 @@ const calculateStatAllocations = (stats, itemSlot) => {
         const [highestSecondaryName, highestSecondaryValue] = secondaryStats[0];
         const [lowestSecondaryName, lowestSecondaryValue] = secondaryStats[1];
 
-        const ratio = highestSecondaryValue / lowestSecondaryValue;
+        if (lowestSecondaryValue !== 0) {
+            const ratio = highestSecondaryValue / lowestSecondaryValue;
 
-        statAllocations[highestSecondaryName] = totalSecondariesAllocated / (ratio + 1) * ratio;
-        statAllocations[lowestSecondaryName] = totalSecondariesAllocated / (ratio + 1);
+            statAllocations[highestSecondaryName] = totalSecondariesAllocated / (ratio + 1) * ratio;
+            statAllocations[lowestSecondaryName] = totalSecondariesAllocated / (ratio + 1);
+        } else {
+            statAllocations[highestSecondaryName] = totalSecondariesAllocated;
+            statAllocations[lowestSecondaryName] = 0;
+        };
     };
 
     return statAllocations;
 };
 
 const generateItemStats = (stats, itemSlot, itemLevel) => {
+    if (!itemLevel) {
+        itemLevel = 1;
+    };
+
     let ratingMultiplier;
     let staminaMultiplier = ratingMultiplierStamina[itemLevel] ? ratingMultiplierStamina[itemLevel] : 1;
 

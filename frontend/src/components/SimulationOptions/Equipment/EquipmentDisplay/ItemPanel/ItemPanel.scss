@@ -94,6 +94,10 @@
             font-size: 1.1rem;
             color: var(--mana);
             padding-bottom: 0.5rem;
+
+            .item-panel-tier-bonus {
+                color: var(--paladin-font)
+            }
         }
 
         .item-slot-bonuses {

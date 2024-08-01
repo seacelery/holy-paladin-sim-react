@@ -97,7 +97,7 @@ const EditEquipment = ({
                     >
                         {newItem?.name}
                     </div>
-                    <EditItem item={newItem} setNewItem={setNewItem} selectedSlot={selectedSlot} />
+                    <EditItem item={newItem} setNewItem={setNewItem} equipmentData={equipmentData} selectedSlot={selectedSlot} />
                 </div>
             </div>
         </div>

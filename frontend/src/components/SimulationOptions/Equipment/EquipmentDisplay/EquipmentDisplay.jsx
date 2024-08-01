@@ -3,7 +3,7 @@ import "./EquipmentDisplay.scss";
 import ItemPanel from "./ItemPanel/ItemPanel";
 import { itemSlotsMap } from "../../../../utils/item-slots-map";
 
-const EquipmentDisplay = ({ equipmentData, selectedItem, setSelectedItem, setSelectedSlot }) => {
+const EquipmentDisplay = ({ characterData, equipmentData, selectedItem, setSelectedItem, setSelectedSlot }) => {
     const [equippedItemLevel, setEquippedItemLevel] = useState(0);
     const [embellishmentCounter, setEmbellishmentCounter] = useState(0);
     const [tierSetCounters, setTierSetCounters] = useState({});
@@ -70,7 +70,7 @@ const EquipmentDisplay = ({ equipmentData, selectedItem, setSelectedItem, setSel
         setEquippedItemLevel(calculateItemLevel(equipmentData));
         countEmbellishments(equipmentData);
         countTierSets(equipmentData);
-    }, [equipmentData]);
+    }, [characterData]);
 
     const slotOrder = [
         ["head"],
@@ -131,6 +131,7 @@ const EquipmentDisplay = ({ equipmentData, selectedItem, setSelectedItem, setSel
                     {row.map((slot) => (
                         <ItemPanel
                             key={slot}
+                            characterData={characterData}
                             itemData={equipmentData[slot]}
                             selectedItem={selectedItem}
                             onClick={() => handleItemPanelClick(equipmentData[slot], slot)}

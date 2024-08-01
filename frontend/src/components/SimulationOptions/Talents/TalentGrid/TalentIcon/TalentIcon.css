@@ -1,6 +1,7 @@
 .talent-icon {
   position: relative;
   box-shadow: 0.1rem 0.1rem 0.1rem var(--border-colour-2);
+  border-radius: 3px;
   cursor: pointer;
 }
 
@@ -28,8 +29,9 @@
 }
 
 .talent-icon-border {
-  box-shadow: 0rem 0rem 0.1rem var(--border-colour-2);
+  box-shadow: 0.1rem 0.1rem 0.1rem var(--border-colour-2);
   border: 0.1rem solid var(--panel-colour-2);
+  border-radius: 4px;
 }
 
 .talent-icon-selected {

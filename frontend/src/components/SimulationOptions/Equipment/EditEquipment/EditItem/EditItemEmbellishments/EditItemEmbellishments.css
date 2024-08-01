@@ -1,0 +1,96 @@
+.edit-embellishments-dropdown {
+  width: 32.2rem;
+  height: 7.1rem;
+  margin: 0 auto;
+  border: none;
+  border-bottom: 0.1rem solid var(--border-colour-3);
+  padding: 0rem 0rem 0rem 0rem;
+  border-radius: 0rem;
+  font-size: 1.35rem;
+  background-color: transparent;
+}
+.edit-embellishments-dropdown .dropdown-selected-input {
+  width: 32.2rem;
+  height: 7.2rem;
+  padding-left: 0.5rem;
+  left: 0;
+  align-items: start;
+  padding-top: 0.4rem;
+}
+
+.edit-embellishments-dropdown .dropdown-options-container {
+  max-height: 10.8rem;
+  width: 32.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  top: 7.2rem;
+  left: -0.1rem;
+  padding-top: 0rem;
+  border: none;
+  border-radius: 0rem;
+  background-color: transparent;
+  border-left: 0.1rem solid var(--border-colour-3);
+  border-bottom: 0.1rem solid var(--border-colour-3);
+  border-right: 0.1rem solid var(--border-colour-3);
+}
+.edit-embellishments-dropdown .dropdown-options-container .dropdown-option {
+  height: 3.6rem;
+  border: none;
+  border-radius: 0rem;
+  padding-left: 0.5rem;
+}
+.edit-embellishments-dropdown .dropdown-options-container .dropdown-option:last-of-type {
+  height: 3.5rem;
+}
+
+.item-rarity-epic .dropdown-options-container {
+  border-right: 0.1rem solid var(--rarity-epic);
+  background-color: var(--rarity-epic-dark);
+}
+
+.item-rarity-epic-border .dropdown-options-container {
+  border-bottom: 0.1rem solid var(--rarity-epic);
+  border-right: 0.1rem solid var(--rarity-epic);
+  border-left: 0.1rem solid var(--rarity-epic);
+}
+
+.item-rarity-rare .dropdown-options-container {
+  border-right: 0.1rem solid var(--rarity-rare);
+  background-color: var(--rarity-rare-dark);
+}
+
+.item-rarity-rare-border .dropdown-options-container {
+  border-bottom: 0.1rem solid var(--rarity-rare);
+  border-right: 0.1rem solid var(--rarity-rare);
+  border-left: 0.1rem solid var(--rarity-rare);
+}
+
+.item-rarity-uncommon .dropdown-options-container {
+  border-right: 0.1rem solid var(--rarity-uncommon);
+  background-color: var(--rarity-uncommon-dark);
+}
+
+.item-rarity-uncommon-border .dropdown-options-container {
+  border-bottom: 0.1rem solid var(--rarity-uncommon);
+  border-right: 0.1rem solid var(--rarity-uncommon);
+  border-left: 0.1rem solid var(--rarity-uncommon);
+}
+
+.item-rarity-common .dropdown-options-container {
+  border-right: 0.1rem solid var(--rarity-common);
+  background-color: var(--rarity-common-dark);
+}
+
+.item-rarity-common-border .dropdown-options-container {
+  border-bottom: 0.1rem solid var(--rarity-common);
+  border-right: 0.1rem solid var(--rarity-common);
+  border-left: 0.1rem solid var(--rarity-common);
+}
+
+.effect-text .dropdown-selected-input {
+  color: var(--mana);
+}
+
+.no-effect-text .dropdown-selected-input {
+  color: var(--rarity-poor);
+}/*# sourceMappingURL=EditItemEmbellishments.css.map */

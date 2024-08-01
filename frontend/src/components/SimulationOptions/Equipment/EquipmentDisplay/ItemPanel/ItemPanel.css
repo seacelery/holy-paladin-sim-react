@@ -89,6 +89,9 @@
   color: var(--mana);
   padding-bottom: 0.5rem;
 }
+.item-slot-info .item-slot-info-container .item-slot-category .item-panel-tier-bonus {
+  color: var(--paladin-font);
+}
 .item-slot-info .item-slot-info-container .item-slot-bonuses {
   color: var(--paladin-font);
   font-size: 1.1rem;

@@ -48,37 +48,61 @@
 
 .item-rarity-epic {
     .dropdown-options-container {
+        border-right: 0.1rem solid var(--rarity-epic);
+        background-color: var(--rarity-epic-dark);
+    }
+}
+
+.item-rarity-epic-border {
+    .dropdown-options-container {
         border-bottom: 0.1rem solid var(--rarity-epic);
         border-right: 0.1rem solid var(--rarity-epic);
         border-left: 0.1rem solid var(--rarity-epic);
-        background-color: var(--rarity-epic-dark);
     }
 }
 
 .item-rarity-rare {
     .dropdown-options-container {
+        border-right: 0.1rem solid var(--rarity-rare);
+        background-color: var(--rarity-rare-dark);
+    }
+}
+
+.item-rarity-rare-border {
+    .dropdown-options-container {
         border-bottom: 0.1rem solid var(--rarity-rare);
         border-right: 0.1rem solid var(--rarity-rare);
         border-left: 0.1rem solid var(--rarity-rare);
-        background-color: var(--rarity-rare-dark);
     }
 }
 
 .item-rarity-uncommon {
     .dropdown-options-container {
+        border-right: 0.1rem solid var(--rarity-uncommon);
+        background-color: var(--rarity-uncommon-dark);
+    }
+}
+
+.item-rarity-uncommon-border {
+    .dropdown-options-container {
         border-bottom: 0.1rem solid var(--rarity-uncommon);
         border-right: 0.1rem solid var(--rarity-uncommon);
         border-left: 0.1rem solid var(--rarity-uncommon);
-        background-color: var(--rarity-uncommon-dark);
     }
 }
 
 .item-rarity-common {
     .dropdown-options-container {
+        border-right: 0.1rem solid var(--rarity-common);
+        background-color: var(--rarity-common-dark);
+    }
+}
+
+.item-rarity-common-border {
+    .dropdown-options-container {
         border-bottom: 0.1rem solid var(--rarity-common);
         border-right: 0.1rem solid var(--rarity-common);
         border-left: 0.1rem solid var(--rarity-common);
-        background-color: var(--rarity-common-dark);
     }
 }
 

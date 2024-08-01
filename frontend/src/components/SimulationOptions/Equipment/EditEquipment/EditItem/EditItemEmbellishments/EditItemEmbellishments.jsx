@@ -10,18 +10,14 @@ import {
     embellishmentItems,
     ptrEmbellishmentItems
 } from "../../../../../../utils/item-level-calculations/item-slot-bonuses";
-import { formatEmbellishment } from "../../../formatEquipment";
 import { itemSlotsMap } from "../../../../../../utils/item-slots-map";
 
 const EditItemEmbellishments = ({ setCharacterData, updateStats, item, selectedSlot, updateEquipment }) => {
-    console.log(item)
-
     const { version } = useContext(VersionContext);
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    
-
-    const embellishments = version === "live" ? Object.keys(embellishmentsData) : Object.keys(ptrEmbellishmentsData);
+    const embellishmentsDataSet = version === "live" ? embellishmentsData : ptrEmbellishmentsData;
+    const embellishments = Object.keys(embellishmentsDataSet);
     const craftedItemsSet = version === "live" ? craftedItems : ptrCraftedItems;
     const embellishmentsAvailable = item.name in craftedItemsSet;
 
@@ -45,6 +41,28 @@ const EditItemEmbellishments = ({ setCharacterData, updateStats, item, selectedS
         setDropdownOpen(false);
     }, [item]);
 
+    useEffect(() => {
+        if (updateEquipment) {
+            setCharacterData((prevState) => {
+                const newState = { ...prevState };
+    
+                if (!selectedEmbellishment || selectedEmbellishment === "No embellishments available") {
+                    return prevState;
+                } else if (selectedEmbellishment === "No embellishment") {
+                    newState.equipment[itemSlotsMap[selectedSlot.toLowerCase()]].effects = [];
+                    newState.equipment[itemSlotsMap[selectedSlot.toLowerCase()]].limit = null;
+                } else {
+                    newState.equipment[itemSlotsMap[selectedSlot.toLowerCase()]].effects = [embellishmentsDataSet[selectedEmbellishment]];
+                    newState.equipment[itemSlotsMap[selectedSlot.toLowerCase()]].limit = "Unique-Equipped: Embellished (2)";
+                };
+    
+                return newState;
+            });
+    
+            updateStats();
+        };
+    }, [selectedEmbellishment]);
+
     const toggleDropdown = () => {
         if (embellishmentsAvailable) {
             setDropdownOpen((prevState) => !prevState);
@@ -61,7 +79,7 @@ const EditItemEmbellishments = ({ setCharacterData, updateStats, item, selectedS
             customClassName={`
                 ${embellishments.length > 3 ? "edit-embellishments-dropdown-narrow" : ""} 
                 edit-embellishments-dropdown
-                ${embellishments.length >= 3 ? `item-rarity-${item.quality.toLowerCase()}` : ""}
+                ${embellishments.length >= 3 ? `item-rarity-${item.quality.toLowerCase()} item-rarity-${item.quality.toLowerCase()}-border` : ""}
                 ${selectedEmbellishment === "No embellishment" ? "" : selectedEmbellishment === "No embellishments available" ? "no-effect-text" : "effect-text"}`
             }
             hideArrow={!embellishmentsAvailable}

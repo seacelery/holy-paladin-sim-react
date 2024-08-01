@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./EditItemStats.scss";
 import { itemSlotsMap } from "../../../../../../utils/item-slots-map";
+import { VersionContext } from "../../../../../../context/VersionContext";
 
-const EditItemStats = ({ setCharacterData, updateStats, item, updateEquipment, selectedSlot }) => {
-    const [itemStats, setItemStats] = useState(item.stats);
+const EditItemStats = ({ setCharacterData, itemStats, setItemStats, updateStats, item, updateEquipment, selectedSlot }) => {
+    const { version } = useContext(VersionContext);
     const [displayedStats, setDisplayedStats] = useState([]);
     const [inputValues, setInputValues] = useState([]);
     const excludedStats = ["combat_rating_avoidance", "stamina"];
+
+    useEffect(() => {
+        updateStats();
+    }, [version]);
 
     useEffect(() => {
         if (updateEquipment) {

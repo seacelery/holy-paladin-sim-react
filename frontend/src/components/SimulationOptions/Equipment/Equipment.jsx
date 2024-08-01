@@ -12,6 +12,25 @@ const Equipment = () => {
     const { characterData, setCharacterData } = useContext(CharacterDataContext);
     const equipmentData = characterData.equipment;
 
+    if (!equipmentData.off_hand) {
+        setCharacterData(prevCharacterData => ({
+            ...prevCharacterData,
+            equipment: {
+                ...prevCharacterData.equipment,
+                off_hand: {
+                    effects: [],
+                    item_icon: "https://wow.zamimg.com/images/wow/icons/large/inventoryslot_offhand.jpg",
+                    item_id: 0,
+                    item_level: equipmentData.main_hand.item_level,
+                    limit: null,
+                    name: "Off Hand",
+                    quality: "Poor",
+                    stats: []
+                }
+            }
+        }));
+    };
+
     const statsData = characterData.stats;
 
     const [selectedSlot, setSelectedSlot] = useState("Head");
@@ -45,7 +64,7 @@ const Equipment = () => {
     return (
         <div className="options-tab-content equipment-content">
             <div className="equipment-left">
-                <EquipmentDisplay equipmentData={equipmentData} selectedItem={selectedItem} setSelectedItem={setSelectedItem} setSelectedSlot={setSelectedSlot} />
+                <EquipmentDisplay characterData={characterData} equipmentData={equipmentData} selectedItem={selectedItem} setSelectedItem={setSelectedItem} setSelectedSlot={setSelectedSlot} />
             </div>
 
             <div className="equipment-right">

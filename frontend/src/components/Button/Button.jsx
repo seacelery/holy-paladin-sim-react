@@ -1,7 +1,7 @@
 import React from "react";
 import "./Button.scss";
 
-const Button = ({ children, width, height, margin, fontSize, grow, onClick, ...props }) => {
+const Button = ({ children, width, height, margin, fontSize, grow, onClick, customClassName, ...props }) => {
     const styles = {
         width: width,
         height: height,
@@ -10,7 +10,7 @@ const Button = ({ children, width, height, margin, fontSize, grow, onClick, ...p
     };
 
     return (
-        <button className={`button ${grow ? "button-grow" : ""}`} onClick={onClick} style={styles} {...props}>
+        <button className={`button ${grow ? "button-grow" : ""} ${customClassName}`} onClick={onClick} style={styles} {...props}>
             {children}
         </button>
     );

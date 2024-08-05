@@ -36,6 +36,43 @@ const blizzardItemSlotsMap = {
     "trinket": "trinket_1",
 };
 
+const slots = [
+    "Head",
+    "Shoulders",
+    "Necklace",
+    "Cloak",
+    "Gloves",
+    "Body",
+    "Bracers",
+    "Main Hand",
+    "Off Hand",
+    "Belt",
+    "Legs",
+    "Ring 1",
+    "Ring 2",
+    "Trinket 1",
+    "Trinket 2",
+];
+
+const selectedSlotToItemDataSlot = {
+    "head": "head",
+    "necklace": "necklace",
+    "shoulders": "shoulder",
+    "cloak": "back",
+    "gloves": "hands",
+    "body": "chest",
+    "bracers": "wrist",
+    "main hand": "one-hand",
+    "off hand": "held in off-hand",
+    "belt": "waist",
+    "ring 1": "finger",
+    "ring 2": "finger",
+    "legs": "legs",
+    "boots": "feet",
+    "trinket 1": "trinket",
+    "trinket 2": "trinket",
+};
+
 const itemSlotToDefaultIcon = {
     "Main Hand": "https://wow.zamimg.com/images/wow/icons/large/inventoryslot_mainhand.jpg",
     "Off Hand": "https://wow.zamimg.com/images/wow/icons/large/inventoryslot_offhand.jpg",
@@ -55,4 +92,4 @@ const itemSlotToDefaultIcon = {
     "Trinket 2": "https://wow.zamimg.com/images/wow/icons/large/inventoryslot_trinket.jpg",
 };
 
-export { itemSlotsMap, blizzardItemSlotsMap, itemSlotToDefaultIcon };
+export { slots, itemSlotsMap, blizzardItemSlotsMap, itemSlotToDefaultIcon, selectedSlotToItemDataSlot };

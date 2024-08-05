@@ -9,7 +9,7 @@ import {
 import { formatEnchantName } from "../../../formatEquipment";
 import { itemSlotsMap } from "../../../../../../utils/item-slots-map";
 
-const EditItemEnchants = ({ setCharacterData, updateStats, item, selectedSlot, updateEquipment }) => {
+const EditItemEnchants = ({ setCharacterData, updateStats, item, selectedSlot, updateEquipment, setNewItem }) => {
     const { version } = useContext(VersionContext);
 
     const enchants =
@@ -62,6 +62,11 @@ const EditItemEnchants = ({ setCharacterData, updateStats, item, selectedSlot, u
             });
     
             updateStats();
+        } else { 
+            setNewItem({
+                ...item,
+                enchantments: selectedEnchant === "No enchant" ? [] : [`Enchanted: ${[selectedEnchant]}`]
+            });
         };
     }, [selectedEnchant]);
 

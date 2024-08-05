@@ -81,9 +81,9 @@ const ItemPanel = ({ characterData, itemData, selectedItem, onClick }) => {
                             ? formatEmbellishment(itemData.effects)
                             : null
                         } 
-                        <span className="item-panel-tier-bonus">
+                        <div className="item-panel-tier-bonus">
                             {getTierSet(itemData.name)}
-                        </span>
+                        </div>
                     </div>
                     <div className="item-slot-bonuses"></div>
                 </div>

@@ -12,6 +12,15 @@ import { generateItemEffects } from "../../../../../utils/item-level-calculation
 const EditItem = ({ setCharacterData, updateStats, item, equipmentData, selectedSlot, updateEquipment = false, setNewItem = null }) => {
     const itemIcon = item ? item.item_icon : itemSlotToDefaultIcon[selectedSlot];
 
+    const [itemStats, setItemStats] = useState(item ? item.stats : {});
+    const [itemLevel, setItemLevel] = useState(item ? item.item_level : 0);
+    const [originalItemLevel, setOriginalItemLevel] = useState(item ? item.item_level : 0);
+
+    useEffect(() => {
+        setItemLevel(item ? item.item_level : 0);
+        setOriginalItemLevel(item ? item.item_level : 0);
+    }, [item]);
+
     if (!item) {
         return (
             <div className="edit-item">
@@ -23,15 +32,6 @@ const EditItem = ({ setCharacterData, updateStats, item, equipmentData, selected
             </div>
         );
     };
-
-    const [itemStats, setItemStats] = useState(item.stats);
-    const [itemLevel, setItemLevel] = useState(item ? item.item_level : 0);
-    const [originalItemLevel, setOriginalItemLevel] = useState(item ? item.item_level : 0);
-
-    useEffect(() => {
-        setItemLevel(item.item_level);
-        setOriginalItemLevel(item.item_level);
-    }, [item]);
 
     const handleItemLevelChange = (input) => {
         setItemLevel(input);
@@ -47,20 +47,30 @@ const EditItem = ({ setCharacterData, updateStats, item, equipmentData, selected
         const newStats = generateItemStats(item.stats, itemSlotsMap[selectedSlot.toLowerCase()], parseInt(itemLevelForCalculation));
         const newEffects = generateItemEffects(item.effects, itemSlotsMap[selectedSlot.toLowerCase()], parseInt(itemLevelForCalculation));
         
-        setCharacterData((prevState) => {
-            const newState = { ...prevState };
-            newState.equipment[itemSlotsMap[selectedSlot.toLowerCase()]].stats = newStats;
-            setItemStats(newStats);
-            newState.equipment[itemSlotsMap[selectedSlot.toLowerCase()]].effects = newEffects;
-            newState.equipment[itemSlotsMap[selectedSlot.toLowerCase()]].item_level = parseInt(itemLevelForCalculation);
-            return newState;
-        });
+        if (updateEquipment) {
+            setCharacterData((prevState) => {
+                const newState = { ...prevState };
+                newState.equipment[itemSlotsMap[selectedSlot.toLowerCase()]].stats = newStats;
+                setItemStats(newStats);
+                newState.equipment[itemSlotsMap[selectedSlot.toLowerCase()]].effects = newEffects;
+                newState.equipment[itemSlotsMap[selectedSlot.toLowerCase()]].item_level = parseInt(itemLevelForCalculation);
+                return newState;
+            });
+            updateStats();
+        } else {
+            const newItem = { ...item };
+            newItem.stats = newStats;
+            newItem.effects = newEffects;
+            newItem.item_level = parseInt(itemLevelForCalculation);
+            delete newItem.base_item_level;
+            delete newItem.item_slot;
 
+            setNewItem(newItem);
+        };
+        
         setItemLevel(itemLevelForCalculation);
         setOriginalItemLevel(itemLevelForCalculation);
-        updateStats();
     };
-
 
     const itemRarityStyle = item
         ? `var(--rarity-${item.quality.toLowerCase()})`
@@ -89,9 +99,9 @@ const EditItem = ({ setCharacterData, updateStats, item, equipmentData, selected
                 <div className="edit-item-info-bonuses">
                     {selectedSlot !== "Trinket 1" && selectedSlot !== "Trinket 2" && (
                         <>
-                            <EditItemEnchants setCharacterData={setCharacterData} updateStats={updateStats} item={item} selectedSlot={selectedSlot} updateEquipment={updateEquipment} />
-                            <EditItemGems setCharacterData={setCharacterData} updateStats={updateStats} item={item} selectedSlot={selectedSlot} updateEquipment={updateEquipment} />
-                            <EditItemEmbellishments setCharacterData={setCharacterData} updateStats={updateStats} item={item} selectedSlot={selectedSlot} updateEquipment={updateEquipment} />
+                            <EditItemEnchants setCharacterData={setCharacterData} updateStats={updateStats} item={item} selectedSlot={selectedSlot} updateEquipment={updateEquipment} setNewItem={setNewItem} />
+                            <EditItemGems setCharacterData={setCharacterData} updateStats={updateStats} item={item} selectedSlot={selectedSlot} updateEquipment={updateEquipment} setNewItem={setNewItem} />
+                            <EditItemEmbellishments setCharacterData={setCharacterData} updateStats={updateStats} item={item} selectedSlot={selectedSlot} updateEquipment={updateEquipment} setNewItem={setNewItem} />
                         </>
                     )}
                     {(selectedSlot === "Trinket 1" || selectedSlot === "Trinket 2") && (

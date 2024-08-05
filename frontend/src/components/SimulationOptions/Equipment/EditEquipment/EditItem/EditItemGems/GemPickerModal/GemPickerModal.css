@@ -1,5 +1,5 @@
 .gem-picker-modal {
-  z-index: 1;
+  z-index: 1001;
   position: absolute;
   top: 35px;
   left: -1px;

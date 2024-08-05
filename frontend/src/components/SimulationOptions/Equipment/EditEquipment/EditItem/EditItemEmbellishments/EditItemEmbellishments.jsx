@@ -12,7 +12,7 @@ import {
 } from "../../../../../../utils/item-level-calculations/item-slot-bonuses";
 import { itemSlotsMap } from "../../../../../../utils/item-slots-map";
 
-const EditItemEmbellishments = ({ setCharacterData, updateStats, item, selectedSlot, updateEquipment }) => {
+const EditItemEmbellishments = ({ setCharacterData, updateStats, item, selectedSlot, updateEquipment, setNewItem }) => {
     const { version } = useContext(VersionContext);
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -30,15 +30,18 @@ const EditItemEmbellishments = ({ setCharacterData, updateStats, item, selectedS
     );
 
     useEffect(() => {
-        setSelectedEmbellishment(
-            !embellishmentsAvailable 
-            ? "No embellishments available" 
-            : item.limit && item.limit.includes("Embellished") && item.effects.length > 0
-                ? item.effects[0].name
-                : "No embellishment"
-        );
-
-        setDropdownOpen(false);
+        if (item) {
+            console.log(item)
+            setSelectedEmbellishment(
+                !embellishmentsAvailable 
+                ? "No embellishments available" 
+                : item.limit && item.limit.includes("Embellished") && item.effects.length > 0
+                    ? item.effects[0].name
+                    : "No embellishment"
+            );
+    
+            setDropdownOpen(false);
+        };
     }, [item]);
 
     useEffect(() => {
@@ -60,6 +63,12 @@ const EditItemEmbellishments = ({ setCharacterData, updateStats, item, selectedS
             });
     
             updateStats();
+        } else {
+            setNewItem({
+                ...item,
+                effects: (selectedEmbellishment === "No embellishment" || selectedEmbellishment === "No embellishments available") ? [] : [embellishmentsDataSet[selectedEmbellishment]],
+                limit: selectedEmbellishment === "No embellishment" ? null : "Unique-Equipped: Embellished (2)"
+            });
         };
     }, [selectedEmbellishment]);
 

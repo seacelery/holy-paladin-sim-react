@@ -10,7 +10,9 @@ const EditItemStats = ({ setCharacterData, itemStats, setItemStats, updateStats,
     const excludedStats = ["combat_rating_avoidance", "stamina"];
 
     useEffect(() => {
-        updateStats();
+        if (updateEquipment) {
+            updateStats();
+        };
     }, [version]);
 
     useEffect(() => {
@@ -20,9 +22,9 @@ const EditItemStats = ({ setCharacterData, itemStats, setItemStats, updateStats,
                 newCharacterData.equipment[itemSlotsMap[selectedSlot.toLowerCase()]].stats = itemStats;
                 return newCharacterData;
             });
-        };
 
-        updateStats();
+            updateStats();
+        };
     }, [displayedStats]);
 
     useEffect(() => {

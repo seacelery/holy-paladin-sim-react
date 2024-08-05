@@ -8,7 +8,7 @@ import {
 import { VersionContext } from "../../../../../../../context/VersionContext";
 import { itemSlotsMap } from "../../../../../../../utils/item-slots-map";
 
-const GemPickerModal = ({ onClose, setCharacterData, updateStats, selectedSlot, item, updateEquipment }) => {
+const GemPickerModal = ({ onClose, setCharacterData, updateStats, selectedSlot, item, updateEquipment, setNewItem }) => {
     const { version } = useContext(VersionContext);
     const gemSet = version === "live" ? groupedGems : ptrGroupedGems;
     const gems = item.gems || [];
@@ -47,9 +47,14 @@ const GemPickerModal = ({ onClose, setCharacterData, updateStats, selectedSlot, 
                 ].gems = newGems;
                 return newCharacterData;
             });
-    
             updateStats();
-        };    
+        } else {
+            setNewItem((prevItem) => {
+                const newItem = { ...prevItem };
+                newItem.gems = newGems;
+                return newItem;
+            });
+        } ;
     };
 
     return (

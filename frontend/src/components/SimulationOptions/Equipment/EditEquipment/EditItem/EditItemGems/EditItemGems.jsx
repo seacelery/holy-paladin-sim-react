@@ -10,7 +10,8 @@ const EditItemGems = ({
     updateStats,
     item,
     selectedSlot,
-    updateEquipment,
+    updateEquipment = false,
+    setNewItem
 }) => {
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -29,7 +30,13 @@ const EditItemGems = ({
             });
     
             updateStats();
-        };  
+        } else {
+            setNewItem((prevItem) => {
+                const newItem = { ...prevItem };
+                newItem.gems = newGems;
+                return newItem;
+            });
+        };
     };
 
     return (
@@ -56,7 +63,7 @@ const EditItemGems = ({
                     <FiPlus className="add-gem-icon" />
                 </div>
                 {modalOpen && (
-                    <GemPickerModal onClose={() => setModalOpen(false)} setCharacterData={setCharacterData} updateStats={updateStats} selectedSlot={selectedSlot} item={item} updateEquipment={updateEquipment} />
+                    <GemPickerModal onClose={() => setModalOpen(false)} setCharacterData={setCharacterData} updateStats={updateStats} selectedSlot={selectedSlot} item={item} updateEquipment={updateEquipment} setNewItem={setNewItem} />
                 )}
         </div>
         </div>

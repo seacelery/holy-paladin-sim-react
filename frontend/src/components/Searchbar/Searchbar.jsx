@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import "./Searchbar.scss";
 
 const Searchbar = ({ data, width, fontSize, suggestionHeight = "2.9rem", maxDisplayedSuggestions = 5, newItem, setNewItem }) => {

@@ -64,7 +64,7 @@ const calculateNewEffect = (effectsData, itemSlot, itemLevel, effectDescription)
     const newDescription = effectDescription.replace(/\*(\d+(,\d+)?(\.\d+)?)/g, (match) => {
         const nextValue = replacementIterator.next().value;
         return nextValue !== undefined ? `*${nextValue}` : match;
-    });
+    }); 
 
     return { newEffectsData, newDescription };
 };

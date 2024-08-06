@@ -56,8 +56,17 @@ const EditEquipment = ({
     }, [selectedSlot]);
 
     const replaceItem = (newItem) => {
+        if (!newItem) return;
+
         setCharacterData((prevState) => {
             const newState = { ...prevState };
+            delete newItem.icon;
+            delete newItem.base_item_level;
+            newItem.item_id = newItem.id;
+            delete newItem.id;
+            delete newItem.item_slot;
+            delete newItem.gems;
+            
             newState.equipment[itemSlotsMap[selectedSlot.toLowerCase()]] = newItem;
             return newState;
         });

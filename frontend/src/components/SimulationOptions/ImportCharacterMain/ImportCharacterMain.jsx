@@ -9,6 +9,7 @@ import { realmList } from "../../../data/realm-list";
 import { CharacterDataContext } from "../../../context/CharacterDataContext";
 import { VersionContext } from "../../../context/VersionContext";
 import { baseLightsmithTalents, baseHeraldOfTheSunTalents } from "../../../utils/base-talents";
+import { updateEquipmentWithEffectValues } from "../../../utils/misc-functions";
 
 const ImportCharacterMain = ({ setCharacterImported }) => {
     const { characterData, setCharacterData } = useContext(CharacterDataContext);
@@ -71,7 +72,7 @@ const ImportCharacterMain = ({ setCharacterImported }) => {
                     specTalents: data.spec_talents,
                     lightsmithTalents: { ...baseLightsmithTalents },
                     heraldOfTheSunTalents: { ...baseHeraldOfTheSunTalents },
-                    equipment: data.equipment,
+                    equipment: updateEquipmentWithEffectValues(data.equipment),
                     consumables: data.consumable,
                     stats: data.stats
                 });

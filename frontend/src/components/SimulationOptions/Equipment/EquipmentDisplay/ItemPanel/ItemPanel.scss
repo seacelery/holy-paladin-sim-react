@@ -88,6 +88,11 @@
         .item-slot-gems-container {
             display: flex;
             align-items: center;
+
+            .item-slot-leech {
+                color: var(--stat-leech);
+                font-size: 1.1rem;
+            }
         }
 
         .item-slot-category {

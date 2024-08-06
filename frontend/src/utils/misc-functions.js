@@ -1,4 +1,4 @@
-import itemDataEffects from "../utils/data/item-data-effects.js";
+import itemData from "../data/item-data.js";
 import { generateItemEffects } from "./item-level-calculations/generate-item-effect.js";
 
 const formatNumbers = (number) => {
@@ -129,19 +129,20 @@ const makeFieldEditable = (field, {defaultValue = null, fieldSlider = null, char
     });
 };
 
-const updateEquipmentWithEffectValues = (data) => {
-    const equipmentData = data["equipment"];
+const updateEquipmentWithEffectValues = (equipmentData) => {
     Object.keys(equipmentData).forEach(slot => {
         const equipmentPiece = equipmentData[slot];
-        const enhancedItem = itemDataEffects.find(item => item.id === equipmentPiece.item_id);
+        const enhancedItem = itemData.find(item => item.id === equipmentPiece.item_id);
         
-        if (enhancedItem && enhancedItem.effects) {
+        if (enhancedItem && enhancedItem.effects.length > 0) {
             equipmentPiece.effects[0]["effect_values"] = enhancedItem.effects.map(effect => effect.effect_values)[0];
             equipmentPiece.effects[0]["description"] = enhancedItem.effects.map(effect => effect.description)[0];
         };
         
         equipmentPiece.effects = generateItemEffects(equipmentPiece.effects, slot, equipmentPiece.item_level);
     });
+
+    return equipmentData;
 };
 
 const createTooltip = (tooltipId, tooltipClass) => {

@@ -29,7 +29,8 @@
             color: var(--light-font-colour);
             border: 1px solid var(--border-colour-3);
             font-size: 14px;
-            z-index: 1000;
+            z-index: 1;
+            padding-top: 1px;
         }
     }
 }

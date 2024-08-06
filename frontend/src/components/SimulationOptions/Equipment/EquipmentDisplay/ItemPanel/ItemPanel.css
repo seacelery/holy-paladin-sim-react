@@ -84,6 +84,10 @@
   display: flex;
   align-items: center;
 }
+.item-slot-info .item-slot-info-container .item-slot-gems-container .item-slot-leech {
+  color: var(--stat-leech);
+  font-size: 1.1rem;
+}
 .item-slot-info .item-slot-info-container .item-slot-category {
   font-size: 1.1rem;
   color: var(--mana);

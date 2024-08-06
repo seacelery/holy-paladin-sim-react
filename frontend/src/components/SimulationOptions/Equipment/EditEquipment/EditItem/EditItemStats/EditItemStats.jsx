@@ -1,13 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import "./EditItemStats.scss";
 import { itemSlotsMap } from "../../../../../../utils/item-slots-map";
 import { VersionContext } from "../../../../../../context/VersionContext";
 
-const EditItemStats = ({ setCharacterData, itemStats, setItemStats, updateStats, item, updateEquipment, selectedSlot }) => {
+const EditItemStats = ({ setCharacterData, itemStats, setItemStats, updateStats, item, updateEquipment, selectedSlot, setNewItem }) => {
     const { version } = useContext(VersionContext);
     const [displayedStats, setDisplayedStats] = useState([]);
     const [inputValues, setInputValues] = useState([]);
     const excludedStats = ["combat_rating_avoidance", "stamina"];
+
+    const previousItemStats = useRef(itemStats);
 
     useEffect(() => {
         if (updateEquipment) {
@@ -24,8 +26,17 @@ const EditItemStats = ({ setCharacterData, itemStats, setItemStats, updateStats,
             });
 
             updateStats();
+        } else {
+            if (JSON.stringify(previousItemStats.current) !== JSON.stringify(itemStats)) {
+                setNewItem((prevState) => {
+                    const newItem = { ...prevState };
+                    newItem.stats = itemStats;
+                    return newItem;
+                });
+                previousItemStats.current = itemStats;
+            };
         };
-    }, [displayedStats]);
+    }, [displayedStats, itemStats]);
 
     useEffect(() => {
         if (item?.stats) {

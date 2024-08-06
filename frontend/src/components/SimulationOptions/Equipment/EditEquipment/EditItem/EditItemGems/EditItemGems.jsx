@@ -62,6 +62,7 @@ const EditItemGems = ({
                 >
                     <FiPlus className="add-gem-icon" />
                 </div>
+                
                 {modalOpen && (
                     <GemPickerModal onClose={() => setModalOpen(false)} setCharacterData={setCharacterData} updateStats={updateStats} selectedSlot={selectedSlot} item={item} updateEquipment={updateEquipment} setNewItem={setNewItem} />
                 )}

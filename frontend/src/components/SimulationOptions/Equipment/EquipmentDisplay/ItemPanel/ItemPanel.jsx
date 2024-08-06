@@ -75,6 +75,9 @@ const ItemPanel = ({ characterData, itemData, selectedItem, onClick }) => {
                                   );
                               })
                             : null}
+                        {itemData.stats.leech && (
+                            <div className="item-slot-leech">+{itemData.stats.leech} Leech</div>
+                        )}
                     </div>
                     <div className="item-slot-category">
                         {itemData.limit && itemData.limit.includes("Embellished") && itemData.effects.length > 0

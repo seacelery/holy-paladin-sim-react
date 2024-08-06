@@ -95,7 +95,7 @@ const EditItem = ({ setCharacterData, updateStats, item, equipmentData, selected
                 />
             </div>
             <div className="edit-item-info">
-                <EditItemStats setCharacterData={setCharacterData} itemStats={itemStats} setItemStats={setItemStats} updateStats={updateStats} item={item} selectedSlot={selectedSlot} updateEquipment={updateEquipment} />
+                <EditItemStats setCharacterData={setCharacterData} itemStats={itemStats} setItemStats={setItemStats} updateStats={updateStats} item={item} selectedSlot={selectedSlot} updateEquipment={updateEquipment} setNewItem={setNewItem} />
                 <div className="edit-item-info-bonuses">
                     {selectedSlot !== "Trinket 1" && selectedSlot !== "Trinket 2" && (
                         <>

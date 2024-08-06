@@ -5,7 +5,7 @@ const EditItemTrinkets = ({ item }) => {
     const trinketEffect = item.effects[0];
 
     return <div className="edit-item-trinkets">
-        {trinketEffect.description}
+        {trinketEffect?.description.replaceAll("*", "")}
     </div>;
 };
 

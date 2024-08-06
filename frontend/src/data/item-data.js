@@ -125485,23 +125485,6 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "Use: Rapidly evolve for 1.5 sec before taking on a new more powerful form increasing your <Primary Stat> by 156 and all other stats by 212 for 20 sec. (2 Min Cooldown)"
-            }
-        ],
-        "name": "Rapid Evolution Serum",
-        "item_slot": "Trinket",
-        "base_item_level": 400,
-        "quality": "Uncommon",
-        "id": 225654,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_dpotion_a25.jpg",
-        "stats": {},
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
                 "description": "Equip: The Core's unstable energies will randomly buff one of your secondary stats for 409. This lasts between 10 and 30 sec before randomly changing to another stat."
             }
         ],
@@ -136793,7 +136776,7 @@ const itemData = [
         "item_slot": "Necklace",
         "base_item_level": 571,
         "quality": "Uncommon",
-        "id": 226427,
+        "id": 2264271,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
         "stats": {
             "Stamina": 5034,
@@ -136814,7 +136797,7 @@ const itemData = [
         "item_slot": "Cloak",
         "base_item_level": 571,
         "quality": "Uncommon",
-        "id": 226427,
+        "id": 2264272,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
         "stats": {
             "Intellect": 1133,
@@ -136836,7 +136819,7 @@ const itemData = [
         "item_slot": "Wrists",
         "base_item_level": 606,
         "quality": "Epic",
-        "id": 226427,
+        "id": 2264273,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
         "stats": {
             "Intellect": 1569, 
@@ -136858,7 +136841,7 @@ const itemData = [
         "item_slot": "Held in Off-hand",
         "base_item_level": 558,
         "quality": "Rare",
-        "id": 226427,
+        "id": 2264274,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
         "stats": {
             "Intellect": 892, 
@@ -136880,7 +136863,7 @@ const itemData = [
         "item_slot": "Finger",
         "base_item_level": 571,
         "quality": "Uncommon",
-        "id": 226427,
+        "id": 2264275,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
         "stats": {
             "Stamina": 5034,
@@ -136901,7 +136884,7 @@ const itemData = [
         "item_slot": "Finger",
         "base_item_level": 571,
         "quality": "Epic",
-        "id": 226427,
+        "id": 2264276,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
         "stats": {
             "Stamina": 5034,
@@ -136922,7 +136905,7 @@ const itemData = [
         "item_slot": "Feet",
         "base_item_level": 606,
         "quality": "Epic",
-        "id": 226427,
+        "id": 2264277,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
         "stats": {
             "Intellect": 2093, 
@@ -136944,7 +136927,7 @@ const itemData = [
         "item_slot": "Wrists",
         "base_item_level": 558,
         "quality": "Rare",
-        "id": 226427,
+        "id": 2264278,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_hand_1h_harvester_d_01.jpg",
         "stats": {
             "Intellect": 1338, 

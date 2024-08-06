@@ -31,7 +31,6 @@ const EditItemEmbellishments = ({ setCharacterData, updateStats, item, selectedS
 
     useEffect(() => {
         if (item) {
-            console.log(item)
             setSelectedEmbellishment(
                 !embellishmentsAvailable 
                 ? "No embellishments available" 
@@ -67,7 +66,7 @@ const EditItemEmbellishments = ({ setCharacterData, updateStats, item, selectedS
             setNewItem({
                 ...item,
                 effects: (selectedEmbellishment === "No embellishment" || selectedEmbellishment === "No embellishments available") ? [] : [embellishmentsDataSet[selectedEmbellishment]],
-                limit: selectedEmbellishment === "No embellishment" ? null : "Unique-Equipped: Embellished (2)"
+                limit: (selectedEmbellishment === "No embellishment" || !embellishmentsAvailable) ? null : "Unique-Equipped: Embellished (2)"
             });
         };
     }, [selectedEmbellishment]);

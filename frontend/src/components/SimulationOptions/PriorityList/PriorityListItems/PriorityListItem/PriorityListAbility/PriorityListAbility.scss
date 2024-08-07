@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: center;
     width: 15.0rem;
+    padding-left: 0.7rem;
     height: 4.2rem;
     border: .1rem solid var(--border-colour-3);
     background-color: var(--panel-colour-2);
@@ -10,23 +11,16 @@
     .priority-list-item-ability-text {
         width: 100%;
         height: 100%;
-        box-sizing: border-box;
         border: none;
         outline: none;
         color: var(--light-font-colour);
         resize: none;
-        padding: 1.0rem;
         overflow: auto;
         display: flex;
         align-items: center;
         justify-content: center;
-        line-height: 1.5;
-        font-size: 13.0.5rem;
+        line-height: 4rem;
+        font-size: 1.35rem;
         background-color: var(--panel-colour-2);
-    }
-
-    .priority-list-item-ability.multi-line .priority-list-item-ability-text {
-        align-items: flex-start;
-        justify-content: flex-start;
     }
 }

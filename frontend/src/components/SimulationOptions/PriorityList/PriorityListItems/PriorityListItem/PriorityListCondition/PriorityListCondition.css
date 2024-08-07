@@ -1,28 +1,26 @@
 .priority-list-item-condition {
   display: flex;
   align-items: center;
-  flex-grow: 1;
-  padding-left: 0.7rem;
+  justify-content: center;
+  width: 16.5rem;
   margin-left: 0.5rem;
-  border-radius: 0.1rem;
-  min-width: 16.5rem;
-  max-width: 16.5rem;
-  min-height: 4rem;
+  padding-left: 0.7rem;
+  height: 4.2rem;
   border: 0.1rem solid var(--border-colour-3);
   background-color: var(--panel-colour-2);
 }
 .priority-list-item-condition .priority-list-item-condition-text {
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-right: 3px;
-  resize: none;
-  word-wrap: break-word;
-  height: 17px;
-  max-height: 40px;
+  width: 100%;
+  height: 100%;
   border: none;
   outline: none;
   color: var(--light-font-colour);
-  font-size: 13.5px;
-  background-color: var(--panel-colour-2);
+  resize: none;
   overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 4rem;
+  font-size: 1.35rem;
+  background-color: var(--panel-colour-2);
 }/*# sourceMappingURL=PriorityListCondition.css.map */

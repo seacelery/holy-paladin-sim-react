@@ -1,0 +1,23 @@
+.priority-list-buttons-container {
+  display: flex;
+}
+.priority-list-buttons-container .priority-list-buttons {
+  display: flex;
+  flex-direction: column;
+}
+.priority-list-buttons-container .priority-list-buttons .priority-list-buttons-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.5rem;
+  border-radius: 0.1rem;
+  padding-left: 0.1rem;
+  min-width: 4.2rem;
+  width: 4.2rem;
+  height: 2.1rem;
+  border: 0.1rem solid var(--border-colour-3);
+  background-color: var(--panel-colour-2);
+  color: var(--light-font-colour);
+  font-size: 1.3rem;
+  cursor: pointer;
+}/*# sourceMappingURL=PriorityListButtons.css.map */

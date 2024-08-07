@@ -4,6 +4,7 @@
     min-width: 60%;
     padding: .3rem;
     padding-left: .0rem;
+    user-select: none;
 
     .priority-list-button {
         display: flex;
@@ -24,14 +25,18 @@
     .priority-list-item-number {
         margin-left: 0;
         margin-right: .5rem;
-        padding-top: .1rem;
         padding-right: .1rem;
         font-size: 1.7rem;
     }
 
     .priority-list-item-icon-container {
+        width: 4.2rem;
+        height: 4.2rem;
+        margin-right: .5rem;
+
+
         .priority-list-item-icon {
-            margin-right: .5rem;
+            // margin-right: .5rem;
             border-radius: .1rem;
             width: 4.2rem;
             height: 4.2rem;
@@ -42,9 +47,23 @@
 
     .priority-list-item-and-button {
         color: var(--paladin-font);
+        cursor: pointer;
     }
 
     .priority-list-item-or-button {
         color: var(--mana);
+        cursor: pointer;
+    }
+
+    .priority-list-item-handle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: .1rem;
+        padding-left: .1rem;
+        min-width: 4.2rem;
+        width: 4.2rem;
+        height: 4.2rem;
+        cursor: move;
     }
 }

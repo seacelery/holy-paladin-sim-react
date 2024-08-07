@@ -4,6 +4,9 @@
   min-width: 60%;
   padding: 0.3rem;
   padding-left: 0rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .priority-list-item-container .priority-list-button {
   display: flex;
@@ -23,12 +26,15 @@
 .priority-list-item-container .priority-list-item-number {
   margin-left: 0;
   margin-right: 0.5rem;
-  padding-top: 0.1rem;
   padding-right: 0.1rem;
   font-size: 1.7rem;
 }
-.priority-list-item-container .priority-list-item-icon-container .priority-list-item-icon {
+.priority-list-item-container .priority-list-item-icon-container {
+  width: 4.2rem;
+  height: 4.2rem;
   margin-right: 0.5rem;
+}
+.priority-list-item-container .priority-list-item-icon-container .priority-list-item-icon {
   border-radius: 0.1rem;
   width: 4.2rem;
   height: 4.2rem;
@@ -37,7 +43,20 @@
 }
 .priority-list-item-container .priority-list-item-and-button {
   color: var(--paladin-font);
+  cursor: pointer;
 }
 .priority-list-item-container .priority-list-item-or-button {
   color: var(--mana);
+  cursor: pointer;
+}
+.priority-list-item-container .priority-list-item-handle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.1rem;
+  padding-left: 0.1rem;
+  min-width: 4.2rem;
+  width: 4.2rem;
+  height: 4.2rem;
+  cursor: move;
 }/*# sourceMappingURL=PriorityListItem.css.map */

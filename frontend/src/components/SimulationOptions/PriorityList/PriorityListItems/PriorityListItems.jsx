@@ -6,10 +6,11 @@ import { SimulationParametersContext } from "../../../../context/SimulationParam
 const PriorityListItems = () => {
     const { simulationParameters, setSimulationParameters } = useContext(SimulationParametersContext);
     const priorityList = simulationParameters.priorityList;
+    console.log(priorityList)
 
     return <div className="priority-list-items">
         {priorityList.map((priorityListItem, index) => {
-            return <PriorityListItem key={index} text={priorityListItem} />
+            return <PriorityListItem key={index} index={index} text={priorityListItem} setSimulationParameters={setSimulationParameters} />
         })}
     </div>;
 };

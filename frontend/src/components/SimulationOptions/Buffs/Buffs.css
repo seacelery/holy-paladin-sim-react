@@ -1,0 +1,13 @@
+.buffs-content {
+  display: flex;
+  padding-top: 1rem;
+}
+.buffs-content .buffs-content-half {
+  width: 50%;
+}
+.buffs-content .buffs-content-half .buffs-container {
+  display: flex;
+  position: relative;
+  padding: 2.4rem 0 0rem 2.5rem;
+  font-size: 1.5rem;
+}/*# sourceMappingURL=Buffs.css.map */

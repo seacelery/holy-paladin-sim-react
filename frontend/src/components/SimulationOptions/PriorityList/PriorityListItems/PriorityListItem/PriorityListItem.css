@@ -1,0 +1,43 @@
+.priority-list-item-container {
+  display: flex;
+  margin-top: 0.5rem;
+  min-width: 60%;
+  padding: 0.3rem;
+  padding-left: 0rem;
+}
+.priority-list-item-container .priority-list-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.5rem;
+  border-radius: 0.1rem;
+  padding-left: 0.1rem;
+  min-width: 4.2rem;
+  width: 4.2rem;
+  height: 4.2rem;
+  border: 0.1rem solid var(--border-colour-3);
+  background-color: var(--panel-colour-2);
+  color: var(--light-font-colour);
+  font-size: 1.4rem;
+}
+.priority-list-item-container .priority-list-item-number {
+  margin-left: 0;
+  margin-right: 0.5rem;
+  padding-top: 0.1rem;
+  padding-right: 0.1rem;
+  font-size: 1.7rem;
+}
+.priority-list-item-container .priority-list-item-icon-container .priority-list-item-icon {
+  margin-right: 0.5rem;
+  border-radius: 0.1rem;
+  width: 4.2rem;
+  height: 4.2rem;
+  border: 0.1rem solid var(--border-colour-3);
+  vertical-align: middle;
+}
+.priority-list-item-container .priority-list-item-and-button {
+  color: var(--paladin-font);
+}
+.priority-list-item-container .priority-list-item-or-button {
+  color: var(--mana);
+}/*# sourceMappingURL=PriorityListItem.css.map */

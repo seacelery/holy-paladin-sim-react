@@ -1,0 +1,78 @@
+.priority-list-container {
+    // display: flex;
+    padding: 1.0rem 0 0 1.0rem;
+    font-size: 1.5rem;
+}
+
+.priority-list-headers {
+    display: flex;
+    width: 99%;
+    border-bottom: .1rem solid var(--border-colour-3);
+    margin-bottom: .5rem;
+    color: var(--light-font-colour);
+    font-size: 1.6rem;
+
+    .priority-list-header-ability {
+        margin-left: 8.5rem;
+        padding: .5rem;
+        padding-left: 1.6rem;
+        height: 4.2rem;
+        width: 15.0rem;
+    }
+
+    .priority-list-header-conditions {
+        margin-left: .3rem;
+        padding: .5rem;
+        padding-left: 1.6rem;
+        height: 4.2rem;
+        width: 16.5rem;
+    }
+}
+
+.priority-list-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 1.0rem;
+    margin-top: 0.4rem;
+    transform: translateY(-.5rem);
+    color: var(--light-font-colour);
+    font-size: 2.4rem;
+
+    .priority-list-info-icon {
+        margin-right: 1.5rem;
+    }
+
+    .priority-list-info-icon:last-of-type {
+        margin-right: 0;
+    }
+
+    .priority-list-info-icon:nth-child(1) {
+        font-size: 2.5rem;
+    }
+
+    .priority-list-info-icon:nth-child(2) {
+        font-size: 2.5rem;
+    }
+
+    .priority-list-info-icon-active {
+        color: var(--paladin-font);
+    }
+    
+    .priority-list-info-icon:hover {
+        cursor: pointer;
+        user-select: none;
+    
+        color: var(--paladin-font);
+        transition: color 0.1s ease-in-out;
+    }
+    
+    .priority-list-copy-icon:active {
+        color: var(--dark-paladin-font);
+        transition: color 0.1s ease-in-out;
+    }
+}
+
+
+

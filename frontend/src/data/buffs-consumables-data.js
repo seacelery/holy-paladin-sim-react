@@ -30,6 +30,20 @@ const foodItems = {
     "Great Cerulean Sea": {effect: "Increases your Mastery and Versatility by 67.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_159_fish_white.jpg"},
 };
 
+const ptrFoodItems = {
+    "Grand Banquet of the Kalu'ak": {effect: "Increases your Intellect by 75.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_cooking_10_grandbanquet.jpg"},
+    "Timely Demise": {effect: "Increases your Haste by 105.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_seedbatteredfishplate.jpg"},
+    "Filet of Fangs": {effect: "Increases your Critical Strike by 105.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_cooked_eternalblossomfish.jpg"},
+    "Seamoth Surprise": {effect: "Increases your Versatility by 105.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_159_fish_82.jpg"},
+    "Salt-Baked Fishcake": {effect: "Increases your Mastery by 105.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_deepfriedmossgill.jpg"},
+    "Feisty Fish Sticks": {effect: "Increases your Haste and Critical Strike by 67.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_164_fish_seadog.jpg"},
+    "Aromatic Seafood Platter": {effect: "Increases your Haste and Versatility by 67.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_drogbarstylesalmon.jpg"},
+    "Sizzling Seafood Medley": {effect: "Increases your Haste and Mastery by 67.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_draenor_sturgeonstew.jpg"},
+    "Revenge, Served Cold": {effect: "Increases your Versatility and Critical Strike by 67.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_cooking_100_revengeservedcold_color02.jpg"},
+    "Thousandbone Tongueslicer": {effect: "Increases your Mastery and Critical Strike by 67.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_154_fish_77.jpg"},
+    "Great Cerulean Sea": {effect: "Increases your Mastery and Versatility by 67.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_159_fish_white.jpg"},
+};
+
 const weaponImbues = {
     "Buzzing Rune": {effect: "Increases your Critical Strike by 310.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_08.jpg"},
     "Chirping Rune": {effect: "Your healing spells have a high chance to heal your target for an additional 7987 healing.", image: "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rune_09.jpg"},
@@ -94,4 +108,4 @@ const seasons = [
     {name: "Blessing of Spring", image: "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_spring.jpg"},
 ]
 
-export { flasks, ptrFlasks, foodItems, weaponImbues, ptrWeaponImbues, augmentRunes, ptrAugmentRunes, raidBuffs, ptrRaidBuffs, externalBuffs, potions, ptrPotions, seasons };
+export { flasks, ptrFlasks, foodItems, ptrFoodItems, weaponImbues, ptrWeaponImbues, augmentRunes, ptrAugmentRunes, raidBuffs, ptrRaidBuffs, externalBuffs, potions, ptrPotions, seasons };

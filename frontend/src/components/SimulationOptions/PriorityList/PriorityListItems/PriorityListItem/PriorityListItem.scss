@@ -1,0 +1,50 @@
+.priority-list-item-container {
+    display: flex;
+    margin-top: .5rem;
+    min-width: 60%;
+    padding: .3rem;
+    padding-left: .0rem;
+
+    .priority-list-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: .5rem;
+        border-radius: .1rem;
+        padding-left: .1rem;
+        min-width: 4.2rem;
+        width: 4.2rem;
+        height: 4.2rem;
+        border: .1rem solid var(--border-colour-3);
+        background-color: var(--panel-colour-2);
+        color: var(--light-font-colour);
+        font-size: 1.4rem;
+    }
+
+    .priority-list-item-number {
+        margin-left: 0;
+        margin-right: .5rem;
+        padding-top: .1rem;
+        padding-right: .1rem;
+        font-size: 1.7rem;
+    }
+
+    .priority-list-item-icon-container {
+        .priority-list-item-icon {
+            margin-right: .5rem;
+            border-radius: .1rem;
+            width: 4.2rem;
+            height: 4.2rem;
+            border: .1rem solid var(--border-colour-3);
+            vertical-align: middle;
+        }
+    }
+
+    .priority-list-item-and-button {
+        color: var(--paladin-font);
+    }
+
+    .priority-list-item-or-button {
+        color: var(--mana);
+    }
+}

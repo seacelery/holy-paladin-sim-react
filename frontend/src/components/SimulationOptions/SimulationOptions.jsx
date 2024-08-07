@@ -3,7 +3,7 @@ import Navbar from "./Navbar/Navbar";
 import Options from "./Options/Options";
 import Talents from "./Talents/Talents";
 import Equipment from "./Equipment/Equipment";
-import BuffsAndConsumables from "./BuffsAndConsumables/BuffsAndConsumables";
+import Buffs from "./Buffs/Buffs";
 import PriorityList from "./PriorityList/PriorityList";
 import StatusBar from "./StatusBar/StatusBar";
 import ImportCharacterMain from "./ImportCharacterMain/ImportCharacterMain";
@@ -22,7 +22,7 @@ const SimulationOptions = () => {
             {activeTab === "Options" && <Options />}
             {activeTab === "Talents" && <Talents />}
             {activeTab === "Equipment" && <Equipment />}
-            {activeTab === "Buffs & Consumables" && <BuffsAndConsumables />}
+            {activeTab === "Buffs & Consumables" && <Buffs />}
             {activeTab === "Priority List" && <PriorityList />}
         </div>
         <StatusBar />

@@ -17,10 +17,13 @@ const SimulationParametersProvider = ({ children }) => {
         SunsAvatarTargets: 10,
         LightOfTheMartyrUptime: 0.8,
         PotionBombOfPowerUptime: 0.3,
+        priorityList: ["Crusader Strike | Holy Power <= 3",
+        "Holy Light | Divine Favor active | and | Infusion of Light active",
+        "Holy Light | Infusion of Light active | and | Liberation active"]
     });
     
     return (
-        <SimulationParametersContext.Provider value={{}}>
+        <SimulationParametersContext.Provider value={{simulationParameters, setSimulationParameters}}>
             {children}
         </SimulationParametersContext.Provider>
     );  

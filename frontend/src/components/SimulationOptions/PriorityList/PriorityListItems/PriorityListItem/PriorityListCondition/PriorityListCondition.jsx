@@ -10,6 +10,10 @@ const PriorityListCondition = ({ text, setTextParts, index }) => {
     };
 
     useEffect(() => {
+        setInputValue(text);
+    }, [text]);
+
+    useEffect(() => {
         const textarea = textareaRef.current;
 
         textarea.style.lineHeight = "4rem";

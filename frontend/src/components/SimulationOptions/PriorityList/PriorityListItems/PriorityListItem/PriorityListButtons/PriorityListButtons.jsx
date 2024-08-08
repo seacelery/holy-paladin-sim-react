@@ -3,12 +3,16 @@ import "./PriorityListButtons.scss";
 import { FaPlus } from "react-icons/fa6";
 import { FaXmark } from "react-icons/fa6";
 
-const PriorityListButtons = ({ textParts, setTextParts }) => {
+const PriorityListButtons = ({ textParts, setTextParts, addItem, deleteItem }) => {
     const handleAndClick = () => {
         if (textParts.length >= 8) return;
 
         setTextParts((prevTextParts) => {
             const newTextParts = [...prevTextParts];
+            console.log(newTextParts)
+            if (!newTextParts[1]) {
+                newTextParts.push("");
+            };
             newTextParts.push("and");
             newTextParts.push("");
             return newTextParts;
@@ -20,19 +24,21 @@ const PriorityListButtons = ({ textParts, setTextParts }) => {
 
         setTextParts((prevTextParts) => {
             const newTextParts = [...prevTextParts];
+            if (!newTextParts[1]) {
+                newTextParts.push("");
+            };
             newTextParts.push("or");
             newTextParts.push("");
             return newTextParts;
         });
     };
 
-    const handleAddClick = () => {};
+    const handleAddClick = () => {
+        addItem();
+    };
 
     const handleRemoveClick = () => {
-        setTextParts((prevTextParts) => {
-            const newTextParts = [];
-            return newTextParts
-        });
+        deleteItem();
     };
 
     return <div className="priority-list-buttons-container">
@@ -41,11 +47,11 @@ const PriorityListButtons = ({ textParts, setTextParts }) => {
             <div className="priority-list-buttons-button" style={{ color: "var(--mana)"} } onClick={handleOrClick} >OR</div>
         </div>
         <div className="priority-list-buttons">
-            <div className="priority-list-buttons-button">
-                <FaPlus style={{ color: "var(--healing-font)", fontSize: "1.6rem" }}/>
+            <div className="priority-list-buttons-button" onClick={handleAddClick}>
+                <FaPlus style={{ color: "var(--healing-font)", fontSize: "1.6rem" }} />
             </div>
-            <div className="priority-list-buttons-button">
-                <FaXmark style={{ color: "var(--red-font)", fontSize: "1.6rem" }} onClick={handleRemoveClick} />
+            <div className="priority-list-buttons-button" onClick={handleRemoveClick}>
+                <FaXmark style={{ color: "var(--red-font)", fontSize: "1.6rem" }} />
             </div>
         </div>
     </div>;

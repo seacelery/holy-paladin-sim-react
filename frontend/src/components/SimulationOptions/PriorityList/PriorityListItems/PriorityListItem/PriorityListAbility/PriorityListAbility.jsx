@@ -10,6 +10,10 @@ const PriorityListAbility = ({ text, setTextParts }) => {
     };
 
     useEffect(() => {
+        setInputValue(text);
+    }, [text]);
+
+    useEffect(() => {
         const textarea = textareaRef.current;
 
         textarea.style.lineHeight = "4rem";
@@ -19,7 +23,7 @@ const PriorityListAbility = ({ text, setTextParts }) => {
         if (numberOfLines <= 1) {
             textarea.style.lineHeight = "4rem";
         } else {
-            textarea.style.lineHeight = "1.6rem";
+            textarea.style.lineHeight = "2rem";
         };
 
         setTextParts((prevTextParts) => {

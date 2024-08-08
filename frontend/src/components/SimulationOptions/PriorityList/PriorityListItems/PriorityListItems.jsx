@@ -1,16 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./PriorityListItems.scss";
 import PriorityListItem from "./PriorityListItem/PriorityListItem";
-import { SimulationParametersContext } from "../../../../context/SimulationParametersContext";
 
-const PriorityListItems = () => {
-    const { simulationParameters, setSimulationParameters } = useContext(SimulationParametersContext);
+const PriorityListItems = ({ simulationParameters, setSimulationParameters }) => {
     const priorityList = simulationParameters.priorityList;
-    console.log(priorityList)
 
     return <div className="priority-list-items">
         {priorityList.map((priorityListItem, index) => {
-            return <PriorityListItem key={index} index={index} text={priorityListItem} setSimulationParameters={setSimulationParameters} />
+            return <PriorityListItem key={index} index={index} text={priorityListItem} priorityList={priorityList} setSimulationParameters={setSimulationParameters} />
         })}
     </div>;
 };

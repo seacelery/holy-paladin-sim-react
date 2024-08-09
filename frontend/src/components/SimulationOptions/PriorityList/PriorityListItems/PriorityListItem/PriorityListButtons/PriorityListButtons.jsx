@@ -9,7 +9,6 @@ const PriorityListButtons = ({ textParts, setTextParts, addItem, deleteItem }) =
 
         setTextParts((prevTextParts) => {
             const newTextParts = [...prevTextParts];
-            console.log(newTextParts)
             if (!newTextParts[1]) {
                 newTextParts.push("");
             };

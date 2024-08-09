@@ -1,0 +1,32 @@
+.info-modal {
+    padding: 1.0rem;
+    position: absolute;
+    left: auto;
+    right: 1.4rem;
+    bottom: 0;
+    top: 4.5rem;
+    margin: auto;
+    width: 25%;
+    height: 52.5rem;
+    overflow: auto;
+    border: .1rem solid var(--border-colour-3);
+    background-color: var(--panel-colour-table-3);
+    border-radius: .2rem;
+    color: var(--light-font-colour);
+    font-size: 1.4rem;
+
+    .info-modal-header {
+        margin-top: 2rem;
+    }
+
+    > div:first-child .info-modal-header {
+        margin-top: 0;
+    }
+
+    .info-modal-divider {
+        height: .1rem;
+        margin-bottom: .5rem;
+        width: 7.5rem;
+        background-color: var(--border-colour-3);
+    }
+}

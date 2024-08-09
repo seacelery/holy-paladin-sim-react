@@ -143,10 +143,10 @@ def update_character_route():
 
 @main.route("/run_simulation", methods=["GET"])
 def run_simulation_route():
-    character_name = session.get("character_name")
-    realm = session.get("realm")
-    region = session.get("region")
-    version = session.get("version")
+    character_name = request.args.get("character_name")
+    realm = request.args.get("character_realm")
+    region = request.args.get("character_region")
+    version = request.args.get("version")
 
     if not character_name or not realm:
         return jsonify({"error": "Character name or realm not found in session"}), 400
@@ -155,12 +155,11 @@ def run_simulation_route():
     iterations = request.args.get("iterations", default=1, type=int)
     time_warp_time = request.args.get("time_warp_time", default=0, type=int)
     priority_list_json = request.args.get("priority_list", default="")
-    custom_equipment = request.args.get("custom_equipment")
+    equipment = request.args.get("equipment")
     tick_rate = request.args.get("tick_rate")
     raid_health = request.args.get("raid_health")
     mastery_effectiveness = request.args.get("mastery_effectiveness")
     light_of_dawn_targets = request.args.get("light_of_dawn_targets")
-    lights_hammer_targets = request.args.get("lights_hammer_targets")
     resplendent_light_targets = request.args.get("resplendent_light_targets")
     sureki_zealots_insignia_count = request.args.get("sureki_zealots_insignia_count")
     dawnlight_targets = request.args.get("dawnlight_targets")
@@ -185,21 +184,17 @@ def run_simulation_route():
 
     paladin, healing_targets = import_character(character_name, realm, region, version)
     
-    print(session["modifiable_data"])
-    
-    modifiable_data = session.get("modifiable_data", {})
     paladin.update_character(
-        race=modifiable_data.get("race"),
-        class_talents=modifiable_data.get("class_talents"),
-        spec_talents=modifiable_data.get("spec_talents"),
-        lightsmith_talents=modifiable_data.get("lightsmith_talents"),
-        herald_of_the_sun_talents=modifiable_data.get("herald_of_the_sun_talents"),
-        consumables=modifiable_data.get("consumables")
+        race=request.args.get("race"),
+        class_talents=json.loads(request.args.get("class_talents")),
+        spec_talents=json.loads(request.args.get("spec_talents")),
+        lightsmith_talents=json.loads(request.args.get("lightsmith_talents")),
+        herald_of_the_sun_talents=json.loads(request.args.get("herald_of_the_sun_talents")),
+        consumables=json.loads(request.args.get("consumables"))
     )
         
-    simulation = initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list, custom_equipment, tick_rate, raid_health, mastery_effectiveness, light_of_dawn_targets, lights_hammer_targets, resplendent_light_targets, sureki_zealots_insignia_count, dawnlight_targets, suns_avatar_targets, light_of_the_martyr_uptime, potion_bomb_of_power_uptime, seasons, stat_scaling, overhealing)
-
-    # pp.pprint(paladin.class_talents)
+    simulation = initialise_simulation(paladin, healing_targets, encounter_length, iterations, time_warp_time, priority_list, equipment, tick_rate, raid_health, mastery_effectiveness, light_of_dawn_targets, resplendent_light_targets, sureki_zealots_insignia_count, dawnlight_targets, suns_avatar_targets, light_of_the_martyr_uptime, potion_bomb_of_power_uptime, seasons, stat_scaling, overhealing)
+    
     results = run_simulation(simulation)
 
     return jsonify(results)

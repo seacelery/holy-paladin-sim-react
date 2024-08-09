@@ -1,0 +1,45 @@
+.overhealing-modal {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 26rem;
+    right: 3.8rem;
+    bottom: 0;
+    margin: auto;
+    width: 29%;
+    height: 44.0rem;
+    user-select: none;
+    padding: 0.3rem;
+    outline: none;
+    border: 0.1rem solid var(--border-colour-3);
+    border-radius: 0.3rem;
+    background-color: var(--panel-colour-table-3);
+    color: var(--light-font-colour);
+    font-size: 1.6rem;
+    overflow: auto;
+
+    .overhealing-modal-content {
+        width: 100%;
+        padding: 1.5rem;
+    }
+}
+
+.overhealing-abilities {
+    margin-bottom: 2.0rem;
+
+    .overhealing-header {
+        display: flex;
+        margin-bottom: 1.0rem;
+        font-size: 1.6rem;
+        color: var(--light-font-colour);
+    }
+
+    .overhealing-divider {
+        height: 0.1rem;
+        margin-left: -0.1rem;
+        margin-bottom: 1.5rem;
+        background-color: var(--border-colour-3);
+    }
+}

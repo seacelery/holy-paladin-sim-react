@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./OptionCheckbox.scss";
 import Button from "../../../../Button/Button";
 
-const OptionCheckbox = ({ label, buttonEnabled, buttonText }) => {
+const OptionCheckbox = ({ label, buttonEnabled, buttonText, buttonClick = null }) => {
     const [checked, setChecked] = useState(true);
 
     const handleCheckboxChange = () => {
@@ -27,6 +27,7 @@ const OptionCheckbox = ({ label, buttonEnabled, buttonText }) => {
                         width="8rem"
                         height="3.5rem"
                         grow={true}
+                        onClick={buttonClick}
                     >
                         {buttonText}
                     </Button>

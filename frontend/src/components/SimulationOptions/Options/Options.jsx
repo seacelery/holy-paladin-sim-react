@@ -1,12 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./Options.scss";
 import OptionContainer from "./OptionContainer/OptionContainer";
 import races from "../../../data/races";
 import { seasons } from "../../../data/buffs-consumables-data";
 import { CharacterDataContext } from "../../../context/CharacterDataContext";
 import { SimulationParametersContext } from "../../../context/SimulationParametersContext";
+import OverhealingModal from "./OptionContainer/OverhealingModal/OverhealingModal";
 
 const Options = () => {
+    const [overhealingModalOpen, setOverhealingModalOpen] = useState(false);
+
+    const handleOverhealingButtonClick = () => {
+        setOverhealingModalOpen((prevState) => !prevState);
+    };
+
     const isTalentActive = (talent, talentData) => {
         if (!talentData) return false;
 
@@ -25,7 +32,7 @@ const Options = () => {
     return (
         <div className="options-tab-content options-content">
             <div className="options-container">
-                <div className="overhealing-abilities-modal"></div>
+                <OverhealingModal isOpen={overhealingModalOpen} />
 
                 <div className="options-section options-left">
                     <div className="options-header">Encounter</div>
@@ -175,6 +182,7 @@ const Options = () => {
                             label: "Enable Overhealing",
                             buttonEnabled: true,
                             buttonText: "Abilities",
+                            buttonClick: handleOverhealingButtonClick
                         }}
                     />
 

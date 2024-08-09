@@ -53,10 +53,8 @@ class Paladin:
         self.talents = self.parse_talents(talent_data)
         self.class_talents = copy.deepcopy(self.talents.class_talents)
         self.spec_talents = copy.deepcopy(self.talents.spec_talents)
-        
-        if self.ptr:
-            self.lightsmith_talents = copy.deepcopy(self.talents.lightsmith_talents)
-            self.herald_of_the_sun_talents = copy.deepcopy(self.talents.herald_of_the_sun_talents)
+        self.lightsmith_talents = copy.deepcopy(self.talents.lightsmith_talents)
+        self.herald_of_the_sun_talents = copy.deepcopy(self.talents.herald_of_the_sun_talents)
         
         self.base_mana = 250000 if not self.ptr else 2500000
         self.mana = self.base_mana
@@ -1059,19 +1057,14 @@ class Paladin:
         class_talents = {}
         spec_talents = {}
         
-        if self.ptr:
-            lightsmith_talents = {}
-            herald_of_the_sun_talents = {}
+        lightsmith_talents = {}
+        herald_of_the_sun_talents = {}
 
-        if self.ptr:
-            active_class_talents = copy.deepcopy(base_active_class_talents_ptr)
-            active_spec_talents = copy.deepcopy(base_active_spec_talents_ptr)
-            
-            active_lightsmith_talents = copy.deepcopy(base_active_lightsmith_talents)
-            active_herald_of_the_sun_talents = copy.deepcopy(base_herald_of_the_sun_talents)
-        else:
-            active_class_talents = copy.deepcopy(base_active_class_talents)
-            active_spec_talents = copy.deepcopy(base_active_spec_talents)
+        active_class_talents = copy.deepcopy(base_active_class_talents_ptr)
+        active_spec_talents = copy.deepcopy(base_active_spec_talents_ptr)
+        
+        active_lightsmith_talents = copy.deepcopy(base_active_lightsmith_talents)
+        active_herald_of_the_sun_talents = copy.deepcopy(base_herald_of_the_sun_talents)
 
         class_talent_data = talent_data["specializations"][0]["loadouts"][0]["selected_class_talents"]
         for talent in class_talent_data:
@@ -1094,31 +1087,15 @@ class Paladin:
             for talent_name, talent_info in talents.items():
                 if talent_name in spec_talents:
                     active_spec_talents[talent_row][talent_name]["ranks"]["current rank"] = spec_talents[talent_name]
-       
-        if self.ptr:
-            # lightsmith_talent_data = talent_data["specializations"][0]["loadouts"][0]["selected_lightsmith_talents"]
-            # for talent in lightsmith_talent_data:
-            #     talent_name = talent["tooltip"]["talent"]["name"]
-            #     talent_rank = talent["rank"]
-            #     lightsmith_talents[talent_name] = talent_rank
                 
-            # herald_of_the_sun_talent_data = talent_data["specializations"][0]["loadouts"][0]["selected_herald_of_the_sun_talents"]
-            # for talent in herald_of_the_sun_talent_data:
-            #     talent_name = talent["tooltip"]["talent"]["name"]
-            #     talent_rank = talent["rank"]
-            #     herald_of_the_sun_talents[talent_name] = talent_rank  
-                
-            for talent_row, talents in active_lightsmith_talents.items():
-                for talent_name, talent_info in talents.items():
-                    if talent_name in class_talents:
-                        active_lightsmith_talents[talent_row][talent_name]["ranks"]["current rank"] = lightsmith_talents[talent_name]
-                        
-            for talent_row, talents in active_herald_of_the_sun_talents.items():
-                for talent_name, talent_info in talents.items():
-                    if talent_name in spec_talents:
-                        active_herald_of_the_sun_talents[talent_row][talent_name]["ranks"]["current rank"] = herald_of_the_sun_talents[talent_name]
+        for talent_row, talents in active_lightsmith_talents.items():
+            for talent_name, talent_info in talents.items():
+                if talent_name in class_talents:
+                    active_lightsmith_talents[talent_row][talent_name]["ranks"]["current rank"] = lightsmith_talents[talent_name]
+                    
+        for talent_row, talents in active_herald_of_the_sun_talents.items():
+            for talent_name, talent_info in talents.items():
+                if talent_name in spec_talents:
+                    active_herald_of_the_sun_talents[talent_row][talent_name]["ranks"]["current rank"] = herald_of_the_sun_talents[talent_name]
         
-        if self.ptr:
-            return Talents(active_class_talents, active_spec_talents, active_lightsmith_talents, active_herald_of_the_sun_talents)
-        else:           
-            return Talents(active_class_talents, active_spec_talents)
+        return Talents(active_class_talents, active_spec_talents, active_lightsmith_talents, active_herald_of_the_sun_talents)

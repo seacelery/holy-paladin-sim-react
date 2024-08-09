@@ -8,19 +8,20 @@ const SimulationParametersProvider = ({ children }) => {
         encounterLength: 300,
         timeWarp: 0,
         tickRate: 0.05,
-        masteryEffectiveness: 0.95,
-        raidHealth: 0.7,
+        masteryEffectiveness: 95,
+        raidHealth: 70,
         lightOfDawnTargets: 5,
-        ResplendentLightTargets: 5,
-        SurekiZealotsInsigniaCount: 10,
-        DawnlightTargets: 12,
-        SunsAvatarTargets: 10,
-        LightOfTheMartyrUptime: 0.8,
-        PotionBombOfPowerUptime: 0.3,
-        priorityList: ["Crusader Strike | Holy Power <= 3",
-        "Holy Light | Divine Favor active | and | Infusion of Light active",
-        "Holy Light | Infusion of Light active | and | Liberation active"]
+        resplendentLightTargets: 5,
+        surekiZealotsInsigniaCount: 10,
+        dawnlightTargets: 12,
+        sunsAvatarTargets: 10,
+        lightOfTheMartyrUptime: 80,
+        potionBombOfPowerUptime: 30,
+        priorityList: [],
+        overhealing: {}
     });
+
+    console.log(simulationParameters)
     
     return (
         <SimulationParametersContext.Provider value={{simulationParameters, setSimulationParameters}}>

@@ -1,0 +1,33 @@
+.overhealing-item {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.overhealing-item .overhealing-item-icon {
+  height: 2.5rem;
+  width: 2.5rem;
+  border: 0.1rem solid var(--border-colour-3);
+  border-radius: 0.2rem;
+}
+.overhealing-item .overhealing-item-text {
+  margin-left: 0.6rem;
+  font-size: 1.4rem;
+}
+.overhealing-item .overhealing-item-input-container {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  font-size: 1.5rem;
+}
+.overhealing-item .overhealing-item-input-container .overhealing-item-input {
+  text-align: right;
+  margin-left: auto;
+  max-width: 2rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: var(--light-font-colour);
+  margin-right: 0.2rem;
+}
+.overhealing-item .overhealing-item-input-container .overhealing-item-percentage {
+  font-size: 1.5rem;
+}/*# sourceMappingURL=OverhealingItem.css.map */

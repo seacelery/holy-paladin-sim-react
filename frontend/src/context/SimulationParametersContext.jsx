@@ -17,11 +17,9 @@ const SimulationParametersProvider = ({ children }) => {
         sunsAvatarTargets: 10,
         lightOfTheMartyrUptime: 80,
         potionBombOfPowerUptime: 30,
-        priorityList: [],
+        priorityList: [""],
         overhealing: {}
     });
-
-    console.log(simulationParameters)
     
     return (
         <SimulationParametersContext.Provider value={{simulationParameters, setSimulationParameters}}>

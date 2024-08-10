@@ -181,6 +181,8 @@ def run_simulation_route():
         
     if overhealing_json:
         overhealing = json.loads(overhealing_json)
+        
+    pp.pprint(overhealing)
 
     paladin, healing_targets = import_character(character_name, realm, region, version)
     

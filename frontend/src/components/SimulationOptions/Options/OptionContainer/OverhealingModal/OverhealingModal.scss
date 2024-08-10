@@ -4,9 +4,8 @@
     flex-direction: column;
     align-items: center;
     position: absolute;
-    top: 26rem;
+    top: 10rem;
     right: 3.8rem;
-    bottom: 0;
     margin: auto;
     width: 29%;
     height: 44.0rem;
@@ -23,6 +22,7 @@
     .overhealing-modal-content {
         width: 100%;
         padding: 1.5rem;
+        padding-top: 1.5rem;
     }
 }
 
@@ -32,8 +32,30 @@
     .overhealing-header {
         display: flex;
         margin-bottom: 1.0rem;
+        height: 3rem;
         font-size: 1.6rem;
         color: var(--light-font-colour);
+
+        .overhealing-header-icons {
+            margin-left: auto;
+
+            .overhealing-header-icon {
+                margin-right: 0.7rem;
+                font-size: 2.3rem;
+                margin-left: 0.5rem;
+                font-weight: 900;
+            }
+
+            .overhealing-header-icon:hover {
+                cursor: pointer;
+                color: var(--paladin-font);
+            }
+
+            .overhealing-copy-icon:active {
+                color: var(--border-colour-3);
+                transition: all 0.2s ease;
+            }
+        }
     }
 
     .overhealing-divider {
@@ -41,5 +63,25 @@
         margin-left: -0.1rem;
         margin-bottom: 1.5rem;
         background-color: var(--border-colour-3);
+    }
+
+    .overhealing-paste-modal {
+        height: 220rem;
+
+        .overhealing-paste-modal-textarea {
+            width: 100%;
+            background-color: var(--panel-colour-table-3);
+            border: none;
+            outline: none;
+            color: var(--light-font-colour);
+            font-size: 1.4rem;
+            resize: none;
+            line-height: 1.7;
+            height: 220rem;
+        }
+    }
+
+    .overhealing-header-icon-selected {
+        color: var(--paladin-font);
     }
 }

@@ -28,7 +28,8 @@ class Simulation:
         self.priority_list = []
         self.custom_equipment = custom_equipment
         self.paladin.update_equipment(custom_equipment)
-        self.paladin.overhealing = overhealing
+        self.overhealing = {key: float(value) / 100 if isinstance(value, str) else value / 100 for key, value in overhealing.items()}
+        self.paladin.overhealing = self.overhealing
         self.test = test
 
         for item in priority_list:
@@ -37,7 +38,7 @@ class Simulation:
             self.priority_list.append((action_name, condition_lambda))
             
         self.stat_scaling = stat_scaling
-        self.overhealing = overhealing
+        
         
         # make tick rate smaller for better hot accuracy
         self.tick_rate = float(tick_rate)
@@ -1638,8 +1639,9 @@ class Simulation:
                   "intellect": round(self.paladin.spell_power), "health": round(self.paladin.max_health), "leech": round(self.paladin.leech_rating), "mana": round(self.paladin.max_mana),
                   "haste_percent": round(self.paladin.haste, 2), "crit_percent": round(self.paladin.crit, 2), "mastery_percent": round(self.paladin.mastery, 2), 
                   "versatility_percent": round(self.paladin.versatility, 2), "leech_percent": round(self.paladin.leech, 2)},
-            "talents": {"class_talents": self.paladin.class_talents, "spec_talents": self.paladin.spec_talents},
-            "priority_list": self.priority_list_text
+            "talents": {"class_talents": self.paladin.class_talents, "spec_talents": self.paladin.spec_talents, "lightsmith_talents": self.paladin.lightsmith_talents, "herald_of_the_sun_talents": self.paladin.herald_of_the_sun_talents},
+            "priority_list": self.priority_list_text,
+            "overhealing": self.paladin.overhealing
         }
     
         print(self.paladin.holy_shock_resets)

@@ -1,0 +1,29 @@
+.info-modal {
+  padding: 1rem;
+  position: absolute;
+  left: auto;
+  right: 1.4rem;
+  bottom: 0;
+  top: 4.5rem;
+  margin: auto;
+  width: 25%;
+  height: 52.5rem;
+  overflow: auto;
+  border: 0.1rem solid var(--border-colour-3);
+  background-color: var(--panel-colour-table-3);
+  border-radius: 0.2rem;
+  color: var(--light-font-colour);
+  font-size: 1.4rem;
+}
+.info-modal .info-modal-header {
+  margin-top: 2rem;
+}
+.info-modal > div:first-child .info-modal-header {
+  margin-top: 0;
+}
+.info-modal .info-modal-divider {
+  height: 0.1rem;
+  margin-bottom: 0.5rem;
+  width: 7.5rem;
+  background-color: var(--border-colour-3);
+}/*# sourceMappingURL=InfoModal.css.map */

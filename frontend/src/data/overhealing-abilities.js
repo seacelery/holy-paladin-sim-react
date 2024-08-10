@@ -67,4 +67,27 @@ const miscellaneous = [
     "Leech"
 ];
 
-export { abilities, trinkets, miscellaneous };
+const convertAbilitiesToString = (overhealingData) => {
+    let string = "";
+
+    for (const ability in overhealingData) {
+        string += `${ability} ${overhealingData[ability]}%\n`;
+    };
+
+    return string;
+};
+const convertStringToAbilities = (string) => {
+    const abilities = string.split("\n");
+    const abilitiesObject = {};
+
+    abilities.forEach((ability) => {
+        const lastSpaceIndex = ability.lastIndexOf(" ");
+        const abilityName = ability.substring(0, lastSpaceIndex);
+        const abilityValue = ability.substring(lastSpaceIndex + 1).replace("%", "");
+        abilitiesObject[abilityName] = Number(abilityValue);
+    });
+
+    return abilitiesObject;
+};
+
+export { abilities, trinkets, miscellaneous, convertAbilitiesToString, convertStringToAbilities };

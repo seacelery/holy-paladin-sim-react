@@ -1,10 +1,18 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./OptionIcons.scss";
 import Tooltip from "../../../../Tooltip/Tooltip";
 
-const OptionIcons = ({ icons, label, dataType, showTooltip = false, exclusiveSelection = true, allowDeselection = true, defaultSelectedIcons = [] }) => {
-    const defaultSelectedIndices = icons.map((icon, index) => defaultSelectedIcons.includes(icon.name) ? index : null)
-    const [selectedIcons, setSelectedIcons] = useState(defaultSelectedIndices);
+const OptionIcons = ({ icons, label, dataType, showTooltip = false, exclusiveSelection = true, allowDeselection = true, defaultSelectedIcons = [], updateParameter = null }) => {
+    const getSelectedIndices = () => icons.map((icon, index) => 
+        defaultSelectedIcons.includes(icon.name) ? index : null
+    ).filter(index => index !== null);
+
+    const [selectedIcons, setSelectedIcons] = useState(getSelectedIndices());
+
+    useEffect(() => {
+        const newSelectedIndices = getSelectedIndices();
+        setSelectedIcons(newSelectedIndices);
+    }, [defaultSelectedIcons]);
 
     const [hoverElement, setHoverElement] = useState(null);
     const [tooltipText, setTooltipText] = useState(null);
@@ -30,6 +38,8 @@ const OptionIcons = ({ icons, label, dataType, showTooltip = false, exclusiveSel
                 return [...prevSelectedIcons, index];
             };
         });
+
+        updateParameter(icons[index].name);
     };
 
     return (

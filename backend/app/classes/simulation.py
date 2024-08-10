@@ -1641,7 +1641,8 @@ class Simulation:
                   "versatility_percent": round(self.paladin.versatility, 2), "leech_percent": round(self.paladin.leech, 2)},
             "talents": {"class_talents": self.paladin.class_talents, "spec_talents": self.paladin.spec_talents, "lightsmith_talents": self.paladin.lightsmith_talents, "herald_of_the_sun_talents": self.paladin.herald_of_the_sun_talents},
             "priority_list": self.priority_list_text,
-            "overhealing": self.paladin.overhealing
+            "overhealing": self.paladin.overhealing,
+            "character_details": {"race": self.paladin.race},
         }
     
         print(self.paladin.holy_shock_resets)

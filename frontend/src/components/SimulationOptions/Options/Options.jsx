@@ -9,6 +9,8 @@ import OverhealingModal from "./OptionContainer/OverhealingModal/OverhealingModa
 
 const Options = () => {
     const [overhealingModalOpen, setOverhealingModalOpen] = useState(false);
+    const { characterData, setCharacterData } = useContext(CharacterDataContext);
+    const { simulationParameters, setSimulationParameters } = useContext(SimulationParametersContext);
 
     const handleOverhealingButtonClick = () => {
         setOverhealingModalOpen((prevState) => !prevState);
@@ -26,8 +28,30 @@ const Options = () => {
         };
     };
 
-    const { characterData } = useContext(CharacterDataContext);
-    const { setSimulationParameters } = useContext(SimulationParametersContext);
+    const updateSimulationParameters = (name, value) => {
+        if (name === "seasons") {
+            setSimulationParameters((prevState) => ({
+                ...prevState,
+                seasons: {
+                    ...prevState.seasons,
+                    [value]: !prevState.seasons[value]
+                }
+            }));
+            return;
+        } else {
+            setSimulationParameters((prevState) => ({
+                ...prevState,
+                [name]: value
+            }));
+        };
+    };
+
+    const updateCharacterData = (name, value) => {
+        setCharacterData((prevState) => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
 
     return (
         <div className="options-tab-content options-content">
@@ -46,7 +70,8 @@ const Options = () => {
                             min: 1,
                             max: 1000,
                             step: 1,
-                            defaultValue: 1,
+                            defaultValue: simulationParameters.iterations,
+                            updateParameter: (value) => updateSimulationParameters("iterations", value)
                         }}
                     />
 
@@ -58,7 +83,8 @@ const Options = () => {
                             min: 1,
                             max: 600,
                             step: 1,
-                            defaultValue: 300,
+                            defaultValue: simulationParameters.encounterLength,
+                            updateParameter: (value) => updateSimulationParameters("encounterLength", value)
                         }}
                     />
 
@@ -70,7 +96,8 @@ const Options = () => {
                             min: 0,
                             max: 600,
                             step: 1,
-                            defaultValue: 0,
+                            defaultValue: simulationParameters.timeWarp,
+                            updateParameter: (value) => updateSimulationParameters("timeWarp", value)
                         }}
                     />
 
@@ -82,9 +109,10 @@ const Options = () => {
                             min: 0,
                             max: 0.1,
                             step: 0.01,
-                            defaultValue: 0.05,
+                            defaultValue: simulationParameters.tickRate,
                             showInfo: true,
-                            tooltipText: "Reducing this will increase HoT accuracy, but it will be much slower."
+                            tooltipText: "Reducing this will increase HoT accuracy, but it will be much slower.",
+                            updateParameter: (value) => updateSimulationParameters("tickRate", value)
                         }}
                     />
                 </div>
@@ -102,7 +130,8 @@ const Options = () => {
                             showTooltip: true,
                             exclusiveSelection: true,
                             allowDeselection: false,
-                            defaultSelectedIcons: []
+                            defaultSelectedIcons: [characterData ? characterData.race : ""],
+                            updateParameter: (value) => updateCharacterData("race", value)
                         }}
                     />
 
@@ -114,7 +143,8 @@ const Options = () => {
                             min: 0,
                             max: 100,
                             step: 1,
-                            defaultValue: 95,
+                            defaultValue: simulationParameters.masteryEffectiveness,
+                            updateParameter: (value) => updateSimulationParameters("masteryEffectiveness", value)
                         }}
                     />
 
@@ -127,9 +157,10 @@ const Options = () => {
                                 min: 0,
                                 max: 100,
                                 step: 1,
-                                defaultValue: 70,
+                                defaultValue: simulationParameters.raidHealth,
                                 showInfo: true,
-                                tooltipText: "This affects Reclamation and Extrication."
+                                tooltipText: "This affects Reclamation and Extrication.",
+                                updateParameter: (value) => updateSimulationParameters("raidHealth", value)
                             }}
                         />
                     )}                  
@@ -143,7 +174,8 @@ const Options = () => {
                                 min: 1,
                                 max: 5,
                                 step: 1,
-                                defaultValue: 5,
+                                defaultValue: simulationParameters.lightOfDawnTargets,
+                                updateParameter: (value) => updateSimulationParameters("lightOfDawnTargets", value)
                             }}
                         />
                     )}
@@ -157,7 +189,8 @@ const Options = () => {
                                 min: 1,
                                 max: 5,
                                 step: 1,
-                                defaultValue: 5,
+                                defaultValue: simulationParameters.resplendentLightTargets,
+                                updateParameter: (value) => updateSimulationParameters("resplendentLightTargets", value)
                             }}
                         />
                     )}
@@ -170,7 +203,8 @@ const Options = () => {
                             min: 0,
                             max: 20,
                             step: 1,
-                            defaultValue: 10,
+                            defaultValue: simulationParameters.surekiZealotsInsigniaCount,
+                            updateParameter: (value) => updateSimulationParameters("surekiZealotsInsigniaCount", value)
                         }}
                     />
                 </div>
@@ -195,7 +229,8 @@ const Options = () => {
                                 min: 1,
                                 max: 20,
                                 step: 1,
-                                defaultValue: 12,
+                                defaultValue: simulationParameters.dawnlightTargets,
+                                updateParameter: (value) => updateSimulationParameters("dawnlightTargets", value)
                             }}
                         />
                     )}
@@ -209,7 +244,8 @@ const Options = () => {
                                 min: 1,
                                 max: 20,
                                 step: 1,
-                                defaultValue: 10,
+                                defaultValue: simulationParameters.sunsAvatarTargets,
+                                updateParameter: (value) => updateSimulationParameters("sunsAvatarTargets", value)
                             }}
                         />
                     )}
@@ -223,7 +259,8 @@ const Options = () => {
                                 min: 0,
                                 max: 100,
                                 step: 1,
-                                defaultValue: 80,
+                                defaultValue: simulationParameters.lightOfTheMartyrUptime,
+                                updateParameter: (value) => updateSimulationParameters("lightOfTheMartyrUptime", value)
                             }}
                         />
                     )}       
@@ -236,7 +273,8 @@ const Options = () => {
                             min: 0,
                             max: 100,
                             step: 1,
-                            defaultValue: 30,
+                            defaultValue: simulationParameters.potionBombOfPowerUptime,
+                            updateParameter: (value) => updateSimulationParameters("potionBombOfPowerUptime", value)
                         }}
                     />
 
@@ -250,7 +288,8 @@ const Options = () => {
                                 showTooltip: true,
                                 exclusiveSelection: false,
                                 allowDeselection: true,
-                                defaultSelectedIcons: ["Blessing of Winter", "Blessing of Spring", "Blessing of Autumn"]
+                                defaultSelectedIcons: ["Blessing of Winter", "Blessing of Spring", "Blessing of Autumn"],
+                                updateParameter: (value) => updateSimulationParameters("seasons", value)
                             }}
                         />   
                     )}

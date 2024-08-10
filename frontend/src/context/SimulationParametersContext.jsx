@@ -18,7 +18,20 @@ const SimulationParametersProvider = ({ children }) => {
         lightOfTheMartyrUptime: 80,
         potionBombOfPowerUptime: 30,
         priorityList: [""],
-        overhealing: {}
+        overhealing: {},
+        seasons: {
+            "Blessing of Summer": false,
+            "Blessing of Autumn": false,
+            "Blessing of Winter": false,
+            "Blessing of Spring": false,
+        },
+        statScaling: {
+            "haste": false,
+            "crit": false,
+            "mastery": false,
+            "versatility": false,
+            "leech": false
+        }
     });
     
     return (

@@ -3,7 +3,7 @@ import "./OptionSlider.scss";
 import { FaCircleInfo } from "react-icons/fa6";
 import Tooltip from "../../../../Tooltip/Tooltip";
 
-const OptionSlider = ({ sliderType, name, min, max, step, defaultValue, showInfo = false, tooltipText = null }) => {
+const OptionSlider = ({ sliderType, name, min, max, step, defaultValue, showInfo = false, tooltipText = null, updateParameter = null }) => {
     const formatValue = (value) => {
         if (sliderType === "integer" || sliderType === "float") {
             return value;
@@ -75,6 +75,12 @@ const OptionSlider = ({ sliderType, name, min, max, step, defaultValue, showInfo
     useEffect(() => {
         setHoverElement(infoIconRef.current);
     }, []);
+
+    useEffect(() => {
+        if (updateParameter) {
+            updateParameter(value);
+        };
+    }, [value]);
     
     return (
         <>

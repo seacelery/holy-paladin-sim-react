@@ -653,6 +653,12 @@ const templateSpecTalents = {
                 "current rank": 1,
                 "max rank": 1
             }
+        },
+        "Truth Prevails": {
+            "ranks": {
+                "current rank": 1,
+                "max rank": 1
+            }
         }
     }
 };
@@ -990,7 +996,7 @@ const templateUpdateHeraldOfTheSunTalents = {
 const templateEquipment = {
     "back": {
         "effects": [],
-        "enchantments": ["Chant of Leeching Fangs"],
+        "enchantments": ["Enchanted: Chant of Leeching Fangs"],
         "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_cape_special_nerubian_d_02.jpg",
         "item_id": 212446,
         "item_level": 610,
@@ -1006,7 +1012,7 @@ const templateEquipment = {
     },
     "chest": {
         "effects": [],
-        "enchantments": ["Council's Intellect"],
+        "enchantments": ["Enchanted: Council's Intellect"],
         "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_chest.jpg",
         "item_id": 211996,
         "item_level": 616,
@@ -1022,7 +1028,7 @@ const templateEquipment = {
     },
     "feet": {
         "effects": [],
-        "enchantments": ["Defender's March"],
+        "enchantments": ["Enchanted: Defender's March"],
         "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_boot_raiddeathknightnerubian_d_01.jpg",
         "item_id": 225590,
         "item_level": 610,
@@ -1038,7 +1044,7 @@ const templateEquipment = {
     },
     "finger_1": {
         "effects": [],
-        "enchantments": ["Cursed Critical Strike"],
+        "enchantments": ["Enchanted: Cursed Critical Strike"],
         "gems": [],
         "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_ring_oribos_01_silver.jpg",
         "item_id": 212447,
@@ -1054,7 +1060,7 @@ const templateEquipment = {
     },
     "finger_2": {
         "effects": [],
-        "enchantments": ["Cursed Critical Strike"],
+        "enchantments": ["Enchanted: Cursed Critical Strike"],
         "gems": [],
         "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_qiraj_skinsandworm.jpg",
         "item_id": 225576,
@@ -1102,7 +1108,7 @@ const templateEquipment = {
     },
     "legs": {
         "effects": [],
-        "enchantments": ["Daybreak Spellthread"],
+        "enchantments": ["Enchanted: Daybreak Spellthread"],
         "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_plate_raidpaladinnerubian_d_01_pant.jpg",
         "item_id": 211992,
         "item_level": 616,
@@ -1118,7 +1124,7 @@ const templateEquipment = {
     },
     "main_hand": {
         "effects": [],
-        "enchantments": ["Authority of Fiery Resolve"],
+        "enchantments": ["Enchanted: Authority of Fiery Resolve"],
         "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_sword_1h_nerubianraid_d_01.jpg",
         "item_id": 212405,
         "item_level": 616,
@@ -1238,7 +1244,7 @@ const templateEquipment = {
     },
     "wrist": {
         "effects": [],
-        "enchantments": ["Chant of Armored Leech"],
+        "enchantments": ["Enchanted: Chant of Armored Leech"],
         "gems": [],
         "item_icon": "https://wow.zamimg.com/images/wow/icons/large/inv_bracer_raiddeathknightnerubian_d_01.jpg",
         "item_id": 212437,

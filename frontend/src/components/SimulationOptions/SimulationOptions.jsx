@@ -7,17 +7,25 @@ import Buffs from "./Buffs/Buffs";
 import PriorityList from "./PriorityList/PriorityList";
 import StatusBar from "./StatusBar/StatusBar";
 import ImportCharacterMain from "./ImportCharacterMain/ImportCharacterMain";
+import Loader from "../Loader/Loader";
 import "./SimulationOptions.css";
 
-const SimulationOptions = () => {
-    const [characterImported, setCharacterImported] = useState(false);
-    const [activeTab, setActiveTab] = useState("Options");
+const SimulationOptions = ({ characterImported, setCharacterImported, activeTab, setActiveTab }) => {
+    const [importing, setImporting] = useState(false);
 
     return <div className="simulation-options-container">
         {!characterImported && (
             <ImportCharacterMain setCharacterImported={setCharacterImported} />
         )}
-        <Navbar activeTab={activeTab} setActiveTab={setActiveTab} characterImported={characterImported} />
+        {importing && (
+            <>
+                <div className="import-overlay">
+                    <Loader loading={importing} size="large" />
+                </div>
+                
+            </>
+        )}
+        <Navbar activeTab={activeTab} setActiveTab={setActiveTab} characterImported={characterImported} setImporting={setImporting} />
         <div className="options-window">
             {activeTab === "Options" && <Options />}
             {activeTab === "Talents" && <Talents />}

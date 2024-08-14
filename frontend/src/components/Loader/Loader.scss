@@ -4,7 +4,6 @@
     align-items: center;
 
     height: 100%;
-
     width: 100%;
 }
 
@@ -15,6 +14,15 @@
     mask: conic-gradient(from 15deg,#0000,#000);
     animation: l26 1s infinite steps(12);
 }
+
+.loader-large {
+    transform: translateY(-3rem);
+}
+
+.loader-large .loader {
+    width: 7rem;
+}
+
 .loader,
 .loader:before,
 .loader:after {
@@ -49,8 +57,4 @@
 
 @keyframes l26 {
     100% {transform:rotate(1turn)}
-}
-
-.loader-large {
-    width: 7.0rem;
 }

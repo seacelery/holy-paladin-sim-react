@@ -21,9 +21,9 @@ const SimulationParametersProvider = ({ children }) => {
         overhealing: {},
         seasons: {
             "Blessing of Summer": false,
-            "Blessing of Autumn": false,
-            "Blessing of Winter": false,
-            "Blessing of Spring": false,
+            "Blessing of Autumn": true,
+            "Blessing of Winter": true,
+            "Blessing of Spring": true,
         },
         statScaling: {
             "haste": false,

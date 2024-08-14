@@ -18,6 +18,7 @@ const ImportCharacterMain = ({ setCharacterImported }) => {
     const [loading, setLoading] = useState(false);
     const [errorModalOpen, setErrorModalOpen] = useState(false);
     const [notificationVisible, setNotificationVisible] = useState(false);
+    const [notificationMessage, setNotificationMessage] = useState("");
 
     const [dropdownOpen, setDropdownOpen] = useState(null);
     const [region, setRegion] = useState("EU");
@@ -56,10 +57,6 @@ const ImportCharacterMain = ({ setCharacterImported }) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data)
-                // updateEquipmentWithEffectValues(data);
-                // updateUIAfterImport(data, isFirstImport);
-                // initialiseEquipment();
-
 
                 setCharacterData({
                     ...prevCharacterData,
@@ -82,6 +79,7 @@ const ImportCharacterMain = ({ setCharacterImported }) => {
             .catch(error => { 
                 console.error("Error:", error);
                 setNotificationVisible(true);
+                setNotificationMessage("Character not found");
                 setTimeout(() => {
                     setNotificationVisible(false);
                 }, 3000);
@@ -92,7 +90,7 @@ const ImportCharacterMain = ({ setCharacterImported }) => {
 
     return (
         <>
-            <Notification notificationVisible={notificationVisible} notificationMessage="Character not found" width="18rem" fontSize="1.4rem"></Notification>
+            <Notification notificationVisible={notificationVisible} notificationMessage={notificationMessage} width="18rem" fontSize="1.4rem"></Notification>
 
             <div className="import-overlay">
                 <div className="import-character-container-main">

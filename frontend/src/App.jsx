@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { act, useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import SimulationOptions from "./components/SimulationOptions/SimulationOptions";
 import Footer from "./components/Footer/Footer";
@@ -9,6 +9,8 @@ import { SocketProvider } from "./context/SocketContext";
 
 const App = () => {
     const [theme, setTheme] = useState("paladin");
+    const [characterImported, setCharacterImported] = useState(false);
+    const [activeTab, setActiveTab] = useState("Options");
 
     useEffect(() => {
         setTheme(localStorage.getItem("theme") || "paladin");
@@ -25,10 +27,10 @@ const App = () => {
         <>
             <SocketProvider>
                 <VersionProvider>               
-                    <Header theme={theme} toggleTheme={toggleTheme} />
                     <SimulationParametersProvider>
                         <CharacterDataProvider>
-                            <SimulationOptions />
+                            <Header theme={theme} toggleTheme={toggleTheme} setCharacterImported={setCharacterImported} setActiveTab={setActiveTab} />
+                            <SimulationOptions characterImported={characterImported} setCharacterImported={setCharacterImported} activeTab={activeTab} setActiveTab={setActiveTab} />
                         </CharacterDataProvider>
                     </SimulationParametersProvider>
                     <Footer />            

@@ -18,6 +18,8 @@ const CharacterDataProvider = ({ children }) => {
         stats: {}
     });
 
+    console.log(characterData)
+
     return (
         <CharacterDataContext.Provider value={{characterData, setCharacterData}}>
             {children}

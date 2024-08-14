@@ -10,7 +10,7 @@ import { itemSlotsMap } from "../../../utils/item-slots-map";
 const Equipment = () => {
     const { version } = useContext(VersionContext);
     const { characterData, setCharacterData } = useContext(CharacterDataContext);
-    const equipmentData = characterData.equipment;
+    const equipmentData = characterData ? characterData.equipment : {};
 
     if (!equipmentData.off_hand) {
         setCharacterData(prevCharacterData => ({

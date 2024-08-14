@@ -9,10 +9,10 @@ const OptionIcons = ({ icons, label, dataType, showTooltip = false, exclusiveSel
 
     const [selectedIcons, setSelectedIcons] = useState(getSelectedIndices());
 
-    useEffect(() => {
-        const newSelectedIndices = getSelectedIndices();
-        setSelectedIcons(newSelectedIndices);
-    }, [defaultSelectedIcons]);
+    // useEffect(() => {
+    //     const newSelectedIndices = getSelectedIndices();
+    //     setSelectedIcons(newSelectedIndices);
+    // }, [defaultSelectedIcons]);
 
     const [hoverElement, setHoverElement] = useState(null);
     const [tooltipText, setTooltipText] = useState(null);

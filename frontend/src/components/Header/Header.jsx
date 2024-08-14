@@ -1,12 +1,15 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { VersionContext } from "../../context/VersionContext";
 import Button from "../Button/Button";
 import "./Header.scss";
 import { FaMoon } from "react-icons/fa6";
 import { FaChevronDown } from "react-icons/fa";
+import { CharacterDataContext } from "../../context/CharacterDataContext";
+import { templateClassTalents, templateSpecTalents, templateLightsmithTalents, templateUpdateHeraldOfTheSunTalents, templateEquipment } from "../../utils/template-settings";
 
-const Header = ({ theme, toggleTheme }) => {
+const Header = ({ theme, toggleTheme, setCharacterImported, setActiveTab }) => {
     const { version, changeVersion } = useContext(VersionContext);
+    const { characterData, setCharacterData } = useContext(CharacterDataContext);
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggleDropdown = () => setDropdownOpen(prevState => !prevState);
@@ -18,9 +21,29 @@ const Header = ({ theme, toggleTheme }) => {
 
     const currentVersionName = versionOptions.find(option => option.id === version).name;
 
+    const importTemplate = () => {
+        if (!characterData.characterName || !characterData.characterRealm || !characterData.characterRegion) return;
+
+        setCharacterData(prevCharacterData => {
+            const newCharacterData = {
+                ...prevCharacterData,
+                classTalents: templateClassTalents,
+                specTalents: templateSpecTalents,
+                lightsmithTalents: templateLightsmithTalents,
+                heraldOfTheSunTalents: templateUpdateHeraldOfTheSunTalents,
+                equipment: templateEquipment
+            };
+
+            return newCharacterData;
+        });
+
+        setCharacterImported(true);
+        setActiveTab("Options");
+    };
+
     return (
         <div className="header-container">
-            <Button width="14rem" height="3.2rem" grow={false}>
+            <Button width="14rem" height="3.2rem" grow={false} onClick={importTemplate}>
                 Import Template
             </Button>
 

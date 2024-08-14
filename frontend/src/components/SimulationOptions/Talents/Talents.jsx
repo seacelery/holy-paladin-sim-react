@@ -19,7 +19,7 @@ const Talents = () => {
         useContext(CharacterDataContext);
 
     const classTalents = {
-        talentsData: characterData.classTalents,
+        talentsData: characterData ? characterData.classTalents : "",
         liveTalents: classTalentsLive,
         ptrTalents: classTalentsPTR,
         arrowsLive: classTalentsArrowsLive,
@@ -27,7 +27,7 @@ const Talents = () => {
     };
 
     const specTalents = {
-        talentsData: characterData.specTalents,
+        talentsData: characterData ? characterData.specTalents : "",
         liveTalents: specTalentsLive,
         ptrTalents: specTalentsPTR,
         arrowsLive: specTalentsArrowsLive,

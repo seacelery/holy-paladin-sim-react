@@ -1643,6 +1643,7 @@ class Simulation:
             "priority_list": self.priority_list_text,
             "overhealing": self.paladin.overhealing,
             "character_details": {"race": self.paladin.race},
+            "seasons": self.paladin.seasons,
         }
     
         print(self.paladin.holy_shock_resets)

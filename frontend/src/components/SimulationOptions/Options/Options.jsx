@@ -37,7 +37,6 @@ const Options = () => {
                     [value]: !prevState.seasons[value]
                 }
             }));
-            return;
         } else {
             setSimulationParameters((prevState) => ({
                 ...prevState,
@@ -288,7 +287,7 @@ const Options = () => {
                                 showTooltip: true,
                                 exclusiveSelection: false,
                                 allowDeselection: true,
-                                defaultSelectedIcons: ["Blessing of Winter", "Blessing of Spring", "Blessing of Autumn"],
+                                defaultSelectedIcons: Object.keys(simulationParameters.seasons).filter(season => simulationParameters.seasons[season]),
                                 updateParameter: (value) => updateSimulationParameters("seasons", value)
                             }}
                         />   

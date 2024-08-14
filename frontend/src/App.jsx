@@ -1,10 +1,12 @@
-import { act, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import SimulationOptions from "./components/SimulationOptions/SimulationOptions";
+import SimulationResults from "./components/SimulationResults/SimulationResults";
 import Footer from "./components/Footer/Footer";
 import { VersionProvider } from "./context/VersionContext";
 import { CharacterDataProvider } from "./context/CharacterDataContext"; 
 import { SimulationParametersProvider } from "./context/SimulationParametersContext";
+import { SimulationResultsProvider } from "./context/SimulationResultsContext";
 import { SocketProvider } from "./context/SocketContext";
 
 const App = () => {
@@ -29,8 +31,11 @@ const App = () => {
                 <VersionProvider>               
                     <SimulationParametersProvider>
                         <CharacterDataProvider>
-                            <Header theme={theme} toggleTheme={toggleTheme} setCharacterImported={setCharacterImported} setActiveTab={setActiveTab} />
-                            <SimulationOptions characterImported={characterImported} setCharacterImported={setCharacterImported} activeTab={activeTab} setActiveTab={setActiveTab} />
+                            <SimulationResultsProvider>
+                                <Header theme={theme} toggleTheme={toggleTheme} setCharacterImported={setCharacterImported} setActiveTab={setActiveTab} />
+                                <SimulationOptions characterImported={characterImported} setCharacterImported={setCharacterImported} activeTab={activeTab} setActiveTab={setActiveTab} />
+                                <SimulationResults />
+                            </SimulationResultsProvider>
                         </CharacterDataProvider>
                     </SimulationParametersProvider>
                     <Footer />            

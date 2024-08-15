@@ -1,0 +1,47 @@
+const healingHeaders = ["Spell Name", "%", "Healing", "HPS", "Casts", "Average", "Hits", "Crit %", "Mana Spent", "Holy Power", "CPM", "OH %"];
+
+const excludedSpells = [
+    "Reclamation (Holy Shock)", "Reclamation (Crusader Strike)", "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)", 
+    "Aerated Mana Potion", "Tirion's Devotion", "Source of Magic", "Mana Spring Totem", "Symbol of Hope", "Mana Tide Totem",
+    "Algari Mana Potion", "Sureki Zealot's Insignia"
+];
+
+// displays only casts and resource gains
+const excludedSpellsOnlyResourcesAndCasts = [
+    "Beacon of Virtue", "Beacon of Faith", "Blessing of the Seasons", "Blessing of Summer", "Blessing of Autumn", "Blessing of Winter", "Blessing of Spring", 
+    "Divine Favor", "Avenging Wrath", "Arcane Torrent", "Aerated Mana Potion"
+];
+
+// displays casts with average as healing divided by casts
+const excludedSpellsCasts = [
+    "Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", "Judgment of Light", "Greater Judgment", 
+    "Touch of Light", "Afterimage", "Glimmer of Light", "Glimmer of Light (Glistening Radiance (Light of Dawn))",
+    "Glimmer of Light (Glistening Radiance (Word of Glory))", "Glimmer of Light (Daybreak)", "Embrace of Akunda", "Holy Reverberation", 
+    "Restorative Sands", "Echoing Tyrstone", "Smoldering Seedling", "Blossom of Amirdrassil Large HoT", "Blossom of Amirdrassil Small HoT", 
+    "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Barrier of Faith (Holy Shock)", "Barrier of Faith (Flash of Light)", 
+    "Barrier of Faith (Holy Light)", "Leech", "Dreaming Devotion", "Veneration", "Merciful Auras", "Light of the Martyr ", "Saved by the Light",
+    "Chirping Rune", "Larodar's Fiery Reverie", "Rashok's Molten Heart", "Magazine of Healing Darts", "Bronzed Grip Wrappings",
+    "Dawnlight", "Dawnlight (HoT)", "Dawnlight (AoE)", "Afterimage (Word of Glory)", "Afterimage (Eternal Flame)", "Eternal Flame (HoT)",
+    "Broodkeeper's Promise", "Sun Sear", "Sacred Weapon 1", "Sacred Weapon 2", "Authority of Fiery Resolve", "Rite of Adjuration",
+    "Avenging Crusader (Judgment)", "Avenging Crusader (Crusader Strike)", "Sun's Avatar", "Divine Guidance", "Hammer and Anvil", "Scrapsinger's Symphony",
+    "Siphoning Phylactery Shard", "Creeping Coagulum ", "Gruesome Syringe", "Truth Prevails", "Saved by the Light (Word of Glory)", 
+    "Saved by the Light (Eternal Flame)", "Saved by the Light (Light of Dawn)", "Radiant Aura", "Sacred Word", "Fading Light"
+];
+
+// displays casts with average as healing divided by hits
+const excludedSpellsCastsAverageHits = [
+    "Gift of the Naaru"
+];
+
+const excludedSpellsCrit = [
+    "Beacon of Light", "Overflowing Light", "Resplendent Light", "Crusader's Reprieve", "Crusader Strike", "Judgment", "Daybreak", 
+    "Divine Toll", "Smoldering Seedling", "Blossom of Amirdrassil Absorb", "Blossom of Amirdrassil", "Lay on Hands", "Leech", "Veneration",
+    "Light of the Martyr ", "Saved by the Light", "Dawnlight", "Broodkeeper's Promise", "Sacred Weapon", "Holy Bulwark",
+    "Avenging Crusader", "Siphoning Phylactery Shard", "Fading Light"
+];
+
+const excludedSpellsAverage = [
+    "Dawnlight"
+];
+
+export { healingHeaders, excludedSpells, excludedSpellsOnlyResourcesAndCasts, excludedSpellsCasts, excludedSpellsCastsAverageHits, excludedSpellsCrit, excludedSpellsAverage };

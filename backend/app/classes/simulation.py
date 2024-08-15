@@ -39,7 +39,6 @@ class Simulation:
             
         self.stat_scaling = stat_scaling
         
-        
         # make tick rate smaller for better hot accuracy
         self.tick_rate = float(tick_rate)
         self.abilities = paladin.abilities
@@ -1643,7 +1642,7 @@ class Simulation:
             "priority_list": self.priority_list_text,
             "overhealing": self.paladin.overhealing,
             "character_details": {"race": self.paladin.race},
-            "seasons": self.paladin.seasons,
+            "seasons": self.paladin.seasons
         }
     
         print(self.paladin.holy_shock_resets)

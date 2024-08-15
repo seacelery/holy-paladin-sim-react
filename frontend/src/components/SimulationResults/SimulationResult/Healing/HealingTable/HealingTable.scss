@@ -1,4 +1,84 @@
-.table-wrapper {
+.table-container {
+    display: flex;
+    flex-direction: column;
+    border: 0.1rem solid var(--border-colour-3);
     overflow: hidden;
     border-radius: 0.3rem;
+}
+
+.table-header-grid {
+    display: grid;
+    grid-template-rows: repeat(1, 1fr);
+    grid-template-columns: 368fr 68fr 117fr 80fr 68fr 101fr 68fr 68fr 112fr 108fr 68fr 68fr;
+
+    background-color: var(--panel-colour-table-5);
+
+    .table-header-cell {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        padding: .5rem .5rem .5rem .5rem;
+        min-width: 6.5rem;
+        height: 6.0rem;
+        border-left: .1rem solid var(--border-colour-3);
+        text-align: center;
+        font-size: 1.7rem;
+    }
+
+    .table-header-cell:first-child {
+        border-left: none;
+    }
+}
+
+.table-body-grid {
+    display: grid;
+    grid-template-rows: repeat(1, 35fr);
+    grid-template-columns: 368fr 68fr 117fr 80fr 68fr 101fr 68fr 68fr 112fr 108fr 68fr 68fr;
+
+    background-color: var(--panel-colour-table-5);
+
+    .table-body-cell {
+        display: flex;
+        align-items: center;
+        justify-content: right;
+        padding: .5rem .5rem .5rem .5rem;
+        min-width: 6.5rem;
+        height: 3.5rem;
+        border-left: .1rem solid var(--border-colour-3);
+        border-top: 0.1rem solid var(--border-colour-3);
+        font-size: 1.7rem;
+        font-weight: 300;
+        background-color: var(--panel-colour-table-3);
+    }
+
+    .table-body-cell:first-child {
+        border-left: none;
+    }
+}
+
+.table-footer-grid {
+    display: grid;
+    grid-template-rows: repeat(1, 35fr);
+    grid-template-columns: 368fr 68fr 117fr 80fr 68fr 101fr 68fr 68fr 112fr 108fr 68fr 68fr;
+
+    background-color: var(--panel-colour-table-5);
+
+    .table-footer-cell {
+        padding: .5rem .5rem .5rem .5rem;
+        min-width: 6.5rem;
+        height: 3.5rem;
+        border-left: .1rem solid var(--border-colour-3);
+        border-top: 0.1rem solid var(--border-colour-3);
+        text-align: right;
+        font-size: 1.7rem;
+        font-weight: 500;
+    }
+}
+
+.table-spell-icon {
+    width: 3.0rem;
+    height: 3.0rem;
+    border: 0.15rem solid var(--border-colour-3);
+    margin-right: 0.6rem;
 }

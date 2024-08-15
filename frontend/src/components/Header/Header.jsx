@@ -5,7 +5,7 @@ import "./Header.scss";
 import { FaMoon } from "react-icons/fa6";
 import { FaChevronDown } from "react-icons/fa";
 import { CharacterDataContext } from "../../context/CharacterDataContext";
-import { templateClassTalents, templateSpecTalents, templateLightsmithTalents, templateUpdateHeraldOfTheSunTalents, templateEquipment } from "../../utils/template-settings";
+import { templateClassTalents, templateSpecTalents, templateLightsmithTalents, templateHeraldOfTheSunTalents, templateEquipment } from "../../utils/template-settings";
 
 const Header = ({ theme, toggleTheme, setCharacterImported, setActiveTab }) => {
     const { version, changeVersion } = useContext(VersionContext);
@@ -30,7 +30,7 @@ const Header = ({ theme, toggleTheme, setCharacterImported, setActiveTab }) => {
                 classTalents: templateClassTalents,
                 specTalents: templateSpecTalents,
                 lightsmithTalents: templateLightsmithTalents,
-                heraldOfTheSunTalents: templateUpdateHeraldOfTheSunTalents,
+                heraldOfTheSunTalents: templateHeraldOfTheSunTalents,
                 equipment: templateEquipment
             };
 

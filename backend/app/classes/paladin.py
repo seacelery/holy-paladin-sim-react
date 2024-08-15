@@ -264,28 +264,34 @@ class Paladin:
         self.race = new_race
     
     def update_class_talents(self, talents):
-        for talent_name, new_rank in talents.items():
-            for row in self.class_talents.values():
-                if talent_name in row:
-                    row[talent_name]["ranks"]["current rank"] = new_rank 
+        for row, talents_in_row in talents.items():
+            for talent_name, talent_info in talents_in_row.items():
+                new_rank = talent_info["ranks"]["current rank"]
+                if talent_name in self.class_talents[row]:
+                    self.class_talents[row][talent_name]["ranks"]["current rank"] = new_rank
         
     def update_spec_talents(self, talents):
-        for talent_name, new_rank in talents.items(): 
-            for row in self.spec_talents.values():
-                if talent_name in row:
-                    row[talent_name]["ranks"]["current rank"] = new_rank 
+        for row, talents_in_row in talents.items():
+            for talent_name, talent_info in talents_in_row.items():
+                new_rank = talent_info["ranks"]["current rank"]
+                if talent_name in self.spec_talents[row]:
+                    self.spec_talents[row][talent_name]["ranks"]["current rank"] = new_rank
                     
     def update_lightsmith_talents(self, talents):
-        for talent_name, new_rank in talents.items(): 
-            for row in self.lightsmith_talents.values():
-                if talent_name in row:
-                    row[talent_name]["ranks"]["current rank"] = new_rank 
+        for row, talents_in_row in talents.items():
+            for talent_name, talent_info in talents_in_row.items():
+                new_rank = talent_info["ranks"]["current rank"]
+                if talent_name in self.lightsmith_talents[row]:
+                    self.lightsmith_talents[row][talent_name]["ranks"]["current rank"] = new_rank
                     
     def update_herald_of_the_sun_talents(self, talents):
-        for talent_name, new_rank in talents.items(): 
-            for row in self.herald_of_the_sun_talents.values():
-                if talent_name in row:
-                    row[talent_name]["ranks"]["current rank"] = new_rank 
+        pp.pprint(talents)
+        
+        for row, talents_in_row in talents.items():
+            for talent_name, talent_info in talents_in_row.items():
+                new_rank = talent_info["ranks"]["current rank"]
+                if talent_name in self.herald_of_the_sun_talents[row]:
+                    self.herald_of_the_sun_talents[row][talent_name]["ranks"]["current rank"] = new_rank
                     
     def update_equipment(self, equipment_data):        
         self.equipment = json.loads(equipment_data)      

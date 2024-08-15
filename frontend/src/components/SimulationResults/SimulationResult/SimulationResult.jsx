@@ -15,7 +15,7 @@ import Loadout from "./Loadout/Loadout";
 
 const SimulationResult = ({ simulationResult, setSimulationResults }) => {
     const [expanded, setExpanded] = useState(true);
-    const [activeTab, setActiveTab] = useState("resources");
+    const [activeTab, setActiveTab] = useState("Healing");
 
     const [simulationName, setSimulationName] = useState("Simulation 1");
 

@@ -29,10 +29,12 @@ const SimulateButton = () => {
         const simVersion = version;
 
         const race = characterData.race;
+
         const classTalents = encodeURIComponent(JSON.stringify(characterData.classTalents));
         const specTalents = encodeURIComponent(JSON.stringify(characterData.specTalents));
         const lightsmithTalents = encodeURIComponent(JSON.stringify(characterData.lightsmithTalents));
         const heraldOfTheSunTalents = encodeURIComponent(JSON.stringify(characterData.heraldOfTheSunTalents));
+        console.log(characterData.heraldOfTheSunTalents)
         const consumables = encodeURIComponent(JSON.stringify(characterData.consumables));
         const equipment = encodeURIComponent(JSON.stringify(characterData.equipment));
 
@@ -61,7 +63,7 @@ const SimulateButton = () => {
         .then(response => response.json())
         .then(data => {
             let simulationData = data;     
-            // console.log(simulationData)
+            console.log(simulationData)
             // simulationProgressBarText.textContent = "";
             // if (simulationData) {
             //     createSimulationResults(simulationData);

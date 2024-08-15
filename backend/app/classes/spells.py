@@ -1,8 +1,9 @@
 import random
+import re
 
 from .auras_buffs import SunSear
 from ..utils.leech_abilities import leech_abilities
-from ..utils.misc_functions import format_time, append_spell_heal_event, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event, update_spell_data_heals, update_spell_data_casts, update_target_buff_data, update_priority_breakdown
+from ..utils.misc_functions import format_time, append_spell_heal_event, append_spell_started_casting_event, append_spell_cast_event, append_spell_damage_event, update_spell_data_heals, update_spell_data_casts, update_target_buff_data, update_priority_breakdown, update_self_buff_data
 from collections import defaultdict
 
 class Spell:
@@ -57,17 +58,27 @@ class Spell:
         
     def can_cast(self, caster, current_time=0):
         if caster.is_occupied:
+            if self.name == "Light of Dawn" and current_time == 0:
+                print(current_time, "Light of Dawn occupied")
             return False
         if self.name in ["Hammer of Wrath"] and "Avenging Wrath" not in caster.active_auras and "Veneration" not in caster.active_auras and not caster.is_enemy_below_20_percent:
             return False       
         if not self.off_gcd and caster.global_cooldown > 0:
+            if self.name == "Light of Dawn" and current_time == 0:
+                print(current_time, "Light of Dawn not off gcd, cd > 0", caster.global_cooldown)
             return False
         if self.max_charges > 0:
             if self.remaining_cooldown > 0 and self.current_charges == 0:
+                if self.name == "Light of Dawn" and current_time == 0:
+                    print(current_time, "Light of Dawn charges???")
                 return False    
         if caster.mana < self.get_mana_cost(caster):
+            if self.name == "Light of Dawn" and current_time == 0:
+                print(current_time, "Light of Dawn MANA ISSUE")
             return False
         if hasattr(self, "holy_power_cost") and caster.holy_power < self.holy_power_cost:
+            if self.name == "Light of Dawn" and current_time == 0:
+                print(current_time, "Light of Dawn HOLY POWER ISSUE")
             return False       
         return True
     
@@ -123,7 +134,7 @@ class Spell:
 
         return True, spell_crit, damage_value
         
-    def cast_healing_spell(self, caster, targets, current_time, is_heal, exclude_mastery=False, ignore_spell_multiplier=False, exclude_cast=False):
+    def cast_healing_spell(self, caster, targets, current_time, is_heal, exclude_mastery=False, ignore_spell_multiplier=False, exclude_cast=False, initial_cast=True):
         if not self.can_cast(caster):         
             return False, False, 0
     
@@ -157,8 +168,8 @@ class Spell:
             caster.mana -= self.get_mana_cost(caster)
                      
         # add spells that cost mana and do heal       
-        elif caster.mana >= self.get_mana_cost(caster) and is_heal and not exclude_cast: 
-            if self.name not in ["Tyr's Deliverance", "Light's Hammer", "Holy Shock (Divine Toll)", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Resonance)", "Flash of Light", "Golden Path", "Holy Light", "Seal of Mercy"]:
+        elif caster.mana >= self.get_mana_cost(caster) and is_heal: 
+            if self.name not in ["Tyr's Deliverance", "Light's Hammer", "Holy Shock (Divine Toll)", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Resonance)", "Flash of Light", "Golden Path", "Holy Light", "Seal of Mercy"] and initial_cast:
                 update_priority_breakdown(caster.priority_breakdown, caster, current_time, "1", self.name, self_auras, {"mana": caster.mana, "holy_power": caster.holy_power}, target_active_auras=target_auras, remaining_cooldowns=spell_cooldowns, aura_counts=total_target_aura_counts, current_stats=current_stats)    
             
             target_count = self.healing_target_count
@@ -184,7 +195,7 @@ class Spell:
                             update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, 0, self.holy_power_cost)
                             
                     # sun sear
-                    if is_crit and caster.ptr and caster.is_talent_active("Sun Sear") and self.name == "Light of Dawn":
+                    if is_crit and caster.is_talent_active("Sun Sear") and self.name == "Light of Dawn":
                         target.apply_buff_to_target(SunSear(caster), current_time, caster=caster)
                         
                     self.aoe_cast_counter -= 1
@@ -275,16 +286,29 @@ class Spell:
             
         heal_amount = spell_power * self.SPELL_POWER_COEFFICIENT * caster.healing_multiplier * versatility_multiplier * crit_multiplier * mastery_multiplier * spell_healing_modifier * caster_crit_healing_modifier
         
+        # if "Holy Shock" in self.name:
+        #     print(" ")
+        #     print(self.name, is_crit)
+        #     print(f"Heal amount: {heal_amount}")
+        #     if "Power of the Silver Hand" in caster.active_auras:
+        #         print(f"Current stored healing: {caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing}")
+        
         if self.name in ["Holy Shock", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Toll)", "Holy Shock (Divine Resonance)"] and "Power of the Silver Hand Stored Healing" in caster.active_auras:
             if is_crit:
-                heal_amount += caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing * 2
+                heal_amount += (caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing * 2) / caster.mastery_multiplier
             else:
-                heal_amount += caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing
+                heal_amount += caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing / caster.mastery_multiplier
             caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing = 0
+            
+        # if "Holy Shock" in self.name:
+        #     print(f"Heal amount after stored healing: {heal_amount}")
         
         # season 2 tier 2pc   
         if self.name in ["Holy Shock", "Holy Shock (Rising Sunlight)", "Holy Shock (Divine Toll)", "Holy Shock (Divine Resonance)"] and caster.set_bonuses["dragonflight_season_2"] >= 2 and is_crit:
             heal_amount *= 1.8
+            
+        # if "Holy Shock" in self.name:
+        #     print(f"Heal amount after season 2 2pc: {heal_amount}")
         
         if "Close to Heart" in caster.active_auras:
             heal_amount *= 1.04
@@ -292,19 +316,22 @@ class Spell:
         if "Aura Mastery" in caster.active_auras and caster.is_talent_active("Protection of Tyr"):
             heal_amount *= 1.1
             
-        if caster.is_talent_active("Power of the Silver Hand") and "Power of the Silver Hand" in caster.active_auras:
-            caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing += heal_amount * 0.1
+        if caster.is_talent_active("Power of the Silver Hand") and "Power of the Silver Hand" in caster.active_auras and self.name != "Lay on Hands":
+            spell_overhealing_multiplier = (1 - caster.overhealing[self.name]) if self.name in caster.overhealing else 0
+            caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing += heal_amount * 0.2 * spell_overhealing_multiplier
             caster.active_auras["Power of the Silver Hand Stored Healing"].duration = caster.active_auras["Power of the Silver Hand Stored Healing"].base_duration
+            
+        # if "Holy Shock" in self.name and "Power of the Silver Hand" in caster.active_auras:
+        #     print(f"New stored healing: {caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing}")
             
         if self.name in leech_abilities:   
             leech_multiplier = 0.7
             update_spell_data_heals(caster.ability_breakdown, "Leech", caster, heal_amount * (caster.leech / 100) * leech_multiplier, False)
-        
-        # if self.name == "Glimmer of Light":  
             
-        # if "Holy Shock" in self.name:
-        #     print(f"Heal amount for {self.name}, {heal_amount}")
-        #     print(f"Calculating heal for {self.name}, {spell_power} * {self.SPELL_POWER_COEFFICIENT} * {caster.healing_multiplier} * {versatility_multiplier} * {crit_multiplier} * {mastery_multiplier} * {self.spell_healing_modifier} * {caster_crit_healing_modifier}")
+        # if "Holy Shock" in self.name and "Power of the Silver Hand" in caster.active_auras:
+        #     print(f"Heal amount for {self.name}, {heal_amount}, {is_crit}")
+        #     print(f"new stored healing {caster.active_auras['Power of the Silver Hand Stored Healing'].stored_healing}")
+            # print(f"Calculating heal for {self.name}, {spell_power} * {self.SPELL_POWER_COEFFICIENT} * {caster.healing_multiplier} * {versatility_multiplier} * {crit_multiplier} * {mastery_multiplier} * {self.spell_healing_modifier} * {caster_crit_healing_modifier}")
         return heal_amount, is_crit
     
     def calculate_damage(self, caster, bonus_crit=0, bonus_versatility=0):
@@ -446,27 +473,23 @@ class Spell:
             power_of_the_silver_hand = PowerOfTheSilverHand()
             try_proc_rppm_effect(power_of_the_silver_hand, is_hasted=False, is_self_buff=True)
             
-        if caster.ptr and caster.is_talent_active("Blessing of An'she") and (self.name in ["Eternal Flame", "Dawnlight", "Sun Sear"]):
-            blessing_of_anshe = BlessingOfAnshe(caster)
-            try_proc_rppm_effect(blessing_of_anshe, is_hasted=False, is_self_buff=True)
-            
-        if caster.ptr and caster.is_talent_active("Holy Bulwark"):
+        if caster.is_talent_active("Holy Bulwark"):
             sacred_weapon_targets = [target for target in caster.potential_healing_targets if "Sacred Weapon" in target.target_active_buffs]
             if len(sacred_weapon_targets) == 2:
                 sacred_weapon_1 = SacredWeapon(caster, 1)
-                try_proc_rppm_effect(sacred_weapon_1, is_other_effect=True, is_hasted=False)
+                try_proc_rppm_effect(sacred_weapon_1, is_other_effect=True, is_hasted=True)
                 
                 sacred_weapon_2 = SacredWeapon(caster, 2)
-                try_proc_rppm_effect(sacred_weapon_2, is_other_effect=True, is_hasted=False)
+                try_proc_rppm_effect(sacred_weapon_2, is_other_effect=True, is_hasted=True)
             elif len(sacred_weapon_targets) == 1:
                 sacred_weapon_1 = SacredWeapon(caster, 1)
-                try_proc_rppm_effect(sacred_weapon_1, is_other_effect=True, is_hasted=False)
+                try_proc_rppm_effect(sacred_weapon_1, is_other_effect=True, is_hasted=True)
         
-        if caster.ptr and caster.is_talent_active("Divine Inspiration"):
+        if caster.is_talent_active("Divine Inspiration"):
             divine_inspiration = DivineInspiration(caster)
             try_proc_rppm_effect(divine_inspiration, is_hasted=False, is_other_effect=True)
             
-        if caster.ptr and caster.is_talent_active("Rite of Adjuration") and (self.name == "Light of Dawn" or self.name == "Word of Glory"):
+        if caster.is_talent_active("Rite of Adjuration") and (self.name == "Light of Dawn" or self.name == "Word of Glory"):
             rite_of_adjuration = RiteOfAdjurationSpell(caster)
             try_proc_rppm_effect(rite_of_adjuration, is_hasted=False, is_other_effect=True)
         
@@ -479,27 +502,27 @@ class Spell:
             dreaming_devotion = DreamingDevotion(caster)
             try_proc_rppm_effect(dreaming_devotion, is_flat_healing=True)
             
-        if caster.ptr and "Authority of Fiery Resolve" in caster.bonus_enchants:
+        if "Authority of Fiery Resolve" in caster.bonus_enchants:
             authority_of_fiery_resolve = AuthorityOfFieryResolve(caster)
             try_proc_rppm_effect(authority_of_fiery_resolve, is_flat_healing=True, is_hasted=False)
 
-        if caster.ptr and "Authority of Radiant Power" in caster.bonus_enchants:
+        if "Authority of Radiant Power" in caster.bonus_enchants:
             authority_of_radiant_power = AuthorityOfRadiantPower(caster)
             try_proc_rppm_effect(authority_of_radiant_power, is_self_buff=True, is_hasted=False)
             
-        if caster.ptr and "Council's Guile" in caster.bonus_enchants:
+        if "Council's Guile" in caster.bonus_enchants:
             councils_guile = CouncilsGuile(caster)
             try_proc_rppm_effect(councils_guile, is_self_buff=True, is_hasted=False)
             
-        if caster.ptr and "Stormrider's Fury" in caster.bonus_enchants:
+        if "Stormrider's Fury" in caster.bonus_enchants:
             stormriders_fury = StormridersFury(caster)
             try_proc_rppm_effect(stormriders_fury, is_self_buff=True, is_hasted=False)
             
-        if caster.ptr and "Stonebound Artistry" in caster.bonus_enchants:
+        if "Stonebound Artistry" in caster.bonus_enchants:
             stonebound_artistry = StoneboundArtistry(caster)
             try_proc_rppm_effect(stonebound_artistry, is_self_buff=True, is_hasted=False)
 
-        if caster.ptr and "Oathsworn's Tenacity" in caster.bonus_enchants:
+        if "Oathsworn's Tenacity" in caster.bonus_enchants:
             oathsworns_tenacity = OathswornsTenacity(caster)
             try_proc_rppm_effect(oathsworns_tenacity, is_self_buff=True, is_hasted=False)
             
@@ -530,18 +553,28 @@ class Spell:
             sureki_zealots_insignia = SurekiZealotsInsignia(caster)
             try_proc_rppm_effect(sureki_zealots_insignia, is_hasted=False, is_self_buff=True)
             
-        # trinkets
-        # if "Treacherous Transmitter" in caster.trinkets:
-        #     treacherous_transmitter = CrypticInstructions(caster)
-        #     try_proc_rppm_effect(treacherous_transmitter, is_hasted=False, is_self_buff=True)
-         
+        # trinkets   
         if "Ara-Kara Sacbrood" in caster.trinkets:
             ara_kara_sacbrood = AraKaraSacbrood(caster)
-            try_proc_rppm_effect(ara_kara_sacbrood, is_hasted=False, is_self_buff=True)
+            proc_occurred = try_proc_rppm_effect(ara_kara_sacbrood, is_hasted=False, is_self_buff=True)
+            if proc_occurred:
+                ara_kara_sacbrood_counters = [
+                    int(match.group(1)) for aura_name in caster.active_auras 
+                    if (match := re.search(r'Ara-Kara Sacbrood (\d+)', aura_name))
+                ]
+                
+                counter = 1
+                while counter in ara_kara_sacbrood_counters:
+                    counter += 1
+                
+                new_name = f"Ara-Kara Sacbrood {counter}"
+                caster.active_auras[new_name] = caster.active_auras.pop("Ara-Kara Sacbrood")
+                caster.active_auras[new_name].name = new_name
         
         if "Unbound Changeling" in caster.trinkets:
             unbound_changeling = UnboundChangeling(caster)
-            try_proc_rppm_effect(unbound_changeling, is_self_buff=True)
+            if "Unbound Changeling" not in caster.active_auras:
+                try_proc_rppm_effect(unbound_changeling, is_hasted=False, is_self_buff=True)
             
         if "Gruesome Syringe" in caster.trinkets:
             gruesome_syringe = GruesomeSyringe(caster)
@@ -557,7 +590,8 @@ class Spell:
             
         if "Empowering Crystal of Anub'ikkaj" in caster.trinkets:
             empowering_crystal_of_anubikkaj = EmpoweringCrystalOfAnubikkaj(caster)
-            try_proc_rppm_effect(empowering_crystal_of_anubikkaj, is_hasted=False, is_self_buff=True)
+            if "Empowering Crystal of Anub'ikkaj" not in caster.active_auras:
+                try_proc_rppm_effect(empowering_crystal_of_anubikkaj, is_hasted=False, is_self_buff=True)
         
         if "Emerald Coach's Whistle" in caster.trinkets:
             emerald_coachs_whistle = EmeraldCoachsWhistle(caster)
@@ -670,6 +704,7 @@ class Spell:
     def try_trigger_conditional_effects(self, caster, targets, current_time):
         from .spells_passives import EchoingTyrstoneProc, BlossomOfAmirdrassilProc
         from .trinkets import EchoingTyrstone
+        from .auras_buffs import SpymastersWebStacks
         
         if caster.is_trinket_equipped("Echoing Tyrstone"):
             echoing_tyrstone_cast = EchoingTyrstone(caster)
@@ -688,6 +723,23 @@ class Spell:
             if current_time >= blossom_proc.AVERAGE_TIME_TO_PROC and caster.conditional_effect_cooldowns[blossom_proc.name] <= 0:
                 caster.conditional_effect_cooldowns[blossom_proc.name] = blossom_proc.BASE_COOLDOWN
                 blossom_proc.trigger_proc(caster, targets, current_time)
+                
+        if caster.is_trinket_equipped("Spymaster's Web"):
+            if self.name in ["Judgment", "Crusader Strike", "Consecration"] and caster.conditional_effect_cooldowns.get("Spymaster's Web", 0) <= 0:
+                caster.conditional_effect_cooldowns["Spymaster's Web"] = 6
+                if "Spymaster's Web Stacks" not in caster.active_auras:
+                    caster.apply_buff_to_self(SpymastersWebStacks(caster), current_time, stacks_to_apply=1, max_stacks=40)
+                else:
+                    spymasters_web_stacks = caster.active_auras["Spymaster's Web Stacks"]
+                    
+                    if spymasters_web_stacks.current_stacks < spymasters_web_stacks.max_stacks:
+                        spymasters_web_stacks.remove_effect(caster)
+                        spymasters_web_stacks.current_stacks += 1
+                        spymasters_web_stacks.apply_effect(caster)
+                    
+                    spymasters_web_stacks.duration = spymasters_web_stacks.base_duration
+                    update_self_buff_data(caster.self_buff_breakdown, "Spymaster's Web Stacks", current_time, "applied", spymasters_web_stacks.duration, spymasters_web_stacks.current_stacks)       
+                
                           
     def collect_priority_breakdown_data(self, caster, targets=None, exclude_target_auras=False):
         # add auras to dictionaries and check current spell cooldownsfor display in priority list example

@@ -2,7 +2,7 @@ import random
 import re
 
 from .auras import Buff
-from ..utils.misc_functions import format_time, update_mana_gained, update_self_buff_data, update_spell_data_heals, add_talent_healing_multipliers, update_target_buff_data, calculate_sqrt_ability_scaling
+from ..utils.misc_functions import format_time, update_mana_gained, update_self_buff_data, update_spell_data_heals, add_talent_healing_multipliers, update_target_buff_data, calculate_sqrt_ability_scaling, try_proc_rppm_effect
 from ..utils.stat_values import update_stat_with_multiplicative_percentage
 
 
@@ -37,6 +37,8 @@ class HoT(Buff):
         target.receive_heal(total_heal_value, caster)
         caster.handle_beacon_healing(self.name, target, total_heal_value, current_time)
         
+        self.trigger_on_periodic_heal_effect(caster, current_time, target)
+        
         if is_crit and self.name == "Holy Reverberation":
             caster.events.append(f"{format_time(current_time)}: Holy Reverberation crit healed {target.name} for {round(total_heal_value)}")
         elif self.name == "Holy Reverberation":
@@ -47,7 +49,6 @@ class HoT(Buff):
         update_spell_data_heals(caster.ability_breakdown, self.name, target, total_heal_value, is_crit)
         
         if self.name == "Dawnlight (HoT)":
-            # print(f"radiating {total_heal_value}")
             self.radiate_healing(caster, current_time, total_heal_value)
              
     def calculate_tick_healing(self, caster, can_crit=True):
@@ -78,6 +79,31 @@ class HoT(Buff):
         healing_per_tick = add_talent_healing_multipliers(healing_per_tick, caster)
 
         return healing_per_tick, is_crit
+    
+    def trigger_on_periodic_heal_effect(self, caster, current_time, target):
+        from .auras_buffs import (
+            GaleOfShadows, BlessingOfAnshe
+        )
+        
+        if self.name in ["Eternal Flame (HoT)", "Dawnlight (HoT)", "Sun Sear (HoT)"]:
+            if caster.is_trinket_equipped("Gale of Shadows"):
+                if "Gale of Shadows" in caster.active_auras:
+                    gale_of_shadows = caster.active_auras["Gale of Shadows"]
+                    
+                    if gale_of_shadows.current_stacks < gale_of_shadows.max_stacks:
+                        gale_of_shadows.remove_effect(caster)
+                        gale_of_shadows.current_stacks += 1
+                        gale_of_shadows.apply_effect(caster)
+                    
+                    gale_of_shadows.duration = gale_of_shadows.base_duration
+                    update_self_buff_data(caster.self_buff_breakdown, "Gale of Shadows", current_time, "applied", gale_of_shadows.duration, gale_of_shadows.current_stacks)               
+                else:
+                    caster.apply_buff_to_self(GaleOfShadows(caster), current_time, stacks_to_apply=1, max_stacks=20)
+        
+        if caster.is_talent_active("Blessing of An'she") and (self.name in ["Eternal Flame", "Dawnlight", "Sun Sear"]):
+            blessing_of_anshe = BlessingOfAnshe(caster)
+            try_proc_rppm_effect(caster, target, current_time, blessing_of_anshe, is_hasted=False, is_self_buff=True)
+            
 
 
 class GiftOfTheNaaruBuff(HoT):
@@ -113,8 +139,6 @@ class HolyReverberation(HoT):
 # trinket hots
 class BroodkeepersPromiseHoT(HoT):
     
-    # TODO everything
-    
     def __init__(self, caster):
         super().__init__("Broodkeeper's Promise", 10000, base_duration=10000, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier, hasted=False)
         trinket_effect = caster.trinkets[self.name]["effect"]
@@ -143,7 +167,7 @@ class BroodkeepersPromiseHoT(HoT):
 class Dawnlight(HoT):
     
     # TODO verify 22.5% higher
-    SPELL_POWER_COEFFICIENT = 4 * 1.225
+    SPELL_POWER_COEFFICIENT = 3.6 * 1.225
     
     def __init__(self, caster, duration_to_apply=8):
         super().__init__("Dawnlight (HoT)", duration_to_apply, base_duration=duration_to_apply, base_tick_interval=1.5, initial_haste_multiplier=caster.haste_multiplier) 
@@ -178,7 +202,7 @@ class Dawnlight(HoT):
  
 class EternalFlameBuff(HoT):
     
-    SPELL_POWER_COEFFICIENT = 0.96 * 1.1
+    SPELL_POWER_COEFFICIENT = 0.912 * 1.1
     
     def __init__(self, caster, duration_to_apply):
         super().__init__("Eternal Flame (HoT)", duration_to_apply, base_duration=duration_to_apply, base_tick_interval=3, initial_haste_multiplier=caster.haste_multiplier) 
@@ -188,7 +212,7 @@ class EternalFlameBuff(HoT):
 class SunSear(HoT):
     
     # TODO verify 22.5% higher
-    SPELL_POWER_COEFFICIENT = 0.6 * 1.225
+    SPELL_POWER_COEFFICIENT = 0.54 * 1.225
     
     def __init__(self, caster):
         super().__init__("Sun Sear", 4, base_duration=4, base_tick_interval=1, initial_haste_multiplier=caster.haste_multiplier) 
@@ -308,8 +332,8 @@ class AvengingWrathBuff(Buff):
         caster.damage_multiplier *= 1.15
         
         if caster.is_talent_active("Sanctified Wrath"):
-            caster.abilities["Holy Shock"].cooldown *= 0.8
-            caster.abilities["Holy Shock"].remaining_cooldown *= 0.8
+            caster.abilities["Holy Shock"].cooldown *= 0.5
+            caster.abilities["Holy Shock"].remaining_cooldown *= 0.5
             
         if caster.is_talent_active("Sun's Avatar"):
             caster.apply_buff_to_self(SunsAvatarActive(caster), current_time)
@@ -322,8 +346,8 @@ class AvengingWrathBuff(Buff):
         caster.damage_multiplier /= 1.15
         
         if caster.is_talent_active("Sanctified Wrath"):
-            caster.abilities["Holy Shock"].cooldown /= 0.8
-            caster.abilities["Holy Shock"].remaining_cooldown /= 0.8
+            caster.abilities["Holy Shock"].cooldown /= 0.5
+            caster.abilities["Holy Shock"].remaining_cooldown /= 0.5
             
         if caster.is_talent_active("Sun's Avatar") and "Sun's Avatar Active" in caster.active_auras:
             del caster.active_auras["Sun's Avatar Active"]   
@@ -414,16 +438,16 @@ class AvengingCrusaderBuff(Buff):
             update_self_buff_data(caster.self_buff_breakdown, "Avenging Crusader (Awakening)", current_time, "expired")      
         
         if caster.is_talent_active("Sanctified Wrath"):
-            caster.abilities["Holy Shock"].cooldown *= 0.8
-            caster.abilities["Holy Shock"].remaining_cooldown *= 0.8
+            caster.abilities["Holy Shock"].cooldown *= 0.5
+            caster.abilities["Holy Shock"].remaining_cooldown *= 0.5
             
         if caster.is_talent_active("Sun's Avatar"):
             caster.apply_buff_to_self(SunsAvatarActive(caster), current_time)
         
     def remove_effect(self, caster, current_time=None):
         if caster.is_talent_active("Sanctified Wrath"):
-            caster.abilities["Holy Shock"].cooldown /= 0.8
-            caster.abilities["Holy Shock"].remaining_cooldown /= 0.8
+            caster.abilities["Holy Shock"].cooldown /= 0.5
+            caster.abilities["Holy Shock"].remaining_cooldown /= 0.5
             
         if caster.is_talent_active("Sun's Avatar") and "Sun's Avatar Active" in caster.active_auras:
             del caster.active_auras["Sun's Avatar Active"]   
@@ -655,7 +679,7 @@ class FirstLight(Buff):
 class AwakeningStacks(Buff):
     
     def __init__(self):
-        super().__init__("Awakening", 60, base_duration=60, current_stacks=1, max_stacks=12)
+        super().__init__("Awakening", 60, base_duration=60, current_stacks=1, max_stacks=15)
        
         
 class AwakeningTrigger(Buff):
@@ -1127,16 +1151,16 @@ class AlchemicalChaosAir(Buff):
         self.chosen_stats = []
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("haste", 6002)
+        caster.update_stat("haste", 3470)
         self.chosen_stats = random.sample(["crit", "versatility", "mastery"], 2)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, -405)
+            caster.update_stat(stat, -290)
         
     def remove_effect(self, caster, current_time):
-        caster.update_stat("haste", -6002)
+        caster.update_stat("haste", -3470)
         apply_alchemical_chaos_aura(caster, current_time)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, 405)
+            caster.update_stat(stat, 290)
         
     def reapply_self(self, caster, current_time):
         new_buff = self.__class__()
@@ -1149,16 +1173,16 @@ class AlchemicalChaosFire(Buff):
         super().__init__("Alchemical Chaos: Fire", 30, base_duration=30)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("crit", 6002)
+        caster.update_stat("crit", 3470)
         self.chosen_stats = random.sample(["haste", "versatility", "mastery"], 2)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, -405)
+            caster.update_stat(stat, -290)
         
     def remove_effect(self, caster, current_time):
-        caster.update_stat("crit", -6002)
+        caster.update_stat("crit", -3470)
         apply_alchemical_chaos_aura(caster, current_time)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, 405)
+            caster.update_stat(stat, 290)
         
     def reapply_self(self, caster, current_time):
         new_buff = self.__class__()
@@ -1171,16 +1195,16 @@ class AlchemicalChaosFrost(Buff):
         super().__init__("Alchemical Chaos: Frost", 30, base_duration=30)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("versatility", 6002)
+        caster.update_stat("versatility", 3470)
         self.chosen_stats = random.sample(["crit", "haste", "mastery"], 2)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, -405)
+            caster.update_stat(stat, -290)
         
     def remove_effect(self, caster, current_time):
-        caster.update_stat("versatility", -6002)
+        caster.update_stat("versatility", -3470)
         apply_alchemical_chaos_aura(caster, current_time)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, 405)
+            caster.update_stat(stat, 290)
         
     def reapply_self(self, caster, current_time):
         new_buff = self.__class__()
@@ -1193,16 +1217,16 @@ class AlchemicalChaosEarth(Buff):
         super().__init__("Alchemical Chaos: Earth", 30, base_duration=30)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("mastery", 4082)
+        caster.update_stat("mastery", 3470)
         self.chosen_stats = random.sample(["crit", "versatility", "haste"], 2)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, -340)
+            caster.update_stat(stat, -290)
         
     def remove_effect(self, caster, current_time):
-        caster.update_stat("mastery", -4082)
+        caster.update_stat("mastery", -3470)
         apply_alchemical_chaos_aura(caster, current_time)
         for stat in self.chosen_stats:
-            caster.update_stat(stat, 340)
+            caster.update_stat(stat, 290)
         
     def reapply_self(self, caster, current_time):
         new_buff = self.__class__()
@@ -1215,10 +1239,10 @@ class FlaskOfTemperedSwiftness(Buff):
         super().__init__("Flask of Tempered Swiftness", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("haste", 3323)
+        caster.update_stat("haste", 2825)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("haste", -3323)
+        caster.update_stat("haste", -2825)
             
 
 class FlaskOfTemperedAggression(Buff):
@@ -1227,10 +1251,10 @@ class FlaskOfTemperedAggression(Buff):
         super().__init__("Flask of Tempered Aggression", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("crit", 3323)
+        caster.update_stat("crit", 2825)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("crit", -3323)
+        caster.update_stat("crit", -2825)
             
 
 class FlaskOfTemperedMastery(Buff):
@@ -1239,10 +1263,10 @@ class FlaskOfTemperedMastery(Buff):
         super().__init__("Flask of Tempered Mastery", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("mastery", 3323)
+        caster.update_stat("mastery", 2825)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("mastery", -3323)
+        caster.update_stat("mastery", -2825)
             
     
 class FlaskOfTemperedVersatility(Buff):
@@ -1251,10 +1275,10 @@ class FlaskOfTemperedVersatility(Buff):
         super().__init__("Flask of Tempered Versatility", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("versatility", 3323)
+        caster.update_stat("versatility", 2825)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("versatility", -3323)
+        caster.update_stat("versatility", -2825)
 
 
 class FlaskOfSavingGraces(Buff):
@@ -2654,7 +2678,6 @@ class AraKaraSacbrood(Buff):
     count = 0
 
     def __init__(self, caster):
-        AraKaraSacbrood.count += 1
         self.count = AraKaraSacbrood.count
 
         super().__init__(f"Ara-Kara Sacbrood", 60, base_duration=60)
@@ -3457,10 +3480,10 @@ class Liberation(Buff):
         self.mana_cost = caster.abilities["Judgment"].mana_cost * caster.base_mana
             
     def apply_effect(self, caster, current_time=None):
-        caster.abilities["Judgment"].mana_cost_modifier *= 1 - (4000 / self.mana_cost)
+        caster.abilities["Judgment"].mana_cost_modifier *= 1 - (6000 / self.mana_cost)
         
     def remove_effect(self, caster, current_time=None):
-        caster.abilities["Judgment"].mana_cost_modifier /= 1 - (4000 / self.mana_cost)
+        caster.abilities["Judgment"].mana_cost_modifier /= 1 - (6000 / self.mana_cost)
         
 
 class BlessingOfTheForge(Buff):
@@ -3559,6 +3582,22 @@ class OathswornsTenacity(Buff):
         caster.update_stat("versatility", -1360)
         
 
+class GaleOfShadows(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Gale of Shadows", 15, base_duration=15, current_stacks=1, max_stacks=20)   
+        trinket_effect = caster.trinkets["Gale of Shadows"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.spell_power += caster.get_effective_spell_power(self.trinket_first_value * self.current_stacks)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(self.trinket_first_value * self.current_stacks)
+        
+
 class SurekiZealotsInsignia(Buff):
     count = 0
     
@@ -3592,3 +3631,141 @@ class PotionBombOfPower(Buff):
         
     def remove_effect(self, caster, current_time=None):
         caster.spell_power -= caster.get_effective_spell_power(800)
+        
+
+class DawnthreadLining(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Dawnthread Lining", 10000, base_duration=10000)   
+        embellishment_effect = caster.embellishments["Dawnthread Lining"]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        self.embellishment_first_value = embellishment_values[0]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("crit", self.embellishment_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("crit", -self.embellishment_first_value)
+        
+        
+class DuskthreadLining(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Duskthread Lining", 10000, base_duration=10000)   
+        embellishment_effect = caster.embellishments["Duskthread Lining"]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        self.embellishment_first_value = embellishment_values[0]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", self.embellishment_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", -self.embellishment_first_value)
+        
+        
+class PrismaticNullStone(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Prismatic Null Stone", 10000, base_duration=10000)   
+        
+    def apply_effect(self, caster, current_time=None):
+        unique_gem_colours = sum(1 for gem in ["Emerald", "Sapphire", "Onyx", "Ruby"] if caster.gem_counts[gem] > 0)
+        
+        if "Insightful Blasphemite" in caster.gems:
+            caster.max_mana = caster.mana + caster.base_mana * unique_gem_colours * 0.0025
+            caster.mana = caster.max_mana
+            
+        if "Culminating Blasphemite" in caster.gems:
+            caster.crit_healing_modifier += unique_gem_colours * 0.0015 * 0.25
+            caster.base_crit_healing_modifier += unique_gem_colours * 0.0015 * 0.25
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
+class WrithingArmorBanding(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Writhing Armor Banding", 10000, base_duration=10000)   
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+
+class EnergyDistributionBeacon(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Energy Distribution Beacon", 10000, base_duration=10000)   
+        
+    def apply_effect(self, caster, current_time=None):
+        pass
+        
+    def remove_effect(self, caster, current_time=None):
+        pass
+    
+    
+class BlessedWeaponGrip(Buff):
+    
+    BASE_PPM = 1
+    
+    def __init__(self, caster):
+        super().__init__("Blessed Weapon Grip", 30, base_duration=30, current_stacks=10, max_stacks=10)   
+        embellishment_effect = caster.embellishments["Blessed Weapon Grip"]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        print(embellishment_effect)
+        print(embellishment_values)
+        
+        self.embellishment_first_value = embellishment_values[0]
+        self.highest_stat = caster.find_highest_secondary_stat_rating()
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat(self.highest_stat, self.embellishment_first_value * self.current_stacks)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat(self.highest_stat, -self.embellishment_first_value * self.current_stacks)
+        
+
+class SpymastersWebStacks(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Spymaster's Web Stacks", 10000, base_duration=10000, current_stacks=1, max_stacks=40)   
+        trinket_effect = caster.trinkets["Spymaster's Web"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*?(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.spell_power += caster.get_effective_spell_power(self.trinket_first_value * self.current_stacks)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(self.trinket_first_value * self.current_stacks)
+    
+
+class SpymastersWebBuff(Buff):
+        
+    def __init__(self, caster):
+        super().__init__("Spymaster's Web", 20, base_duration=20)   
+        trinket_effect = caster.trinkets["Spymaster's Web"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_second_value = trinket_values[1]
+        self.stack_count = 0
+        
+    def apply_effect(self, caster, current_time=None):
+        self.stack_count = caster.active_auras["Spymaster's Web Stacks"].current_stacks
+        
+        caster.spell_power += caster.get_effective_spell_power(self.trinket_second_value * self.stack_count)
+        
+        caster.active_auras["Spymaster's Web Stacks"].remove_effect(caster)
+        del caster.active_auras["Spymaster's Web Stacks"]
+        update_self_buff_data(caster.self_buff_breakdown, "Spymaster's Web Stacks", current_time, "expired")
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(self.trinket_second_value * self.stack_count)
+        self.stack_count = 0

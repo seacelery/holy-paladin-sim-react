@@ -8,12 +8,10 @@ from ..classes.auras_buffs import HolyBulwarkBuff, SacredWeaponBuff
 
 class GlimmerOfLightSpell(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1.6416 * 0.8
+    SPELL_POWER_COEFFICIENT = 1.1
     
     def __init__(self, caster):
         super().__init__("Glimmer of Light")
-        if caster.ptr:
-            self.SPELL_POWER_COEFFICIENT = 1.1
         
     def cast_healing_spell(self):
         pass
@@ -21,7 +19,7 @@ class GlimmerOfLightSpell(Spell):
     
 class JudgmentOfLightSpell(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.175 * 0.8
+    SPELL_POWER_COEFFICIENT = 0.175 * 0.9
     
     def __init__(self, caster):
         super().__init__("Judgment of Light")
@@ -37,7 +35,7 @@ class GreaterJudgmentSpell(Spell):
         
 class TouchOfLight(Spell):
     
-    SPELL_POWER_COEFFICIENT = 0.45 * 5
+    SPELL_POWER_COEFFICIENT = 0.45 * 5 * 0.88
     BASE_PPM = 3
     
     def __init__(self, caster):
@@ -67,8 +65,8 @@ class RiteOfAdjurationSpell(Spell):
 
 class SacredWeapon(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1 * 1.04 * 1.5
-    BASE_PPM = 10
+    SPELL_POWER_COEFFICIENT = 1 * 1.04 * 0.8
+    BASE_PPM = 8
     TARGET_COUNT = 5
     
     def __init__(self, caster, count):
@@ -342,7 +340,7 @@ class GruesomeSyringe(Spell):
         trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
         
         # heal
-        self.trinket_first_value = trinket_values[1]
+        self.trinket_first_value = trinket_values[0]
         
     def apply_flat_healing(self, caster, target, current_time, is_heal):
         gruesome_syringe_heal, gruesome_syringe_crit = GruesomeSyringe(caster).calculate_heal(caster)

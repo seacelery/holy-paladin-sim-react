@@ -656,7 +656,7 @@ const templateSpecTalents = {
         },
         "Truth Prevails": {
             "ranks": {
-                "current rank": 1,
+                "current rank": 0,
                 "max rank": 1
             }
         }

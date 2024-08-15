@@ -28,10 +28,10 @@ const specTalentsLive = [
     "", "", "", "", "Holy Shock", "", "", "", "",
     "", "", "", "Extrication", "", "Light of Dawn", "", "", "", 
     "", "", "Light's Conviction", "", "Aura Mastery", "", "Beacon of the Lightbringer", "", "", 
-    "", "Moment of Compassion/Resplendent Light", "", "Tirion's Devotion", "", "Unending Light", "", "Awestruck/Holy Infusion", "", 
-    "Divine Revelations", "", "Holy Prism/Barrier of Faith", "", "Unwavering Spirit/Protection of Tyr", "", "Imbued Infusions", "", "Light of the Martyr", 
+    "", "Tower of Radiance", "", "Tirion's Devotion", "", "Unending Light", "", "Awestruck", "", 
+    "Moment of Compassion/Resplendent Light", "", "Holy Prism/Barrier of Faith", "", "Unwavering Spirit/Protection of Tyr", "", "Imbued Infusions", "", "Light of the Martyr", 
     "", "Righteous Judgment", "Divine Favor/Hand of Divinity", "Saved by the Light", "", "Light's Protection", "Overflowing Light", "Shining Righteousness", "", 
-    "Liberation", "", "Commanding Light", "Glistening Radiance", "Breaking Dawn", "Tower of Radiance", "Divine Glimpse", "", "Bestow Light", 
+    "Liberation", "", "Commanding Light", "Glistening Radiance", "Breaking Dawn", "Divine Revelations", "Divine Glimpse", "", "Bestow Light", 
     "", "Beacon of Faith/Beacon of Virtue", "Empyrean Legacy", "Veneration", "", "Avenging Wrath: Might/Avenging Crusader", "Power of the Silver Hand", "Tyr's Deliverance", "", 
     "Truth Prevails", "", "Crusader's Might", "", "Sanctified Wrath/Awakening", "", "Reclamation", "", "Relentless Inquisitor", 
     "", "Rising Sunlight", "", "Glorious Dawn", "Merciful Auras/Blessing of Summer", "Inflorescence of the Sunwell", "", "Boundless Salvation", "", 
@@ -41,10 +41,10 @@ const specTalentsPTR = [
     "", "", "", "", "Holy Shock", "", "", "", "",
     "", "", "", "Extrication", "", "Light of Dawn", "", "", "", 
     "", "", "Light's Conviction", "", "Aura Mastery", "", "Beacon of the Lightbringer", "", "", 
-    "", "Moment of Compassion/Resplendent Light", "", "Tirion's Devotion", "", "Unending Light", "", "Awestruck/Holy Infusion", "", 
-    "Divine Revelations", "", "Holy Prism/Barrier of Faith", "", "Unwavering Spirit/Protection of Tyr", "", "Imbued Infusions", "", "Light of the Martyr", 
+    "", "Tower of Radiance", "", "Tirion's Devotion", "", "Unending Light", "", "Awestruck", "", 
+    "Moment of Compassion/Resplendent Light", "", "Holy Prism/Barrier of Faith", "", "Unwavering Spirit/Protection of Tyr", "", "Imbued Infusions", "", "Light of the Martyr", 
     "", "Righteous Judgment", "Divine Favor/Hand of Divinity", "Saved by the Light", "", "Light's Protection", "Overflowing Light", "Shining Righteousness", "", 
-    "Liberation", "", "Commanding Light", "Glistening Radiance", "Breaking Dawn", "Tower of Radiance", "Divine Glimpse", "", "Bestow Light", 
+    "Liberation", "", "Commanding Light", "Glistening Radiance", "Breaking Dawn", "Divine Revelations", "Divine Glimpse", "", "Bestow Light", 
     "", "Beacon of Faith/Beacon of Virtue", "Empyrean Legacy", "Veneration", "", "Avenging Wrath: Might/Avenging Crusader", "Power of the Silver Hand", "Tyr's Deliverance", "", 
     "Truth Prevails", "", "Crusader's Might", "", "Sanctified Wrath/Awakening", "", "Reclamation", "", "Relentless Inquisitor", 
     "", "Rising Sunlight", "", "Glorious Dawn", "Merciful Auras/Blessing of Summer", "Inflorescence of the Sunwell", "", "Boundless Salvation", "", 
@@ -206,15 +206,14 @@ let baseSpecTalentsLive = {
         "Beacon of the Lightbringer": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row4": {
-        "Moment of Compassion": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Resplendent Light": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Tower of Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
         "Tirion's Devotion": {"ranks": {"current rank": 0, "max rank": 1}},
         "Unending Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Awestruck": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Holy Infusion": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row5": {
-        "Divine Revelations": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Moment of Compassion": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Resplendent Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Holy Prism": {"ranks": {"current rank": 0, "max rank": 1}},
         "Barrier of Faith": {"ranks": {"current rank": 0, "max rank": 1}},
         "Unwavering Spirit": {"ranks": {"current rank": 0, "max rank": 1}},
@@ -236,7 +235,7 @@ let baseSpecTalentsLive = {
         "Commanding Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Glistening Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
         "Breaking Dawn": {"ranks": {"current rank": 0, "max rank": 2}},
-        "Tower of Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Revelations": {"ranks": {"current rank": 0, "max rank": 1}},
         "Divine Glimpse": {"ranks": {"current rank": 0, "max rank": 1}},
         "Bestow Light": {"ranks": {"current rank": 0, "max rank": 1}}
     },
@@ -282,15 +281,14 @@ let baseSpecTalentsPTR = {
         "Beacon of the Lightbringer": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row4": {
-        "Moment of Compassion": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Resplendent Light": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Tower of Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
         "Tirion's Devotion": {"ranks": {"current rank": 0, "max rank": 1}},
         "Unending Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Awestruck": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Holy Infusion": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row5": {
-        "Divine Revelations": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Moment of Compassion": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Resplendent Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Holy Prism": {"ranks": {"current rank": 0, "max rank": 1}},
         "Barrier of Faith": {"ranks": {"current rank": 0, "max rank": 1}},
         "Unwavering Spirit": {"ranks": {"current rank": 0, "max rank": 1}},
@@ -312,7 +310,7 @@ let baseSpecTalentsPTR = {
         "Commanding Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Glistening Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
         "Breaking Dawn": {"ranks": {"current rank": 0, "max rank": 2}},
-        "Tower of Radiance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Revelations": {"ranks": {"current rank": 0, "max rank": 1}},
         "Divine Glimpse": {"ranks": {"current rank": 0, "max rank": 1}},
         "Bestow Light": {"ranks": {"current rank": 0, "max rank": 1}}
     },
@@ -397,16 +395,16 @@ const classTalentsArrowsPTR = {
 const specTalentsArrowsLive = {
     "down": [
         "Glistening Radiance", "Imbued Infusions", "Saved by the Light", "Holy Prism/Barrier of Faith",
-        "Power of the Silver Hand", "Light's Protection", "Overflowing Light", "Divine Favor/Hand of Divinity", "Tower of Radiance",
+        "Power of the Silver Hand", "Light's Protection", "Overflowing Light", "Divine Favor/Hand of Divinity", "Divine Revelations",
         "Reclamation/Barrier of Faith", "Daybreak", "Sanctified Wrath/Awakening", "Commanding Light", "Empyrean Legacy", "Divine Glimpse"
     ],
     "downLong": [
-        "Light's Conviction", "Aura Mastery", "Beacon of the Lightbringer", "Moment of Compassion/Resplendent Light", "Tirion's Devotion",
-        "Unending Light", "Awestruck/Holy Infusion", "Divine Revelations", "Light of the Martyr", "Shining Righteousness",
+        "Light's Conviction", "Aura Mastery", "Beacon of the Lightbringer", "Tower of Radiance", "Tirion's Devotion",
+        "Unending Light", "Awestruck", "Moment of Compassion/Resplendent Light", "Light of the Martyr", "Shining Righteousness",
         "Tyr's Deliverance", "Beacon of Faith/Beacon of Virtue",
     ],
     "left": [
-        "Holy Shock", "Extrication", "Light of Dawn", "Light's Conviction", "Beacon of the Lightbringer", "Moment of Compassion/Resplendent Light",
+        "Holy Shock", "Extrication", "Light of Dawn", "Light's Conviction", "Beacon of the Lightbringer", "Tower of Radiance",
         "Unwavering Spirit/Protection of Tyr", "Imbued Infusions", "Righteous Judgment","Light's Hammer/Holy Prism",
         "Light's Protection", "Shining Righteousness", "Commanding Light", "Breaking Dawn", "Divine Glimpse", "Bestow Light",
         "Veneration", "Avenging Wrath: Might/Avenging Crusader", "Reclamation/Barrier of Faith", "Maraad's Dying Breath", 
@@ -414,7 +412,7 @@ const specTalentsArrowsLive = {
         "Reclamation"
     ],
     "right": [
-        "Holy Shock", "Extrication", "Light of Dawn", "Light's Conviction", "Beacon of the Lightbringer", "Awestruck/Holy Infusion",
+        "Holy Shock", "Extrication", "Light of Dawn", "Light's Conviction", "Beacon of the Lightbringer", "Awestruck",
         "Unwavering Spirit/Protection of Tyr", "Imbued Infusions", "Liberation", "Light's Hammer/Holy Prism",
         "Light's Protection", "Righteous Judgment", "Commanding Light", "Breaking Dawn", "Divine Glimpse", "Beacon of Faith/Beacon of Virtue",
         "Veneration", "Avenging Wrath: Might/Avenging Crusader", "Crusader's Might", "Sanctified Wrath/Awakening", "Tyr's Deliverance",
@@ -425,16 +423,16 @@ const specTalentsArrowsLive = {
 const specTalentsArrowsPTR = {
     "down": [
         "Glistening Radiance", "Imbued Infusions", "Saved by the Light", "Holy Prism/Barrier of Faith",
-        "Power of the Silver Hand", "Light's Protection", "Overflowing Light", "Divine Favor/Hand of Divinity", "Tower of Radiance",
+        "Power of the Silver Hand", "Light's Protection", "Overflowing Light", "Divine Favor/Hand of Divinity", "Divine Revelations",
         "Reclamation/Barrier of Faith", "Daybreak", "Sanctified Wrath/Awakening", "Commanding Light", "Empyrean Legacy", "Divine Glimpse"
     ],
     "downLong": [
-        "Light's Conviction", "Aura Mastery", "Beacon of the Lightbringer", "Moment of Compassion/Resplendent Light", "Tirion's Devotion",
-        "Unending Light", "Awestruck/Holy Infusion", "Divine Revelations", "Light of the Martyr", "Shining Righteousness",
+        "Light's Conviction", "Aura Mastery", "Beacon of the Lightbringer", "Tower of Radiance", "Tirion's Devotion",
+        "Unending Light", "Awestruck", "Moment of Compassion/Resplendent Light", "Light of the Martyr", "Shining Righteousness",
         "Tyr's Deliverance", "Beacon of Faith/Beacon of Virtue",
     ],
     "left": [
-        "Holy Shock", "Extrication", "Light of Dawn", "Light's Conviction", "Beacon of the Lightbringer", "Moment of Compassion/Resplendent Light",
+        "Holy Shock", "Extrication", "Light of Dawn", "Light's Conviction", "Beacon of the Lightbringer", "Tower of Radiance",
         "Unwavering Spirit/Protection of Tyr", "Imbued Infusions", "Righteous Judgment","Light's Hammer/Holy Prism",
         "Light's Protection", "Shining Righteousness", "Commanding Light", "Breaking Dawn", "Divine Glimpse", "Bestow Light",
         "Veneration", "Avenging Wrath: Might/Avenging Crusader", "Reclamation/Barrier of Faith", "Maraad's Dying Breath", 
@@ -442,7 +440,7 @@ const specTalentsArrowsPTR = {
         "Reclamation"
     ],
     "right": [
-        "Holy Shock", "Extrication", "Light of Dawn", "Light's Conviction", "Beacon of the Lightbringer", "Awestruck/Holy Infusion",
+        "Holy Shock", "Extrication", "Light of Dawn", "Light's Conviction", "Beacon of the Lightbringer", "Awestruck",
         "Unwavering Spirit/Protection of Tyr", "Imbued Infusions", "Liberation", "Light's Hammer/Holy Prism",
         "Light's Protection", "Righteous Judgment", "Commanding Light", "Breaking Dawn", "Divine Glimpse", "Beacon of Faith/Beacon of Virtue",
         "Veneration", "Avenging Wrath: Might/Avenging Crusader", "Crusader's Might", "Sanctified Wrath/Awakening", "Tyr's Deliverance",

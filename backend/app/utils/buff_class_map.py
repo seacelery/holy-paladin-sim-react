@@ -8,7 +8,8 @@ from ..classes.auras_buffs import (
                                    DreamtendersCharm, IcedPhialOfCorruptingRage, ManaSpringTotem, SymbolOfHope, MagazineOfHealingDarts,
                                    BronzedGripWrappings, ManaTideTotem, FlaskOfSavingGraces, FlaskOfTemperedAggression, FlaskOfAlchemicalChaos,
                                    FlaskOfTemperedMastery, FlaskOfTemperedSwiftness, FlaskOfTemperedVersatility, CrystallizedAugmentRune,
-                                   AlgariManaOil, OilOfBeledarsGrace, Skyfury
+                                   AlgariManaOil, OilOfBeledarsGrace, Skyfury, DawnthreadLining, DuskthreadLining, PrismaticNullStone,
+                                   WrithingArmorBanding, EnergyDistributionBeacon, BlessedWeaponGrip
                                   )
 
 buff_class_map = {
@@ -74,4 +75,11 @@ buff_class_map = {
     "Elemental Lariat": ElementalLariat,
     "Allied Chestplate of Generosity": AlliedChestplateOfGenerosity,
     "Allied Wristgaurds of Companionship": AlliedWristguardOfCompanionship,
+    
+    "Dawnthread Lining": DawnthreadLining,
+    "Duskthread Lining": DuskthreadLining,
+    "Prismatic Null Stone": PrismaticNullStone,
+    "Writhing Armor Banding": WrithingArmorBanding,
+    "Energy Distribution Beacon": EnergyDistributionBeacon,
+    "Blessed Weapon Grip": BlessedWeaponGrip
 }

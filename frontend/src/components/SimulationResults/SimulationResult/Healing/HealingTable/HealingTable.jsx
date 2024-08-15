@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import "./HealingTable.scss";
 import TableCell from "./TableCell/TableCell";
 import { healingHeaders, excludedSpells } from "../../../../../data/breakdown-objects";
@@ -6,6 +6,8 @@ import { formatFixedNumber, formatThousands, formatThousandsWithoutRounding, for
 import { spellToIconsMap } from "../../../../../utils/spell-to-icons-map";
 
 const HealingTable = ({ simulationResult }) => {
+    const [rowsExpanded, setRowsExpanded] = useState([]);
+
     const abilityBreakdown = simulationResult.results.ability_breakdown;
     const sortedAbilityBreakdown = sortAbilityBreakdown(abilityBreakdown);
     const encounterLength = simulationResult.simulation_details.encounter_length;
@@ -29,7 +31,7 @@ const HealingTable = ({ simulationResult }) => {
 
                     return (
                         <Fragment key={rowIndex}>
-                            <TableCell type="body" style={{ color: "var(--holy-font)", justifyContent: "left" }} subSpells={spellData.sub_spells}>
+                            <TableCell index={rowIndex} type="body" style={{ color: "var(--holy-font)", justifyContent: "left" }} subSpells={spellData.sub_spells} rowsExpanded={rowsExpanded} setRowsExpanded={setRowsExpanded}>
                                 <img src={spellToIconsMap[spellName]} alt={spellName} className="table-spell-icon" />
                                 <span style={{ fontWeight: 300 }}>{spellName}</span>
                             </TableCell>

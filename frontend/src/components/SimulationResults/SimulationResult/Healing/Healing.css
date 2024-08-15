@@ -1,7 +1,26 @@
 .breakdown-container {
   margin: 0 auto 0rem auto;
-  display: none;
   width: 100%;
   overflow: hidden;
   color: var(--light-font-colour);
+  margin-bottom: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 3px;
+  border-top-left-radius: 0px;
+  border-right: 1px solid var(--border-colour-3);
+  border-left: 1px solid var(--border-colour-3);
+  border-bottom: 1px solid var(--border-colour-3);
+  padding: 10px;
+  min-width: 80px;
+  border-top: 1px solid var(--border-colour-3);
+  border-right: 1px solid var(--border-colour-3);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--light-font-colour);
+  background-color: var(--panel-colour-background);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }/*# sourceMappingURL=Healing.css.map */

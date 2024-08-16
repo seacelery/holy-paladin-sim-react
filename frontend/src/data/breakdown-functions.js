@@ -25,6 +25,73 @@ const sortAbilityBreakdown = (abilityBreakdown) => {
     return Object.fromEntries(array);
 };
 
+const sortBreakdownByHeader = (breakdown, header, sortDirection) => {
+    let sortFunction;
+    
+    switch (header) {
+        case "Spell Name":
+            sortFunction = (a, b) => b[0].localeCompare(a[0]);
+            break;
+        case "%":
+            sortFunction = (a, b) => a[1].total_healing - b[1].total_healing;
+            break;
+        case "Healing":
+            sortFunction = (a, b) => a[1].total_healing - b[1].total_healing;
+            break;
+        case "HPS":
+            sortFunction = (a, b) => a[1].total_healing - b[1].total_healing;
+            break;
+        case "Casts":
+            sortFunction = (a, b) => a[1].casts - b[1].casts;
+            break;
+        case "CPM":
+            sortFunction = (a, b) => a[1].casts - b[1].casts;
+            break;
+        case "Average":
+            sortFunction = (a, b) => a[1].total_healing - b[1].total_healing;
+            break;
+        case "Hits":
+            sortFunction = (a, b) => a[1].hits - b[1].hits;
+            break;
+        case "Crit %":
+            sortFunction = (a, b) => a[1].crit_percent - b[1].crit_percent;
+            break;
+        case "Mana Spent":
+            sortFunction = (a, b) => a[1].mana_spent - b[1].mana_spent;
+            break;
+        case "Holy Power":
+            sortFunction = (a, b) => {
+                const aGained = a[1].holy_power_gained || 0;
+                const aSpent = a[1].holy_power_spent || 0;
+                const bGained = b[1].holy_power_gained || 0;
+                const bSpent = b[1].holy_power_spent || 0;
+
+                if (aGained !== bGained) {
+                    return aGained - bGained;
+                };
+
+                if (aSpent !== bSpent) {
+                    return aSpent - bSpent;
+                };
+
+                return 0;
+            };
+            break;
+        case "OH %":
+            sortFunction = (a, b) => a[1].overhealing - b[1].overhealing;
+            break;
+        default:
+            sortFunction = (a, b) => 0;
+    };
+
+    return Object.fromEntries(
+        Object.entries(breakdown).sort((a, b) => {
+            const result = sortFunction(a, b);
+            return sortDirection === "ascending" ? result : -result;
+        })
+    );
+};
+
 const aggregateOverallHealingData = (abilityBreakdown, encounterLength) => {
     const overallData = {
         healing: 0,
@@ -50,6 +117,30 @@ const aggregateOverallHealingData = (abilityBreakdown, encounterLength) => {
     };
 
     return overallData;
+};
+
+const formatHealingPercent = (spellName, healing, overallHealing) => {
+    if (excludedSpellsOnlyResourcesAndCasts.includes(spellName)) {
+        return "";
+    } else {
+        return formatPercentage(healing / overallHealing)
+    };
+};
+
+const formatHealing = (spellName, healing) => {
+    if (excludedSpellsOnlyResourcesAndCasts.includes(spellName)) {
+        return "";
+    } else {
+        return formatThousands(healing);
+    };
+};
+
+const formatHPS = (spellName, healing, encounterLength) => {
+    if (excludedSpellsOnlyResourcesAndCasts.includes(spellName)) {
+        return "";
+    } else {
+        return formatThousands(healing / encounterLength);
+    };
 };
 
 const formatCasts = (spellName, casts) => {
@@ -124,7 +215,11 @@ export {
     formatThousandsWithoutRounding,
     formatPercentage,
     sortAbilityBreakdown,
+    sortBreakdownByHeader,
     aggregateOverallHealingData,
+    formatHealingPercent,
+    formatHealing,
+    formatHPS,
     formatCasts,
     formatAverage,
     formatCritPercent,

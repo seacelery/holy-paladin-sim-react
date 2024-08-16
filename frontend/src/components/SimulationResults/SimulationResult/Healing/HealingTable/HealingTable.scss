@@ -42,6 +42,7 @@
         display: flex;
         align-items: center;
         justify-content: right;
+        position: relative;
         padding: .5rem .5rem .5rem .5rem;
         min-width: 6.5rem;
         height: 3.5rem;
@@ -81,4 +82,16 @@
     height: 3.0rem;
     border: 0.15rem solid var(--border-colour-3);
     margin-right: 0.6rem;
+}
+
+.table-header-arrow-container {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0.6rem;
+    color: var(--subrow-arrow-colour);
+    cursor: pointer;
 }

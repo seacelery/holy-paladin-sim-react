@@ -31,13 +31,13 @@ const HealingTable = ({ simulationResult }) => {
 
     return <>
         <div className="table-container">
-            <div className="table-header-grid">
+            <div className="table-header-grid healing-table">
                 {healingHeaders.map((header, index) => {
                     return <TableCell key={`header-${index}`} type="header" rowsExpanded={rowsExpanded} setRowsExpanded={setRowsExpanded} breakdown={breakdown} handleHeaderClick={handleHeaderClick} sortHeader={sortHeader} sortDirection={sortDirection}>{header}</TableCell>
                 })}
             </div>
 
-            <div className="table-body-grid">
+            <div className="table-body-grid healing-table">
                 {Object.keys(breakdown).map((spellName, rowIndex) => {
                     const spellData = breakdown[spellName];
 
@@ -47,7 +47,7 @@ const HealingTable = ({ simulationResult }) => {
 
                     return (
                         <Fragment key={`spell-row-${rowIndex}`}>
-                            <TableCell key={`spell-${rowIndex}-name`} index={rowIndex} type="body" style={{ color: "var(--holy-font)", justifyContent: "left" }} subSpells={spellData.sub_spells} rowsExpanded={rowsExpanded} setRowsExpanded={setRowsExpanded}>
+                            <TableCell key={`spell-${rowIndex}-name`} index={rowIndex} type="body" style={{ color: "var(--holy-font)", justifyContent: "left" }} subSpells={spellData.sub_spells} sourceSpells={spellData.source_spells} rowsExpanded={rowsExpanded} setRowsExpanded={setRowsExpanded}>
                                 <img src={spellToIconsMap[spellName]} className="table-spell-icon" alt={spellName} />
                                 <span style={{ fontWeight: 300 }}>{spellName}</span>
                             </TableCell>
@@ -68,7 +68,7 @@ const HealingTable = ({ simulationResult }) => {
 
                                 if (excludedSpells.includes(subSpellName)) {
                                     return null;
-                                }
+                                };
 
                                 return (
                                     <Fragment key={`subspell-row-${rowIndex}-${subRowIndex}`}>
@@ -90,12 +90,40 @@ const HealingTable = ({ simulationResult }) => {
                                     </Fragment>
                                 );
                             })}
+
+                            {rowsExpanded.includes(rowIndex) && spellData.source_spells && Object.keys(spellData.source_spells).map((sourceSpellName, subRowIndex) => {
+                                const sourceSpellData = spellData.source_spells[sourceSpellName];
+
+                                if (excludedSpells.includes(sourceSpellName)) {
+                                    return null;
+                                };
+
+                                return (
+                                    <Fragment key={`sourcespell-row-${rowIndex}-${subRowIndex}`}>
+                                        <TableCell key={`sourcespell-${rowIndex}-${subRowIndex}-name`} type="body" style={{ color: "var(--holy-font)", justifyContent: "left" }} customClassName="subrow">
+                                            <img src={spellToIconsMap[sourceSpellName]} className="table-spell-icon" style={{ marginLeft: "3rem" }} alt={sourceSpellName} />
+                                            <span style={{ fontWeight: 300 }}>{sourceSpellName}</span>
+                                        </TableCell>
+                                        <TableCell key={`sourcespell-${rowIndex}-${subRowIndex}-percent`} type="body">{formatPercentage(sourceSpellData.healing / overallData.healing)}</TableCell>
+                                        <TableCell key={`sourcespell-${rowIndex}-${subRowIndex}-healing`} type="body" style={{ color: sourceSpellData.healing >= 0 ? "var(--healing-font)" : "var(--red-font-hover)" }}>{formatThousands(sourceSpellData.healing)}</TableCell>
+                                        <TableCell key={`sourcespell-${rowIndex}-${subRowIndex}-hps`} type="body" style={{ color: sourceSpellData.healing >= 0 ? "var(--healing-font)" : "var(--red-font-hover)" }}>{formatThousands(sourceSpellData.healing / encounterLength)}</TableCell>
+                                        <TableCell key={`sourcespell-${rowIndex}-${subRowIndex}-casts`} type="body">{}</TableCell>
+                                        <TableCell key={`sourcespell-${rowIndex}-${subRowIndex}-average`} type="body" style={{ color: sourceSpellData.healing >= 0 ? "var(--healing-font)" : "var(--red-font-hover)" }}>{formatAverage(sourceSpellName, sourceSpellData.healing, sourceSpellData.hits, null)}</TableCell>
+                                        <TableCell key={`sourcespell-${rowIndex}-${subRowIndex}-hits`} type="body">{sourceSpellData.hits > 0 ? formatFixedNumber(sourceSpellData.hits, 1) : ""}</TableCell>
+                                        <TableCell key={`sourcespell-${rowIndex}-${subRowIndex}-crit`} type="body"></TableCell>
+                                        <TableCell key={`sourcespell-${rowIndex}-${subRowIndex}-mana`} type="body"></TableCell>
+                                        <TableCell key={`sourcespell-${rowIndex}-${subRowIndex}-holy-power`} type="body"></TableCell>
+                                        <TableCell key={`sourcespell-${rowIndex}-${subRowIndex}-cpm`} type="body"></TableCell>
+                                        <TableCell key={`sourcespell-${rowIndex}-${subRowIndex}-overhealing`} type="body"></TableCell>
+                                    </Fragment>
+                                );
+                            })}
                         </Fragment>
                     );
                 })}
             </div>
 
-            <div className="table-footer-grid">
+            <div className="table-footer-grid healing-table">
                 <TableCell type="footer" style={{ textAlign: "center" }}>Total</TableCell>
                 <TableCell type="footer">100%</TableCell>
                 <TableCell type="footer" style={{ color: overallData.healing >= 0 ? "var(--healing-font)" : "var(--red-font-hover)" }}>{formatThousands(overallData.healing)}</TableCell>

@@ -1,0 +1,18 @@
+.graph-tooltip {
+    z-index: 10000;
+    pointer-events: none;
+
+    border: 1px solid var(--border-colour-3);
+
+    text-align: left;
+    background-color: var(--panel-colour-2) !important;
+    font-size: 1.4rem;
+}
+
+.tooltip-healing {
+    color: var(--healing-font);
+}
+
+.tooltip-mana {
+    color: var(--mana);
+}

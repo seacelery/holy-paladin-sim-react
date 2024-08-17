@@ -1,5 +1,12 @@
 const healingHeaders = ["Spell Name", "%", "Healing", "HPS", "Casts", "Average", "Hits", "Crit %", "Mana Spent", "Holy Power", "CPM", "OH %"];
 
+const selfBuffHeaders = ["Buff Name", "Count", "Uptime", "Average Duration"];
+
+const targetBuffHeaders = ["Buff Name", "Count", "Uptime"];
+
+const manaHeaders = ["Spell Name", "Mana Gained", "Mana Spent"];
+const holyPowerHeaders = ["Spell Name", "Holy Power Gained", "Holy Power Wasted", "Holy Power Spent"];
+
 const excludedSpells = [
     "Reclamation (Holy Shock)", "Reclamation (Crusader Strike)", "Divine Revelations (Holy Light)", "Divine Revelations (Judgment)", 
     "Aerated Mana Potion", "Tirion's Devotion", "Source of Magic", "Mana Spring Totem", "Symbol of Hope", "Mana Tide Totem",
@@ -44,4 +51,12 @@ const excludedSpellsAverage = [
     "Dawnlight"
 ];
 
-export { healingHeaders, excludedSpells, excludedSpellsOnlyResourcesAndCasts, excludedSpellsCasts, excludedSpellsCastsAverageHits, excludedSpellsCrit, excludedSpellsAverage };
+const targetBuffsMap = {
+    "Eternal Flame (HoT)": "Eternal Flame",
+    "Tyr's Deliverance (target)": "Tyr's Deliverance",
+    "Dawnlight (HoT)": "Dawnlight",
+};
+
+const overlappingBuffs = ["Sureki Zealot's Insignia", "Solar Grace", "Ara-Kara Sacbrood"];
+
+export { healingHeaders, selfBuffHeaders, targetBuffHeaders, manaHeaders, holyPowerHeaders, excludedSpells, excludedSpellsOnlyResourcesAndCasts, excludedSpellsCasts, excludedSpellsCastsAverageHits, excludedSpellsCrit, excludedSpellsAverage, targetBuffsMap, overlappingBuffs };

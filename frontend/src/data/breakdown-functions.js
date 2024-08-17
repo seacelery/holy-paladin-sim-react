@@ -25,6 +25,13 @@ const sortAbilityBreakdown = (abilityBreakdown) => {
     return Object.fromEntries(array);
 };
 
+const sortBuffsBreakdown = (buffsBreakdown) => {
+    let array = Object.entries(buffsBreakdown);
+    array.sort((a, b) => b[1].uptime - a[1].uptime);
+
+    return Object.fromEntries(array);
+};
+
 const sortBreakdownByHeader = (breakdown, header, sortDirection) => {
     let sortFunction;
     
@@ -79,6 +86,15 @@ const sortBreakdownByHeader = (breakdown, header, sortDirection) => {
             break;
         case "OH %":
             sortFunction = (a, b) => a[1].overhealing - b[1].overhealing;
+            break;
+        case "Uptime":
+            sortFunction = (a, b) => a[1].uptime - b[1].uptime;
+            break;
+        case "Count":
+            sortFunction = (a, b) => a[1].count - b[1].count;
+            break;
+        case "Average Duration":
+            sortFunction = (a, b) => a[1].average_duration - b[1].average_duration;
             break;
         default:
             sortFunction = (a, b) => 0;
@@ -154,7 +170,9 @@ const formatCasts = (spellName, casts) => {
 const formatAverage = (spellName, totalHealing, hits, casts) => {
     let average = "";
 
-    if (excludedSpellsAverage.includes(spellName)) {
+    if (!casts) {
+        average = formatThousands(totalHealing / hits);
+    } else if (excludedSpellsAverage.includes(spellName)) {
         average = "";
     } else if (excludedSpellsCasts.includes(spellName) || excludedSpellsCastsAverageHits.includes(spellName)) {
         average =  formatThousands(totalHealing / hits);
@@ -165,7 +183,7 @@ const formatAverage = (spellName, totalHealing, hits, casts) => {
     };
 
     if (average === "Infinity") {
-        average = 0;
+        average = "";
     };
 
     return average;
@@ -209,12 +227,56 @@ const formatOverhealing = (overhealing) => {
     };
 };
 
+const handleOverlappingBuffs = (buffName, breakdown) => {
+    let buffActive = false;
+    let buffsToConsolidate = [];
+    let newBreakdown = { ...breakdown };
+
+    for (let buff in newBreakdown) {
+        if (buff.includes(buffName)) {
+            buffActive = true;
+            buffsToConsolidate.push(buff);
+        };
+    };
+
+    if (buffActive) {
+        let uptime = 0;
+        let averageDuration = 0;
+        let totalDuration = 0;
+        let count = 0;
+
+        buffsToConsolidate.forEach(buff => {
+            const buffData = newBreakdown[buff];
+            uptime = buffData.uptime;
+            averageDuration += buffData.average_duration;
+            totalDuration += buffData.total_duration;
+            count += buffData.count;
+        });
+
+        averageDuration = averageDuration / buffsToConsolidate.length;
+
+        buffsToConsolidate.forEach(buff => {
+            delete newBreakdown[buff];
+        });
+
+        newBreakdown[buffName] = {
+            uptime: uptime,
+            average_duration: averageDuration,
+            total_duration: totalDuration,
+            count: count
+        };
+    };
+
+    return newBreakdown;
+};
+
 export {
     formatFixedNumber,
     formatThousands,
     formatThousandsWithoutRounding,
     formatPercentage,
     sortAbilityBreakdown,
+    sortBuffsBreakdown,
     sortBreakdownByHeader,
     aggregateOverallHealingData,
     formatHealingPercent,
@@ -227,4 +289,5 @@ export {
     formatHolyPower,
     formatCPM,
     formatOverhealing,
+    handleOverlappingBuffs
 };

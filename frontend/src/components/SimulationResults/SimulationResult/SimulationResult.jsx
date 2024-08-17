@@ -101,7 +101,7 @@ const SimulationResult = ({ simulationResult, setSimulationResults }) => {
                     <ResultNavbar activeTab={activeTab} setActiveTab={setActiveTab} />
                     <div className="result-content">
                         {activeTab === "Healing" && <Healing simulationResult={simulationResult} />}
-                        {activeTab === "Buffs" && <Buffs />}
+                        {activeTab === "Buffs" && <Buffs simulationResult={simulationResult} />}
                         {activeTab === "Resources" && <Resources />}
                         {activeTab === "Timeline" && <Timeline />}
                         {activeTab === "Cooldowns" && <Cooldowns />}

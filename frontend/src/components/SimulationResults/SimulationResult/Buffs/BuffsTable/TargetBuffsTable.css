@@ -1,0 +1,5 @@
+.target-buffs-table {
+  display: grid;
+  grid-template-rows: repeat(1, 1fr);
+  grid-template-columns: 415fr 101fr 125fr;
+}/*# sourceMappingURL=TargetBuffsTable.css.map */

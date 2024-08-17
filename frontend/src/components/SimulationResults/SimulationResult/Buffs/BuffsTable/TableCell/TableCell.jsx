@@ -5,7 +5,7 @@ import { FaCaretDown } from "react-icons/fa";
 import { FaCaretUp } from "react-icons/fa";
 import { excludedSpells } from "../../../../../../data/breakdown-objects";
 
-const TableCell = ({ index, type, style, children, subSpells, sourceSpells, rowsExpanded, setRowsExpanded, customClassName, breakdown, handleHeaderClick, sortHeader, sortDirection }) => {
+const TableCell = ({ index, type, style, children, subSpells, targets, rowsExpanded, setRowsExpanded, customClassName, breakdown, handleHeaderClick, sortHeader, sortDirection }) => {
     const handleSubspellArrowClick = () => {
         if (rowsExpanded.includes(index)) {
             setRowsExpanded(rowsExpanded.filter(row => row !== index));
@@ -21,11 +21,11 @@ const TableCell = ({ index, type, style, children, subSpells, sourceSpells, rows
         return Object.keys(subSpells).some(spell => !excludedSpells.includes(spell));
     };
 
-    const showSourceSpellArrow = () => {
-        if (!sourceSpells || Object.keys(sourceSpells).length === 0) {
+    const showTargetArrow = () => {
+        if (!targets || Object.keys(targets).length === 0) {
             return false;
         };
-        return Object.keys(sourceSpells).some(spell => !excludedSpells.includes(spell));
+        return Object.keys(targets).some(target => !excludedSpells.includes(target));
     };
 
     const handleHeaderArrowClick = (e) => {
@@ -57,7 +57,7 @@ const TableCell = ({ index, type, style, children, subSpells, sourceSpells, rows
                 {rowsExpanded.includes(index) ? <FaCaretDown className="table-subspell-arrow-down" /> : <FaCaretRight className="table-subspell-arrow-right" />}
             </div>
         )}
-        {showSourceSpellArrow() && (
+        {showTargetArrow() && (
             <div className="table-subspell-arrow-container" onClick={handleSubspellArrowClick}>
                 {rowsExpanded.includes(index) ? <FaCaretDown className="table-subspell-arrow-down" /> : <FaCaretRight className="table-subspell-arrow-right" />}
             </div>

@@ -48,10 +48,14 @@ const PriorityListItem = ({ index, text, priorityList, setSimulationParameters }
         });
     };
 
+    const iconSrc = textParts[0]?.trim().includes("Reset")
+        ? "https://wow.zamimg.com/images/wow/icons/large/trade_engineering.jpg"
+        : spellToIconsMap[textParts[0]?.trim()] || "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg";
+
     return <div className="priority-list-item-container" onMouseOver={() => setButtonsDisplayed(true)} onMouseOut={() => setButtonsDisplayed(false)} >
         <div className="priority-list-item-number priority-list-button">{index}</div>
         <div className="priority-list-item-icon-container">
-            <img className="priority-list-item-icon" src={spellToIconsMap[textParts[0]?.trim()] ? spellToIconsMap[textParts[0]?.trim()] : "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_questionmark.jpg"} alt="icon" />
+            <img className="priority-list-item-icon" src={iconSrc} alt="icon" />
         </div>
         <PriorityListAbility text={textParts[0].trim()} setTextParts={setTextParts} />
         <PriorityListCondition text={textParts[1]?.trim()} setTextParts={setTextParts} index={1} />

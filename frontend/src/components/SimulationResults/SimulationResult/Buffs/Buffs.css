@@ -34,6 +34,8 @@
   display: flex;
   margin-top: 1.5rem;
   border-left: 0.1rem solid var(--border-colour-3);
+  border-top-left-radius: 0.2rem;
+  border-top-right-radius: 0.2rem;
 }
 .buffs-graph-navbar .buffs-graph-tab {
   padding: 1rem;
@@ -56,6 +58,9 @@
 .buffs-graph-navbar .buffs-graph-tab.active {
   background-color: var(--panel-colour-4);
   text-shadow: 0.5px 0 0 var(--light-font-colour);
+}
+.buffs-graph-navbar .buffs-graph-tab:last-child {
+  border-top-right-radius: 0.2rem;
 }
 
 .buffs-graph-content {

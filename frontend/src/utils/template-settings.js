@@ -397,21 +397,9 @@ const templateSpecTalents = {
                 "max rank": 1
             }
         },
-        "Holy Infusion": {
+        "Tower of Radiance": {
             "ranks": {
                 "current rank": 0,
-                "max rank": 1
-            }
-        },
-        "Moment of Compassion": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
-        "Resplendent Light": {
-            "ranks": {
-                "current rank": 1,
                 "max rank": 1
             }
         },
@@ -429,6 +417,18 @@ const templateSpecTalents = {
         }
     },
     "row5": {
+        "Moment of Compassion": {
+            "ranks": {
+                "current rank": 0,
+                "max rank": 1
+            }
+        },
+        "Resplendent Light": {
+            "ranks": {
+                "current rank": 1,
+                "max rank": 1
+            }
+        },
         "Imbued Infusions": {
             "ranks": {
                 "current rank": 1,
@@ -453,12 +453,6 @@ const templateSpecTalents = {
                 "max rank": 1
             }
         },
-        "Divine Revelations": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
         "Barrier of Faith": {
             "ranks": {
                 "current rank": 0,
@@ -480,12 +474,6 @@ const templateSpecTalents = {
             }
         },
         "Hand of Divinity": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
-        "Blessed Focus": {
             "ranks": {
                 "current rank": 0,
                 "max rank": 1
@@ -523,6 +511,12 @@ const templateSpecTalents = {
         },
     },
     "row7": {
+        "Divine Revelations": {
+            "ranks": {
+                "current rank": 1,
+                "max rank": 1
+            }
+        },
         "Glistening Radiance": {
             "ranks": {
                 "current rank": 0,
@@ -550,12 +544,6 @@ const templateSpecTalents = {
         "Divine Glimpse": {
             "ranks": {
                 "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Tower of Radiance": {
-            "ranks": {
-                "current rank": 0,
                 "max rank": 1
             }
         },
@@ -636,12 +624,6 @@ const templateSpecTalents = {
                 "max rank": 1
             }
         },
-        "Daybreak": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
         "Reclamation": {
             "ranks": {
                 "current rank": 1,
@@ -671,6 +653,8 @@ const templateLightsmithTalents = {
                 "max rank": 1
             }
         },
+    },
+    "row2": {
         "Rite of Sanctification": {
             "ranks": {
                 "current rank": 0,
@@ -701,6 +685,8 @@ const templateLightsmithTalents = {
                 "max rank": 1
             }
         },
+    },
+    "row3": {
         "Laying Down Arms": {
             "ranks": {
                 "current rank": 0,
@@ -731,12 +717,8 @@ const templateLightsmithTalents = {
                 "max rank": 1
             }
         },
-        "Holy Shock": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
+    },
+    "row4": {
         "Shared Resolve": {
             "ranks": {
                 "current rank": 0,
@@ -749,6 +731,14 @@ const templateLightsmithTalents = {
                 "max rank": 1
             }
         },
+        "Hammer and Anvil": {
+            "ranks": {
+                "current rank": 0,
+                "max rank": 1
+            }
+        },
+    },
+    "row5": {
         "Blessing of the Forge": {
             "ranks": {
                 "current rank": 0,
@@ -766,6 +756,8 @@ const templateHeraldOfTheSunTalents = {
                 "max rank": 1
             }
         },
+    },
+    "row2": {
         "Morning Star": {
             "ranks": {
                 "current rank": 0,
@@ -790,6 +782,8 @@ const templateHeraldOfTheSunTalents = {
                 "max rank": 1
             }
         },
+    },
+    "row3": {
         "Illumine": {
             "ranks": {
                 "current rank": 0,
@@ -804,13 +798,13 @@ const templateHeraldOfTheSunTalents = {
         },
         "Blessing of An'she": {
             "ranks": {
-                "current rank": 1,
+                "current rank": 0,
                 "max rank": 1
             }
         },
         "Lingering Radiance": {
             "ranks": {
-                "current rank": 0,
+                "current rank": 1,
                 "max rank": 1
             }
         },
@@ -820,6 +814,8 @@ const templateHeraldOfTheSunTalents = {
                 "max rank": 1
             }
         },
+    },
+    "row4": {
         "Aurora": {
             "ranks": {
                 "current rank": 1,
@@ -838,6 +834,8 @@ const templateHeraldOfTheSunTalents = {
                 "max rank": 1
             }
         },
+    },
+    "row5": {
         "Sun's Avatar": {
             "ranks": {
                 "current rank": 1,

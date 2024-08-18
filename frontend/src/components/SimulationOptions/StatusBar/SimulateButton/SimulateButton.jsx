@@ -34,7 +34,6 @@ const SimulateButton = () => {
         const specTalents = encodeURIComponent(JSON.stringify(characterData.specTalents));
         const lightsmithTalents = encodeURIComponent(JSON.stringify(characterData.lightsmithTalents));
         const heraldOfTheSunTalents = encodeURIComponent(JSON.stringify(characterData.heraldOfTheSunTalents));
-        console.log(characterData.heraldOfTheSunTalents)
         const consumables = encodeURIComponent(JSON.stringify(characterData.consumables));
         const equipment = encodeURIComponent(JSON.stringify(characterData.equipment));
 

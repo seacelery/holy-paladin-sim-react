@@ -32,6 +32,35 @@ const sortBuffsBreakdown = (buffsBreakdown) => {
     return Object.fromEntries(array);
 };
 
+const sortManaBreakdown = (manaBreakdown) => {
+    let array = Object.entries(manaBreakdown);
+    array.sort((a, b) => b[1].mana_spent - a[1].mana_spent);
+    
+    return Object.fromEntries(array);
+};
+
+const sortHolyPowerBreakdown = (holyPowerBreakdown) => {
+    let array = Object.entries(holyPowerBreakdown);
+    array.sort((a, b) => {
+        const aGained = a[1].holy_power_gained || 0;
+        const aSpent = a[1].holy_power_spent || 0;
+        const bGained = b[1].holy_power_gained || 0;
+        const bSpent = b[1].holy_power_spent || 0;
+        
+        if (aGained !== bGained) {
+            return bGained - aGained;
+        };
+
+        if (aSpent !== bSpent) {
+            return aSpent - bSpent;
+        };
+
+        return 0;
+    });
+
+    return Object.fromEntries(array);
+};
+
 const sortBreakdownByHeader = (breakdown, header, sortDirection) => {
     let sortFunction;
     
@@ -66,7 +95,11 @@ const sortBreakdownByHeader = (breakdown, header, sortDirection) => {
         case "Mana Spent":
             sortFunction = (a, b) => a[1].mana_spent - b[1].mana_spent;
             break;
+        case "Mana Gained":
+            sortFunction = (a, b) => a[1].mana_gained - b[1].mana_gained;
+            break;
         case "Holy Power":
+            console.log("a")
             sortFunction = (a, b) => {
                 const aGained = a[1].holy_power_gained || 0;
                 const aSpent = a[1].holy_power_spent || 0;
@@ -83,6 +116,15 @@ const sortBreakdownByHeader = (breakdown, header, sortDirection) => {
 
                 return 0;
             };
+            break;
+        case "Holy Power Gained":
+            sortFunction = (a, b) => a[1].holy_power_gained - b[1].holy_power_gained;
+            break;
+        case "Holy Power Wasted":
+            sortFunction = (a, b) => a[1].holy_power_wasted - b[1].holy_power_wasted;
+            break;
+        case "Holy Power Spent":
+            sortFunction = (a, b) => a[1].holy_power_spent - b[1].holy_power_spent;
             break;
         case "OH %":
             sortFunction = (a, b) => a[1].overhealing - b[1].overhealing;
@@ -114,6 +156,10 @@ const aggregateOverallHealingData = (abilityBreakdown, encounterLength) => {
         HPS: 0,
         casts: 0,
         manaSpent: 0,
+        manaGained: 0,
+        holyPowerGained: 0,
+        holyPowerSpent: 0,
+        holyPowerWasted: 0,
         CPM: 0
     };
 
@@ -130,6 +176,10 @@ const aggregateOverallHealingData = (abilityBreakdown, encounterLength) => {
         overallData.casts += spellData.casts;
         overallData.manaSpent += spellData.mana_spent;
         overallData.CPM += spellData.casts / (encounterLength / 60);
+        overallData.manaGained += spellData.mana_gained || 0;
+        overallData.holyPowerGained += spellData.holy_power_gained || 0;
+        overallData.holyPowerSpent += spellData.holy_power_spent || 0;
+        overallData.holyPowerWasted += spellData.holy_power_wasted || 0;
     };
 
     return overallData;
@@ -205,12 +255,44 @@ const formatManaSpent = (manaSpent) => {
     };
 };
 
+const formatManaGained = (manaGained) => {
+    if (manaGained <= 0) {
+        return "";
+    } else {
+        return formatThousands(manaGained);
+    };
+};
+
 const formatHolyPower = (holyPowerGained, holyPowerSpent) => {
     if (holyPowerGained > 0) {
         return "+" + formatFixedNumber(holyPowerGained, 1);
     } else if (holyPowerSpent > 0) {
         return "-" + formatFixedNumber(holyPowerSpent, 1);
     } else if (holyPowerGained === holyPowerSpent) {
+        return "";
+    };
+};
+
+const formatHolyPowerGained = (holyPowerGained) => {
+    if (holyPowerGained > 0) {
+        return "+" + formatFixedNumber(holyPowerGained, 1);
+    } else {
+        return "";
+    };
+};
+
+const formatHolyPowerWasted = (holyPowerWasted) => {
+    if (holyPowerWasted > 0) {
+        return "-" + formatFixedNumber(holyPowerWasted, 1);
+    } else {
+        return "";
+    };
+};
+
+const formatHolyPowerSpent = (holyPowerSpent) => {
+    if (holyPowerSpent > 0) {
+        return "-" + formatFixedNumber(holyPowerSpent, 1);
+    } else {
         return "";
     };
 };
@@ -277,6 +359,8 @@ export {
     formatPercentage,
     sortAbilityBreakdown,
     sortBuffsBreakdown,
+    sortManaBreakdown,
+    sortHolyPowerBreakdown,
     sortBreakdownByHeader,
     aggregateOverallHealingData,
     formatHealingPercent,
@@ -286,7 +370,11 @@ export {
     formatAverage,
     formatCritPercent,
     formatManaSpent,
+    formatManaGained,
     formatHolyPower,
+    formatHolyPowerGained,
+    formatHolyPowerSpent,
+    formatHolyPowerWasted,
     formatCPM,
     formatOverhealing,
     handleOverlappingBuffs

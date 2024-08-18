@@ -1,0 +1,17 @@
+.resources-breakdown-container {
+    width: 49.5%;
+    overflow: hidden;
+    
+    background-color: var(--panel-colour-background);
+    color: var(--light-font-colour);
+    
+    font-size: 1.6rem;
+    font-weight: 300;
+    text-align: center;
+    
+    user-select: none;
+}
+
+.resources-breakdown-container:first-child {
+    margin-right: 1%;
+}

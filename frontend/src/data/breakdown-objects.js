@@ -51,12 +51,23 @@ const excludedSpellsAverage = [
     "Dawnlight"
 ];
 
+const selfBuffsMap = {
+    "Tyr's Deliverance (self)": "Tyr's Deliverance",
+};
+
 const targetBuffsMap = {
     "Eternal Flame (HoT)": "Eternal Flame",
     "Tyr's Deliverance (target)": "Tyr's Deliverance",
     "Dawnlight (HoT)": "Dawnlight",
 };
 
+const manaMap = {
+    "Divine Revelations (Judgment)": "Divine Revelations",
+    "Divine Revelations (Holy Light)": "Divine Revelations",
+    "Reclamation (Holy Shock)": "Reclamation",
+    "Reclamation (Crusader Strike)": "Reclamation",
+};
+
 const overlappingBuffs = ["Sureki Zealot's Insignia", "Solar Grace", "Ara-Kara Sacbrood"];
 
-export { healingHeaders, selfBuffHeaders, targetBuffHeaders, manaHeaders, holyPowerHeaders, excludedSpells, excludedSpellsOnlyResourcesAndCasts, excludedSpellsCasts, excludedSpellsCastsAverageHits, excludedSpellsCrit, excludedSpellsAverage, targetBuffsMap, overlappingBuffs };
+export { healingHeaders, selfBuffHeaders, targetBuffHeaders, manaHeaders, holyPowerHeaders, excludedSpells, excludedSpellsOnlyResourcesAndCasts, excludedSpellsCasts, excludedSpellsCastsAverageHits, excludedSpellsCrit, excludedSpellsAverage, selfBuffsMap, targetBuffsMap, overlappingBuffs, manaMap };

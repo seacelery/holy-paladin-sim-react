@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./SimulationResult.scss";
 import { FaSortDown } from "react-icons/fa";
 import { FaCaretRight } from "react-icons/fa";
@@ -24,6 +24,10 @@ const SimulationResult = ({ simulationResult, setSimulationResults }) => {
             prevState.filter((result) => result !== simulationResult)
         );
     };
+
+    useEffect(() => {
+        setActiveTab("Healing");
+    }, [simulationResult]);
 
     return (
         <div className="simulation-result">
@@ -102,11 +106,11 @@ const SimulationResult = ({ simulationResult, setSimulationResults }) => {
                     <div className="result-content">
                         {activeTab === "Healing" && <Healing simulationResult={simulationResult} />}
                         {activeTab === "Buffs" && <Buffs simulationResult={simulationResult} />}
-                        {activeTab === "Resources" && <Resources />}
-                        {activeTab === "Timeline" && <Timeline />}
-                        {activeTab === "Cooldowns" && <Cooldowns />}
-                        {activeTab === "Distribution" && <Distribution />}
-                        {activeTab === "Loadout" && <Loadout />}
+                        {activeTab === "Resources" && <Resources simulationResult={simulationResult} />}
+                        {activeTab === "Timeline" && <Timeline simulationResult={simulationResult} />}
+                        {activeTab === "Cooldowns" && <Cooldown simulationResult={simulationResult}s />}
+                        {activeTab === "Distribution" && <Distribution simulationResult={simulationResult} />}
+                        {activeTab === "Loadout" && <Loadout simulationResult={simulationResult} />}
                     </div>
                 </div>
             )}

@@ -1,0 +1,30 @@
+.table-subspell-arrow-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.6rem;
+  color: var(--subrow-arrow-colour);
+  cursor: pointer;
+}
+
+.subrow::before {
+  position: absolute;
+  left: 19px;
+  top: 0px;
+  height: 50%;
+  width: 15px;
+  content: "";
+  border-bottom: 1.5px solid var(--border-colour-3);
+  border-left: 1.5px solid var(--border-colour-3);
+}
+
+.table-sort-arrow-container {
+  position: absolute;
+  bottom: 0.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.6rem;
+  color: var(--sorting-arrow-colour);
+  cursor: pointer;
+}/*# sourceMappingURL=TableCell.css.map */

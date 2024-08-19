@@ -25,9 +25,9 @@ const SimulationResult = ({ simulationResult, setSimulationResults }) => {
         );
     };
 
-    useEffect(() => {
-        setActiveTab("Healing");
-    }, [simulationResult]);
+    // useEffect(() => {
+    //     setActiveTab("Healing");
+    // }, [simulationResult]);
 
     return (
         <div className="simulation-result">
@@ -108,7 +108,7 @@ const SimulationResult = ({ simulationResult, setSimulationResults }) => {
                         {activeTab === "Buffs" && <Buffs simulationResult={simulationResult} />}
                         {activeTab === "Resources" && <Resources simulationResult={simulationResult} />}
                         {activeTab === "Timeline" && <Timeline simulationResult={simulationResult} setSimulationResults={setSimulationResults} />}
-                        {activeTab === "Cooldowns" && <Cooldown simulationResult={simulationResult}s />}
+                        {activeTab === "Cooldowns" && <Cooldowns simulationResult={simulationResult}s />}
                         {activeTab === "Distribution" && <Distribution simulationResult={simulationResult} />}
                         {activeTab === "Loadout" && <Loadout simulationResult={simulationResult} />}
                     </div>

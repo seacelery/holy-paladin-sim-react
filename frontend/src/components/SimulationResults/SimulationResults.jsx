@@ -8,7 +8,7 @@ const SimulationResults = () => {
 
     return <div className="simulation-results">
         {simulationResults.map((result, index) => {
-            return <SimulationResult key={index} simulationResult={result} setSimulationResults={setSimulationResults} />;
+            return <SimulationResult key={result.id} simulationResult={result} setSimulationResults={setSimulationResults} />;
         })}
     </div>;
 };

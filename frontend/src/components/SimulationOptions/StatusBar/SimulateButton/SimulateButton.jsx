@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import "./SimulateButton.css";
+import { v4 as uuidv4 } from "uuid";
 import Button from "../../../Button/Button";
 import { SimulationParametersContext } from "../../../../context/SimulationParametersContext";
 import { CharacterDataContext } from "../../../../context/CharacterDataContext";
@@ -73,7 +74,12 @@ const SimulateButton = () => {
 
             consolidateOverlappingBuffs(simulationData.results.priority_breakdown);
 
-            setSimulationResults(prevData => [simulationData, ...prevData]);
+            const newSimulationResult = {
+                id: uuidv4(),
+                ...simulationData
+            };
+
+            setSimulationResults(prevResults => [newSimulationResult, ...prevResults]);
             setSimulating(false);
             // simulationProgressBarContainer.removeEventListener("click", handleSimulationCancel);
         })
@@ -91,7 +97,7 @@ const SimulateButton = () => {
 
     return <div className="simulate-button-container">
         <input className="simulation-name-text-input" defaultValue="Simulation 1"></input>
-        <Button className="simulate-button" grow={false} onClick={runSimulation}>Simulate</Button>
+        <Button className="simulate-button" grow={false} onClick={runSimulation} disabled={simulating}>Simulate</Button>
     </div>;
 };
 

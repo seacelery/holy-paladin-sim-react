@@ -69,5 +69,16 @@ const manaMap = {
 };
 
 const overlappingBuffs = ["Sureki Zealot's Insignia", "Solar Grace", "Ara-Kara Sacbrood"];
+const overlappingBuffsData = {
+    "Sureki Zealot's Insignia": {
+        "applied_duration": 12
+    },
+    "Solar Grace": {
+        "applied_duration": 12
+    },
+    "Ara-Kara Sacbrood": {
+        "applied_duration": 60
+    }
+};
 
-export { healingHeaders, selfBuffHeaders, targetBuffHeaders, manaHeaders, holyPowerHeaders, excludedSpells, excludedSpellsOnlyResourcesAndCasts, excludedSpellsCasts, excludedSpellsCastsAverageHits, excludedSpellsCrit, excludedSpellsAverage, selfBuffsMap, targetBuffsMap, overlappingBuffs, manaMap };
+export { healingHeaders, selfBuffHeaders, targetBuffHeaders, manaHeaders, holyPowerHeaders, excludedSpells, excludedSpellsOnlyResourcesAndCasts, excludedSpellsCasts, excludedSpellsCastsAverageHits, excludedSpellsCrit, excludedSpellsAverage, selfBuffsMap, targetBuffsMap, overlappingBuffs,overlappingBuffsData,  manaMap };

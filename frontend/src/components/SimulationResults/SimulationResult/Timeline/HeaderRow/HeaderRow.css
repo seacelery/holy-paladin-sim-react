@@ -1,0 +1,9 @@
+.timeline-header-cell {
+  padding: 1rem 0 1rem 0;
+  border-left: 0.1rem solid var(--border-colour-3);
+  border-bottom: 0.1rem solid var(--border-colour-3);
+}
+
+.timeline-header-cell:first-child {
+  border-left: none;
+}/*# sourceMappingURL=HeaderRow.css.map */

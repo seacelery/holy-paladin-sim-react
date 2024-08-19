@@ -1,4 +1,4 @@
-import { excludedSpellsCasts, excludedSpellsAverage, excludedSpellsCastsAverageHits, excludedSpellsCrit, excludedSpellsOnlyResourcesAndCasts } from "./breakdown-objects";
+import { excludedSpellsCasts, excludedSpellsAverage, excludedSpellsCastsAverageHits, excludedSpellsCrit, excludedSpellsOnlyResourcesAndCasts, overlappingBuffsData } from "./breakdown-objects";
 
 const formatFixedNumber = (number, decimalPlaces) => {
     return number.toFixed(decimalPlaces);
@@ -352,6 +352,58 @@ const handleOverlappingBuffs = (buffName, breakdown) => {
     return newBreakdown;
 };
 
+const formatPriorityTime = (seconds) => {
+    let minutes = Math.floor(seconds / 60);
+    let remainingSeconds = (seconds % 60).toFixed(2);
+
+    if (remainingSeconds === 60) {
+        minutes += 1;
+        remainingSeconds = 0;
+    };
+
+    if (remainingSeconds < 10) {
+        return `${minutes}:0${String(remainingSeconds).padStart(2, '0')}`;
+    } else if (remainingSeconds >= 10) {
+        return `${minutes}:${String(remainingSeconds).padStart(2, '0')}`;
+    };
+};
+
+const formatTime = (seconds) => {
+    let minutes = Math.floor(seconds / 60);
+    let remainingSeconds = Math.round(seconds % 60);
+
+    if (remainingSeconds === 60) {
+        minutes += 1;
+        remainingSeconds = 0;
+    };
+
+    return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
+};
+
+const consolidateOverlappingBuffs = (timelineData) => {
+    Object.keys(overlappingBuffsData).forEach(buff => {
+        for (const timestamp in timelineData) {
+            const playerAuras = timelineData[timestamp].player_active_auras;
+
+            let count = 0;
+            let highestDuration = 0;
+
+            for (let aura in playerAuras) {
+                if (aura.includes(buff)) {
+                    count += 1;
+                    if (playerAuras[aura].duration > highestDuration) {
+                        highestDuration = playerAuras[aura].duration;
+                    };
+                    delete playerAuras[aura];
+                };
+            };
+            if (highestDuration > 0) {
+                playerAuras[buff] = {applied_duration: overlappingBuffsData[buff].applied_duration, duration: highestDuration, stacks: count};
+            };
+        };
+    });
+};
+
 export {
     formatFixedNumber,
     formatThousands,
@@ -377,5 +429,8 @@ export {
     formatHolyPowerWasted,
     formatCPM,
     formatOverhealing,
-    handleOverlappingBuffs
+    handleOverlappingBuffs,
+    formatPriorityTime,
+    formatTime,
+    consolidateOverlappingBuffs
 };

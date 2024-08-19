@@ -1,0 +1,8 @@
+.timeline-player-auras-container {
+  display: flex;
+  max-width: 100%;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 10rem;
+}/*# sourceMappingURL=PlayerAuras.css.map */

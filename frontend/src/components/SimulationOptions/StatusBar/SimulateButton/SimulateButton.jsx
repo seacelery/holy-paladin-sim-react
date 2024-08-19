@@ -5,6 +5,8 @@ import { SimulationParametersContext } from "../../../../context/SimulationParam
 import { CharacterDataContext } from "../../../../context/CharacterDataContext";
 import { VersionContext } from "../../../../context/VersionContext";
 import { SimulationResultsContext } from "../../../../context/SimulationResultsContext";
+import { overlappingBuffsData } from "../../../../data/breakdown-objects";
+import { consolidateOverlappingBuffs } from "../../../../data/breakdown-functions";
 
 const SimulateButton = () => {
     const { simulationParameters } = useContext(SimulationParametersContext);
@@ -68,6 +70,8 @@ const SimulateButton = () => {
             //     createSimulationResults(simulationData);
             //     playCheckmarkAnimation();
             // };
+
+            consolidateOverlappingBuffs(simulationData.results.priority_breakdown);
 
             setSimulationResults(prevData => [simulationData, ...prevData]);
             setSimulating(false);

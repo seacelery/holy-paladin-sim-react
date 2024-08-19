@@ -1,21 +1,29 @@
 .timeline-grid-row {
   display: contents;
-  border-top: 0.1rem solid var(--border-colour-3);
-}
-
-.timeline-grid-row:first-child {
-  border-top: none;
 }
 
 .timeline-grid-cell {
   padding: 0.7rem 0.5rem 0.5rem 0.5rem;
-  border-top: 0.1rem solid var(--border-colour-3);
   border-left: 0.1rem solid var(--border-colour-3);
-  height: 100%;
+  position: relative;
 }
 
 .timeline-grid-cell:first-child {
   border-left: none;
+}
+
+.timeline-grid-cell::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.1rem;
+  background-color: var(--border-colour-3);
+}
+
+.timeline-grid-row:first-child .timeline-grid-cell::before {
+  display: none;
 }
 
 .timeline-resources-cell {
@@ -24,7 +32,7 @@
   align-items: center;
   justify-content: flex-start;
   gap: 0.5rem;
-  padding: 0.9rem 0 0.5rem 0;
+  padding: 1.7rem 0 0.5rem 0;
 }
 .timeline-resources-cell .timeline-mana-bar-container {
   position: relative;

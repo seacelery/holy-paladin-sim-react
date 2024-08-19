@@ -17,10 +17,8 @@ const GridRow = ({ time, timelineData, simulationResult }) => {
         <PlayerAuras playerAuras={timelineData.player_active_auras} />
         <TargetAuras targetAuras={timelineData.target_active_auras} />
         <Cooldowns cooldowns={timelineData.remaining_cooldowns} />
-
-        <div className="timeline-grid-cell"></div>
-
-        <div className="timeline-grid-cell"></div>
+        <Counts counts={timelineData.total_target_aura_counts} />
+        <Stats stats={timelineData.current_stats} />
     </div>;
 };
 

@@ -5,17 +5,24 @@
 
 .timeline-header-grid {
   background-color: var(--panel-colour-table);
+  width: calc(100% + 0.2rem);
+  position: relative;
+}
+.timeline-header-grid .timeline-header-cell:last-child {
+  width: calc(100% - 0.1rem);
+  border-right: 0.1rem solid var(--border-colour-3);
 }
 
 .timeline-body-grid {
   height: 100vh;
   overflow-y: scroll;
-  width: calc(100% + 0.9rem);
+  width: calc(100% + 1rem);
+  max-height: 919px;
 }
 
 .timeline-body-grid::-webkit-scrollbar-thumb {
-  border: 0.1rem solid var(--panel-colour-6);
-  border-left: 0.3rem solid var(--panel-colour-6);
+  border: 0.2rem solid var(--panel-colour-background);
+  border-left: 0.2rem solid var(--panel-colour-background);
   border-radius: 0.2rem;
   background: var(--border-colour-3);
 }

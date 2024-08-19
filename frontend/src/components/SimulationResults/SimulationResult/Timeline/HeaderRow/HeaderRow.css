@@ -1,4 +1,8 @@
 .timeline-header-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   padding: 1rem 0 1rem 0;
   border-left: 0.1rem solid var(--border-colour-3);
   border-bottom: 0.1rem solid var(--border-colour-3);
@@ -6,4 +10,21 @@
 
 .timeline-header-cell:first-child {
   border-left: none;
+}
+
+.timeline-player-auras-button, .timeline-cooldowns-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 2.5rem;
+  border: 1px solid var(--border-colour-3);
+  background-color: var(--panel-colour-3);
+  margin-left: 1rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.timeline-player-auras-button:hover, .timeline-cooldowns-button:hover {
+  background-color: var(--panel-colour-5);
 }/*# sourceMappingURL=HeaderRow.css.map */

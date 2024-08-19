@@ -1,0 +1,23 @@
+.filter-modal {
+  transform: translateY(10.5rem);
+  padding: 0.8rem;
+  z-index: 10000;
+  min-width: 30rem;
+  border: 0.1rem solid var(--border-colour-3);
+  border-radius: 0.3rem;
+  background-color: var(--panel-colour-2);
+  transition: opacity 0.1s ease-in-out;
+  pointer-events: none;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.filter-modal-icon {
+  margin: 0.25rem;
+  margin-bottom: 0.5rem;
+  z-index: 0;
+  width: 3rem;
+  height: 3rem;
+  border: 0.1rem solid var(--border-colour-3);
+}/*# sourceMappingURL=FilterModal.css.map */

@@ -1,7 +1,6 @@
 import React from "react";
 import "./PlayerAuras.scss";
 import AuraIcon from "../AuraIcon/AuraIcon";
-import { overlappingBuffs, overlappingBuffsData } from "../../../../../../data/breakdown-objects";
 
 const PlayerAuras = ({ playerAuras }) => {
     return <div className="timeline-grid-cell">

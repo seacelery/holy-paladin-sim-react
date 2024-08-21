@@ -81,4 +81,11 @@ const overlappingBuffsData = {
     }
 };
 
-export { healingHeaders, selfBuffHeaders, targetBuffHeaders, manaHeaders, holyPowerHeaders, excludedSpells, excludedSpellsOnlyResourcesAndCasts, excludedSpellsCasts, excludedSpellsCastsAverageHits, excludedSpellsCrit, excludedSpellsAverage, selfBuffsMap, targetBuffsMap, overlappingBuffs,overlappingBuffsData,  manaMap };
+const generatorCooldownsRow = ["Holy Shock", "Judgment", "Crusader Strike", "Hammer of Wrath", "Consecration", "Beacon of Virtue"];
+const majorCooldownsRow = [
+    "Avenging Wrath", "Daybreak", "Divine Toll", "Tyr's Deliverance",
+    "Light's Hammer", "Holy Prism", "Barrier of Faith", "Blessing of the Seasons", 
+    "Divine Favor", "Lay on Hands", "Arcane Torrent", "Fireblood", "Gift of the Naaru"
+];
+
+export { healingHeaders, selfBuffHeaders, targetBuffHeaders, manaHeaders, holyPowerHeaders, excludedSpells, excludedSpellsOnlyResourcesAndCasts, excludedSpellsCasts, excludedSpellsCastsAverageHits, excludedSpellsCrit, excludedSpellsAverage, selfBuffsMap, targetBuffsMap, overlappingBuffs,overlappingBuffsData, manaMap, generatorCooldownsRow, majorCooldownsRow };

@@ -3,6 +3,7 @@ import "./Timeline.scss";
 import HeaderRow from "./HeaderRow/HeaderRow";
 import GridRow from "./GridRow/GridRow";
 import FilterModal from "./FilterModal/FilterModal";
+import { generatorCooldownsRow, majorCooldownsRow } from "../../../../data/breakdown-objects";
 
 const Timeline = ({ simulationResult, setSimulationResults }) => {
     const [visibleRows, setVisibleRows] = useState([]);
@@ -23,7 +24,9 @@ const Timeline = ({ simulationResult, setSimulationResults }) => {
         return Array.from(auras);
     };
 
+
     const allAuras = generateAllAuras(simulationResult.results.priority_breakdown);
+    const allCooldowns = [generatorCooldownsRow, majorCooldownsRow].flat();
 
     const timelineRef = useRef(null);
     const headers = ["Time", "Spell", "Resources", "Player Auras", "Target Auras", "Cooldowns", "Counts", "Stats"];
@@ -81,7 +84,7 @@ const Timeline = ({ simulationResult, setSimulationResults }) => {
         <div className="breakdown-container">
             <div className="timeline-grid-container">
                 <div className="timeline-header-grid">
-                    <HeaderRow headers={headers} filterModalOpen={filterModalOpen} setFilterModalOpen={setFilterModalOpen} allAuras={allAuras} filteredAuras={filteredAuras} setFilteredAuras={setFilteredAuras} />
+                    <HeaderRow headers={headers} filterModalOpen={filterModalOpen} setFilterModalOpen={setFilterModalOpen} allAuras={allAuras} filteredAuras={filteredAuras} setFilteredAuras={setFilteredAuras} allCooldowns={allCooldowns} filteredCooldowns={filteredCooldowns} setFilteredCooldowns={setFilteredCooldowns} />
                 </div>
                 <div className="timeline-body-grid" ref={timelineRef}>
                     {visibleRows.map(([time, data]) => (
@@ -90,6 +93,8 @@ const Timeline = ({ simulationResult, setSimulationResults }) => {
                             time={time} 
                             timelineData={data} 
                             simulationResult={simulationResult}
+                            filteredAuras={filteredAuras}
+                            filteredCooldowns={filteredCooldowns}
                         />
                     ))}
                 </div>

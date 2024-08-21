@@ -1,23 +1,53 @@
 .filter-modal {
   transform: translateY(10.5rem);
-  padding: 0.8rem;
-  z-index: 10000;
-  min-width: 30rem;
+  padding: 0.5rem;
+  z-index: 1000;
+  width: 36.2rem;
   border: 0.1rem solid var(--border-colour-3);
   border-radius: 0.3rem;
   background-color: var(--panel-colour-2);
   transition: opacity 0.1s ease-in-out;
-  pointer-events: none;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   flex-wrap: wrap;
+  position: absolute;
+  top: -6.5rem;
+  left: -17.8rem;
+}
+
+.filter-modal::before,
+.filter-modal::after {
+  content: "";
+  position: absolute;
+  border-left: 1.1rem solid transparent;
+  border-right: 1.1rem solid transparent;
+}
+
+.filter-modal::before {
+  top: -1.1rem;
+  left: 18rem;
+  z-index: 2;
+  border-bottom: 1.1rem solid var(--panel-colour-2);
+}
+
+.filter-modal::after {
+  top: -1.2rem;
+  left: 18rem;
+  border-bottom: 1.1rem solid var(--border-colour-3);
+}
+
+.filter-modal-icon-container {
+  margin-top: 0.1rem;
+  cursor: pointer;
+  z-index: 1000;
 }
 
 .filter-modal-icon {
   margin: 0.25rem;
-  margin-bottom: 0.5rem;
-  z-index: 0;
   width: 3rem;
   height: 3rem;
   border: 0.1rem solid var(--border-colour-3);
+  cursor: pointer;
+  z-index: 1000;
 }/*# sourceMappingURL=FilterModal.css.map */

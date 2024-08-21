@@ -1,8 +1,10 @@
 import React from "react";
 import "./HeaderRow.scss";
 import FilterModal from "../FilterModal/FilterModal";
+import { FaWandSparkles } from "react-icons/fa6";
+import { FaRegHourglass } from "react-icons/fa6";
 
-const HeaderRow = ({ headers, filterModalOpen, setFilterModalOpen, allAuras, filteredAuras, setFilteredAuras }) => {
+const HeaderRow = ({ headers, filterModalOpen, setFilterModalOpen, allAuras, filteredAuras, setFilteredAuras, allCooldowns, filteredCooldowns, setFilteredCooldowns }) => {
     const handleButtonClick = (filterModal) => {
         setFilterModalOpen(filterModalOpen === filterModal ? null : filterModal);
     };
@@ -13,14 +15,16 @@ const HeaderRow = ({ headers, filterModalOpen, setFilterModalOpen, allAuras, fil
                 return <div key={index} className="timeline-header-cell">
                     {header}
                     <div className="timeline-player-auras-button" onClick={() => handleButtonClick("Player Auras")}>
-                        {filterModalOpen === "Player Auras" && <FilterModal type="auras" names={allAuras} />}
+                        <FaWandSparkles />
+                        {filterModalOpen === "Player Auras" && <FilterModal type="auras" names={allAuras} filteredNames={filteredAuras} setFilteredNames={setFilteredAuras} />}
                     </div>
                 </div>
             } else if (header === "Cooldowns") {
                 return <div key={index} className="timeline-header-cell">
                     {header}
                     <div className="timeline-cooldowns-button" onClick={() => handleButtonClick("Cooldowns")}>
-                        {filterModalOpen === "Cooldowns" && <FilterModal type="cooldowns" />}
+                        <FaRegHourglass />
+                        {filterModalOpen === "Cooldowns" && <FilterModal type="cooldowns" names={allCooldowns} filteredNames={filteredCooldowns} setFilteredNames={setFilteredCooldowns} />}
                     </div>
                 </div>
             } else {

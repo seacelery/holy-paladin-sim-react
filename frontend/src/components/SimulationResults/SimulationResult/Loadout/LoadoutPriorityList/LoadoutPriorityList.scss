@@ -1,0 +1,16 @@
+.loadout-priority-list {
+    overflow: auto;
+    max-height: 45rem;
+}
+
+.loadout-priority-list::-webkit-scrollbar {
+    width: 0.6rem;
+}
+
+.loadout-priority-list::-webkit-scrollbar-thumb {
+    border: .1rem solid var(--panel-colour-6);
+    border-left: .1rem solid var(--panel-colour-6);
+    border-radius: .2rem;
+
+    background: var(--border-colour-3);
+}

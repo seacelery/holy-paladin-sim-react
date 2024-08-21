@@ -14,6 +14,14 @@ const formatThousandsWithoutRounding = (number) => {
     return parts.join(".");
 };
 
+const formatThousandsWithShorthand = (number) => {
+    if (number >= 1000) {
+        return (number / 1000).toFixed(1) + "K";
+    } else {
+        return number.toString();
+    };
+};
+
 const formatPercentage = (number) => {
     return (number * 100).toFixed(1) + "%";
 };
@@ -408,6 +416,7 @@ export {
     formatFixedNumber,
     formatThousands,
     formatThousandsWithoutRounding,
+    formatThousandsWithShorthand,
     formatPercentage,
     sortAbilityBreakdown,
     sortBuffsBreakdown,

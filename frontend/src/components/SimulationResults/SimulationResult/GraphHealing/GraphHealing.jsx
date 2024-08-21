@@ -36,7 +36,7 @@ const GraphHealing = ({ healingData, manaData, title, colour }) => {
                 .attr("x", width / 2)
                 .attr("y", -26)
                 .attr("text-anchor", "middle")
-                .style("font-size", "16px")
+                .style("font-size", "1.6rem")
                 .style("fill", "white");
 
             const formatTime = (seconds) => {

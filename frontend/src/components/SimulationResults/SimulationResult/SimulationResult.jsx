@@ -108,7 +108,7 @@ const SimulationResult = ({ simulationResult, setSimulationResults }) => {
                         {activeTab === "Buffs" && <Buffs simulationResult={simulationResult} />}
                         {activeTab === "Resources" && <Resources simulationResult={simulationResult} />}
                         {activeTab === "Timeline" && <Timeline simulationResult={simulationResult} setSimulationResults={setSimulationResults} />}
-                        {activeTab === "Cooldowns" && <Cooldowns simulationResult={simulationResult}s />}
+                        {activeTab === "Cooldowns" && <Cooldowns simulationResult={simulationResult} />}
                         {activeTab === "Distribution" && <Distribution simulationResult={simulationResult} />}
                         {activeTab === "Loadout" && <Loadout simulationResult={simulationResult} />}
                     </div>

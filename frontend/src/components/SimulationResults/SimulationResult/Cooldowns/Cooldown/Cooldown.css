@@ -1,0 +1,45 @@
+.cooldown-breakdown-container {
+  display: flex;
+  margin-bottom: 2rem;
+  margin-right: 2rem;
+  width: 100%;
+}
+.cooldown-breakdown-container .cooldown-breakdown-icon {
+  margin-right: 0.5rem;
+  height: 6rem;
+  width: 6rem;
+  border: 2px solid var(--border-colour-3);
+  border-radius: 0.3rem;
+}
+
+.cooldown-breakdown-details {
+  padding: 0rem 0rem 1rem 1rem;
+  text-align: left;
+}
+.cooldown-breakdown-details .cooldown-breakdown-details-name {
+  padding-bottom: 1rem;
+  font-size: 2rem;
+  color: var(--holy-font);
+}
+
+.cooldown-breakdown-instance {
+  display: flex;
+  background-color: var(--panel-colour-table-2);
+  border: 0.1rem solid var(--border-colour-3);
+  border-radius: 0.3rem;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+.cooldown-breakdown-instance .cooldown-breakdown-instance-count {
+  display: flex;
+  align-items: center;
+  font-size: 1.9rem;
+  margin: 0 3rem 1rem 3rem;
+}
+.cooldown-breakdown-instance .cooldown-breakdown-instance-time, .cooldown-breakdown-instance .cooldown-breakdown-instance-hps, .cooldown-breakdown-instance .cooldown-breakdown-instance-duration {
+  width: 10rem;
+  border-radius: 0.3rem;
+  text-align: center;
+  margin: 0 3rem 1rem 0;
+}/*# sourceMappingURL=Cooldown.css.map */

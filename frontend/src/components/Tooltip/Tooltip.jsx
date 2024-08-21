@@ -12,8 +12,8 @@ const Tooltip = ({ type, children, hoverElement, customClassName = "" }) => {
             const xOffset = 15;
             const yOffset = 15;
             const newPosition = {
-                x: e.pageX + xOffset,
-                y: e.pageY + yOffset,
+                x: e.clientX + xOffset,
+                y: e.clientY + yOffset,
             };
             setPosition(newPosition);
             setVisible(true);

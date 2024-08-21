@@ -1,0 +1,10 @@
+.cooldowns-breakdown-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 3.0rem;
+    width: 100%;
+    border: .1rem solid var(--border-colour-3);
+    border-radius: .3rem;
+    background-color: var(--panel-colour-table-4);
+}

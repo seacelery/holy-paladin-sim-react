@@ -1,0 +1,42 @@
+.loadout-priority-list-item {
+    display: flex;
+    justify-content: left;
+    position: relative;
+    margin-bottom: 0.3rem;
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    box-shadow: 0.1rem 0.0rem 0.0rem 0.0rem var(--border-colour-3);
+    line-height: 1.4;
+
+    .loadout-priority-list-item-icon {
+        margin-bottom: 0.4rem;
+        width: 3.5rem;
+        height: 3.5rem;
+        border: 0.1rem solid var(--border-colour-3);
+    }
+
+    .loadout-priority-list-item-name {
+        display: flex;
+        justify-content: left;
+        margin-left: 0.8rem;
+        margin-top: 0.7rem;
+        text-align: left;
+        overflow: auto;
+        min-height: 3.2rem;
+        min-width: 12.0rem;
+        max-width: 12.0rem;
+        font-size: 1.3rem;
+        color: var(--holy-font);
+    }
+
+    .loadout-priority-list-item-conditions {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        padding-left: 0.7rem;
+        padding-bottom: 0.3rem;
+        text-align: left;
+        overflow: auto;
+        font-size: 1.3rem;
+    }
+}

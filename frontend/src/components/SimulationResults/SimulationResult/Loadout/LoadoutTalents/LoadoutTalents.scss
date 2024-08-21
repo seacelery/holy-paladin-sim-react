@@ -1,0 +1,35 @@
+.loadout-talents {
+    display: flex;
+    justify-content: space-between;
+
+    .loadout-talents-left, .loadout-talents-right {
+        width: 21.4rem;
+
+        .loadout-class-talent-icon {
+            display: flex;
+            margin: .5rem auto .5rem .4rem;
+            border: .1rem solid var(--border-colour-3);
+        }
+
+        .loadout-spec-talent-icon {
+            display: flex;
+            margin: .5rem .4rem .5rem auto;
+            border: .1rem solid var(--border-colour-3);
+        }
+    }
+}
+
+.loadout-talent-row {
+    display: flex;
+    justify-content: left;
+    padding: .2rem;
+    width: 100%;
+    border-top: .1rem solid var(--border-colour-3);
+
+    .loadout-talent-icon {
+        width: 3.0rem;
+        height: 2.9rem;
+        margin: .2rem;
+        border: .1rem solid var(--border-colour-3);
+    }
+}

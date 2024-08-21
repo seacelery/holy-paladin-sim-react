@@ -1,1 +1,22 @@
-/*# sourceMappingURL=Loadout.css.map */
+.loadout-breakdown-container {
+  margin: 0 auto 0rem auto;
+  width: 100%;
+  overflow: hidden;
+  color: var(--light-font-colour);
+  display: flex;
+  justify-content: space-between;
+}
+.loadout-breakdown-container .loadout-container {
+  width: 33%;
+  border: 0.1rem solid var(--border-colour-3);
+  border-radius: 0.5rem;
+}
+.loadout-breakdown-container .loadout-container .loadout-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  width: 100%;
+  background-color: var(--panel-colour-5);
+  border-bottom: 0.1rem solid var(--border-colour-3);
+}/*# sourceMappingURL=Loadout.css.map */

@@ -1,0 +1,24 @@
+.loadout-breakdown-container {
+    margin: 0 auto .0rem auto;
+    width: 100%;
+    overflow: hidden;
+    color: var(--light-font-colour);
+    display: flex;
+    justify-content: space-between;
+
+    .loadout-container {
+        width: 33%;
+        border: .1rem solid var(--border-colour-3);
+        border-radius: .5rem;
+
+        .loadout-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 3.0rem;
+            width: 100%;
+            background-color: var(--panel-colour-5);
+            border-bottom: .1rem solid var(--border-colour-3);
+        }
+    }
+}

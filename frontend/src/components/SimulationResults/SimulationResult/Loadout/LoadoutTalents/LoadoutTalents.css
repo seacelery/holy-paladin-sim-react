@@ -1,0 +1,31 @@
+.loadout-talents {
+  display: flex;
+  justify-content: space-between;
+}
+.loadout-talents .loadout-talents-left, .loadout-talents .loadout-talents-right {
+  width: 21.4rem;
+}
+.loadout-talents .loadout-talents-left .loadout-class-talent-icon, .loadout-talents .loadout-talents-right .loadout-class-talent-icon {
+  display: flex;
+  margin: 0.5rem auto 0.5rem 0.4rem;
+  border: 0.1rem solid var(--border-colour-3);
+}
+.loadout-talents .loadout-talents-left .loadout-spec-talent-icon, .loadout-talents .loadout-talents-right .loadout-spec-talent-icon {
+  display: flex;
+  margin: 0.5rem 0.4rem 0.5rem auto;
+  border: 0.1rem solid var(--border-colour-3);
+}
+
+.loadout-talent-row {
+  display: flex;
+  justify-content: left;
+  padding: 0.2rem;
+  width: 100%;
+  border-top: 0.1rem solid var(--border-colour-3);
+}
+.loadout-talent-row .loadout-talent-icon {
+  width: 3rem;
+  height: 2.9rem;
+  margin: 0.2rem;
+  border: 0.1rem solid var(--border-colour-3);
+}/*# sourceMappingURL=LoadoutTalents.css.map */

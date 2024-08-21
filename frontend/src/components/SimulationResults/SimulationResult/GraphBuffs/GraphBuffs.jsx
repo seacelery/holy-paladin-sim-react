@@ -35,7 +35,7 @@ const GraphBuffs = ({ data, title, colour, awakening = false, awakeningTriggers 
                 .attr("x", width / 2)
                 .attr("y", -26)
                 .attr("text-anchor", "middle")
-                .style("font-size", "16px")
+                .style("font-size", "1.4rem")
                 .style("fill", "white")
                 .text(`${title} Count`);
 
@@ -69,7 +69,7 @@ const GraphBuffs = ({ data, title, colour, awakening = false, awakeningTriggers 
                 .attr("fill", "none")
                 .attr("stroke", colour)
                 .attr("stroke-width", 1.5)
-                .attr("d", line);
+                .attr("d", line)
 
             const xAxisGroup = svg.append("g")
                 .attr("transform", `translate(0,${height})`)
@@ -80,7 +80,8 @@ const GraphBuffs = ({ data, title, colour, awakening = false, awakeningTriggers 
                 .attr("x", (width / 2) - 10)
                 .attr("y", 41)
                 .style("text-anchor", "middle")
-                .text("Time");
+                .text("Time")
+                .style("font-size", "1.4rem");
 
             xAxisGroup.selectAll("line").style("stroke", "white");
             xAxisGroup.selectAll("path").style("stroke", "white");
@@ -95,7 +96,8 @@ const GraphBuffs = ({ data, title, colour, awakening = false, awakeningTriggers 
                 .attr("x", -height / 2)
                 .attr("y", -35)
                 .style("text-anchor", "middle")
-                .text("Count");
+                .text("Count")
+                .style("font-size", "1.4rem");
 
             yAxisGroup.selectAll("line").style("stroke", "white");
             yAxisGroup.selectAll("path").style("stroke", "white");

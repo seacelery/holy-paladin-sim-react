@@ -9,6 +9,7 @@
     transform: translateX(-50%);
     z-index: 4;
     box-shadow: 0.0rem 0.0rem 0.1rem var(--holy-font);
+    pointer-events: none;
 }
 
 .hero-talent-arrow-down::after {
@@ -23,6 +24,7 @@
     transform: translateX(-50%) rotate(45deg);
     z-index: 5;
     box-shadow: 0.0rem 0.0rem 0.0rem var(--holy-font);
+    pointer-events: none;
 }
 
 .hero-talent-arrow-left::before {
@@ -36,6 +38,7 @@
     transform: rotate(58deg);
     z-index: 0;
     box-shadow: 0.0rem 0.0rem 0.1rem var(--holy-font);
+    pointer-events: none;
 }
 
 .hero-talent-arrow-left::after {
@@ -48,6 +51,7 @@
     padding: 0.3rem;
     transform: translateX(-50%) rotate(100deg);
     z-index: 5;
+    pointer-events: none;
 }
 
 .hero-talent-arrow-right::before {
@@ -61,6 +65,7 @@
     transform: rotate(-58deg);
     z-index: 0;
     box-shadow: 0.0rem 0.0rem 0.1rem var(--holy-font);
+    pointer-events: none;
 }
 
 .hero-talent-arrow-right::after {
@@ -73,13 +78,16 @@
     padding: 0.3rem;
     transform: translateX(-50%) rotate(-7deg);
     z-index: 5;
+    pointer-events: none;
 }
 
 .talent-arrow-selected::before {
     background-color:  var(--gold-font);
+    pointer-events: none;
 }
 
 .talent-arrow-selected::after {
     border: solid var(--gold-font);
     border-width: 0 0.2rem 0.2rem 0;
+    pointer-events: none;
 }

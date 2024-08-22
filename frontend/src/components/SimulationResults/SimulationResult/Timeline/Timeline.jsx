@@ -105,16 +105,38 @@ const Timeline = ({ simulationResult, setSimulationResults }) => {
 
 export default Timeline;
 
-// setVisibleRows(prev => {
-//     const lastVisibleTime = prev[prev.length - 1][0];
-//     const lastVisibleIndex = timelineData.findIndex(row => row[0] === lastVisibleTime);
+// const handleScroll = () => {
+//     if (!timelineRef.current) return;
 
-//     console.log(`lastVisibleTime ${lastVisibleTime}, lastVisibleIndex ${lastVisibleIndex}, endIndex ${endIndex}`);
+//     const { scrollTop, clientHeight } = timelineRef.current;
+//     const visibleRowCount = Math.ceil(clientHeight / rowHeight);
+//     const totalRows = timelineData.length;
 
-//     const newRows = timelineData.slice(lastVisibleIndex + 1, endIndex + 1);
-//     console.log(`newRows ${newRows}`);
-//     const rowsToRemove = newRows.length;
-    
-//     return [...prev.slice(rowsToRemove), ...newRows];
-// });
-// setCurrentEndIndex(endIndex);
+//     const startIndex = Math.max(0, Math.floor((scrollTop + addedScrollTop) / rowHeight) - buffer);
+//     const endIndex = Math.min(totalRows - 1, startIndex + visibleRowCount + buffer);
+
+//     if (scrollTop === 0) {
+//         const newEndIndex = Math.ceil(clientHeight / rowHeight) + buffer - 1;
+//         setVisibleRows(timelineData.slice(0, newEndIndex + 1));
+//         setCurrentEndIndex(newEndIndex);
+//         return;
+//     }
+
+//     if (endIndex > currentEndIndex) {
+//         setVisibleRows(prev => {
+//             const lastVisibleTime = prev[prev.length - 1][0];
+//             const lastVisibleIndex = timelineData.findIndex(row => row[0] === lastVisibleTime);
+        
+//             const newRows = timelineData.slice(lastVisibleIndex + 1, endIndex + 1);
+//             const rowsToRemove = newRows.length;
+        
+//             if (rowsToRemove > 0) {
+//                 const newAddedScrollTop = addedScrollTop + rowsToRemove * rowHeight;
+//                 setAddedScrollTop(newAddedScrollTop);
+//             };
+            
+//             return [...prev.slice(rowsToRemove), ...newRows];
+//         });
+//         setCurrentEndIndex(endIndex);
+//     }
+// };

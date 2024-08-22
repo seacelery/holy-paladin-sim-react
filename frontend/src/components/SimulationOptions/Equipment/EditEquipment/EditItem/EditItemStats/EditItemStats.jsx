@@ -8,6 +8,7 @@ const EditItemStats = ({ setCharacterData, itemStats, setItemStats, updateStats,
     const [displayedStats, setDisplayedStats] = useState([]);
     const [inputValues, setInputValues] = useState([]);
     const excludedStats = ["combat_rating_avoidance", "stamina"];
+    const secondaryStats = ["haste", "crit", "mastery", "versatility"];
 
     const previousItemStats = useRef(itemStats);
 
@@ -71,8 +72,26 @@ const EditItemStats = ({ setCharacterData, itemStats, setItemStats, updateStats,
     const handleBlur = (e, index) => {
         const input = e.target.value.trim();
         const valueMatch = input.match(/\d+/g);
+        const statMatch = input.match(/[a-zA-Z]+/g);
         const newDisplayedStats = [...displayedStats];
 
+        if (statMatch && secondaryStats.includes(statMatch[0].toLowerCase())) {
+            const newStat = statMatch[0].toLowerCase();
+            const value = valueMatch ? parseInt(valueMatch[0]) : 0;
+
+            setItemStats((prevState) => {
+                const newStats = { ...prevState };
+                delete newStats[newDisplayedStats[index].stat];
+                newStats[newStat] = value;
+                return newStats;
+            });
+
+            newDisplayedStats[index] = { stat: newStat, value: value };
+            setDisplayedStats(newDisplayedStats);
+            setInputValues(newDisplayedStats.map((stat) => `${stat.value ? "+" : ""}${stat.value} ${stat.stat.charAt(0).toUpperCase() + stat.stat.slice(1)}`));
+
+            e.target.value = `+${value} ${newStat.charAt(0).toUpperCase() + newStat.slice(1)}`;
+        } else
         if (valueMatch) {
             const value = valueMatch[0];
             newDisplayedStats[index] = { stat: "leech", value: parseInt(value) };
@@ -112,7 +131,7 @@ const EditItemStats = ({ setCharacterData, itemStats, setItemStats, updateStats,
                     value={inputValues[index]}
                     onBlur={(e) => handleBlur(e, index)}
                     onKeyDown={(e) => e.key === "Enter" && e.target.blur()}
-                    disabled={!(statInfo.stat === "" || statInfo.stat === "leech")}
+                    disabled={!(statInfo.stat === "" || statInfo.stat === "leech" || secondaryStats.includes(statInfo.stat))}
                     style={{ color: `var(--stat-${statInfo.stat})` }}
                     onChange={(e) => {
                         const newInputValues = [...inputValues];

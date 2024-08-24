@@ -45,3 +45,38 @@
     border: 0.1rem solid var(--border-colour-4);
     filter: grayscale(0.7) !important;
 }
+
+.external-buff-buttons {
+    display: flex;
+    cursor: pointer;
+}
+
+.external-buff-add-button, .external-buff-remove-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -.1rem;
+    padding-bottom: .3rem;
+    width: 100%;
+    height: 2.0rem;
+    background-color: var(--panel-colour-2);
+    border: 1px solid var(--border-colour-3);
+    color: var(--light-font-colour);
+    font-size: 2.2rem;
+    text-align: center;
+    user-select: none;
+}
+
+.external-buff-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: .3rem;
+    width: 100%;
+    height: 2.0rem;
+    background-color: var(--panel-colour-2);
+    border: .1rem solid var(--border-colour-3);
+    color: var(--light-font-colour);
+    font-size: 1.3rem;
+    text-align: center;
+}

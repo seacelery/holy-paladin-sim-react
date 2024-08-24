@@ -412,6 +412,29 @@ const consolidateOverlappingBuffs = (timelineData) => {
     });
 };
 
+const colourStatWords = (text) => {
+    let words = ["intellect", "haste", "crit", "mastery", "versatility", "critical strike", "leech", "healing", "damage", "mana"];
+    let styledText = text;
+
+    words.forEach(word => {
+        let colourVariable = `var(--stat-${word.toLowerCase()})`;
+        if (word === "critical strike") {
+            colourVariable = "var(--stat-crit)";
+        } else if (word === "healing") {
+            colourVariable = "var(--healing-font)";
+        } else if (word === "damage") {
+            colourVariable = "var(--red-font-hover)";
+        } else if (word === "mana") {
+            colourVariable = "var(--mana)";
+        };
+
+        const regex = new RegExp(`\\b${word}\\b`, "gi");
+        styledText = styledText.replace(regex, `<span style="color: ${colourVariable}">$&</span>`);
+    });
+
+    return styledText;
+};
+
 export {
     formatFixedNumber,
     formatThousands,
@@ -441,5 +464,6 @@ export {
     handleOverlappingBuffs,
     formatPriorityTime,
     formatTime,
-    consolidateOverlappingBuffs
+    consolidateOverlappingBuffs,
+    colourStatWords
 };

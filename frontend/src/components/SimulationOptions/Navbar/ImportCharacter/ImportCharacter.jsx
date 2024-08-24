@@ -75,7 +75,6 @@ const ImportCharacter = ({ setActiveTab, setImporting }) => {
                     lightsmithTalents: { ...baseLightsmithTalents },
                     heraldOfTheSunTalents: { ...baseHeraldOfTheSunTalents },
                     equipment: updateEquipmentWithEffectValues(data.equipment),
-                    consumables: data.consumable,
                     stats: data.stats
                 });
 

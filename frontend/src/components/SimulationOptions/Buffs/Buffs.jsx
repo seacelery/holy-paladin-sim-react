@@ -17,9 +17,12 @@ import {
     ptrPotions,
 } from "../../../data/buffs-consumables-data";
 import { VersionContext } from "../../../context/VersionContext";
+import { CharacterDataContext } from "../../../context/CharacterDataContext";
 
 const Buffs = () => {
     const { version } = useContext(VersionContext);
+    const { characterData } = useContext(CharacterDataContext);
+    const consumables = characterData.consumables;
 
     const flasksIcons = version === "live" ? flasks : ptrFlasks;
     const foodItemsIcons = version === "live" ? foodItems : ptrFoodItems;
@@ -32,29 +35,29 @@ const Buffs = () => {
         <div className="options-tab-content buffs-content">
             <div className="buffs-content-half">
                 <div className="buffs-container">
-                    <BuffIcons rawIcons={flasksIcons} label="Flask" dataType="flask" showTooltip={true} exclusiveSelection={true} allowDeselection={true} />
+                    <BuffIcons rawIcons={flasksIcons} label="Flask" dataType="flask" showTooltip={true} exclusiveSelection={true} allowDeselection={true} defaultSelectedIcons={consumables["flask"]} />
                 </div>
 
                 <div className="buffs-container">
-                    <BuffIcons rawIcons={foodItemsIcons} label="Food" dataType="food" showTooltip={true} exclusiveSelection={true} allowDeselection={true} />
+                    <BuffIcons rawIcons={foodItemsIcons} label="Food" dataType="food" showTooltip={true} exclusiveSelection={true} allowDeselection={true} defaultSelectedIcons={consumables["food"]} />
                 </div>
 
                 <div className="buffs-container">
-                    <BuffIcons rawIcons={weaponImbuesIcons} label="Weapon Imbue" dataType="weapon-imbue" showTooltip={true} exclusiveSelection={true} allowDeselection={true} />
+                    <BuffIcons rawIcons={weaponImbuesIcons} label="Weapon Imbue" dataType="weapon-imbue" showTooltip={true} exclusiveSelection={true} allowDeselection={true} defaultSelectedIcons={consumables["weapon_imbue"]} />
                 </div>
 
                 <div className="buffs-container">
-                    <BuffIcons rawIcons={augmentRunesIcons} label="Augment Rune" dataType="augment-rune" showTooltip={true} exclusiveSelection={true} allowDeselection={true} />
+                    <BuffIcons rawIcons={augmentRunesIcons} label="Augment Rune" dataType="augment-rune" showTooltip={true} exclusiveSelection={true} allowDeselection={true} defaultSelectedIcons={consumables["augment_rune"]} />
                 </div>
             </div>
             
             <div className="buffs-content-half">
                 <div className="buffs-container">
-                    <BuffIcons rawIcons={raidBuffsIcons} label="Raid Buffs" dataType="raid-buff" showTooltip={true} exclusiveSelection={false} allowDeselection={true} />
+                    <BuffIcons rawIcons={raidBuffsIcons} label="Raid Buffs" dataType="raid-buff" showTooltip={true} exclusiveSelection={false} allowDeselection={true} defaultSelectedIcons={consumables["raid_buffs"]} />
                 </div>
 
                 <div className="buffs-container">
-                    <BuffIcons rawIcons={externalBuffs} label="External Buffs" dataType="external-buff" showTooltip={true} exclusiveSelection={false} allowDeselection={true} />
+                    <BuffIcons rawIcons={externalBuffs} label="External Buffs" dataType="external-buff" showTooltip={true} exclusiveSelection={false} allowDeselection={true} defaultSelectedIcons={Object.keys(consumables["external_buffs"])} defaultExternalBuffTimers={consumables["external_buffs"]} />
                 </div>
             </div>
         </div>

@@ -14,7 +14,15 @@ const CharacterDataProvider = ({ children }) => {
         heraldOfTheSunTalents: {},
         lightsmithTalents: {},
         equipment: {},
-        consumables: {},
+        consumables: {
+            flask: [],
+            food: [],
+            weapon_imbue: [],
+            augment_rune: [],
+            raid_buffs: [],
+            external_buffs: {},
+            potion: {}
+        },
         stats: {}
     });
 

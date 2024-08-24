@@ -1644,7 +1644,7 @@ class Simulation:
             "talents": {"class_talents": self.paladin.class_talents, "spec_talents": self.paladin.spec_talents, "lightsmith_talents": self.paladin.lightsmith_talents, "herald_of_the_sun_talents": self.paladin.herald_of_the_sun_talents},
             "priority_list": self.priority_list_text,
             "overhealing": self.paladin.overhealing,
-            "character_details": {"race": self.paladin.race},
+            "character_details": {"race": self.paladin.race, "consumables": self.paladin.consumables},
             "seasons": self.paladin.seasons
         }
     

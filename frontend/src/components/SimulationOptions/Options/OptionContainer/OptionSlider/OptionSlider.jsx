@@ -97,9 +97,10 @@ const OptionSlider = ({ sliderType, name, min, max, step, defaultValue, showInfo
                         {hoverElement && (
                             <Tooltip
                                 type="option"
-                                text={tooltipText}
                                 hoverElement={hoverElement}
-                            />
+                            >
+                                {tooltipText}
+                            </Tooltip>
                         )}
                     </div>
                 )}

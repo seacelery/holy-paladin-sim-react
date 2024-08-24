@@ -254,12 +254,12 @@ class Paladin:
         if "weapon_imbue" in new_consumables:
             self.consumables["weapon_imbue"] = new_consumables["weapon_imbue"]
             self.initial_consumables["weapon_imbue"] = new_consumables["weapon_imbue"]
-        if "raid_buff" in new_consumables:
-            self.consumables["raid_buff"] = new_consumables["raid_buff"]
-            self.initial_consumables["raid_buff"] = new_consumables["raid_buff"]
-        if "external_buff" in new_consumables:
-            self.consumables["external_buff"] = new_consumables["external_buff"]
-            self.initial_consumables["external_buff"] = new_consumables["external_buff"]
+        if "raid_buffs" in new_consumables:
+            self.consumables["raid_buffs"] = new_consumables["raid_buffs"]
+            self.initial_consumables["raid_buffs"] = new_consumables["raid_buffs"]
+        if "external_buffs" in new_consumables:
+            self.consumables["external_buffs"] = new_consumables["external_buffs"]
+            self.initial_consumables["external_buffs"] = new_consumables["external_buffs"]
     
     def update_race(self, new_race):
         self.race = new_race
@@ -355,15 +355,15 @@ class Paladin:
         for consumable_type, consumable_list in self.consumables.items():
             if consumable_list:                
                 for consumable_name in consumable_list:
-                    if consumable_type == "external_buff":
+                    if consumable_type == "external_buffs":
                         external_buff_timers = consumable_list[consumable_name]
                         self.external_buff_timers[consumable_name] = external_buff_timers
                     
-                    if consumable_type != "external_buff":
+                    if consumable_type != "external_buffs":
                         consumable_class = buff_class_map.get(consumable_name)
                         if consumable_class:
                             consumable_buffs.append(consumable_class)   
-                            
+                
                 for buff, timers in self.external_buff_timers.items():
                     for timer in timers:
                         if timer != "":

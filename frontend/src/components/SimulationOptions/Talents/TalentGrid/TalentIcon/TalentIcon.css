@@ -64,4 +64,8 @@
   color: var(--light-font-colour);
   z-index: 10;
   pointer-events: none;
+}
+
+.talent-tooltip {
+  color: var(--holy-font);
 }/*# sourceMappingURL=TalentIcon.css.map */

@@ -119,7 +119,7 @@ const TalentIcon = ({ name, size = "talent-icon-small", talentData, arrowsData, 
                         <div className="talent-rank-display">{currentRank} / {maxRank}</div>
                     )}
             
-                    <Tooltip children={name} hoverElement={hoverElement} />
+                    <Tooltip children={name} hoverElement={hoverElement} customClassName="talent-tooltip" />
 
                     {createArrows()}
                 </>

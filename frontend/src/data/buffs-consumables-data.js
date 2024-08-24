@@ -99,13 +99,13 @@ const ptrPotions = {
     "Algari Mana Potion": {effect: "Restores 150000 mana.", image: "https://wow.zamimg.com/images/wow/icons/large/inv_flask_blue.jpg"},
     "Slumbering Soul Serum": {effect: "Elevate your focus to restore 218390 mana over 10 sec, but you are defenseless until your focus is broken.", image: "https://wow.zamimg.com/images/wow/icons/large/inv_flask_green.jpg"},
     "Tempered Potion": {effect: "Gain the effects of all inactive Tempered Flasks, increasing their associated secondary stats by 2168 for 30 sec.", image: "https://render.worldofwarcraft.com/eu/icons/56/trade_alchemy_potiona4.jpg"},
-}
+};
 
 const seasons = [
     {name: "Blessing of Summer", image: "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_summer.jpg"},
     {name: "Blessing of Autumn", image: "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_autumn.jpg"},
     {name: "Blessing of Winter", image: "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_winter.jpg"},
     {name: "Blessing of Spring", image: "https://render.worldofwarcraft.com/eu/icons/56/ability_ardenweald_paladin_spring.jpg"},
-]
+];
 
 export { flasks, ptrFlasks, foodItems, ptrFoodItems, weaponImbues, ptrWeaponImbues, augmentRunes, ptrAugmentRunes, raidBuffs, ptrRaidBuffs, externalBuffs, potions, ptrPotions, seasons };

@@ -14,8 +14,15 @@ const BuffIcons = ({ rawIcons, label, dataType, showTooltip = false, exclusiveSe
         image: rawIcons[key].image
     }));
 
-    const defaultSelectedIndices = icons.map((icon, index) => defaultSelectedIcons.includes(icon.name) ? index : null)
-    const [selectedIcons, setSelectedIcons] = useState(defaultSelectedIndices);
+    const [selectedIcons, setSelectedIcons] = useState([]); 
+
+    useEffect(() => {
+        const defaultSelectedIndices = icons.map((icon, index) =>
+            defaultSelectedIcons.includes(icon.name) ? index : null
+        );
+        setSelectedIcons(defaultSelectedIndices);
+    }, [defaultSelectedIcons]);
+
     const [externalBuffTimers, setExternalBuffTimers] = useState(defaultExternalBuffTimers);
     const externalBuffCooldowns = {
         "Power Infusion": 120,
@@ -25,6 +32,13 @@ const BuffIcons = ({ rawIcons, label, dataType, showTooltip = false, exclusiveSe
     const [hoverElement, setHoverElement] = useState(null);
     const [tooltipText, setTooltipText] = useState(null);
     const iconRefs = useRef([]);
+
+    // useEffect(() => {
+    //     const defaultSelectedIndices = icons.map((icon, index) => 
+    //         defaultSelectedIcons.includes(icon.name) ? index : null
+    //     );
+    //     setSelectedIcons(defaultSelectedIndices);
+    // }, [defaultSelectedIcons, icons]);
 
     const handleMouseEnter = (iconName, index) => {
         const effect = rawIcons[iconName].effect;
@@ -169,7 +183,7 @@ const BuffIcons = ({ rawIcons, label, dataType, showTooltip = false, exclusiveSe
                     const isSourceOfMagic = icon.name === "Source of Magic";
                     const showTimers = isExternalBuff && !isSourceOfMagic && Object.keys(externalBuffTimers).includes(icon.name);
 
-                    return <div key={index} style={{ height: "5.1rem" }}>
+                    return <div key={icon.name} style={{ height: "5.1rem" }}>
                         <img
                             className={`buff-image ${selectedIcons.includes(index) ? "buff-image-selected" : "buff-image-unselected"}`}
                             src={icon.image}

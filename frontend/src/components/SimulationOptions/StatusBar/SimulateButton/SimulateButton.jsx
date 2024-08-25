@@ -38,6 +38,7 @@ const SimulateButton = () => {
         const lightsmithTalents = encodeURIComponent(JSON.stringify(characterData.lightsmithTalents));
         const heraldOfTheSunTalents = encodeURIComponent(JSON.stringify(characterData.heraldOfTheSunTalents));
         const consumables = encodeURIComponent(JSON.stringify(characterData.consumables));
+        console.log(characterData.consumables)
         const equipment = encodeURIComponent(JSON.stringify(characterData.equipment));
 
         const encounterLength = simulationParameters.encounterLength;

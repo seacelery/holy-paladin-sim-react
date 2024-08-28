@@ -18,12 +18,15 @@ const SimulateButton = () => {
     const { socket } = useContext(SocketContext);
 
     const buttonRef = useRef(null);
+    let abortController;
 
     const [simulating, setSimulating] = useState(false);
     const [simulationProgress, setSimulationProgress] = useState(0);
     const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
     const [showCancelledAnimation, setShowCancelledAnimation] = useState(false);
-
+    const [simulationName, setSimulationName] = useState("Simulation 1");
+    const [simulationCount, setSimulationCount] = useState(1);
+    
     useEffect(() => {
         if (socket) {
             socket.on("iteration_update", (data) => {
@@ -41,7 +44,9 @@ const SimulateButton = () => {
         };
     }, [socket, simulating, simulationParameters.iterations]);
 
-    let abortController;
+    const handleSimulationNameChange = (e) => {
+        setSimulationName(e.target.value);
+    };
 
     const cancelSimulation = () => {
         if (abortController) {
@@ -98,8 +103,14 @@ const SimulateButton = () => {
             console.log(data);
             consolidateOverlappingBuffs(data.results.priority_breakdown);
 
+            setSimulationCount(prevCount => prevCount + 1);
+            if (simulationName.includes("Simulation")) {
+                setSimulationName(`Simulation ${simulationCount + 1}`);
+            };
+
             const newSimulationResult = {
                 id: uuidv4(),
+                name: simulationName,
                 ...data
             };
 
@@ -149,7 +160,7 @@ const SimulateButton = () => {
 
     return (
         <div className="simulate-button-container" ref={buttonRef}>
-            <input className="simulation-name-text-input" defaultValue="Simulation 1" />
+            <input className="simulation-name-text-input" value={simulationName} onChange={(e) => setSimulationName(e.target.value)} />
             {(simulating || showSuccessAnimation || showCancelledAnimation)
                 ? <ProgressBar simulationProgress={simulationProgress} showSuccessAnimation={showSuccessAnimation} showCancelledAnimation={showCancelledAnimation} />
                 : <Button className="simulate-button" grow={false} onClick={runSimulation} disabled={simulating}>Simulate</Button>

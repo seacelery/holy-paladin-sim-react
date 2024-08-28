@@ -17,17 +17,26 @@ const SimulationResult = ({ simulationResult, setSimulationResults }) => {
     const [expanded, setExpanded] = useState(true);
     const [activeTab, setActiveTab] = useState("Healing");
 
-    const [simulationName, setSimulationName] = useState("Simulation 1");
-
     const removeSimulationResult = () => {
         setSimulationResults((prevState) =>
             prevState.filter((result) => result !== simulationResult)
         );
     };
 
-    // useEffect(() => {
-    //     setActiveTab("Healing");
-    // }, [simulationResult]);
+    const handleSimulationNameChange = (value) => {
+        setSimulationResults((prevState) =>
+            prevState.map((result) => {
+                if (result === simulationResult) {
+                    return {
+                        ...result,
+                        name: value,
+                    };
+                } else {
+                    return result;
+                };
+            })
+        );
+    };
 
     return (
         <div className="simulation-result">
@@ -48,13 +57,14 @@ const SimulationResult = ({ simulationResult, setSimulationResults }) => {
                     </div>
                     <input
                         className="result-header-simulation-name"
-                        value={simulationName}
-                        onChange={(e) => setSimulationName(e.target.value)}
+                        value={simulationResult.name}
+                        onChange={(e) => handleSimulationNameChange(e.target.value)}
                         onKeyDown={(e) => {
                             if (e.key === "Enter") {
                                 e.target.blur();
                             };
                         }}
+                        onClick={(e) => e.stopPropagation()}
                     ></input>
                 </div>
 

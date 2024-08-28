@@ -88,4 +88,15 @@ const majorCooldownsRow = [
     "Divine Favor", "Lay on Hands", "Arcane Torrent", "Fireblood", "Gift of the Naaru"
 ];
 
-export { healingHeaders, selfBuffHeaders, targetBuffHeaders, manaHeaders, holyPowerHeaders, excludedSpells, excludedSpellsOnlyResourcesAndCasts, excludedSpellsCasts, excludedSpellsCastsAverageHits, excludedSpellsCrit, excludedSpellsAverage, selfBuffsMap, targetBuffsMap, overlappingBuffs,overlappingBuffsData, manaMap, generatorCooldownsRow, majorCooldownsRow };
+const abilityNames = [
+    "Holy Shock", "Holy Light", "Flash of Light", "Word of Glory", "Light of Dawn", "Divine Toll", 
+    "Holy Prism", "Beacon of Virtue", "Divine Favor", "Hand of Divinity",
+    "Lay on Hands", "Blessing of the Seasons", "Tyr's Deliverance",
+    "Avenging Wrath", "Avenging Crusader", "Judgment",
+    "Crusader Strike", "Consecration", "Barrier of Faith", "Aura Mastery", 
+    "Hammer of Wrath", "Eternal Flame", "Ovinax's Mercurial Egg", "Treacherous Transmitter", 
+    "Creeping Coagulum", "High Speaker's Accretion", "Siphoning Phylactery Shard", "Holy Armament",
+    "Tempered Potion", "Algari Mana Potion", "Slumbering Soul Serum"
+];
+
+export { healingHeaders, selfBuffHeaders, targetBuffHeaders, manaHeaders, holyPowerHeaders, excludedSpells, excludedSpellsOnlyResourcesAndCasts, excludedSpellsCasts, excludedSpellsCastsAverageHits, excludedSpellsCrit, excludedSpellsAverage, selfBuffsMap, targetBuffsMap, overlappingBuffs,overlappingBuffsData, manaMap, generatorCooldownsRow, majorCooldownsRow, abilityNames };

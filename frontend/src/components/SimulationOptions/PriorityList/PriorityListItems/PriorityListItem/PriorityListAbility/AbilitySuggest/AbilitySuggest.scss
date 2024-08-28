@@ -1,0 +1,41 @@
+.ability-suggestions-container {
+    position: absolute;
+    top: 4.1rem;
+    left: -0.1rem;
+    width: 15.0rem;
+    max-height: 28.0rem;
+    overflow: auto;
+    list-style: none;
+    background-color: var(--panel-colour-table-2);
+    z-index: 100;
+    border: 0.1rem solid var(--border-colour-3);
+    border-top: none;
+
+    .ability-suggestion {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: .8rem;
+        height: 4.0rem;
+        line-height: 1.5rem;
+        font-size: 1.3rem;
+        color: var(--light-font-colour);
+    }
+
+    .ability-suggestion:hover {
+        background-color: var(--panel-colour-4);
+    }
+}
+
+.ability-suggestions-container::-webkit-scrollbar {
+    width: .8rem;
+}
+
+.ability-suggestions-container::-webkit-scrollbar-thumb {
+    border-left: .2rem solid var(--panel-colour-table-2);
+    border-right: .2rem solid var(--panel-colour-table-2);
+}
+
+.ability-suggestions-container::-webkit-scrollbar-track {
+    background-color: var(--panel-colour-table-2);
+}

@@ -1,0 +1,133 @@
+.simulation-progress-bar-container {
+    width: 20rem;
+    position: relative;
+
+    justify-content: center;
+    align-items: center;
+
+    transition: opacity 0.2s ease-in;
+    
+    height: 3.8rem;
+    
+    border: 0.1rem solid var(--border-colour-3);
+    border-radius: .3rem;
+
+    font-size: 2.0rem;
+    color: var(--light-font-colour);
+
+    background-color: var(--panel-colour-table-2);
+    box-shadow: .3rem .5rem .6rem 0 rgba(36, 14, 25, 0.15);
+    transition: opacity 0.4s ease-in;
+
+    user-select: none;
+    cursor: pointer;
+}
+
+.simulation-progress-bar-text, .simulation-progress-bar-check, .simulation-progress-bar-cancel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+    color: var(--light-font-colour);
+}
+
+.simulation-progress-bar-check-container, .simulation-progress-bar-cancel-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 100%;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+
+    transition: box-shadow 1s ease-in-out;
+}
+
+.simulation-progress-bar-checkmark {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 5;
+    stroke: #fff;
+    stroke-miterlimit: 10;
+    margin: 2% auto;
+}
+
+.simulation-progress-bar-cancel {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 5;
+    stroke: #fff;
+    stroke-miterlimit: 10;
+    margin: 2% auto;
+}
+
+.simulation-progress-bar-checkmark-circle, .simulation-progress-bar-cancel-circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 5;
+    stroke-miterlimit: 10;
+    stroke: #fff;
+}
+
+.simulation-progress-bar-checkmark-check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+}
+
+.animate-circle {
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.animate-check {
+    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+.animate-checkmark {
+    animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+}
+
+.simulation-progress-bar-cancel {
+    stroke: var(--light-font-colour);
+}
+
+.simulation-progress-bar-cancel-x {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 56;
+    stroke-dashoffset: 56;
+}
+
+.animate-x {
+    animation: stroke 1s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+@keyframes stroke {
+    100% { stroke-dashoffset: 0; }
+}
+
+@keyframes scale {
+    0%, 100% { transform: none; }
+    50% { transform: scale3d(1.1, 1.1, 1); }
+}
+
+.simulation-progress-bar {
+    width: 0%;
+    height: 100%;
+
+    border: 1px solid var(--border-colour-3);
+	background: linear-gradient(to bottom, #16a137 0%,#15b12c 50%,#12aa2b 51%,#17c52e 100%);
+    transition: width 0.09s ease-in-out;
+}

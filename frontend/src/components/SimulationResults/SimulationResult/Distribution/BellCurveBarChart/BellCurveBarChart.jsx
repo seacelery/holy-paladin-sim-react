@@ -150,7 +150,7 @@ const BellCurveBarChart = ({ data, title, colour }) => {
 
             if (adjustedMouseX >= 0 && adjustedMouseX <= width && adjustedMouseY >= 0 && adjustedMouseY <= height) {
                 const index = Math.floor((adjustedMouseX / width) * intervals.length);
-                const interval = intervals[index].interval;
+                const interval = intervals[index]?.interval;
 
                 setTooltipContent(interval);
                 setTooltipPosition({

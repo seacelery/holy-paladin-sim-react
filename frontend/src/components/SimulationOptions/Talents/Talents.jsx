@@ -18,8 +18,6 @@ const Talents = () => {
     const { characterData, setCharacterData } =
         useContext(CharacterDataContext);
 
-    console.log(characterData)
-
     const classTalents = {
         talentsData: characterData ? characterData.classTalents : "",
         liveTalents: classTalentsLive,

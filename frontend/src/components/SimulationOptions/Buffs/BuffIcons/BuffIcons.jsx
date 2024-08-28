@@ -33,13 +33,6 @@ const BuffIcons = ({ rawIcons, label, dataType, showTooltip = false, exclusiveSe
     const [tooltipText, setTooltipText] = useState(null);
     const iconRefs = useRef([]);
 
-    // useEffect(() => {
-    //     const defaultSelectedIndices = icons.map((icon, index) => 
-    //         defaultSelectedIcons.includes(icon.name) ? index : null
-    //     );
-    //     setSelectedIcons(defaultSelectedIndices);
-    // }, [defaultSelectedIcons, icons]);
-
     const handleMouseEnter = (iconName, index) => {
         const effect = rawIcons[iconName].effect;
         const formattedEffect = colourStatWords(effect);

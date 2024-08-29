@@ -9,7 +9,7 @@ import EditItemTrinkets from "./EditItemTrinkets/EditItemTrinkets";
 import { generateItemStats } from "../../../../../utils/item-level-calculations/generate-item-stats";
 import { generateItemEffects } from "../../../../../utils/item-level-calculations/generate-item-effect";
 
-const EditItem = ({ setCharacterData, updateStats, item, equipmentData, selectedSlot, updateEquipment = false, setNewItem = null }) => {
+const EditItem = ({ setCharacterData, updateStats, item, equipmentData, selectedSlot, updateEquipment = false, setNewItem = null, trinketOptions = false }) => {
     const itemIcon = item ? item.item_icon : itemSlotToDefaultIcon[selectedSlot];
 
     const [itemStats, setItemStats] = useState(item ? item.stats : {});
@@ -105,7 +105,7 @@ const EditItem = ({ setCharacterData, updateStats, item, equipmentData, selected
                         </>
                     )}
                     {(selectedSlot === "Trinket 1" || selectedSlot === "Trinket 2") && (
-                        <EditItemTrinkets item={item} />
+                        <EditItemTrinkets setCharacterData={setCharacterData} selectedSlot={selectedSlot} updateEquipment={updateEquipment} setNewItem={setNewItem} item={item} trinketOptions={trinketOptions} />
                     )}
                 </div>
             </div>

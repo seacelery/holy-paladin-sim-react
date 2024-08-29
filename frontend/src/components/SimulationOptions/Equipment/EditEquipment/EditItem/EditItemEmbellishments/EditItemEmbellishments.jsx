@@ -8,7 +8,8 @@ import {
     craftedItems,
     ptrCraftedItems,
     embellishmentItems,
-    ptrEmbellishmentItems
+    ptrEmbellishmentItems,
+    craftedEmbellishments
 } from "../../../../../../utils/item-level-calculations/item-slot-bonuses";
 import { itemSlotsMap } from "../../../../../../utils/item-slots-map";
 
@@ -50,6 +51,9 @@ const EditItemEmbellishments = ({ setCharacterData, updateStats, item, selectedS
     
                 if (!selectedEmbellishment || selectedEmbellishment === "No embellishments available") {
                     return prevState;
+                } else if (craftedEmbellishments.includes(item.name)) {
+                    newState.equipment[itemSlotsMap[selectedSlot.toLowerCase()]].effects = [embellishmentsDataSet[selectedEmbellishment]];
+                    newState.equipment[itemSlotsMap[selectedSlot.toLowerCase()]].limit = "Crafted Embellishment";
                 } else if (selectedEmbellishment === "No embellishment") {
                     newState.equipment[itemSlotsMap[selectedSlot.toLowerCase()]].effects = [];
                     newState.equipment[itemSlotsMap[selectedSlot.toLowerCase()]].limit = null;
@@ -72,7 +76,7 @@ const EditItemEmbellishments = ({ setCharacterData, updateStats, item, selectedS
     }, [selectedEmbellishment]);
 
     const toggleDropdown = () => {
-        if (embellishmentsAvailable) {
+        if (embellishmentsAvailable && !craftedEmbellishments.includes(item.name)) {
             setDropdownOpen((prevState) => !prevState);
         };
     };
@@ -80,7 +84,7 @@ const EditItemEmbellishments = ({ setCharacterData, updateStats, item, selectedS
     return <div className="edit-item-embellishments">
         <Dropdown
             dropdownOptions={embellishments}
-            selectedOption={`${embellishmentsAvailable ? (selectedEmbellishment === "No embellishment" ? "No embellishment" : `Embellished: ${selectedEmbellishment}`) : "No embellishments available"}`}
+            selectedOption={`${craftedEmbellishments.includes(item.name) ? `Embellished: ${item.name}` : embellishmentsAvailable ? (selectedEmbellishment === "No embellishment" ? "No embellishment" : `Embellished: ${selectedEmbellishment}`) : "No embellishments available"}`}
             setSelectedOption={setSelectedEmbellishment}
             isOpen={dropdownOpen}
             toggleDropdown={toggleDropdown}
@@ -88,9 +92,10 @@ const EditItemEmbellishments = ({ setCharacterData, updateStats, item, selectedS
                 ${embellishments.length > 3 ? "edit-embellishments-dropdown-narrow" : ""} 
                 edit-embellishments-dropdown
                 ${embellishments.length >= 3 ? `item-rarity-${item.quality.toLowerCase()} item-rarity-${item.quality.toLowerCase()}-border` : ""}
-                ${selectedEmbellishment === "No embellishment" ? "" : selectedEmbellishment === "No embellishments available" ? "no-effect-text" : "effect-text"}`
+                ${selectedEmbellishment === "No embellishment" ? "" : selectedEmbellishment === "No embellishments available" ? "no-effect-text" : "effect-text"}
+                ${craftedEmbellishments.includes(item.name) ? "effect-text" : ""}`
             }
-            hideArrow={!embellishmentsAvailable}
+            hideArrow={!embellishmentsAvailable || craftedEmbellishments.includes(item.name)}
         />
     </div>;
 };

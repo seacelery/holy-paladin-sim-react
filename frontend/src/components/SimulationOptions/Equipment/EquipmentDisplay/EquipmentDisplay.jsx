@@ -25,7 +25,7 @@ const EquipmentDisplay = ({ characterData, equipmentData, selectedItem, setSelec
         let counter = 0;
 
         for (const slot in equipmentData) {
-            if (equipmentData[slot].limit && equipmentData[slot].limit.includes("Embellished")) {
+            if ((equipmentData[slot].limit && equipmentData[slot].limit.includes("Embellished")) || (equipmentData[slot].limit && equipmentData[slot].limit.includes("Crafted Embellishment"))) {
                 counter++;
             };
         };

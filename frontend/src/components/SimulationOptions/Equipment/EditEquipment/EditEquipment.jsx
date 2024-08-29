@@ -114,6 +114,7 @@ const EditEquipment = ({
                         item={selectedItem}
                         selectedSlot={selectedSlot}
                         updateEquipment={true}
+                        trinketOptions={true}
                     />
                 </div>
 

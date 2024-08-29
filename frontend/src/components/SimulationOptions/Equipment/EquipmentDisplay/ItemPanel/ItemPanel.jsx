@@ -82,7 +82,9 @@ const ItemPanel = ({ characterData, itemData, selectedItem, onClick }) => {
                     <div className="item-slot-category">
                         {itemData.limit && itemData.limit.includes("Embellished") && itemData.effects.length > 0
                             ? formatEmbellishment(itemData.effects)
-                            : null
+                            : itemData.limit && itemData.limit.includes("Crafted Embellishment") 
+                                ? `Embellished: ${itemData.name}`
+                                : null
                         } 
                         <div className="item-panel-tier-bonus">
                             {getTierSet(itemData.name)}

@@ -122461,7 +122461,7 @@ const itemData = [
         "stats": {},
         "gems": [],
         "enchantments": [],
-        "limit": null
+        "limit": "Crafted Embellishment",
     },
     {
         "effects": [
@@ -122519,7 +122519,7 @@ const itemData = [
         },
         "gems": [],
         "enchantments": [],
-        "limit": null
+        "limit": "Crafted Embellishment",
     },
     {
         "effects": [
@@ -122828,7 +122828,8 @@ const itemData = [
                 "effect_values": [
                     {"base_value": 95, "effect_type": "scalar", "effect_coefficient": 0.02493842691, "allocation_type": "no_multiplier"},
                     {"base_value": 108, "effect_type": "scalar", "effect_coefficient": 0.05418000743, "allocation_type": "rating_multiplier"}
-                ]
+                ],
+                "trinket_options": "Some Movement"
             }
         ],
         "name": "Ovinax's Mercurial Egg",

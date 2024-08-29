@@ -45,43 +45,6 @@ const convertPriorityListToString = (priorityList) => {
     return priorityList.join("\n");
 };
 
-const infoModalHTML = `
-    Conditions<div id="info-modal-divider"></div>
-    Time<br>
-    Timers<br>
-    Fight length<br>
-    Mana<br>
-    Holy Power<br>
-    Ability name cooldown<br>
-    Ability name charges<br>
-    Buff name active/not active<br>
-    Buff name duration<br>
-    Buff name stacks<br>
-    Talent name talented/not talented<br>
-    Previous Ability<br>
-    Overhealing<br>
-    <br>
-    Operations<div id="info-modal-divider"></div>
-    Condition = or <span class="aligned">!=</span> Value<br>
-    Condition &gt; or <span class="aligned">&gt;=</span> Value<br>
-    Condition &lt; or <span class="aligned">&lt;=</span> Value<br>
-    Value &lt; or <span class="aligned">&lt;=</span> Condition &lt; or <span class="aligned">&lt;=</span> Value<br>
-    Timers = [Values]<br>
-    Timers = [Values]+<br>
-    <br>
-    Examples<br>
-    <div id="info-modal-divider"></div>
-    Infusion of Light stacks = 2<br>
-    Mana &lt;= 50%<br>
-    30 < Time <= 40<br>
-    Beacon of Virtue cooldown <= 3 * GCD<br>
-    Timers = [0, 150, 300]<br>
-    Timers = [30]+<br>
-    Previous Ability = Daybreak<br>
-    Light of Dawn overhealing > 70%<br>
-    Holy Infusion talented
-`;
-
 const infoModalContent = [
     {
         header: "Conditions",
@@ -99,6 +62,7 @@ const infoModalContent = [
             "Talent name talented/not talented",
             "Previous Ability",
             "Overhealing",
+            "Reset buff name"
         ],
     },
     {
@@ -123,7 +87,7 @@ const infoModalContent = [
             "Timers = [30]+",
             "Previous Ability = Daybreak",
             "Light of Dawn overhealing > 70%",
-            "Holy Infusion talented",
+            "Awestruck talented",
         ],
     },
 ]

@@ -67,8 +67,8 @@ const ImportCharacterMain = ({ setCharacterImported }) => {
                     ptr: data.ptr,
                     classTalents: data.class_talents,
                     specTalents: data.spec_talents,
-                    lightsmithTalents: { ...baseLightsmithTalents },
-                    heraldOfTheSunTalents: { ...baseHeraldOfTheSunTalents },
+                    lightsmithTalents: data.lightsmith_talents,
+                    heraldOfTheSunTalents: data.herald_of_the_sun_talents,
                     equipment: updateEquipmentWithEffectValues(data.equipment),
                     stats: data.stats
                 });

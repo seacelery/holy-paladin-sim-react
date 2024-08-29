@@ -32,7 +32,6 @@ const abilities = [
     "Lay on Hands",
     "Light of Dawn",
     "Light of the Martyr",
-    "Light's Hammer",
     "Merciful Auras",
     "Overflowing Light",
     "Resplendent Light",
@@ -47,23 +46,13 @@ const abilities = [
     "Word of Glory"
 ];
 const trinkets = [
-    "Blossom of Amirdrassil Absorb",
-    "Blossom of Amirdrassil Large HoT",
-    "Blossom of Amirdrassil Small HoT",
-    "Broodkeeper's Promise",
-    "Echoing Tyrstone",
-    "Miniature Singing Stone",
-    "Rashok's Molten Heart",
-    "Restorative Sands",
-    "Smoldering Seedling",
     "Scrapsinger's Symphony",
     "Gruesome Syringe",
     "Creeping Coagulum",
     "Viscous Coaglam"
 ];
 const miscellaneous = [
-    "Dreaming Devotion",
-    "Larodar's Fiery Reverie",
+    "Authority of Fiery Resolve",
     "Leech"
 ];
 

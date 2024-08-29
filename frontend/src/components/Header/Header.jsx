@@ -16,7 +16,7 @@ const Header = ({ theme, toggleTheme, setCharacterImported, setActiveTab }) => {
 
     const versionOptions = [
         { id: "live", name: "Patch 11.0.0" },
-        { id: "ptr", name: "The War Within" }
+        // { id: "ptr", name: "The War Within" }
     ];
 
     const currentVersionName = versionOptions.find(option => option.id === version).name;

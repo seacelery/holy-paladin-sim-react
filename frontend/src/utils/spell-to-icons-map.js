@@ -85,6 +85,7 @@ const spellToIconsMap = {
     "Tirion's Devotion": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_revivechampion.jpg",
     "Touch of Light": "https://render.worldofwarcraft.com/eu/icons/56/achievment_raid_houroftwilight.jpg",
     "Tyr's Deliverance": "https://render.worldofwarcraft.com/eu/icons/56/inv_mace_2h_artifactsilverhand_d_01.jpg",
+    "Truth Prevails": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_spiritualguidence.jpg",
     "Veneration": "https://render.worldofwarcraft.com/eu/icons/56/ability_crown_of_the_heavens_icon.jpg",
     "Word of Glory": "https://render.worldofwarcraft.com/eu/icons/56/inv_helmet_96.jpg",
 
@@ -97,6 +98,7 @@ const spellToIconsMap = {
     "Grotesque Vial": "https://render.worldofwarcraft.com/eu/icons/56/inv_summerfest_firepotion.jpg",
     "Slumbering Soul Serum": "https://wow.zamimg.com/images/wow/icons/large/inv_flask_green.jpg",
     "Tempered Potion": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_potiona4.jpg",
+    "Beledar's Grace": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_potiond5.jpg",
 
     // trinkets
     "Mirror of Fractured Tomorrows": "https://render.worldofwarcraft.com/eu/icons/56/achievement_dungeon_ulduarraid_misc_06.jpg",
@@ -119,10 +121,14 @@ const spellToIconsMap = {
     "Viscous Coaglam": "https://wow.zamimg.com/images/wow/icons/large/spell_priest_shadoworbs.jpg",
     "Ovinax's Mercurial Egg": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_purple.jpg",
     "Creeping Coagulum": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_creepingcoagulum_purple.jpg",
+    "Creeping Coagulum ": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_creepingcoagulum_purple.jpg",
     "Gruesome Syringe": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_gruesomesyringe_red.jpg",
     "Sureki Zealot's Insignia": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_113.jpg",
     "Treacherous Transmitter": "https://wow.zamimg.com/images/wow/icons/large/inv_etherealraid_communicator_color1.jpg",
     "Imperfect Ascendancy Serum": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_dpotion_a25.jpg",
+    "Corrupted Egg Shell": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_cat_trinket09.jpg",
+    "Spymaster's Web": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_nightelfspyglass.jpg",
+    "Scrapsinger's Symphony": "https://wow.zamimg.com/images/wow/icons/large/inv_10_blacksmithing_craftedoptional_engineering_color1.jpg",
 
     // enchants
     "Dreaming Devotion": "https://render.worldofwarcraft.com/eu/icons/56/item_herbd.jpg",

@@ -23,6 +23,7 @@ import Button from "../../Button/Button";
 const Buffs = () => {
     const { version } = useContext(VersionContext);
     const { characterData, setCharacterData } = useContext(CharacterDataContext);
+    console.log(characterData)
     const consumables = characterData.consumables;
 
     const flasksIcons = version === "live" ? flasks : ptrFlasks;

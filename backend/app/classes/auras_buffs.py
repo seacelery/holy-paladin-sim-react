@@ -1299,10 +1299,10 @@ class SavingGraces(Buff):
         super().__init__("Saving Graces", 10, base_duration=10)
         
     def apply_effect(self, caster, current_time=None):
-        caster.healing_multiplier *= 1.15
+        caster.healing_multiplier *= 1.10
         
     def remove_effect(self, caster, current_time=None):
-        caster.healing_multiplier /= 1.15
+        caster.healing_multiplier /= 1.10
 
 
 class TemperedPotionBuff(Buff):
@@ -1320,23 +1320,23 @@ class TemperedPotionBuff(Buff):
         
     def apply_effect(self, caster, current_time=None):
         if "Flask of Tempered Swiftness" in self.tempered_buffs:
-            caster.update_stat("haste", 2168)
+            caster.update_stat("haste", 2617)
         if "Flask of Tempered Aggression" in self.tempered_buffs:
-            caster.update_stat("crit", 2168)
+            caster.update_stat("crit", 2617)
         if "Flask of Tempered Mastery" in self.tempered_buffs:
-            caster.update_stat("mastery", 2168)
+            caster.update_stat("mastery", 2617)
         if "Flask of Tempered Versatility" in self.tempered_buffs:
-            caster.update_stat("versatility", 2168)
+            caster.update_stat("versatility", 2617)
         
     def remove_effect(self, caster, current_time=None):
         if "Flask of Tempered Swiftness" in self.tempered_buffs:
-            caster.update_stat("haste", -2168)
+            caster.update_stat("haste", -2617)
         if "Flask of Tempered Aggression" in self.tempered_buffs:
-            caster.update_stat("crit", -2168)
+            caster.update_stat("crit", -2617)
         if "Flask of Tempered Mastery" in self.tempered_buffs:
-            caster.update_stat("mastery", -2168)
+            caster.update_stat("mastery", -2617)
         if "Flask of Tempered Versatility" in self.tempered_buffs:
-            caster.update_stat("versatility", -2168)
+            caster.update_stat("versatility", -2617)
 
 
 class SlumberingSoulSerumBuff(Buff):
@@ -1345,7 +1345,9 @@ class SlumberingSoulSerumBuff(Buff):
         super().__init__("Slumbering Soul Serum", 10, base_duration=10)
         
     def apply_effect(self, caster, current_time=None):
-        slumbering_soul_serum_mana_gain = 218390
+        slumbering_soul_serum_mana_gain = 375000
+        if "Algari Alchemist Stone" in caster.trinkets:
+            slumbering_soul_serum_mana_gain *= 1.4
         caster.mana += slumbering_soul_serum_mana_gain
         update_mana_gained(caster.ability_breakdown, self.name, slumbering_soul_serum_mana_gain)
         caster.is_occupied = True
@@ -1499,6 +1501,128 @@ class GreatCeruleanSeaFood(Buff):
         caster.update_stat("mastery", -67)
         caster.update_stat("versatility", -67)
         
+
+class FeastOfTheDivineDay(Buff):
+    
+    def __init__(self):
+        super().__init__("Feast of the Divine Day", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.spell_power += caster.get_effective_spell_power(446)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(446)
+        
+
+class TheSushiSpecial(Buff):
+    
+    def __init__(self):
+        super().__init__("The Sushi Special", 10000, base_duration=10000)
+        self.highest_stat = None
+        
+    def apply_effect(self, caster, current_time=None):
+        self.highest_stat = caster.find_highest_secondary_stat_rating()
+        caster.update_stat(self.highest_stat, 469)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat(self.highest_stat, -469)
+        
+
+class SaltBakedSeafood(Buff):
+    
+    def __init__(self):
+        super().__init__("Salt Baked Seafood", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", 235)
+        caster.update_stat("crit", 235)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", -235)
+        caster.update_stat("crit", -235)
+        
+        
+class MarinatedTenderloins(Buff):
+    
+    def __init__(self):
+        super().__init__("Marinated Tenderloins", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", 235)
+        caster.update_stat("versatility", 235)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", -235)
+        caster.update_stat("versatility", -235)
+        
+
+class ChippyTea(Buff):
+    
+    def __init__(self):
+        super().__init__("Chippy Tea", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", 235)
+        caster.update_stat("haste", 235)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("mastery", -235)
+        caster.update_stat("haste", -235)
+        
+
+class DeepfinPatty(Buff):
+    
+    def __init__(self):
+        super().__init__("Deepfin Patty", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("haste", 235)
+        caster.update_stat("crit", 235)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("haste", -235)
+        caster.update_stat("crit", -235)
+        
+
+class SweetAndSpicySoup(Buff):
+    
+    def __init__(self):
+        super().__init__("Sweet and Spicy Soup", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("haste", 235)
+        caster.update_stat("versatility", 235)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("haste", -235)
+        caster.update_stat("versatility", -235)
+        
+
+class FishAndChips(Buff):
+    
+    def __init__(self):
+        super().__init__("Fish and Chips", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", 235)
+        caster.update_stat("crit", 235)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", -235)
+        caster.update_stat("crit", -235)
+        
+
+class StuffedCavePeppers(Buff):
+    
+    def __init__(self):
+        super().__init__("Stuffed Cave Peppers", 10000, base_duration=10000)
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.spell_power += caster.get_effective_spell_power(223)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(223)
+        
         
 # weapon imbues
 class BuzzingRune(Buff):
@@ -1594,10 +1718,10 @@ class CrystallizedAugmentRune(Buff):
         super().__init__("Crystallized Augment Rune", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.spell_power += caster.get_effective_spell_power(87)
+        caster.spell_power += caster.get_effective_spell_power(733)
         
     def remove_effect(self, caster, current_time=None):
-        caster.spell_power -= caster.get_effective_spell_power(87)
+        caster.spell_power -= caster.get_effective_spell_power(733)
         
         
 # RAID BUFFS
@@ -1607,10 +1731,10 @@ class ArcaneIntellect(Buff):
         super().__init__("Arcane Intellect", 10000, base_duration=10000)
         
     def apply_effect(self, caster, current_time=None):
-        caster.spell_power *= 1.05
+        caster.spell_power *= 1.03
         
     def remove_effect(self, caster, current_time=None):
-        caster.spell_power /= 1.05
+        caster.spell_power /= 1.03
         
         
 class MarkOfTheWild(Buff):
@@ -2146,6 +2270,25 @@ class AlacritousAlchemistStoneBuff(Buff):
         caster.abilities["Potion"].shared_cooldown_end_time -= 10
         caster.abilities["Aerated Mana Potion"].remaining_cooldown -= 10
         caster.abilities["Elemental Potion of Ultimate Power"].remaining_cooldown -= 10
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= caster.get_effective_spell_power(self.trinket_first_value)
+        
+
+class AlgariAlchemistStoneBuff(Buff):
+    
+    BASE_PPM = 1
+    
+    def __init__(self, caster):
+        super().__init__("Algari Alchemist Stone", 15, base_duration=15)
+        trinket_effect = caster.trinkets[self.name]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        # intellect
+        self.trinket_first_value = trinket_values[0]
+        
+    def apply_effect(self, caster, current_time=None):        
+        caster.spell_power += caster.get_effective_spell_power(self.trinket_first_value)
         
     def remove_effect(self, caster, current_time=None):
         caster.spell_power -= caster.get_effective_spell_power(self.trinket_first_value)
@@ -3163,6 +3306,95 @@ class DreamtendersCharm(Buff):
         
     def remove_effect(self, caster, current_time=None):
         caster.update_stat("crit", self.embellishment_first_value * self.current_stacks)
+    
+    
+class DarkmoonSigilAscension(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Darkmoon Sigil: Ascension", 10000, base_duration=10000, current_stacks=1, max_stacks=11)
+        self.stacks_to_apply = 1
+        embellishment_effect = caster.embellishments[self.name]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        self.first_stack = True
+        self.first_time_reaching_ten_stacks = True
+        
+        self.embellishment_first_value = 89
+        if "Writhing Armor Banding" in caster.embellishments:
+            self.embellishment_first_value *= 2
+        caster.time_based_stacking_buffs[self] = 8
+        
+        self.chosen_stat = None
+        
+    def apply_effect(self, caster, current_time=None):
+        if self.chosen_stat and self.current_stacks == 10:
+            caster.update_stat(self.chosen_stat, -self.embellishment_first_value * (self.current_stacks))
+        elif self.chosen_stat:
+            caster.update_stat(self.chosen_stat, -self.embellishment_first_value * self.current_stacks)
+            
+        if self.first_time_reaching_ten_stacks:
+            caster.update_stat(self.chosen_stat, self.embellishment_first_value)
+            self.first_time_reaching_ten_stacks = False
+        
+        available_stats = ["haste", "crit", "mastery", "versatility"]
+        if self.chosen_stat in available_stats:
+            available_stats.remove(self.chosen_stat)
+        
+        self.chosen_stat = random.choice(available_stats)
+        if self.current_stacks == 10:
+            caster.update_stat(self.chosen_stat, self.embellishment_first_value * (self.current_stacks))
+        else:
+            caster.update_stat(self.chosen_stat, self.embellishment_first_value * (self.current_stacks + 1))
+            
+        
+        if self.current_stacks == 1 and self.first_stack:
+            caster.update_stat(self.chosen_stat, -self.embellishment_first_value * (self.current_stacks + 1))
+            self.current_stacks -= 1
+            self.first_stack = False
+            
+        if self.current_stacks == 10:
+            self.current_stacks -= 1
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat(self.chosen_stat, -self.embellishment_first_value * self.current_stacks)
+    
+
+class DarkmoonSigilSymbiosis(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Darkmoon Sigil: Symbiosis", 10000, base_duration=10000, current_stacks=1, max_stacks=5)
+        self.stacks_to_apply = 1
+        embellishment_effect = caster.embellishments[self.name]["effect"]
+        embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
+        
+        self.embellishment_first_value = 131
+        if "Writhing Armor Banding" in caster.embellishments:
+            self.embellishment_first_value *= 2
+        caster.time_based_stacking_buffs[self] = 10
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", self.embellishment_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", self.embellishment_first_value * self.current_stacks)
+        
+
+class DarkmoonDeckSymbiosis(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Darkmoon Deck: Symbiosis", 10000, base_duration=10000, current_stacks=1, max_stacks=5)
+        self.stacks_to_apply = 1
+        trinket_effect = caster.trinkets["Darkmoon Deck: Symbiosis"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        
+        caster.time_based_stacking_buffs[self] = 10
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", self.trinket_first_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", self.trinket_first_value * self.current_stacks)
         
 
 class MagazineOfHealingDarts(Buff):
@@ -3506,24 +3738,10 @@ class AuthorityOfRadiantPower(Buff):
         super().__init__("Authority of Radiant Power", 10, base_duration=10)   
         
     def apply_effect(self, caster, current_time=None):
-        caster.spell_power += caster.get_effective_spell_power(1339)
+        caster.spell_power += caster.get_effective_spell_power(2230)
         
     def remove_effect(self, caster, current_time=None):
-        caster.spell_power -= caster.get_effective_spell_power(1339)
-        
-
-class CouncilsGuile(Buff):
-    
-    BASE_PPM = 2
-    
-    def __init__(self, caster):
-        super().__init__("Council's Guile", 12, base_duration=12)   
-        
-    def apply_effect(self, caster, current_time=None):
-        caster.update_stat("crit", 910)
-        
-    def remove_effect(self, caster, current_time=None):
-        caster.update_stat("crit", -910)
+        caster.spell_power -= caster.get_effective_spell_power(2230)
         
         
 class CouncilsGuile(Buff):
@@ -3534,10 +3752,10 @@ class CouncilsGuile(Buff):
         super().__init__("Council's Guile", 12, base_duration=12)   
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("crit", 910)
+        caster.update_stat("crit", 3910)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("crit", -910)
+        caster.update_stat("crit", -3910)
         
         
 class StormridersFury(Buff):
@@ -3548,10 +3766,10 @@ class StormridersFury(Buff):
         super().__init__("Stormrider's Fury", 12, base_duration=12)   
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("haste", 910)
+        caster.update_stat("haste", 3910)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("haste", -910)
+        caster.update_stat("haste", -3910)
         
 
 class StoneboundArtistry(Buff):
@@ -3562,10 +3780,10 @@ class StoneboundArtistry(Buff):
         super().__init__("Stonebound Artistry", 12, base_duration=12)   
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("mastery", 910)
+        caster.update_stat("mastery", 3910)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("mastery", -910)
+        caster.update_stat("mastery", -3910)
         
 
 class OathswornsTenacity(Buff):
@@ -3576,10 +3794,10 @@ class OathswornsTenacity(Buff):
         super().__init__("Oathsworn's Tenacity", 12, base_duration=12)   
         
     def apply_effect(self, caster, current_time=None):
-        caster.update_stat("versatility", 1360)
+        caster.update_stat("versatility", 3910)
         
     def remove_effect(self, caster, current_time=None):
-        caster.update_stat("versatility", -1360)
+        caster.update_stat("versatility", -3910)
         
 
 class GaleOfShadows(Buff):
@@ -3627,10 +3845,10 @@ class PotionBombOfPower(Buff):
         super().__init__("Potion Bomb of Power", 30, base_duration=30)   
         
     def apply_effect(self, caster, current_time=None):
-        caster.spell_power += caster.get_effective_spell_power(800)
+        caster.spell_power += caster.get_effective_spell_power(632)
         
     def remove_effect(self, caster, current_time=None):
-        caster.spell_power -= caster.get_effective_spell_power(800)
+        caster.spell_power -= caster.get_effective_spell_power(632)
         
 
 class DawnthreadLining(Buff):
@@ -3640,7 +3858,7 @@ class DawnthreadLining(Buff):
         embellishment_effect = caster.embellishments["Dawnthread Lining"]["effect"]
         embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
         
-        self.embellishment_first_value = embellishment_values[0]
+        self.embellishment_first_value = 756
         
     def apply_effect(self, caster, current_time=None):
         caster.update_stat("crit", self.embellishment_first_value)
@@ -3656,7 +3874,7 @@ class DuskthreadLining(Buff):
         embellishment_effect = caster.embellishments["Duskthread Lining"]["effect"]
         embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
         
-        self.embellishment_first_value = embellishment_values[0]
+        self.embellishment_first_value = 756
         
     def apply_effect(self, caster, current_time=None):
         caster.update_stat("versatility", self.embellishment_first_value)
@@ -3697,10 +3915,10 @@ class WrithingArmorBanding(Buff):
         pass
     
 
-class EnergyDistributionBeacon(Buff):
+class EnergyRedistributionBeacon(Buff):
     
     def __init__(self, caster):
-        super().__init__("Energy Distribution Beacon", 10000, base_duration=10000)   
+        super().__init__("Energy Redistribution Beacon", 10000, base_duration=10000)   
         
     def apply_effect(self, caster, current_time=None):
         pass
@@ -3718,10 +3936,7 @@ class BlessedWeaponGrip(Buff):
         embellishment_effect = caster.embellishments["Blessed Weapon Grip"]["effect"]
         embellishment_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", embellishment_effect)]
         
-        print(embellishment_effect)
-        print(embellishment_values)
-        
-        self.embellishment_first_value = embellishment_values[0]
+        self.embellishment_first_value = 185
         self.highest_stat = caster.find_highest_secondary_stat_rating()
         
     def apply_effect(self, caster, current_time=None):

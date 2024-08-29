@@ -13,7 +13,7 @@ from .spells_healing import HolyShock, WordOfGlory, LightOfDawn, FlashOfLight, H
 from .spells_misc import ArcaneTorrent, AeratedManaPotion, Potion, ElementalPotionOfUltimatePowerPotion, AuraMastery, AlgariManaPotion, SlumberingSoulSerum, TemperedPotion
 from .spells_damage import Judgment, CrusaderStrike, HammerOfWrath, Consecration
 from .spells_auras import AvengingWrathSpell, AvengingCrusaderSpell, DivineFavorSpell, TyrsDeliveranceSpell, BlessingOfTheSeasons, FirebloodSpell, GiftOfTheNaaruSpell, HandOfDivinitySpell, BarrierOfFaithSpell, BeaconOfFaithSpell, BeaconOfVirtueSpell, HolyBulwarkSacredWeapon
-from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos, MercifulAuras, SavedByTheLight, OminousChromaticEssence, IncarnatesMarkOfFire, BroodkeepersPromiseHoT, MorningStar, RiteOfAdjurationBuff, RiteOfSanctification, DeliberateIncubation, OvinaxsMercurialEggBuff
+from .auras_buffs import PipsEmeraldFriendshipBadge, BestFriendsWithPip, BestFriendsWithAerwyn, BestFriendsWithUrctos, MercifulAuras, SavedByTheLight, OminousChromaticEssence, IncarnatesMarkOfFire, BroodkeepersPromiseHoT, MorningStar, RiteOfAdjurationBuff, RiteOfSanctification, DeliberateIncubation, OvinaxsMercurialEggBuff, DarkmoonDeckSymbiosis
 from .trinkets import MirrorOfFracturedTomorrows, SmolderingSeedling, NymuesUnravelingSpindle, ConjuredChillglobe, TimeBreachingTalon, SpoilsOfNeltharus, MiniatureSingingStone, HighSpeakersAccretion, SiphoningPhylacteryShard, CreepingCoagulum, OvinaxsMercurialEgg, TreacherousTransmitter, ImperfectAscendancySerumSpell, SpymastersWebSpell, CorruptedEggShell
 from ..utils.talents.base_talent_dictionaries import base_active_class_talents, base_active_spec_talents, base_active_class_talents_ptr, base_active_spec_talents_ptr, base_active_lightsmith_talents, base_herald_of_the_sun_talents
 from ..utils.gems_and_enchants import convert_enchants_to_stats, return_enchants_stats, return_gem_stats
@@ -56,10 +56,10 @@ class Paladin:
         self.lightsmith_talents = copy.deepcopy(self.talents.lightsmith_talents)
         self.herald_of_the_sun_talents = copy.deepcopy(self.talents.herald_of_the_sun_talents)
         
-        self.base_mana = 250000 if not self.ptr else 2500000
+        self.base_mana = 2500000
         self.mana = self.base_mana
         self.max_mana = self.base_mana
-        self.mana_regen_per_second = 2000 if not self.ptr else 20000
+        self.mana_regen_per_second = 20000
         self.innervate_active = False
         
         self.base_flat_haste = 0
@@ -643,6 +643,9 @@ class Paladin:
     def apply_buffs_on_encounter_start(self):
         if self.is_trinket_equipped("Ovinax's Mercurial Egg"):
             self.apply_buff_to_self(OvinaxsMercurialEggBuff(self), 0)
+            
+        if self.is_trinket_equipped("Darkmoon Deck: Symbiosis"):
+            self.apply_buff_to_self(DarkmoonDeckSymbiosis(self), 0)
         
         if self.is_trinket_equipped("Pip's Emerald Friendship Badge"):
             self.apply_buff_to_self(PipsEmeraldFriendshipBadge(self), 0)
@@ -1000,10 +1003,7 @@ class Paladin:
         return_gem_stats(self, gems_from_equipment, stat_values_from_equipment)
         self.gems = gems_from_equipment
         
-        if self.ptr:
-            stat_values_from_equipment["intellect"] += 17647
-        else:  
-            stat_values_from_equipment["intellect"] += 2089
+        stat_values_from_equipment["intellect"] += 17647
         
         stat_values_from_equipment["stamina"] += 3848
         if self.is_talent_active("Sanctified Plates") and self.class_talents["row6"]["Sanctified Plates"]["ranks"]["current rank"] == 1:
@@ -1041,6 +1041,8 @@ class Paladin:
         
         lightsmith_talents = {}
         herald_of_the_sun_talents = {}
+        
+        active_hero_talent_tree = talent_data["active_hero_talent_tree"]["name"] if talent_data.get("active_hero_talent_tree") else None
 
         active_class_talents = copy.deepcopy(base_active_class_talents_ptr)
         active_spec_talents = copy.deepcopy(base_active_spec_talents_ptr)
@@ -1050,15 +1052,28 @@ class Paladin:
 
         class_talent_data = talent_data["specializations"][0]["loadouts"][0]["selected_class_talents"]
         for talent in class_talent_data:
-            talent_name = talent["tooltip"]["talent"]["name"]
-            talent_rank = talent["rank"]
-            class_talents[talent_name] = talent_rank
+            if talent.get("tooltip"):
+                talent_name = talent["tooltip"]["talent"]["name"]
+                talent_rank = talent["rank"]
+                class_talents[talent_name] = talent_rank
         
         spec_talent_data = talent_data["specializations"][0]["loadouts"][0]["selected_spec_talents"]
         for talent in spec_talent_data:
-            talent_name = talent["tooltip"]["talent"]["name"]
-            talent_rank = talent["rank"]
-            spec_talents[talent_name] = talent_rank    
+            if talent.get("tooltip"):
+                talent_name = talent["tooltip"]["talent"]["name"]
+                talent_rank = talent["rank"]
+                spec_talents[talent_name] = talent_rank  
+        
+        if active_hero_talent_tree:
+            hero_talent_data = talent_data["specializations"][0]["loadouts"][0]["selected_hero_talents"]
+            for talent in hero_talent_data:
+                if talent.get("tooltip"):
+                    talent_name = talent["tooltip"]["talent"]["name"]
+                    talent_rank = talent["rank"]
+                    if active_hero_talent_tree == "Lightsmith":
+                        lightsmith_talents[talent_name] = talent_rank
+                    elif active_hero_talent_tree == "Herald of the Sun":
+                        herald_of_the_sun_talents[talent_name] = talent_rank
         
         for talent_row, talents in active_class_talents.items():
             for talent_name, talent_info in talents.items():
@@ -1069,15 +1084,17 @@ class Paladin:
             for talent_name, talent_info in talents.items():
                 if talent_name in spec_talents:
                     active_spec_talents[talent_row][talent_name]["ranks"]["current rank"] = spec_talents[talent_name]
-                
-        for talent_row, talents in active_lightsmith_talents.items():
-            for talent_name, talent_info in talents.items():
-                if talent_name in class_talents:
-                    active_lightsmith_talents[talent_row][talent_name]["ranks"]["current rank"] = lightsmith_talents[talent_name]
-                    
-        for talent_row, talents in active_herald_of_the_sun_talents.items():
-            for talent_name, talent_info in talents.items():
-                if talent_name in spec_talents:
-                    active_herald_of_the_sun_talents[talent_row][talent_name]["ranks"]["current rank"] = herald_of_the_sun_talents[talent_name]
+        
+        if lightsmith_talents:        
+            for talent_row, talents in active_lightsmith_talents.items():
+                for talent_name, talent_info in talents.items():
+                    if talent_name in lightsmith_talents:
+                        active_lightsmith_talents[talent_row][talent_name]["ranks"]["current rank"] = lightsmith_talents[talent_name]
+        
+        if herald_of_the_sun_talents:            
+            for talent_row, talents in active_herald_of_the_sun_talents.items():
+                for talent_name, talent_info in talents.items():
+                    if talent_name in herald_of_the_sun_talents:
+                        active_herald_of_the_sun_talents[talent_row][talent_name]["ranks"]["current rank"] = herald_of_the_sun_talents[talent_name]
         
         return Talents(active_class_talents, active_spec_talents, active_lightsmith_talents, active_herald_of_the_sun_talents)

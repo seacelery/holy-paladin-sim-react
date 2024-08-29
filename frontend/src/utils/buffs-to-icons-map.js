@@ -115,6 +115,15 @@ const buffsToIconsMap = {
     "Algari Mana Oil": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_potiond1.jpg",
     "Oil of Beledar's Grace": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_potiond5.jpg",
     "Potion Bomb of Power": "https://wow.zamimg.com/images/wow/icons/large/inv_10_engineering_explosives_1_color2.jpg",
+    "Feast of the Divine Day": "https://wow.zamimg.com/images/wow/icons/large/inv_11_cooking_profession_feast_table01.jpg",
+    "The Sushi Special": "https://wow.zamimg.com/images/wow/icons/large/inv_tradeskill_cooking_feastofthewater.jpg",
+    "Stuffed Cave Peppers": "https://wow.zamimg.com/images/wow/icons/large/inv_cooking_90_smuggledproduce.jpg",
+    "Marinated Tenderloins": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_food_meat_cooked_02.jpg",
+    "Chippy Tea": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_deepfriedmossgill.jpg",
+    "Deepfin Patty": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_164_fish_seadog.jpg",
+    "Sweet and Spicy Soup": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_legion_drogbarstylesalmon.jpg",
+    "Fish and Chips": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_food_draenor_sturgeonstew.jpg",
+    "Salt Baked Seafood": "https://render.worldofwarcraft.com/eu/icons/56/inv_cooking_100_revengeservedcold_color02.jpg",
 
     // raid buffs
     "Arcane Intellect": "https://render.worldofwarcraft.com/eu/icons/56/spell_holy_magicalsentry.jpg",
@@ -140,6 +149,7 @@ const buffsToIconsMap = {
     "Sea Star": "https://render.worldofwarcraft.com/eu/icons/56/inv_datacrystal05.jpg",
     "Sustaining Alchemist Stone": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_alchemystone_color2.jpg",
     "Alacritous Alchemist Stone": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_alchemy_alchemystone_color1.jpg",
+    "Algari Alchemist Stone": "https://wow.zamimg.com/images/wow/icons/large/inv_10_alchemy_alchemystone_color4.jpg",
     "Neltharion's Call to Chaos": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_dungeonjewelry_dragon_trinket_5_red.jpg",
     "Screaming Black Dragonscale": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_rubysanctum2.jpg",
     "Rashok's Molten Heart": "https://render.worldofwarcraft.com/eu/icons/56/inv_misc_trinket6oih_orb4.jpg",
@@ -192,6 +202,7 @@ const buffsToIconsMap = {
     "Harvester's Edict": "https://wow.zamimg.com/images/wow/icons/large/inv_11_0_dungeon_oldgodstatuepiece_purple.jpg",
     "Ara-Kara Sacbrood": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_red.jpg",
     "Imperfect Ascendancy Serum": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_dpotion_a25.jpg",
+    "Gale of Shadows": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_gathershadows.jpg",
     
     "Deliberate Incubation": "https://wow.zamimg.com/images/wow/icons/large/inv_10_specialreagentfoozles_coolegg_red.jpg",
     "Reckless Incubation": "https://wow.zamimg.com/images/wow/icons/large/inv_10_specialreagentfoozles_coolegg_green.jpg",
@@ -200,6 +211,9 @@ const buffsToIconsMap = {
 
     "Cryptic Instructions": "https://wow.zamimg.com/images/wow/icons/large/ability_racial_etherealconnection.jpg",
     "Ethereal Powerlink": "https://wow.zamimg.com/images/wow/icons/large/inv_etherealraid_communicator_color1.jpg",
+
+    "Spymaster's Web Stacks": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_nightelfspyglass.jpg",
+    "Spymaster's Web": "https://wow.zamimg.com/images/wow/icons/large/ability_spy.jpg",
 
     "Fateweaved Needle": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_nerubianraid_d_02.jpg",
     "Sureki Zealot's Insignia": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_113.jpg",
@@ -228,6 +242,17 @@ const buffsToIconsMap = {
     "Allied Chestplate of Generosity": "https://render.worldofwarcraft.com/eu/icons/56/inv_chest_plate_raidwarriorprimalist_d_01.jpg",
     "Allied Wristguards of Companionship": "https://render.worldofwarcraft.com/eu/icons/56/inv_bracer_plate_raidwarriorprimalist_d_01.jpg",
     "Allied Wristgaurds of Companionship": "https://render.worldofwarcraft.com/eu/icons/56/inv_bracer_plate_raidwarriorprimalist_d_01.jpg",
+
+    "Dawnthread Lining": "https://wow.zamimg.com/images/wow/icons/large/inv_10_tailoring_embroiderythread_color1.jpg",
+    "Duskthread Lining": "https://wow.zamimg.com/images/wow/icons/large/inv_10_tailoring_tailoringconsumable_color3.jpg",
+    "Prismatic Null Stone": "https://wow.zamimg.com/images/wow/icons/large/inv_enchant_prismaticsphere.jpg",
+    "Writhing Armor Banding": "https://wow.zamimg.com/images/wow/icons/large/inv_10_skinning_craftedoptionalreagent_studdedleatherswatch_color2.jpg",
+    "Energy Redistribution Beacon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_enggizmos_24.jpg",
+    "Blessed Weapon Grip": "https://wow.zamimg.com/images/wow/icons/large/spell_holy_weaponmastery.jpg",
+
+    "Darkmoon Sigil: Ascension": "https://wow.zamimg.com/images/wow/icons/large/inv_inscriptions_darkmoonsigil_purple.jpg",
+    "Darkmoon Sigil: Symbiosis": "https://wow.zamimg.com/images/wow/icons/large/inv_inscriptions_darkmoonsigil_teal.jpg",
+    "Darkmoon Deck: Symbiosis": "https://wow.zamimg.com/images/wow/icons/large/inv_inscriptions_darkmoonsigil_teal.jpg",
 }; 
 
 export { buffsToIconsMap };

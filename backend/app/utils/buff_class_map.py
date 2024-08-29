@@ -9,7 +9,9 @@ from ..classes.auras_buffs import (
                                    BronzedGripWrappings, ManaTideTotem, FlaskOfSavingGraces, FlaskOfTemperedAggression, FlaskOfAlchemicalChaos,
                                    FlaskOfTemperedMastery, FlaskOfTemperedSwiftness, FlaskOfTemperedVersatility, CrystallizedAugmentRune,
                                    AlgariManaOil, OilOfBeledarsGrace, Skyfury, DawnthreadLining, DuskthreadLining, PrismaticNullStone,
-                                   WrithingArmorBanding, EnergyDistributionBeacon, BlessedWeaponGrip
+                                   WrithingArmorBanding, EnergyRedistributionBeacon, BlessedWeaponGrip, FeastOfTheDivineDay, TheSushiSpecial, 
+                                   StuffedCavePeppers, MarinatedTenderloins, ChippyTea, DeepfinPatty, SweetAndSpicySoup, FishAndChips, SaltBakedSeafood,
+                                   DarkmoonSigilSymbiosis, DarkmoonSigilAscension
                                   )
 
 buff_class_map = {
@@ -40,6 +42,15 @@ buff_class_map = {
     "Revenge, Served Cold": RevengeServedColdFood,
     "Thousandbone Tongueslicer": ThousandboneTongueslicerFood,
     "Great Cerulean Sea": GreatCeruleanSeaFood,
+    "Feast of the Divine Day": FeastOfTheDivineDay,
+    "The Sushi Special": TheSushiSpecial,
+    "Stuffed Cave Peppers": StuffedCavePeppers,
+    "Marinated Tenderloins": MarinatedTenderloins,
+    "Chippy Tea": ChippyTea,
+    "Deepfin Patty": DeepfinPatty,
+    "Sweet and Spicy Soup": SweetAndSpicySoup,
+    "Fish and Chips": FishAndChips,
+    "Salt-Baked Seafood": SaltBakedSeafood,
     
     # weapon imbues
     "Buzzing Rune": BuzzingRune,
@@ -80,6 +91,9 @@ buff_class_map = {
     "Duskthread Lining": DuskthreadLining,
     "Prismatic Null Stone": PrismaticNullStone,
     "Writhing Armor Banding": WrithingArmorBanding,
-    "Energy Distribution Beacon": EnergyDistributionBeacon,
-    "Blessed Weapon Grip": BlessedWeaponGrip
+    "Energy Redistribution Beacon": EnergyRedistributionBeacon,
+    "Blessed Weapon Grip": BlessedWeaponGrip,
+    
+    "Darkmoon Sigil: Symbiosis": DarkmoonSigilSymbiosis,
+    "Darkmoon Sigil: Ascension": DarkmoonSigilAscension
 }

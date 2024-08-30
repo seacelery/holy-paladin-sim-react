@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   base: '/holy-paladin-sim-react/',
   build: {
+    sourcemap: true,
     outDir: 'dist',
     assetsDir: 'assets',
     rollupOptions: {

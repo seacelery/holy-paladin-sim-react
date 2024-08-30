@@ -6,6 +6,7 @@ import { FaMoon } from "react-icons/fa6";
 import { FaChevronDown } from "react-icons/fa";
 import { CharacterDataContext } from "../../context/CharacterDataContext";
 import { templateClassTalents, templateSpecTalents, templateLightsmithTalents, templateHeraldOfTheSunTalents, templateEquipment } from "../../utils/template-settings";
+import PaladinIcon from '@/assets/custom-icons/paladin-pink.png';
 
 const Header = ({ theme, toggleTheme, setCharacterImported, setActiveTab }) => {
     const { version, changeVersion } = useContext(VersionContext);
@@ -67,7 +68,7 @@ const Header = ({ theme, toggleTheme, setCharacterImported, setActiveTab }) => {
                 <div className="theme-toggle" onClick={toggleTheme}>
                     <div className={`theme-circle ${theme === "plain" ? "theme-checked" : ""}`}>
                         {theme === "paladin" 
-                            ? <img className="theme-paladin-icon" src="src\assets\custom-icons\paladin-pink.png"/>
+                            ? <img className="theme-paladin-icon" src={PaladinIcon} />
                             : <FaMoon className="theme-moon-icon"></FaMoon>
                         }
                     </div>                        

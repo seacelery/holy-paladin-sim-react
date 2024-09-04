@@ -1,7 +1,8 @@
 import { io } from "socket.io-client";
+import { CONFIG } from "./config";
 
 const initialiseSocket = () => {
-    const socket = io("http://localhost:5000/", {
+    const socket = io(CONFIG.backendUrl, {
         transports: ["websocket", "polling"],
     });
 

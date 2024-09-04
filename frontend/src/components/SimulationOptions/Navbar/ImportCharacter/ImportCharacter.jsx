@@ -8,6 +8,7 @@ import { realmList } from "../../../../data/realm-list";
 import { VersionContext } from "../../../../context/VersionContext";
 import { baseLightsmithTalents, baseHeraldOfTheSunTalents } from "../../../../utils/base-talents";
 import { updateEquipmentWithEffectValues } from "../../../../utils/misc-functions";
+import { CONFIG } from "../../../../config/config";
 
 const ImportCharacter = ({ setActiveTab, setImporting }) => {
     const { characterData, setCharacterData } = useContext(CharacterDataContext);
@@ -56,7 +57,7 @@ const ImportCharacter = ({ setActiveTab, setImporting }) => {
             setActiveTab("Options");
             setImporting(true);
 
-            fetch(`http://localhost:5000/import_character?character_name=${newCharacterName}&realm=${newCharacterRealm}&region=${newCharacterRegion}&version=${version}`, {
+            fetch(`${CONFIG.backendUrl}/import_character?character_name=${newCharacterName}&realm=${newCharacterRealm}&region=${newCharacterRegion}&version=${version}`, {
                 credentials: "include"
             })
             .then(response => response.json())

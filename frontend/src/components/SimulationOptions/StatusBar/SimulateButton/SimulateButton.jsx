@@ -9,6 +9,7 @@ import { VersionContext } from "../../../../context/VersionContext";
 import { SimulationResultsContext } from "../../../../context/SimulationResultsContext";
 import { SocketContext } from "../../../../context/SocketContext";
 import { consolidateOverlappingBuffs } from "../../../../data/breakdown-functions";
+import { CONFIG } from "../../../../config/config";
 
 const SimulateButton = () => {
     const { simulationParameters } = useContext(SimulationParametersContext);
@@ -94,7 +95,7 @@ const SimulateButton = () => {
         params.append("seasons", JSON.stringify(simulationParameters.seasons));
         params.append("stat_scaling", JSON.stringify(simulationParameters.statScaling));
 
-        return fetch(`http://127.0.0.1:5000/run_simulation?${params.toString()}`, {
+        return fetch(`${CONFIG.backendUrl}/run_simulation?${params.toString()}`, {
             credentials: "include",
             signal: signal
         })

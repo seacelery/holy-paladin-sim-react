@@ -6,6 +6,7 @@ import EditEquipment from "./EditEquipment/EditEquipment";
 import { CharacterDataContext } from "../../../context/CharacterDataContext";
 import { VersionContext } from "../../../context/VersionContext";
 import { itemSlotsMap } from "../../../utils/item-slots-map";
+import { CONFIG } from "../../../config/config";
 
 const Equipment = () => {
     const { version } = useContext(VersionContext);
@@ -44,7 +45,7 @@ const Equipment = () => {
 
             const customEquipment = encodeURIComponent(JSON.stringify(equipmentData));
 
-            const response = await fetch(`http://127.0.0.1:5000/fetch_updated_data?character_name=${characterName}&realm=${characterRealm}&custom_equipment=${customEquipment}&region=${characterRegion}&version=${version}`, {
+            const response = await fetch(`${CONFIG.backendUrl}/fetch_updated_data?character_name=${characterName}&realm=${characterRealm}&custom_equipment=${customEquipment}&region=${characterRegion}&version=${version}`, {
                 credentials: "include"
             });
 

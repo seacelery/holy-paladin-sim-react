@@ -97,7 +97,7 @@ def register_socketio_events(socketio):
             current_app.redis.set(f'cancel_task_{task_id}', '1')
             emit('simulation_cancelled', {'message': "Cancellation requested for task " + task_id})
 
-app = Flask(__name__, static_url_path="", static_folder="../../docs")
+app = Flask(__name__, static_url_path="", static_folder="../../frontend")
 init_socketio(app)
 register_socketio_events(socketio)
 

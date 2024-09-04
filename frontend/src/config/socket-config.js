@@ -2,6 +2,8 @@ import { io } from "socket.io-client";
 import { CONFIG } from "./config";
 
 const initialiseSocket = () => {
+    console.log("CONFIG object:", CONFIG);
+    console.log("backendUrl:", CONFIG.backendUrl);
     const socket = io(CONFIG.backendUrl, {
         transports: ["websocket", "polling"],
     });

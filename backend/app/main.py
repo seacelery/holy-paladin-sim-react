@@ -1,7 +1,6 @@
 import sys
 import os
 import json
-from dotenv import load_dotenv
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -13,8 +12,6 @@ from app.classes.target import Target, BeaconOfLight
 from app.utils import cache, battlenet_api
 
 pp = pprint.PrettyPrinter(width=200)
-
-load_dotenv()
 
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")

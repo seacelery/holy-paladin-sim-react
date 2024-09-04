@@ -20,7 +20,7 @@ const Header = ({ theme, toggleTheme, setCharacterImported, setActiveTab }) => {
         // { id: "ptr", name: "The War Within" }
     ];
 
-    const currentVersionName = versionOptions.find(option => option.id === version).name;
+    const currentVersionName = versionOptions.find(option => option.id === version)?.name || versionOptions.find(option => option.id === 'live').name;
 
     const importTemplate = () => {
         if (!characterData.characterName || !characterData.characterRealm || !characterData.characterRegion) return;

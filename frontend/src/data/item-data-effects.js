@@ -420,6 +420,51 @@ const itemDataEffects = [
         "gems": []
     },
     {
+        "effects": [
+            {
+                "name": "Fractured Gemstone Locket", 
+                "description":  "Equip: When you enter combat, gain 1 Dormant Gemstone per socketed gem.\n\nWhenever you heal an ally, bestow upon them 1 Empowered Gemstone to increase the potency of one of their socketed gems by 17 for 20 sec. When their gemstone becomes dormant, it is returned to you.",
+                "id": 0,
+                "type": "embellishment",
+                "effect_values": []
+            }
+        ],
+        "name": "Fractured Gemstone Locket",
+        "item_slot": "Neck",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 215134,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_11_0_arathor_necklace_02_color5.jpg",
+        "stats": {
+            "Mastery": 1750,
+            "Critical Strike": 1750
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Binding of Binding", 
+                "description":  "Equip: Your spells and abilities have a chance to empower each unique gem color of an ally's socketed gems. This boon grants 44.75 to each empowered secondary stat for 15 sec. This effect will always target your bonded ally, if able.",
+                "id": 0,
+                "type": "embellishment",
+                "effect_values": []
+            }
+        ],
+        "name": "Binding of Binding",
+        "item_slot": "Finger",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 215133,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_11_0_jewelcrafting_ring_color1.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
         "id": 208615,
         "name": "Nymue's Unraveling Spindle",
         "item_slot": "Trinket",
@@ -819,9 +864,9 @@ const itemDataEffects = [
             {
                 "name": "Gruesome Syringe",
                 "id": 444276,
-                "description": "Equip: Your healing spells have a high chance to cause you to inject yourself with a charge of Volatile Serum. Multiple charges may overlap.\n\nIf an ally drops below 70% health, expel a charge to heal them for *159634. If unconsumed after 15 sec, charges catalyze to grant you *2894 Intellect for 10 sec instead.",
+                "description": "Equip: Your healing spells have a high chance to cause you to inject yourself with a charge of Volatile Serum. Multiple charges may overlap.\n\nIf an ally drops below 70% health, expel a charge to heal them for *163309. If unconsumed after 15 sec, charges catalyze to grant you *2894 Intellect for 10 sec instead.",
                 "effect_values": [
-                    {"base_value": 159634, "effect_type": "scalar", "effect_coefficient": 63.84856796265, "allocation_type": "flat_damage"},
+                    {"base_value": 159634, "effect_type": "scalar", "effect_coefficient": 94.21494293213 * 0.675, "allocation_type": "no_multiplier"},
                     {"base_value": 2894, "effect_type": "scalar", "effect_coefficient": 0.75579804182, "allocation_type": "no_multiplier"}
                 ]
             }
@@ -847,8 +892,8 @@ const itemDataEffects = [
                 // 444271
                 "description": "Use: Feed the Coagulum, redirecting 20% of all healing done until *766815.2 healing has been consumed. Once sated, the Coagulum bursts to heal 5 allies for *541371.531.\n\nLingering effluvia causes affected allies' next attacks to deal an additional 444,271 Shadow damage, increased based on overhealing done by the Coagulum. (1 Min, 30 Sec Cooldown)",
                 "effect_values": [
-                    {"base_value": 766815.2, "effect_type": "scalar", "effect_coefficient": 317.36041259766, "allocation_type": "flat_healing"},
-                    {"base_value": 541371.531, "effect_type": "scalar", "effect_coefficient": 2.26054334641, "allocation_type": "flat_healing"}
+                    {"base_value": 766815.2, "effect_type": "scalar", "effect_coefficient": 468.29669189453, "allocation_type": "rating_multiplier"},
+                    {"base_value": 541371.531, "effect_type": "scalar", "effect_coefficient": 468.29669189453 / 1.416, "allocation_type": "rating_multiplier"}
                 ]
             }
         ],
@@ -956,6 +1001,241 @@ const itemDataEffects = [
         "id": 225654,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/trade_alchemy_dpotion_a25.jpg",
         "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Deadwinds",
+                "id": 90986,
+                "description": "Your healing and damage periodic spells grant *124 Intellect each time they heal or deal damage. Lasts 15 sec, stacking up to 20 times.",
+                "effect_values": [
+                    {"base_value": 124, "effect_type": "scalar", "effect_coefficient": 0.029, "allocation_type": "rating_multiplier_jewellery"},
+                ]
+            }
+        ],
+        "name": "Gale of Shadows",
+        "item_slot": "Trinket",
+        "base_item_level": 593,
+        "quality": "Epic",
+        "id": 133304,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_gathershadows.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Egg Shell",
+                "id": 91308,
+                "description": "Use: Places Egg Shell on your current target, absorbing *3700000 damage. While Egg Shell persists, you gain 0.333% mana every 5 sec.  When the effect ends, you gain 4% mana. Lasts 30 sec.",
+                "effect_values": [
+                    {"base_value": 3700000, "effect_type": "scalar", "effect_coefficient": 2100, "allocation_type": "flat_healing"},
+                ]
+            }
+        ],
+        "name": "Corrupted Egg Shell",
+        "item_slot": "Trinket",
+        "base_item_level": 593,
+        "quality": "Epic",
+        "id": 133305,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_cat_trinket09.jpg",
+        "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Unbound Changeling",
+                "id": 330131,
+                "description": "Equip: Your abilities have a chance to grant you *3909 in a secondary stat for 12 sec.",
+                "effect_values": [
+                    {"base_value": 68, "effect_type": "scalar", "effect_coefficient": 1.67952597141, "allocation_type": "rating_multiplier"},
+                ]
+            }
+        ],
+        "name": "Unbound Changeling",
+        "item_slot": "Trinket",
+        "base_item_level": 593,
+        "quality": "Epic",
+        "id": 178708,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_pet_spectralporcupinered.jpg",
+        "stats": {"Intellect": 2350},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {   
+        "effects": [
+            {
+                "name": "Spymaster's Web",
+                "id": 220202,
+                "description": "Equip: Your damaging spells dispatch a spider to spy on your foes, increasing your Intellect by *56 per report received. Stacks up to 40 times. This effect may only occur every 6 sec. \nUse: Use your accumulated knowledge to strike when the time is right, granting *541 Intellect per report for 20 sec and consuming their passive effect. (20 Sec Cooldown)",
+                "effect_values": [
+                    {"base_value": 56, "effect_type": "scalar", "effect_coefficient": 0.014709, "allocation_type": "no_multiplier"},
+                    {"base_value": 541, "effect_type": "scalar", "effect_coefficient": 0.141408, "allocation_type": "no_multiplier"}
+                ]
+            }
+        ],
+        "name": "Spymaster's Web",
+        "item_slot": "Trinket",
+        "base_item_level": 571,
+        "quality": "Epic",
+        "id": 220202,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_nightelfspyglass.jpg",
+        "stats": {
+            "Mastery": 1001
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Charged Phylactery",
+                "id": 345549,
+                "description": "Use: Sacrifice *297516 health to charge the phylactery.<br><br>Healing a target below 30% health expends the phylactery's charge to amplify your spell, restoring *595147 additional health to the target.",
+                "effect_values": [
+                    {"base_value": 297516, "effect_type": "scalar", "effect_coefficient": 44.53448 * 1.25, "allocation_type": "no_multiplier"},
+                    {"base_value": 595147, "effect_type": "scalar", "effect_coefficient": 89.08621 * 1.25, "allocation_type": "no_multiplier"},
+                ]
+            }
+        ],
+        "name": "Siphoning Phylactery Shard",
+        "item_slot": "Trinket",
+        "base_item_level": 607,
+        "quality": "Epic",
+        "id": 178783,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_enchanting_70_chaosshard.jpg",
+        "stats": {"Intellect": 2677},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Scrapsinger's Symphony",
+                "id": 443414,
+                "description": "Equip: Your healing abilities have a chance to call the nearby metal to form a shield around an ally, absorbing *74256 damage.\n\nThe shield reacts explosively to fire, inflicting *4566 Fire damage to nearby enemies when struck.",
+                "effect_values": [
+                    {"base_value": 74256, "effect_type": "scalar", "effect_coefficient": 28.99190330505 * 3 * 1.5, "allocation_type": "flat_healing"},
+                    {"base_value": 4566, "effect_type": "scalar", "effect_coefficient": 6.17206573486 * 1.5, "allocation_type": "flat_damage"}
+                ]
+            }
+        ],
+        "name": "Scrapsinger's Symphony",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Epic",
+        "id": 219302,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_blacksmithing_craftedoptional_engineering_color1.jpg",
+        "stats": {
+            "Intellect": 549
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Algari Alchemist Stone",
+                "id": 432421,
+                "description": "Equip: When you heal or deal damage you have a chance to increase your Intellect by *1304 for 15 sec. Your highest stat is always chosen.",
+                "effect_values": [
+                    {"base_value": 1304, "effect_type": "scalar", "effect_coefficient": 0.27749052644, "allocation_type": "no_multiplier"},
+                ]
+            }
+        ],
+        "name": "Algari Alchemist Stone",
+        "item_slot": "Trinket",
+        "base_item_level": 593,
+        "quality": "Epic",
+        "id": 210816,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_alchemy_alchemystone_color4.jpg",
+        "stats": {
+            "Versatility": 1144
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Viscous Coaglam",
+                "id": 443557,
+                "description": "Equip: Your excessive healing attracts nearby shadow energy to your party, storing up to *8441 healing and restoring the target's health when they receive damage.<br><br>Use: Channel the coaglam's power, concentrating all current shadow energy to shield to your target. (1 Min Cooldown).",
+                "effect_values": [
+                    {"base_value": 8441, "effect_type": "scalar", "effect_coefficient": 6.03997993469 * 1.5, "allocation_type": "flat_damage"},
+                ]
+            }
+        ],
+        "name": "Viscous Coaglam",
+        "item_slot": "Trinket",
+        "base_item_level": 437,
+        "quality": "Rare",
+        "id": 219320,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_creepingcoagulum_blue.jpg",
+        "stats": {
+            "Intellect": 549
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Darkmoon Deck: Symbiosis",
+                "id": 463610,
+                "description": "Every 10 sec in combat take 1% of your maximum Health as Nature damage and gain a stack of Symbiosis, granting *251 Versatility for 20 sec stacking up to 5 times.",
+                "effect_values": [
+                    {"base_value": 2696, "effect_type": "scalar", "effect_coefficient": 0.1205, "allocation_type": "rating_multiplier"},
+                ]
+            }
+        ],
+        "name": "Darkmoon Deck: Symbiosis",
+        "item_slot": "Trinket",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222653,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_10_inscription_darkmooncards_spore_blank.jpg",
+        "stats": {
+            "intellect": 2024
+        },
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Darkmoon Deck: Ascension",
+                "id": 463610,
+                "description": "Equip: Gain Ascendance every 8 seconds spent in combat. Ascendance grants *145 of a random secondary stat for 15 sec, stacking up to 10 times.",
+                "effect_values": [
+                    {"base_value": 145, "effect_type": "scalar", "effect_coefficient": 0.0408, "allocation_type": "rating_multiplier_jewellery"},
+                ]
+            }
+        ],
+        "name": "Darkmoon Deck: Ascension",
+        "item_slot": "Trinket",
+        "base_item_level": 577,
+        "quality": "Epic",
+        "id": 222680,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_inscriptions_darkmoondeckevolution_0.jpg",
+        "stats": {
+            "intellect": 2024
+        },
         "gems": [],
         "enchantments": [],
         "limit": null

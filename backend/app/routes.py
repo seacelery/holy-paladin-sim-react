@@ -65,11 +65,11 @@ def fetch_updated_stats_route():
     
     paladin.update_character(
         race=data.get("race"),
-        class_talents=json.loads(data.get("class_talents")),
-        spec_talents=json.loads(data.get("spec_talents")),
-        lightsmith_talents=json.loads(data.get("lightsmith_talents")),
-        herald_of_the_sun_talents=json.loads(data.get("herald_of_the_sun_talents")),
-        consumables=json.loads(data.get("consumables"))
+        class_talents=data.get("class_talents"),
+        spec_talents=data.get("spec_talents"),
+        lightsmith_talents=data.get("lightsmith_talents"),
+        herald_of_the_sun_talents=data.get("herald_of_the_sun_talents"),
+        consumables=data.get("consumables")
     )
 
     paladin.update_equipment(custom_equipment)

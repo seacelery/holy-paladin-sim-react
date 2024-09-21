@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import "./Equipment.scss";
 import EquipmentDisplay from "./EquipmentDisplay/EquipmentDisplay";
 import StatsDisplay from "./StatsDisplay/StatsDisplay";
@@ -6,6 +6,7 @@ import EditEquipment from "./EditEquipment/EditEquipment";
 import { CharacterDataContext } from "../../../context/CharacterDataContext";
 import { VersionContext } from "../../../context/VersionContext";
 import { itemSlotsMap } from "../../../utils/item-slots-map";
+import { CONFIG } from "../../../config/config";
 
 const Equipment = () => {
     const { version } = useContext(VersionContext);
@@ -53,7 +54,7 @@ const Equipment = () => {
             params.append("herald_of_the_sun_talents", JSON.stringify(characterData.heraldOfTheSunTalents));
             params.append("consumables", JSON.stringify(characterData.consumables));
 
-            const response = await fetch(`http://127.0.0.1:5000/fetch_updated_data?${params.toString()}`, {
+            const response = await fetch(`${CONFIG.backendUrl}/fetch_updated_data?${params.toString()}`, {
                 credentials: "include"
             });
 
@@ -73,7 +74,7 @@ const Equipment = () => {
     return (
         <div className="options-tab-content equipment-content">
             <div className="equipment-left">
-                <EquipmentDisplay characterData={characterData} equipmentData={equipmentData} selectedItem={selectedItem} setSelectedItem={setSelectedItem} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} />
+                <EquipmentDisplay characterData={characterData} equipmentData={equipmentData} selectedItem={selectedItem} setSelectedItem={setSelectedItem} setSelectedSlot={setSelectedSlot} />
             </div>
 
             <div className="equipment-right">

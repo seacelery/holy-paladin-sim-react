@@ -39,22 +39,26 @@ const Equipment = () => {
 
     const updateStats = async () => {
         try {
-            const params = new URLSearchParams({
+            const payload = {
                 character_name: characterData.characterName,
                 realm: characterData.characterRealm,
                 region: characterData.characterRegion,
-                custom_equipment: JSON.stringify(equipmentData),
+                custom_equipment: equipmentData,
                 version: version,
                 race: characterData.race,
-                class_talents: JSON.stringify(characterData.classTalents),
-                spec_talents: JSON.stringify(characterData.specTalents),
-                lightsmith_talents: JSON.stringify(characterData.lightsmithTalents),
-                herald_of_the_sun_talents: JSON.stringify(characterData.heraldOfTheSunTalents),
-                consumables: JSON.stringify(characterData.consumables)
-            });
+                class_talents: characterData.classTalents,
+                spec_talents: characterData.specTalents,
+                lightsmith_talents: characterData.lightsmithTalents,
+                herald_of_the_sun_talents: characterData.heraldOfTheSunTalents,
+                consumables: characterData.consumables
+            };
     
-            const response = await fetch(`${CONFIG.backendUrl}/fetch_updated_data?${params.toString()}`, {
+            const response = await fetch(`${CONFIG.backendUrl}/fetch_updated_data`, {
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
                 credentials: 'include'
             });
     

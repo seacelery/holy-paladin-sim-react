@@ -52,20 +52,14 @@ const Equipment = () => {
                 herald_of_the_sun_talents: characterData.heraldOfTheSunTalents,
                 consumables: characterData.consumables
             };
-
-            console.log('Sending request:', {
-                url: `${CONFIG.backendUrl}/fetch_updated_data`,
-                method: 'POST',
-                body: payload
-              });
     
             const response = await fetch(`${CONFIG.backendUrl}/fetch_updated_data`, {
-                method: 'POST',
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify(payload),
-                credentials: 'include'
+                credentials: "same-origin"
             });
     
             if (!response.ok) {

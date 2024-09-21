@@ -20,7 +20,9 @@ const formatEnchantName = (name) => {
         "Hissing Rune",
         "Howling Rune",
         "Chirping Rune",
-        "Buzzing Rune"
+        "Buzzing Rune",
+        "Algari Mana Oil",
+        "Oil of Beledar's Grace"
     ];
 
     if (excludedEnchants.includes(formattedEnchantName[0])) {

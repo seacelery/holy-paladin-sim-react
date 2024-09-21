@@ -29,11 +29,6 @@ def import_character_route():
     version = request.args.get("version")
 
     paladin, healing_targets = import_character(character_name, realm, region, version)
-    
-    session_token = str(uuid.uuid4())
-    modifiable_data = {"class_talents": {}, "spec_talents": {}, "lightsmith_talents": {}, "herald_of_the_sun_talents": {}, "race": "", "consumables": {}, "equipment": {}, "character_name": character_name, "realm": realm, "region": region, "ptr": paladin.ptr, "version": version}
-    
-    current_app.redis.setex(session_token, 3600, json.dumps(modifiable_data))
 
     response = jsonify({
         "message": f"Character imported successfully, {character_name}, {realm}, {region}",
@@ -52,41 +47,29 @@ def import_character_route():
                   "haste_percent": round(paladin.haste, 2), "crit_percent": round(paladin.crit, 2), "mastery_percent": round(paladin.mastery, 2), 
                   "versatility_percent": round(paladin.versatility, 2), "leech_percent": round(paladin.leech, 2)},
         "ptr": paladin.ptr,
-        "session_token": session_token
     })
-    response.set_cookie("session_token", session_token, samesite="None", secure=True, httponly=True)
     return response
     
 @main.route("/fetch_updated_data", methods=["POST"])
 @cross_origin(origins=["https://seacelery.github.io"], supports_credentials=True)
 def fetch_updated_stats_route():
-    data = request.json
-    character_name = data["character_name"]
-    realm = data["realm"]
-    region = data["region"]
-    custom_equipment = data["custom_equipment"]
-    version = data["version"]
+    character_name = request.args.get("character_name")
+    realm = request.args.get("realm")
+    region = request.args.get("region")
+    custom_equipment = request.args.get("custom_equipment")
+    version = request.args.get("version")
 
     paladin, healing_targets = import_character(character_name, realm, region, version)
-
-    session_token = request.cookies.get('session_token')
-    if not session_token:
-        return jsonify({"error": "No session token provided"}), 400
-
-    session_data = current_app.redis.get(session_token)
-    if not session_data:
-        return jsonify({"error": "Session not found"}), 404
-
-    modifiable_data = json.loads(session_data)
     
     paladin.update_character(
-        race=modifiable_data.get("race"),
-        class_talents=modifiable_data.get("class_talents"),
-        spec_talents=modifiable_data.get("spec_talents"),
-        lightsmith_talents=modifiable_data.get("lightsmith_talents"),
-        herald_of_the_sun_talents=modifiable_data.get("herald_of_the_sun_talents"),
-        consumables=modifiable_data.get("consumables")
+        race=request.args.get("race"),
+        class_talents=json.loads(request.args.get("class_talents")),
+        spec_talents=json.loads(request.args.get("spec_talents")),
+        lightsmith_talents=json.loads(request.args.get("lightsmith_talents")),
+        herald_of_the_sun_talents=json.loads(request.args.get("herald_of_the_sun_talents")),
+        consumables=json.loads(request.args.get("consumables"))
     )
+
     paladin.update_equipment(custom_equipment)
     
     return jsonify({
@@ -108,30 +91,30 @@ def fetch_updated_stats_route():
         "ptr": paladin.ptr
     })
 
-@main.route("/update_character", methods=["POST"])
-def update_character_route():
-    session_token = request.cookies.get('session_token')
-    if not session_token:
-        return jsonify({"error": "No session token provided"}), 400
+# @main.route("/update_character", methods=["POST"])
+# def update_character_route():
+#     session_token = request.cookies.get('session_token')
+#     if not session_token:
+#         return jsonify({"error": "No session token provided"}), 400
 
-    session_data = current_app.redis.get(session_token)
-    if not session_data:
-        return jsonify({"error": "Session not found"}), 404
+#     session_data = current_app.redis.get(session_token)
+#     if not session_data:
+#         return jsonify({"error": "Session not found"}), 404
 
-    modifiable_data = json.loads(session_data)
-    user_input = request.json
+#     modifiable_data = json.loads(session_data)
+#     user_input = request.json
     
-    current_app.logger.debug(f"Modifiable data before update: {modifiable_data}")
-    current_app.logger.debug(f"User input {user_input}")
+#     current_app.logger.debug(f"Modifiable data before update: {modifiable_data}")
+#     current_app.logger.debug(f"User input {user_input}")
             
-    for key, value in user_input.items():
-        if key in modifiable_data:
-            if isinstance(modifiable_data[key], dict):
-                modifiable_data[key].update(value)
-            else:
-                modifiable_data[key] = value
+#     for key, value in user_input.items():
+#         if key in modifiable_data:
+#             if isinstance(modifiable_data[key], dict):
+#                 modifiable_data[key].update(value)
+#             else:
+#                 modifiable_data[key] = value
 
-    current_app.redis.setex(session_token, 1200, json.dumps(modifiable_data))
-    current_app.logger.debug(f"Modifiable data after update: {modifiable_data}")
+#     current_app.redis.setex(session_token, 1200, json.dumps(modifiable_data))
+#     current_app.logger.debug(f"Modifiable data after update: {modifiable_data}")
 
-    return jsonify({"message": "Character updated successfully"})
+#     return jsonify({"message": "Character updated successfully"})

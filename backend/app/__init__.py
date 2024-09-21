@@ -31,34 +31,22 @@ def register_socketio_events(socketio):
 
     @socketio.on('start_simulation')
     def handle_start_simulation(data):
-        session_token = data.get('session_token')
-        print(f"data received {session_token}")
         sys.stdout.flush()
-        if not session_token:
-            emit('error', {"error": "No session token provided"})
-            return
-
-        session_data = current_app.redis.get(session_token)
-        if not session_data:
-            emit('error', {"error": "Session not found"})
-            return
-
-        modifiable_data = json.loads(session_data)
 
         paladin, healing_targets = import_character(
-            modifiable_data['character_name'],
-            modifiable_data['realm'],
-            modifiable_data['region'],
-            modifiable_data["version"]
+            data.characterName,
+            data.realm,
+            data.region,
+            data.version
         )
 
         paladin.update_character(
-            race=modifiable_data.get("race"),
-            class_talents=modifiable_data.get("class_talents"),
-            spec_talents=modifiable_data.get("spec_talents"),
-            lightsmith_talents=modifiable_data.get("lightsmith_talents"),
-            herald_of_the_sun_talents=modifiable_data.get("herald_of_the_sun_talents"),
-            consumables=modifiable_data.get("consumables")
+            race=data.race,
+            class_talents=data.classTalents,
+            spec_talents=data.specTalents,
+            lightsmith_talents=data.lightsmith_talents,
+            herald_of_the_sun_talents=data.herald_of_the_sun_talents,
+            consumables=data.consumables
         )
 
         paladin_pickled = pickle.dumps(paladin)

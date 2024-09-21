@@ -139,6 +139,7 @@ const EditEquipment = ({
                         setNewItem={setNewItem}
                         equipmentData={equipmentData}
                         selectedSlot={selectedSlot}
+                        setCharacterData={setCharacterData}
                     />
                 </div>
             </div>

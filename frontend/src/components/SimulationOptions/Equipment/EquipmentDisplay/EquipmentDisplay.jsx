@@ -3,10 +3,11 @@ import "./EquipmentDisplay.scss";
 import ItemPanel from "./ItemPanel/ItemPanel";
 import { itemSlotsMap } from "../../../../utils/item-slots-map";
 
-const EquipmentDisplay = ({ characterData, equipmentData, selectedItem, setSelectedItem, setSelectedSlot }) => {
+const EquipmentDisplay = ({ characterData, equipmentData, selectedItem, setSelectedItem, selectedSlot, setSelectedSlot }) => {
     const [equippedItemLevel, setEquippedItemLevel] = useState(0);
     const [embellishmentCounter, setEmbellishmentCounter] = useState(0);
     const [tierSetCounters, setTierSetCounters] = useState({});
+    const [lastChangeTime, setLastChangeTime] = useState(0);
 
     const reversedItemSlotsMap = {};
     for (const [key, value] of Object.entries(itemSlotsMap)) {
@@ -14,11 +15,18 @@ const EquipmentDisplay = ({ characterData, equipmentData, selectedItem, setSelec
     };
 
     const handleItemPanelClick = (itemData, slot) => {
-        setSelectedItem(itemData);
-        const formattedSlot = reversedItemSlotsMap[slot].split(" ")
-                                                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                                                        .join(" ")
-        setSelectedSlot(formattedSlot);
+        const currentTime = new Date().getTime();
+        const cooldownPeriod = 400;
+
+        if (currentTime - lastChangeTime > cooldownPeriod && 
+            (selectedItem !== itemData || reversedItemSlotsMap[slot] !== selectedSlot)) {
+            setLastChangeTime(currentTime);
+            setSelectedItem(itemData);
+            const formattedSlot = reversedItemSlotsMap[slot].split(" ")
+                                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                                            .join(" ");
+            setSelectedSlot(formattedSlot);
+        };
     };
 
     const countEmbellishments = (equipmentData) => {

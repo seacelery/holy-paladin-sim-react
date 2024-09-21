@@ -134,7 +134,7 @@ const updateEquipmentWithEffectValues = (equipmentData) => {
         const equipmentPiece = equipmentData[slot];
         const enhancedItem = itemData.find(item => item.id === equipmentPiece.item_id);
         
-        if (enhancedItem && enhancedItem.effects.length > 0) {
+        if (enhancedItem && enhancedItem.effects.length > 0 && enhancedItem.effects[0]["effect_values"]) {
             equipmentPiece.effects[0]["effect_values"] = enhancedItem.effects.map(effect => effect.effect_values)[0];
             equipmentPiece.effects[0]["description"] = enhancedItem.effects.map(effect => effect.description)[0];
         };

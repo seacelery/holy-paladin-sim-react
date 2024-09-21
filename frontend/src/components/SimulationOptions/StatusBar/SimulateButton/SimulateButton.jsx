@@ -63,7 +63,74 @@ const SimulateButton = () => {
         setSimulating(true);
         setSimulationProgress(0);
 
-        const params = new URLSearchParams({
+        // const params = new URLSearchParams({
+        //     race: characterData.race,
+        //     character_name: characterData.characterName,
+        //     character_realm: characterData.characterRealm,
+        //     character_region: characterData.characterRegion,
+        //     version: version,
+        //     encounter_length: simulationParameters.encounterLength,
+        //     iterations: simulationParameters.iterations,
+        //     time_warp_time: simulationParameters.timeWarp,
+        //     tick_rate: simulationParameters.tickRate,
+        //     mastery_effectiveness: simulationParameters.masteryEffectiveness,
+        //     raid_health: simulationParameters.raidHealth,
+        //     light_of_dawn_targets: simulationParameters.lightOfDawnTargets,
+        //     resplendent_light_targets: simulationParameters.resplendentLightTargets,
+        //     sureki_zealots_insignia_count: simulationParameters.surekiZealotsInsigniaCount,
+        //     dawnlight_targets: simulationParameters.dawnlightTargets,
+        //     suns_avatar_targets: simulationParameters.sunsAvatarTargets,
+        //     light_of_the_martyr_uptime: simulationParameters.lightOfTheMartyrUptime,
+        //     potion_bomb_of_power_uptime: simulationParameters.potionBombOfPowerUptime,
+        // });
+
+        // params.append("class_talents", JSON.stringify(characterData.classTalents));
+        // params.append("spec_talents", JSON.stringify(characterData.specTalents));
+        // params.append("lightsmith_talents", JSON.stringify(characterData.lightsmithTalents));
+        // params.append("herald_of_the_sun_talents", JSON.stringify(characterData.heraldOfTheSunTalents));
+        // params.append("consumables", JSON.stringify(characterData.consumables));
+        // params.append("equipment", JSON.stringify(characterData.equipment));
+        // params.append("priority_list", JSON.stringify(simulationParameters.priorityList));
+        // params.append("overhealing", JSON.stringify(simulationParameters.overhealing));
+        // params.append("seasons", JSON.stringify(simulationParameters.seasons));
+        // params.append("stat_scaling", JSON.stringify(simulationParameters.statScaling));
+
+        // return fetch(`${CONFIG.backendUrl}/run_simulation?${params.toString()}`, {
+        //     credentials: "include",
+        //     signal: signal
+        // })
+        // .then(response => response.json())
+        // .then(data => {
+        //     console.log(data);
+        //     consolidateOverlappingBuffs(data.results.priority_breakdown);
+
+        //     setSimulationCount(prevCount => prevCount + 1);
+        //     if (simulationName.includes("Simulation")) {
+        //         setSimulationName(`Simulation ${simulationCount + 1}`);
+        //     };
+
+        //     const newSimulationResult = {
+        //         id: uuidv4(),
+        //         name: simulationName,
+        //         ...data
+        //     };
+
+        //     buttonRef.current.removeEventListener("click", cancelSimulation);
+        //     setSimulationResults(prevResults => [newSimulationResult, ...prevResults]);
+        //     handleSimulationSuccess();
+        // })
+        // .catch(error => {
+        //     if (error.name === "AbortError") {
+        //         console.log("Fetch aborted:", error);
+        //     } else {
+        //         console.error("Error:", error);
+        //     };
+            
+        //     buttonRef.current.removeEventListener("click", cancelSimulation);
+        //     handleSimulationCancelled();
+        // });
+
+        const simulationData = {
             race: characterData.race,
             character_name: characterData.characterName,
             character_realm: characterData.characterRealm,
@@ -73,8 +140,8 @@ const SimulateButton = () => {
             iterations: simulationParameters.iterations,
             time_warp_time: simulationParameters.timeWarp,
             tick_rate: simulationParameters.tickRate,
-            mastery_effectiveness: simulationParameters.masteryEffectiveness,
             raid_health: simulationParameters.raidHealth,
+            mastery_effectiveness: simulationParameters.masteryEffectiveness,
             light_of_dawn_targets: simulationParameters.lightOfDawnTargets,
             resplendent_light_targets: simulationParameters.resplendentLightTargets,
             sureki_zealots_insignia_count: simulationParameters.surekiZealotsInsigniaCount,
@@ -82,53 +149,13 @@ const SimulateButton = () => {
             suns_avatar_targets: simulationParameters.sunsAvatarTargets,
             light_of_the_martyr_uptime: simulationParameters.lightOfTheMartyrUptime,
             potion_bomb_of_power_uptime: simulationParameters.potionBombOfPowerUptime,
-        });
-
-        params.append("class_talents", JSON.stringify(characterData.classTalents));
-        params.append("spec_talents", JSON.stringify(characterData.specTalents));
-        params.append("lightsmith_talents", JSON.stringify(characterData.lightsmithTalents));
-        params.append("herald_of_the_sun_talents", JSON.stringify(characterData.heraldOfTheSunTalents));
-        params.append("consumables", JSON.stringify(characterData.consumables));
-        params.append("equipment", JSON.stringify(characterData.equipment));
-        params.append("priority_list", JSON.stringify(simulationParameters.priorityList));
-        params.append("overhealing", JSON.stringify(simulationParameters.overhealing));
-        params.append("seasons", JSON.stringify(simulationParameters.seasons));
-        params.append("stat_scaling", JSON.stringify(simulationParameters.statScaling));
-
-        return fetch(`${CONFIG.backendUrl}/run_simulation?${params.toString()}`, {
-            credentials: "include",
-            signal: signal
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            consolidateOverlappingBuffs(data.results.priority_breakdown);
-
-            setSimulationCount(prevCount => prevCount + 1);
-            if (simulationName.includes("Simulation")) {
-                setSimulationName(`Simulation ${simulationCount + 1}`);
-            };
-
-            const newSimulationResult = {
-                id: uuidv4(),
-                name: simulationName,
-                ...data
-            };
-
-            buttonRef.current.removeEventListener("click", cancelSimulation);
-            setSimulationResults(prevResults => [newSimulationResult, ...prevResults]);
-            handleSimulationSuccess();
-        })
-        .catch(error => {
-            if (error.name === "AbortError") {
-                console.log("Fetch aborted:", error);
-            } else {
-                console.error("Error:", error);
-            };
-            
-            buttonRef.current.removeEventListener("click", cancelSimulation);
-            handleSimulationCancelled();
-        });
+            priority_list: simulationParameters.priorityList,
+            custom_equipment: characterData.equipment,
+            seasons: simulationParameters.seasons,
+            overhealing: simulationParameters.overhealing
+        };
+    
+        socket.emit("start_simulation", simulationData);
     };
 
     const handleSimulationSuccess = () => {

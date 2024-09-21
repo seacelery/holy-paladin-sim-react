@@ -40,23 +40,27 @@ const Equipment = () => {
     const updateStats = async () => {
         try {
             const params = new URLSearchParams({
-                race: characterData.race,
                 character_name: characterData.characterName,
                 realm: characterData.characterRealm,
                 region: characterData.characterRegion,
+                custom_equipment: JSON.stringify(equipmentData),
                 version: version,
+                race: characterData.race,
+                class_talents: JSON.stringify(characterData.classTalents),
+                spec_talents: JSON.stringify(characterData.specTalents),
+                lightsmith_talents: JSON.stringify(characterData.lightsmithTalents),
+                herald_of_the_sun_talents: JSON.stringify(characterData.heraldOfTheSunTalents),
+                consumables: JSON.stringify(characterData.consumables)
             });
-
-            params.append("custom_equipment", JSON.stringify(equipmentData));
-            params.append("class_talents", JSON.stringify(characterData.classTalents));
-            params.append("spec_talents", JSON.stringify(characterData.specTalents));
-            params.append("lightsmith_talents", JSON.stringify(characterData.lightsmithTalents));
-            params.append("herald_of_the_sun_talents", JSON.stringify(characterData.heraldOfTheSunTalents));
-            params.append("consumables", JSON.stringify(characterData.consumables));
-
+    
             const response = await fetch(`${CONFIG.backendUrl}/fetch_updated_data?${params.toString()}`, {
-                credentials: "include"
+                method: 'POST',
+                credentials: 'include'
             });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
 
             const data = await response.json();
 

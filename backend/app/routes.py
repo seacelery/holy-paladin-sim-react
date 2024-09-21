@@ -53,21 +53,22 @@ def import_character_route():
 @main.route("/fetch_updated_data", methods=["POST"])
 @cross_origin(origins=["https://seacelery.github.io"], supports_credentials=True)
 def fetch_updated_stats_route():
-    character_name = request.args.get("character_name")
-    realm = request.args.get("realm")
-    region = request.args.get("region")
-    custom_equipment = request.args.get("custom_equipment")
-    version = request.args.get("version")
+    data = request.json
+    character_name = data.get("character_name")
+    realm = data.get("realm")
+    region = data.get("region")
+    custom_equipment = data.get("custom_equipment")
+    version = data.get("version")
 
     paladin, healing_targets = import_character(character_name, realm, region, version)
     
     paladin.update_character(
-        race=request.args.get("race"),
-        class_talents=json.loads(request.args.get("class_talents")),
-        spec_talents=json.loads(request.args.get("spec_talents")),
-        lightsmith_talents=json.loads(request.args.get("lightsmith_talents")),
-        herald_of_the_sun_talents=json.loads(request.args.get("herald_of_the_sun_talents")),
-        consumables=json.loads(request.args.get("consumables"))
+        race=data.get("race"),
+        class_talents=json.loads(data.get("class_talents")),
+        spec_talents=json.loads(data.get("spec_talents")),
+        lightsmith_talents=json.loads(data.get("lightsmith_talents")),
+        herald_of_the_sun_talents=json.loads(data.get("herald_of_the_sun_talents")),
+        consumables=json.loads(data.get("consumables"))
     )
 
     paladin.update_equipment(custom_equipment)

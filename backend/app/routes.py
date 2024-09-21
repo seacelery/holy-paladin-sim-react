@@ -51,7 +51,6 @@ def import_character_route():
     return response
     
 @main.route("/fetch_updated_data", methods=["POST"])
-@cross_origin(origins=["https://seacelery.github.io"], supports_credentials=True)
 def fetch_updated_stats_route():
     data = request.json
     character_name = data.get("character_name")
@@ -73,7 +72,7 @@ def fetch_updated_stats_route():
 
     paladin.update_equipment(custom_equipment)
     
-    return jsonify({
+    response = jsonify({
         "message": "Character updated successfully",
         "character_name": character_name,
         "character_realm": realm,
@@ -91,6 +90,11 @@ def fetch_updated_stats_route():
         },
         "ptr": paladin.ptr
     })
+    
+    response.headers.add('Access-Control-Allow-Origin', 'https://seacelery.github.io')
+    response.headers.add('Access-Control-Allow-Credentials', 'true')
+    
+    return response
 
 # @main.route("/update_character", methods=["POST"])
 # def update_character_route():

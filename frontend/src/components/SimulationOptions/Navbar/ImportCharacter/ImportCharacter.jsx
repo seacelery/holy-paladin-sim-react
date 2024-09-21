@@ -58,7 +58,7 @@ const ImportCharacter = ({ setActiveTab, setImporting }) => {
             setImporting(true);
 
             fetch(`${CONFIG.backendUrl}/import_character?character_name=${newCharacterName}&realm=${newCharacterRealm}&region=${newCharacterRegion}&version=${version}`, {
-                credentials: "include"
+                credentials: "same-origin"
             })
             .then(response => response.json())
             .then(data => {

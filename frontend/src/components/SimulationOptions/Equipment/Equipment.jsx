@@ -52,6 +52,12 @@ const Equipment = () => {
                 herald_of_the_sun_talents: characterData.heraldOfTheSunTalents,
                 consumables: characterData.consumables
             };
+
+            console.log('Sending request:', {
+                url: `${CONFIG.backendUrl}/fetch_updated_data`,
+                method: 'POST',
+                body: payload
+              });
     
             const response = await fetch(`${CONFIG.backendUrl}/fetch_updated_data`, {
                 method: 'POST',

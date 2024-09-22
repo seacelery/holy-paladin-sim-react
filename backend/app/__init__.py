@@ -35,7 +35,7 @@ def register_socketio_events(socketio):
         print(data)
 
         paladin, healing_targets = import_character(
-            data.characterName,
+            data.character_name,
             data.realm,
             data.region,
             data.version
@@ -43,8 +43,8 @@ def register_socketio_events(socketio):
 
         paladin.update_character(
             race=data.race,
-            class_talents=data.classTalents,
-            spec_talents=data.specTalents,
+            class_talents=data.class_talents,
+            spec_talents=data.spec_talents,
             lightsmith_talents=data.lightsmith_talents,
             herald_of_the_sun_talents=data.herald_of_the_sun_talents,
             consumables=data.consumables

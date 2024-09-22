@@ -130,6 +130,8 @@ const SimulateButton = () => {
         //     handleSimulationCancelled();
         // });
 
+        console.log(characterData)
+
         const simulationData = {
             race: characterData.race,
             character_name: characterData.characterName,
@@ -137,6 +139,7 @@ const SimulateButton = () => {
             character_region: characterData.characterRegion,
             class_talents: characterData.classTalents,
             spec_talents: characterData.specTalents,
+            consumables: characterData.consumables,
             lightsmith_talents: characterData.lightsmithTalents,
             herald_of_the_sun_talents: characterData.heraldOfTheSunTalents,
             version: version,

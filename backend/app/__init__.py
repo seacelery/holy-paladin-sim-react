@@ -32,7 +32,7 @@ def register_socketio_events(socketio):
     @socketio.on('start_simulation')
     def handle_start_simulation(data):
         sys.stdout.flush()
-        print(data)
+        print("Character Name:", data.character_name)
 
         paladin, healing_targets = import_character(
             data.character_name,

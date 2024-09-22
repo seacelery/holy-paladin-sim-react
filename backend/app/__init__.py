@@ -37,18 +37,18 @@ def register_socketio_events(socketio):
 
         paladin, healing_targets = import_character(
             data["character_name"],
-            data.realm,
-            data.region,
-            data.version
+            data["realm"],
+            data["region"],
+            data["version"]
         )
 
         paladin.update_character(
-            race=data.race,
+            race=data["race"],
             class_talents=data["class_talents"],
             spec_talents=data["spec_talents"],
             lightsmith_talents=data["lightsmith_talents"],
             herald_of_the_sun_talents=data["herald_of_the_sun_talents"],
-            consumables=data.consumables
+            consumables=data["consumables"]
         )
 
         paladin_pickled = pickle.dumps(paladin)

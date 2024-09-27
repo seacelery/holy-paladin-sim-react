@@ -221,7 +221,7 @@ const SimulateButton = () => {
                 } else if (data.state === 'SUCCESS') {
                     clearInterval(pollInterval);
                     console.log(data);
-                    consolidateOverlappingBuffs(data.results.priority_breakdown);
+                    consolidateOverlappingBuffs(data.result.results.priority_breakdown);
 
                     setSimulationCount(prevCount => prevCount + 1);
                     if (simulationName.includes("Simulation")) {

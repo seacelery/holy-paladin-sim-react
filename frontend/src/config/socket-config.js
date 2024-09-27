@@ -20,6 +20,14 @@ const initialiseSocket = () => {
         console.log("Connection failed:", error);
     });
 
+    socket.on("iteration_update", (data) => {
+        console.log("Iteration update received:", data);
+    });
+
+    socket.on("simulation_complete", (data) => {
+        console.log("Simulation complete event received:", data);
+    });
+
     return socket;
 };
 

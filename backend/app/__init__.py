@@ -134,6 +134,13 @@ def run_simulation_task(self, simulation_parameters):
         # redis = current_app.redis
         # task_id = self.request.id
         
+        print("simulation parameters")
+        sys.stdout.flush()
+        
+        print(simulation_parameters)
+        sys.stdout.flush()
+        
+        
         paladin = pickle.loads(simulation_parameters.pop('paladin'))
         healing_targets = pickle.loads(simulation_parameters.pop('healing_targets_list'))
         
@@ -840,9 +847,51 @@ def get_iteration_status(task_id):
     
 @app.route('/start_simulation', methods=['POST'])
 def start_simulation():
-    simulation_parameters = request.json
-    task = run_simulation_task.delay(simulation_parameters)
-    return jsonify({"task_id": task.id}), 202
+    data = request.json
+    
+    paladin, healing_targets = import_character(
+        data["character_name"],
+        data["character_realm"],
+        data["character_region"],
+        data["version"]
+    )
+
+    paladin.update_character(
+        race=data["race"],
+        class_talents=data["class_talents"],
+        spec_talents=data["spec_talents"],
+        lightsmith_talents=data["lightsmith_talents"],
+        herald_of_the_sun_talents=data["herald_of_the_sun_talents"],
+        consumables=data["consumables"]
+    )
+
+    paladin_pickled = pickle.dumps(paladin)
+    healing_targets_pickled = pickle.dumps(healing_targets)
+
+    simulation_params = {
+        "paladin": paladin_pickled,
+        "healing_targets_list": healing_targets_pickled,
+        "encounter_length": int(data['encounter_length']),
+        "iterations": int(data['iterations']),
+        "time_warp_time": int(data['time_warp_time']),
+        "priority_list": data["priority_list"],
+        "custom_equipment": data["custom_equipment"],
+        "tick_rate": float(data['tick_rate']),
+        "raid_health": int(data['raid_health']),
+        "mastery_effectiveness": int(data['mastery_effectiveness']),
+        "light_of_dawn_targets": int(data['light_of_dawn_targets']),
+        "resplendent_light_targets": int(data['resplendent_light_targets']),
+        "sureki_zealots_insignia_count": int(data['sureki_zealots_insignia_count']),
+        "dawnlight_targets": int(data['dawnlight_targets']),
+        "suns_avatar_targets": int(data['suns_avatar_targets']),
+        "light_of_the_martyr_uptime": float(data['light_of_the_martyr_uptime']) / 100,
+        "potion_bomb_of_power_uptime": float(data['potion_bomb_of_power_uptime']) / 100,
+        "seasons": data["seasons"],
+        "overhealing": data["overhealing"]
+    }
+
+    task = run_simulation_task.delay(simulation_parameters=simulation_params)
+    return jsonify({"message": "Simulation started.", "task_id": str(task.id)}), 202
 
 @app.route('/simulation_status/<task_id>')
 def simulation_status(task_id):

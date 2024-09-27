@@ -809,6 +809,8 @@ def run_simulation_task(self, simulation_parameters):
         
         # objgraph.show_most_common_types()
         # sys.stdout.flush()
+        
+        socketio.emit("simulation_complete", {"results": full_results, "simulation_details": simulation_details}, namespace="/")
 
         return {"results": full_results, "simulation_details": simulation_details}
     except TaskRevokedError:

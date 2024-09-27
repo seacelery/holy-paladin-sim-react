@@ -184,7 +184,53 @@ const SimulateButton = () => {
             overhealing: simulationParameters.overhealing
         };
     
-        socket.emit("start_simulation", simulationData);
+        // socket.emit("start_simulation", simulationData);
+        try {
+            const response = await fetch(`${CONFIG.backendUrl}/start_simulation`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(simulationData)
+            });
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const data = await response.json();
+            const taskId = data.task_id;
+    
+            pollSimulationStatus(taskId);
+        } catch (error) {
+            console.error('Error starting simulation:', error);
+            setSimulating(false);
+        }
+    };
+
+    const pollSimulationStatus = async (taskId) => {
+        const pollInterval = setInterval(async () => {
+            console.log("polling")
+            try {
+                const response = await fetch(`${CONFIG.backendUrl}/simulation_status/${taskId}`);
+                const data = await response.json();
+    
+                if (data.state === 'PROGRESS') {
+                    const progressPercentage = Math.round((data.current / data.total) * 100);
+                    setSimulationProgress(progressPercentage);
+                } else if (data.state === 'SUCCESS') {
+                    clearInterval(pollInterval);
+                    handleSimulationSuccess(data.result);
+                } else if (data.state === 'FAILURE') {
+                    clearInterval(pollInterval);
+                    handleSimulationError(data.status);
+                }
+            } catch (error) {
+                console.error('Error polling simulation status:', error);
+                clearInterval(pollInterval);
+                setSimulating(false);
+            }
+        }, 1000);
     };
 
     const handleSimulationSuccess = () => {

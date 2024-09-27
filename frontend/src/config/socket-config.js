@@ -28,14 +28,6 @@ const initialiseSocket = () => {
         console.log("Simulation complete event received:", data);
     });
 
-    setInterval(() => {
-        console.log("Socket connection status:", socket.connected);
-    }, 5000);  // Check every 5 seconds
-
-    socket.onAny((eventName, ...args) => {
-        console.log(`Received event: ${eventName}`, args);
-    });
-
     return socket;
 };
 

@@ -131,8 +131,8 @@ def check_cancellation(task_id):
 @celery.task(bind=True)
 def run_simulation_task(self, simulation_parameters): 
     try:
-        redis = current_app.redis
-        task_id = self.request.id
+        # redis = current_app.redis
+        # task_id = self.request.id
         
         paladin = pickle.loads(simulation_parameters.pop('paladin'))
         healing_targets = pickle.loads(simulation_parameters.pop('healing_targets_list'))
@@ -278,17 +278,17 @@ def run_simulation_task(self, simulation_parameters):
         for i in range(simulation.iterations):
             sys.stdout.flush()
 
-            if redis.get(f'cancel_task_{task_id}'):
-                print("Cancellation requested")
-                reset_simulation()
-                return
+            # if redis.get(f'cancel_task_{task_id}'):
+            #     print("Cancellation requested")
+            #     reset_simulation()
+            #     return
             
             # reset simulation states
             print(i)
             if not simulation.test:
-                socketio.emit("iteration_update", {"iteration": i}, namespace="/")
-                redis.set(f'iteration_{task_id}', i)
-                redis.expire(f'iteration_{task_id}', 120)
+                # socketio.emit("iteration_update", {"iteration": i}, namespace="/")
+                # redis.set(f'iteration_{task_id}', i)
+                # redis.expire(f'iteration_{task_id}', 120)
                 simulation.paladin.reset_state()
                 simulation.reset_simulation()
                 simulation.paladin.apply_consumables()
@@ -812,7 +812,7 @@ def run_simulation_task(self, simulation_parameters):
         
         socketio.emit("simulation_complete", {"results": full_results, "simulation_details": simulation_details}, namespace="/")
 
-        return {"results": full_results, "simulation_details": simulation_details}
+        return {"status": "COMPLETED", "results": full_results, "simulation_details": simulation_details}
     except TaskRevokedError:
         print("Task was cancelled")
         reset_simulation()
@@ -837,3 +837,41 @@ def get_iteration_status(task_id):
         return jsonify({"iteration": int(iteration_data)}), 200
     else:
         return jsonify({"error": "No iteration data found"}), 404
+    
+@app.route('/start_simulation', methods=['POST'])
+def start_simulation():
+    simulation_parameters = request.json
+    task = run_simulation_task.delay(simulation_parameters)
+    return jsonify({"task_id": task.id}), 202
+
+@app.route('/simulation_status/<task_id>')
+def simulation_status(task_id):
+    task = AsyncResult(task_id)
+    if task.state == 'PENDING':
+        response = {
+            'state': task.state,
+            'status': 'Pending...'
+        }
+    elif task.state == 'PROGRESS':
+        response = {
+            'state': task.state,
+            'current': task.info.get('current', 0),
+            'total': task.info.get('total', 1),
+            'status': task.info.get('status', '')
+        }
+    elif task.state == 'SUCCESS':
+        response = {
+            'state': task.state,
+            'result': task.result
+        }
+    elif task.state == 'FAILURE':
+        response = {
+            'state': task.state,
+            'status': str(task.info),  # this will contain the exception info
+        }
+    else:
+        response = {
+            'state': task.state,
+            'status': 'Unknown state'
+        }
+    return jsonify(response)

@@ -31,6 +31,7 @@ const SimulateButton = () => {
     useEffect(() => {
         if (socket) {
             socket.on("iteration_update", (data) => {
+                console.log("iteration update")
                 if (simulating) {
                     const progressPercentage = Math.round((data.iteration / simulationParameters.iterations) * 100);
                     setSimulationProgress(progressPercentage);
@@ -38,6 +39,7 @@ const SimulateButton = () => {
             });
 
             socket.on("simulation_complete", (data) => {
+                console.log("simulation complete")
                 console.log(data);
                 consolidateOverlappingBuffs(data.results.priority_breakdown);
 

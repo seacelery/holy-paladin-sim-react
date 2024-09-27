@@ -231,7 +231,7 @@ const SimulateButton = () => {
                     const newSimulationResult = {
                         id: uuidv4(),
                         name: simulationName,
-                        ...data
+                        ...data.result
                     };
 
                     buttonRef.current.removeEventListener("click", cancelSimulation);

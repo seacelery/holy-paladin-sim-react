@@ -220,6 +220,22 @@ const SimulateButton = () => {
                     setSimulationProgress(progressPercentage);
                 } else if (data.state === 'SUCCESS') {
                     clearInterval(pollInterval);
+                    console.log(data);
+                    consolidateOverlappingBuffs(data.results.priority_breakdown);
+
+                    setSimulationCount(prevCount => prevCount + 1);
+                    if (simulationName.includes("Simulation")) {
+                        setSimulationName(`Simulation ${simulationCount + 1}`);
+                    };
+
+                    const newSimulationResult = {
+                        id: uuidv4(),
+                        name: simulationName,
+                        ...data
+                    };
+
+                    buttonRef.current.removeEventListener("click", cancelSimulation);
+                    setSimulationResults(prevResults => [newSimulationResult, ...prevResults]);
                     handleSimulationSuccess(data.result);
                 } else if (data.state === 'FAILURE') {
                     clearInterval(pollInterval);

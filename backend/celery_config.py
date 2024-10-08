@@ -13,8 +13,8 @@ def make_celery(app):
         enable_utc=True,
         timezone='UTC',
         broker_connection_retry_on_startup=True,
-        CELERY_TRACK_STARTED=True,
-        CELERY_SEND_EVENTS=True
+        worker_send_task_events=True,
+        task_track_started=True
     )
     
     celery.conf.result_expires = 120

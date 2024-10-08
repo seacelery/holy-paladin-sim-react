@@ -284,18 +284,11 @@ def run_simulation_task(self, simulation_parameters):
         # complete all simulation iterations and process the data of each
         for i in range(simulation.iterations):
             sys.stdout.flush()
-
-            # if redis.get(f'cancel_task_{task_id}'):
-            #     print("Cancellation requested")
-            #     reset_simulation()
-            #     return
             
             # reset simulation states
             print(i)
             if not simulation.test:
-                # socketio.emit("iteration_update", {"iteration": i}, namespace="/")
-                # redis.set(f'iteration_{task_id}', i)
-                # redis.expire(f'iteration_{task_id}', 120)
+                self.update_state(state='PROGRESS', meta={'current': i, 'total': simulation.iterations})
                 simulation.paladin.reset_state()
                 simulation.reset_simulation()
                 simulation.paladin.apply_consumables()
@@ -824,26 +817,7 @@ def run_simulation_task(self, simulation_parameters):
         print("Task was cancelled")
         reset_simulation()
         return {'message': 'Task was cancelled'}
-        
-
-@app.route('/results/<task_id>', methods=['GET'])
-def get_results(task_id):
-    task = AsyncResult(task_id)
-    if task.state == 'SUCCESS':
-        return jsonify(task.get()), 200
-    elif task.state == 'FAILURE':
-        return jsonify({"error": "Task failed", "details": str(task.info)}), 500
-    else:
-        return jsonify({"state": task.state}), 202   
-    
-@app.route('/iteration/<task_id>', methods=['GET'])
-def get_iteration_status(task_id):
-    redis = current_app.redis
-    iteration_data = redis.get(f'iteration_{task_id}')
-    if iteration_data:
-        return jsonify({"iteration": int(iteration_data)}), 200
-    else:
-        return jsonify({"error": "No iteration data found"}), 404
+     
     
 @app.route('/start_simulation', methods=['POST'])
 def start_simulation():

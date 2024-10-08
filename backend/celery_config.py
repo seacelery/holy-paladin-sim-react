@@ -12,7 +12,9 @@ def make_celery(app):
         result_serializer='pickle',
         enable_utc=True,
         timezone='UTC',
-        broker_connection_retry_on_startup=True
+        broker_connection_retry_on_startup=True,
+        CELERY_TRACK_STARTED=True,
+        CELERY_SEND_EVENTS=True
     )
     
     celery.conf.result_expires = 120

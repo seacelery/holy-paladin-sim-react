@@ -20,6 +20,7 @@ const SimulateButton = () => {
 
     const buttonRef = useRef(null);
     const successHandledRef = useRef(false);
+    const cancelSimulationRef = useRef(null);
 
     const [simulating, setSimulating] = useState(false);
     const [simulationProgress, setSimulationProgress] = useState(0);
@@ -54,7 +55,10 @@ const SimulateButton = () => {
                     ...data
                 };
 
-                buttonRef.current.removeEventListener("click", cancelSimulation);
+                if (cancelSimulationRef.current) {
+                    buttonRef.current.removeEventListener("click", cancelSimulationRef.current);
+                };
+
                 setSimulationResults(prevResults => [newSimulationResult, ...prevResults]);
                 handleSimulationSuccess();
             });
@@ -72,27 +76,20 @@ const SimulateButton = () => {
     };
 
     const cancelSimulation = async (taskId) => {
-        console.log("cancelling", taskId);
         try {
             const response = await fetch(`${CONFIG.backendUrl}/cancel_simulation`, {
-                method: 'POST',
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ task_id: taskId })
             });
             
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
             const data = await response.json();
-            console.log("Cancellation response:", data);
-    
             handleSimulationCancelled();
         } catch (error) {
             console.error("Error cancelling simulation:", error);
-        }
+        };
     };
     
     const runSimulation = async () => {
@@ -134,25 +131,26 @@ const SimulateButton = () => {
     
         try {
             const response = await fetch(`${CONFIG.backendUrl}/start_simulation`, {
-                method: 'POST',
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify(simulationData)
             });
     
             if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+                throw new Error('Network response error');
+            };
     
             const data = await response.json();
             const taskId = data.task_id;
     
-            console.log(`Task ID: ${data.task_id}`);
-            buttonRef.current.addEventListener("click", () => cancelSimulation(taskId));
+            cancelSimulationRef.current = () => cancelSimulation(taskId);
+            buttonRef.current.addEventListener("click", cancelSimulationRef.current);
+
             pollSimulationStatus(taskId);
         } catch (error) {
-            console.error('Error starting simulation:', error);
+            console.error("Error starting simulation:", error);
             setSimulating(false);
         };
     };
@@ -160,15 +158,15 @@ const SimulateButton = () => {
     const pollSimulationStatus = async (taskId) => {
         const clearSimulation = () => {
             clearInterval(pollInterval);
-            buttonRef.current.removeEventListener("click", () => cancelSimulation(taskId));
+            if (cancelSimulationRef.current) {
+                buttonRef.current.removeEventListener("click", cancelSimulationRef.current);
+            };
         };
 
         const pollInterval = setInterval(async () => {
             try {
                 const response = await fetch(`${CONFIG.backendUrl}/simulation_status/${taskId}`);
                 const data = await response.json();
-
-                console.log(data)
     
                 if (data.state === "PROGRESS") {
                     const progressPercentage = Math.round((data.current / data.total) * 100);
@@ -192,7 +190,6 @@ const SimulateButton = () => {
                             ...data.result
                         };
 
-                        buttonRef.current.removeEventListener("click", cancelSimulation);
                         setSimulationResults(prevResults => [newSimulationResult, ...prevResults]);
                         handleSimulationSuccess(data.result);
                     }, 1500);

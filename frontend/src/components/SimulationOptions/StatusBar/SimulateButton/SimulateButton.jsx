@@ -19,8 +19,9 @@ const SimulateButton = () => {
     const { socket } = useContext(SocketContext);
 
     const buttonRef = useRef(null);
-    let abortController;
+    const successHandledRef = useRef(false);
 
+    const [currentTaskId, setCurrentTaskId] = useState(null);
     const [simulating, setSimulating] = useState(false);
     const [simulationProgress, setSimulationProgress] = useState(0);
     const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
@@ -72,85 +73,28 @@ const SimulateButton = () => {
     };
 
     const cancelSimulation = () => {
-        if (abortController) {
-            abortController.abort();
+        if (currentTaskId) {
+            fetch(`${CONFIG.backendUrl}/cancel_simulation`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ task_id: currentTaskId })
+            }).then(() => {
+                console.log("Cancellation request sent");
+                handleSimulationCancelled();
+            }).catch(error => {
+                console.error("Error cancelling simulation:", error);
+            });
         };
     };
     
     const runSimulation = async () => {
-        abortController = new AbortController();
-        const { signal } = abortController;
         buttonRef.current.addEventListener("click", cancelSimulation);
 
+        successHandledRef.current = false;
         setSimulating(true);
         setSimulationProgress(0);
-
-        // const params = new URLSearchParams({
-        //     race: characterData.race,
-        //     character_name: characterData.characterName,
-        //     character_realm: characterData.characterRealm,
-        //     character_region: characterData.characterRegion,
-        //     version: version,
-        //     encounter_length: simulationParameters.encounterLength,
-        //     iterations: simulationParameters.iterations,
-        //     time_warp_time: simulationParameters.timeWarp,
-        //     tick_rate: simulationParameters.tickRate,
-        //     mastery_effectiveness: simulationParameters.masteryEffectiveness,
-        //     raid_health: simulationParameters.raidHealth,
-        //     light_of_dawn_targets: simulationParameters.lightOfDawnTargets,
-        //     resplendent_light_targets: simulationParameters.resplendentLightTargets,
-        //     sureki_zealots_insignia_count: simulationParameters.surekiZealotsInsigniaCount,
-        //     dawnlight_targets: simulationParameters.dawnlightTargets,
-        //     suns_avatar_targets: simulationParameters.sunsAvatarTargets,
-        //     light_of_the_martyr_uptime: simulationParameters.lightOfTheMartyrUptime,
-        //     potion_bomb_of_power_uptime: simulationParameters.potionBombOfPowerUptime,
-        // });
-
-        // params.append("class_talents", JSON.stringify(characterData.classTalents));
-        // params.append("spec_talents", JSON.stringify(characterData.specTalents));
-        // params.append("lightsmith_talents", JSON.stringify(characterData.lightsmithTalents));
-        // params.append("herald_of_the_sun_talents", JSON.stringify(characterData.heraldOfTheSunTalents));
-        // params.append("consumables", JSON.stringify(characterData.consumables));
-        // params.append("equipment", JSON.stringify(characterData.equipment));
-        // params.append("priority_list", JSON.stringify(simulationParameters.priorityList));
-        // params.append("overhealing", JSON.stringify(simulationParameters.overhealing));
-        // params.append("seasons", JSON.stringify(simulationParameters.seasons));
-        // params.append("stat_scaling", JSON.stringify(simulationParameters.statScaling));
-
-        // return fetch(`${CONFIG.backendUrl}/run_simulation?${params.toString()}`, {
-        //     credentials: "include",
-        //     signal: signal
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     console.log(data);
-        //     consolidateOverlappingBuffs(data.results.priority_breakdown);
-
-        //     setSimulationCount(prevCount => prevCount + 1);
-        //     if (simulationName.includes("Simulation")) {
-        //         setSimulationName(`Simulation ${simulationCount + 1}`);
-        //     };
-
-        //     const newSimulationResult = {
-        //         id: uuidv4(),
-        //         name: simulationName,
-        //         ...data
-        //     };
-
-        //     buttonRef.current.removeEventListener("click", cancelSimulation);
-        //     setSimulationResults(prevResults => [newSimulationResult, ...prevResults]);
-        //     handleSimulationSuccess();
-        // })
-        // .catch(error => {
-        //     if (error.name === "AbortError") {
-        //         console.log("Fetch aborted:", error);
-        //     } else {
-        //         console.error("Error:", error);
-        //     };
-            
-        //     buttonRef.current.removeEventListener("click", cancelSimulation);
-        //     handleSimulationCancelled();
-        // });
 
         console.log(characterData)
 
@@ -184,7 +128,6 @@ const SimulateButton = () => {
             overhealing: simulationParameters.overhealing
         };
     
-        // socket.emit("start_simulation", simulationData);
         try {
             const response = await fetch(`${CONFIG.backendUrl}/start_simulation`, {
                 method: 'POST',
@@ -201,54 +144,56 @@ const SimulateButton = () => {
             const data = await response.json();
             const taskId = data.task_id;
     
+            setCurrentTaskId(taskId);
             pollSimulationStatus(taskId);
         } catch (error) {
             console.error('Error starting simulation:', error);
             setSimulating(false);
-        }
+        };
     };
 
     const pollSimulationStatus = async (taskId) => {
         const pollInterval = setInterval(async () => {
-            console.log("polling")
             try {
                 const response = await fetch(`${CONFIG.backendUrl}/simulation_status/${taskId}`);
                 const data = await response.json();
-
-                console.log(data)
     
-                if (data.state === 'PROGRESS') {
+                if (data.state === "PROGRESS") {
                     const progressPercentage = Math.round((data.current / data.total) * 100);
-                    setSimulationProgress(progressPercentage);
-                } else if (data.state === 'SUCCESS') {
+                    setSimulationProgress(progressPercentage);                   
+                } else if (data.state === "SUCCESS" && !successHandledRef.current && data.status !== "COMPLETED") {
                     clearInterval(pollInterval);
-                    console.log(data);
-                    consolidateOverlappingBuffs(data.result.results.priority_breakdown);
+                    successHandledRef.current = true;
+                    setSimulationProgress(100);
+                    
+                    setTimeout(() => {
+                        consolidateOverlappingBuffs(data.result.results.priority_breakdown);
 
-                    setSimulationCount(prevCount => prevCount + 1);
-                    if (simulationName.includes("Simulation")) {
-                        setSimulationName(`Simulation ${simulationCount + 1}`);
-                    };
+                        setSimulationCount(prevCount => prevCount + 1);
+                        if (simulationName.includes("Simulation")) {
+                            setSimulationName(`Simulation ${simulationCount + 1}`);
+                        };
 
-                    const newSimulationResult = {
-                        id: uuidv4(),
-                        name: simulationName,
-                        ...data.result
-                    };
+                        const newSimulationResult = {
+                            id: uuidv4(),
+                            name: simulationName,
+                            ...data.result
+                        };
 
-                    buttonRef.current.removeEventListener("click", cancelSimulation);
-                    setSimulationResults(prevResults => [newSimulationResult, ...prevResults]);
-                    handleSimulationSuccess(data.result);
-                } else if (data.state === 'FAILURE') {
+                        buttonRef.current.removeEventListener("click", cancelSimulation);
+                        setSimulationResults(prevResults => [newSimulationResult, ...prevResults]);
+                        handleSimulationSuccess(data.result);
+                    }, 1500);
+                } else if (data.state === "FAILURE") {
                     clearInterval(pollInterval);
                     handleSimulationError(data.status);
                 }
             } catch (error) {
-                console.error('Error polling simulation status:', error);
+                console.error("Error polling simulation status:", error);
                 clearInterval(pollInterval);
                 setSimulating(false);
             }
-        }, 1000);
+        }, 150);
     };
 
     const handleSimulationSuccess = () => {

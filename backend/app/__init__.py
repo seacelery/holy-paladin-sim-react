@@ -867,6 +867,15 @@ def start_simulation():
     task = run_simulation_task.delay(simulation_parameters=simulation_params)
     return jsonify({"message": "Simulation started.", "task_id": str(task.id)}), 202
 
+@app.route('/cancel_simulation', methods=['POST'])
+def cancel_simulation():
+    task_id = request.json.get('task_id')
+    if task_id:
+        task = AsyncResult(task_id)
+        task.revoke(terminate=True)
+        return jsonify({"message": "Cancellation request sent"}), 200
+    return jsonify({"error": "No task_id provided"}), 400
+
 @app.route('/simulation_status/<task_id>')
 def simulation_status(task_id):
     task = AsyncResult(task_id)
@@ -890,7 +899,7 @@ def simulation_status(task_id):
     elif task.state == 'FAILURE':
         response = {
             'state': task.state,
-            'status': str(task.info),  # this will contain the exception info
+            'status': str(task.info),
         }
     else:
         response = {

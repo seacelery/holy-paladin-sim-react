@@ -1,12 +1,8 @@
 import eventlet
 import os
 import sys
-import json
-import redis
 import pickle
 import logging
-import resource
-import objgraph
 
 from flask import Flask, current_app, jsonify, request
 from celery.result import AsyncResult
@@ -82,17 +78,6 @@ app = Flask(__name__, static_url_path="", static_folder="../../frontend")
 init_socketio(app)
 register_socketio_events(socketio)
 
-app.config["REDIS_TLS_URL"] = os.getenv("REDIS_TLS_URL")
-app.redis = redis.Redis.from_url(
-    app.config["REDIS_TLS_URL"],
-    ssl_cert_reqs='none'
-)
-
-app.config.update(
-    CELERY_BROKER_URL=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
-    CELERY_RESULT_BACKEND=app.config["REDIS_TLS_URL"] + '?ssl_cert_reqs=none',
-)   
-
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
 
 logging.basicConfig(level=logging.DEBUG)
@@ -125,9 +110,6 @@ def check_cancellation(task_id):
 @celery.task(bind=True)
 def run_simulation_task(self, simulation_parameters): 
     try:
-        # redis = current_app.redis
-        # task_id = self.request.id
-        
         print("simulation parameters")
         sys.stdout.flush()
         

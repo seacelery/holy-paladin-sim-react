@@ -9,16 +9,8 @@ services:
     volumes:
       - .:/code
     command: python run.py
-    environment:
-      - REDIS_URL=redis://redis:6379/0
     depends_on:
-      - redis
       - worker
-
-  redis:
-    image: "redis:alpine"
-    ports:
-      - "6379:6379"
 
   worker:
     build:
@@ -27,5 +19,3 @@ services:
     command: celery -A app.celery worker --loglevel=info
     volumes:
       - .:/code
-    depends_on:
-      - redis

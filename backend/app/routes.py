@@ -94,31 +94,3 @@ def fetch_updated_stats_route():
     })
     print("Sending response:", response.json)
     return response
-
-# @main.route("/update_character", methods=["POST"])
-# def update_character_route():
-#     session_token = request.cookies.get('session_token')
-#     if not session_token:
-#         return jsonify({"error": "No session token provided"}), 400
-
-#     session_data = current_app.redis.get(session_token)
-#     if not session_data:
-#         return jsonify({"error": "Session not found"}), 404
-
-#     modifiable_data = json.loads(session_data)
-#     user_input = request.json
-    
-#     current_app.logger.debug(f"Modifiable data before update: {modifiable_data}")
-#     current_app.logger.debug(f"User input {user_input}")
-            
-#     for key, value in user_input.items():
-#         if key in modifiable_data:
-#             if isinstance(modifiable_data[key], dict):
-#                 modifiable_data[key].update(value)
-#             else:
-#                 modifiable_data[key] = value
-
-#     current_app.redis.setex(session_token, 1200, json.dumps(modifiable_data))
-#     current_app.logger.debug(f"Modifiable data after update: {modifiable_data}")
-
-#     return jsonify({"message": "Character updated successfully"})

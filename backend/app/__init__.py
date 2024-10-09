@@ -78,6 +78,13 @@ app = Flask(__name__, static_url_path="", static_folder="../../frontend")
 init_socketio(app)
 register_socketio_events(socketio)
 
+app.config["RABBITMQ_URL"] = os.getenv("CLOUDAMQP_URL", "amqp://guest:guest@localhost//")
+
+app.config.update(
+    CELERY_BROKER_URL=app.config["RABBITMQ_URL"],
+    CELERY_RESULT_BACKEND=app.config["RABBITMQ_URL"],
+) 
+
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
 
 logging.basicConfig(level=logging.DEBUG)
@@ -110,6 +117,9 @@ def check_cancellation(task_id):
 @celery.task(bind=True)
 def run_simulation_task(self, simulation_parameters): 
     try:
+        # redis = current_app.redis
+        # task_id = self.request.id
+        
         print("simulation parameters")
         sys.stdout.flush()
         

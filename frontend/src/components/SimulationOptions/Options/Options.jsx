@@ -67,10 +67,13 @@ const Options = () => {
                             sliderType: "integer",
                             name: "Iterations",
                             min: 1,
-                            max: 1000,
+                            max: 1001,
                             step: 1,
                             defaultValue: simulationParameters.iterations,
-                            updateParameter: (value) => updateSimulationParameters("iterations", value)
+                            updateParameter: (value) => updateSimulationParameters("iterations", value),
+                            variableSteps: [{ threshold: 100, step: 50 }],
+                            snapValues: [100],
+                            snapRange: 10
                         }}
                     />
 
@@ -80,10 +83,12 @@ const Options = () => {
                             sliderType: "time",
                             name: "Encounter Length",
                             min: 1,
-                            max: 600,
+                            max: 601,
                             step: 1,
                             defaultValue: simulationParameters.encounterLength,
-                            updateParameter: (value) => updateSimulationParameters("encounterLength", value)
+                            updateParameter: (value) => updateSimulationParameters("encounterLength", value),
+                            snapValues: [60, 120, 180, 240, 300, 360, 420, 480, 540, 600],
+                            snapRange: 10
                         }}
                     />
 

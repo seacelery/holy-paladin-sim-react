@@ -3,7 +3,20 @@ import "./OptionSlider.scss";
 import { FaCircleInfo } from "react-icons/fa6";
 import Tooltip from "../../../../Tooltip/Tooltip";
 
-const OptionSlider = ({ sliderType, name, min, max, step, defaultValue, showInfo = false, tooltipText = null, updateParameter = null }) => {
+const OptionSlider = ({
+    sliderType,
+    name,
+    min,
+    max,
+    step,
+    defaultValue,
+    showInfo = false,
+    tooltipText = null,
+    updateParameter = null,
+    variableSteps = [],
+    snapValues = [],
+    snapRange = 0
+}) => {
     const formatValue = (value) => {
         if (sliderType === "integer" || sliderType === "float") {
             return value;
@@ -13,11 +26,41 @@ const OptionSlider = ({ sliderType, name, min, max, step, defaultValue, showInfo
             const minutes = Math.floor(value / 60);
             const seconds = value % 60;
             return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+        }
+    };
+
+    const getStepAmount = (currentValue) => {
+        if (variableSteps.length > 0) {
+            for (let i = 0; i < variableSteps.length; i++) {
+                if (currentValue >= variableSteps[i].threshold) {
+                    return variableSteps[i].step;
+                };
+            };
         };
+
+        return step;
+    };
+
+    const getClosestSnapValue = (currentValue) => {
+        let closestSnap = currentValue;
+
+        snapValues.forEach((snapValue) => {
+            if (Math.abs(currentValue - snapValue) <= snapRange) {
+                closestSnap = snapValue;
+            };
+        });
+
+        return closestSnap;
     };
 
     const handleSliderChange = (e) => {
-        const newValue = e.target.value;
+        let newValue = parseFloat(e.target.value);
+    
+        newValue = getClosestSnapValue(newValue);
+        let step = getStepAmount(newValue);
+    
+        newValue = Math.round(newValue / step) * step;
+    
         setValue(newValue);
         setInputValue(formatValue(newValue));
     };
@@ -29,7 +72,11 @@ const OptionSlider = ({ sliderType, name, min, max, step, defaultValue, showInfo
         if (isValidInput(newValue)) {
             let parsedValue = parseValue(newValue);
 
-            if (!isNaN(parsedValue) && parsedValue >= min && parsedValue <= max) {
+            if (
+                !isNaN(parsedValue) &&
+                parsedValue >= min &&
+                parsedValue <= max
+            ) {
                 setValue(parsedValue);
             };
         };
@@ -79,9 +126,9 @@ const OptionSlider = ({ sliderType, name, min, max, step, defaultValue, showInfo
     useEffect(() => {
         if (updateParameter) {
             updateParameter(value);
-        };
+        }
     }, [value]);
-    
+
     return (
         <>
             <div className="option-slider-label-container">
@@ -95,10 +142,7 @@ const OptionSlider = ({ sliderType, name, min, max, step, defaultValue, showInfo
                     <div className="option-slider-info" ref={infoIconRef}>
                         <FaCircleInfo className="option-info-circle" />
                         {hoverElement && (
-                            <Tooltip
-                                type="option"
-                                hoverElement={hoverElement}
-                            >
+                            <Tooltip type="option" hoverElement={hoverElement}>
                                 {tooltipText}
                             </Tooltip>
                         )}
@@ -124,7 +168,7 @@ const OptionSlider = ({ sliderType, name, min, max, step, defaultValue, showInfo
                     value={value}
                     min={min}
                     max={max}
-                    step={step}
+                    step={getStepAmount(value)}
                     onChange={handleSliderChange}
                 />
             </div>

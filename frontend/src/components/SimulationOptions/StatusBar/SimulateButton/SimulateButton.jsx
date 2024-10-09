@@ -21,7 +21,6 @@ const SimulateButton = () => {
     const buttonRef = useRef(null);
     const successHandledRef = useRef(false);
 
-    const [currentTaskId, setCurrentTaskId] = useState(null);
     const [simulating, setSimulating] = useState(false);
     const [simulationProgress, setSimulationProgress] = useState(0);
     const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
@@ -72,26 +71,38 @@ const SimulateButton = () => {
         setSimulationName(e.target.value);
     };
 
-    const cancelSimulation = () => {
-        if (currentTaskId) {
-            fetch(`${CONFIG.backendUrl}/cancel_simulation`, {
+    const cancelSimulation = async (taskId) => {
+        console.log("cancelling", taskId);
+        try {
+            const response = await fetch(`${CONFIG.backendUrl}/cancel_simulation`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ task_id: currentTaskId })
-            }).then(() => {
-                console.log("Cancellation request sent");
-                handleSimulationCancelled();
-            }).catch(error => {
-                console.error("Error cancelling simulation:", error);
+                body: JSON.stringify({ task_id: taskId })
             });
-        };
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.indexOf("application/json") !== -1) {
+                const data = await response.json();
+                console.log("Cancellation response:", data);
+            } else {
+                console.log("Received non-JSON response");
+                const text = await response.text();
+                console.log(text);
+            }
+            
+            handleSimulationCancelled();
+        } catch (error) {
+            console.error("Error cancelling simulation:", error);
+        }
     };
     
     const runSimulation = async () => {
-        buttonRef.current.addEventListener("click", cancelSimulation);
-
         successHandledRef.current = false;
         setSimulating(true);
         setSimulationProgress(0);
@@ -144,7 +155,8 @@ const SimulateButton = () => {
             const data = await response.json();
             const taskId = data.task_id;
     
-            setCurrentTaskId(taskId);
+            console.log(`Task ID: ${data.task_id}`);
+            buttonRef.current.addEventListener("click", () => cancelSimulation(taskId));
             pollSimulationStatus(taskId);
         } catch (error) {
             console.error('Error starting simulation:', error);
@@ -153,6 +165,11 @@ const SimulateButton = () => {
     };
 
     const pollSimulationStatus = async (taskId) => {
+        const clearSimulation = () => {
+            clearInterval(pollInterval);
+            buttonRef.current.removeEventListener("click", () => cancelSimulation(taskId));
+        };
+
         const pollInterval = setInterval(async () => {
             try {
                 const response = await fetch(`${CONFIG.backendUrl}/simulation_status/${taskId}`);
@@ -162,7 +179,7 @@ const SimulateButton = () => {
                     const progressPercentage = Math.round((data.current / data.total) * 100);
                     setSimulationProgress(progressPercentage);                   
                 } else if (data.state === "SUCCESS" && !successHandledRef.current && data.status !== "COMPLETED") {
-                    clearInterval(pollInterval);
+                    clearSimulation();
                     successHandledRef.current = true;
                     setSimulationProgress(100);
                     
@@ -185,9 +202,11 @@ const SimulateButton = () => {
                         handleSimulationSuccess(data.result);
                     }, 1500);
                 } else if (data.state === "FAILURE") {
-                    clearInterval(pollInterval);
+                    clearSimulation();
                     handleSimulationError(data.status);
-                }
+                } else if (data.state === "REVOKED") {
+                    clearSimulation();
+                };
             } catch (error) {
                 console.error("Error polling simulation status:", error);
                 clearInterval(pollInterval);

@@ -76,13 +76,6 @@ def register_socketio_events(socketio):
 
         result = run_simulation_task.delay(simulation_parameters=simulation_params)
         emit('simulation_started', {'message': "Simulation started.", 'task_id': str(result.id)})
-        
-    @socketio.on('cancel_simulation')
-    def handle_cancel_simulation(data):
-        task_id = data.get('task_id')
-        if task_id:
-            current_app.redis.set(f'cancel_task_{task_id}', '1')
-            emit('simulation_cancelled', {'message': "Cancellation requested for task " + task_id})
 
 app = Flask(__name__, static_url_path="", static_folder="../../frontend")
 init_socketio(app)

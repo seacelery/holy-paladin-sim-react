@@ -86,16 +86,9 @@ const SimulateButton = () => {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             
-            const contentType = response.headers.get("content-type");
-            if (contentType && contentType.indexOf("application/json") !== -1) {
-                const data = await response.json();
-                console.log("Cancellation response:", data);
-            } else {
-                console.log("Received non-JSON response");
-                const text = await response.text();
-                console.log(text);
-            }
-            
+            const data = await response.json();
+            console.log("Cancellation response:", data);
+    
             handleSimulationCancelled();
         } catch (error) {
             console.error("Error cancelling simulation:", error);

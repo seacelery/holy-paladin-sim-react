@@ -279,7 +279,8 @@ def run_simulation_task(self, simulation_parameters):
         for i in range(simulation.iterations):
             sys.stdout.flush()
             
-            if AsyncResult(self.request.id).state == states.REVOKED:
+            if AsyncResult(self.request.id).state == 'REVOKED':
+                print(f"Task {self.request.id} was revoked. Exiting simulation.")
                 return {'status': 'CANCELLED'}
             
             # reset simulation states
@@ -869,7 +870,9 @@ def cancel_simulation():
     task_id = request.json.get('task_id')
     if task_id:
         task = AsyncResult(task_id)
-        task.revoke(terminate=True, signal='SIGTERM')
+        current_app.logger.info(f'Cancelling task {task_id}, current state: {task.state}')
+        task.revoke(terminate=False)
+        current_app.logger.info(f'Task {task_id} revoked, new state: {task.state}')
         return jsonify({"message": "Cancellation request sent"}), 200
     return jsonify({"error": "No task_id provided"}), 400
 

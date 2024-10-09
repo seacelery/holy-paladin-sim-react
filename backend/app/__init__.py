@@ -84,11 +84,14 @@ app.config.update(
     CELERY_BROKER_URL=app.config["RABBITMQ_URL"],
     CELERY_RESULT_BACKEND=app.config["RABBITMQ_URL"],
 ) 
+logging.basicConfig(level=logging.DEBUG)
+app.logger.setLevel(logging.DEBUG)
+
+current_app.logger.info(app.config["CELERY_BROKER_URL"])
 
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
 
-logging.basicConfig(level=logging.DEBUG)
-app.logger.setLevel(logging.DEBUG)
+
 
 CORS(app, supports_credentials=True, origins=["https://seacelery.github.io"], allow_headers=[
     "Content-Type", "Authorization", "X-Requested-With"], methods=["GET", "POST", "OPTIONS"])

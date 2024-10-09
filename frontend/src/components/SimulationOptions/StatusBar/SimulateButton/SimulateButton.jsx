@@ -174,6 +174,8 @@ const SimulateButton = () => {
             try {
                 const response = await fetch(`${CONFIG.backendUrl}/simulation_status/${taskId}`);
                 const data = await response.json();
+
+                console.log(data)
     
                 if (data.state === "PROGRESS") {
                     const progressPercentage = Math.round((data.current / data.total) * 100);

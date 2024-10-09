@@ -869,7 +869,7 @@ def cancel_simulation():
     task_id = request.json.get('task_id')
     if task_id:
         task = AsyncResult(task_id)
-        task.revoke(terminate=True)
+        task.revoke(terminate=True, signal='SIGTERM')
         return jsonify({"message": "Cancellation request sent"}), 200
     return jsonify({"error": "No task_id provided"}), 400
 

@@ -87,11 +87,10 @@ app.config.update(
 logging.basicConfig(level=logging.DEBUG)
 app.logger.setLevel(logging.DEBUG)
 
-current_app.logger.info(app.config["CELERY_BROKER_URL"])
+sys.stdout.flush()
+print(app.config["CELERY_BROKER_URL"])
 
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
-
-
 
 CORS(app, supports_credentials=True, origins=["https://seacelery.github.io"], allow_headers=[
     "Content-Type", "Authorization", "X-Requested-With"], methods=["GET", "POST", "OPTIONS"])

@@ -33,6 +33,7 @@ wsproto==1.2.0
 gunicorn
 eventlet
 celery
+celery-amqp-backend
 kombu
 amqp
 certifi

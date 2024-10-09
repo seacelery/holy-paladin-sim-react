@@ -82,13 +82,10 @@ app.config["RABBITMQ_URL"] = os.getenv("CLOUDAMQP_URL", "amqp://guest:guest@loca
 
 app.config.update(
     CELERY_BROKER_URL=app.config["RABBITMQ_URL"],
-    CELERY_RESULT_BACKEND=app.config["RABBITMQ_URL"],
+    CELERY_RESULT_BACKEND="rpc://"
 ) 
 logging.basicConfig(level=logging.DEBUG)
 app.logger.setLevel(logging.DEBUG)
-
-sys.stdout.flush()
-print(app.config["CELERY_BROKER_URL"])
 
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "super_secret_key")
 

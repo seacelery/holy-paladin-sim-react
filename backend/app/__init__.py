@@ -278,8 +278,7 @@ def run_simulation_task(self, simulation_parameters):
         for i in range(simulation.iterations):
             sys.stdout.flush()
             
-            if self.request.id is not None and AsyncResult(self.request.id).state == 'REVOKED':
-                print(f"Task {self.request.id} was cancelled")
+            if self.request.is_revoked():
                 return {'status': 'CANCELLED'}
             
             # reset simulation states

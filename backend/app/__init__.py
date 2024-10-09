@@ -11,6 +11,7 @@ import objgraph
 from flask import Flask, current_app, jsonify, request
 from celery.result import AsyncResult
 from celery.exceptions import TaskRevokedError
+from celery import states
 from app.routes import main as main_blueprint
 from app.main import import_character
 from flask_cors import CORS
@@ -278,7 +279,7 @@ def run_simulation_task(self, simulation_parameters):
         for i in range(simulation.iterations):
             sys.stdout.flush()
             
-            if self.request.is_revoked():
+            if AsyncResult(self.request.id).state == states.REVOKED:
                 return {'status': 'CANCELLED'}
             
             # reset simulation states

@@ -203,7 +203,6 @@ const SimulateButton = () => {
                     }, 1500);
                 } else if (data.state === "FAILURE") {
                     clearSimulation();
-                    handleSimulationError(data.status);
                 } else if (data.state === "REVOKED") {
                     clearSimulation();
                 };

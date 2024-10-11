@@ -1,15 +1,15 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import "./HeroTalentsButton.scss";
 import { talentsToIcons } from "../../../../../utils/talents-to-icons-map";
 
-const HeroTalentsButton = ({
+const HeroTalentsButton = forwardRef(({
     currentCount,
     maxCount,
     currentHeroTalentSpec,
     onClick,
-}) => {
+}, ref) => {
     return (
-        <div className="hero-talents-button" onClick={onClick}>
+        <div className="hero-talents-button" onClick={onClick} ref={ref}>
             <div className="hero-talents-button-header">Hero Talents</div>
             <div className="hero-talents-button-icons">
                 <div className="hero-talents-button-icon-container">
@@ -50,6 +50,6 @@ const HeroTalentsButton = ({
             </div>
         </div>
     );
-};
+});
 
 export default HeroTalentsButton;

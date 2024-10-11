@@ -19,8 +19,8 @@ const calculateCount = (talentsData, freePoints) => {
     for (const row in talentsData) {
         for (const talent in talentsData[row]) {
             count += talentsData[row][talent].ranks["current rank"];
-        }
-    }
+        };
+    };
     return count - freePoints;
 };
 
@@ -31,6 +31,7 @@ const HeroTalents = () => {
     const [currentHeroTalentSpec, setCurrentHeroTalentSpec] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
     const modalRef = useRef(null);
+    const buttonRef = useRef(null);
 
     const heraldOfTheSunTalents = {
         talentsData: characterData.heraldOfTheSunTalents,
@@ -53,7 +54,7 @@ const HeroTalents = () => {
     };
 
     const handleClickOutside = (e) => {
-        if (modalRef.current && !modalRef.current.contains(e.target)) {
+        if (modalRef.current && !modalRef.current.contains(e.target) && !buttonRef.current.contains(e.target)) {
             setModalOpen(false);
         };
     };
@@ -97,6 +98,7 @@ const HeroTalents = () => {
                 maxCount={11}
                 currentHeroTalentSpec={currentHeroTalentSpec}
                 onClick={handleButtonClick}
+                ref={buttonRef}
             />
 
             {modalOpen && (

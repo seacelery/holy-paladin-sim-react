@@ -14,21 +14,14 @@
     position: relative;
 }
 
-.saving-data-status, .saved-data-status {
-    display: flex;
-    align-items: center;
-
-    position: absolute;
-    left: 2.0rem;
-    top: 1.5rem;
-
-    color: var(--light-font-colour);
-    display: none;
-}
 
 .saved-data-status {
-    display: block;
-    margin-top: -0.4rem;
+    position: absolute;
+    left: 2.0rem;
+    display: flex;
+    align-items: center;
+    margin-top: -0.3rem;
+    
 
     color: var(--green-font);
 
@@ -43,4 +36,8 @@
     font-size: 2.2rem;
 
     transition: opacity 0.4s ease-out;
+}
+
+.saved-data-status-text {
+    margin-top: 0.4rem;
 }

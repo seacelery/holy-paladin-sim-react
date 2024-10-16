@@ -75,11 +75,15 @@ beacon_transfer = {
     "Avenging Crusader (Judgment)": "single_target",
     "Avenging Crusader (Crusader Strike)": "single_target",
     "Sun Sear": "single_target",
+    "Hammer and Anvil": "single_target",
+    "Sacred Word": "single_target",
+    "Sacred Weapon": "single_target",
     "Light of Dawn": "aoe",
     "Glimmer of Light": "aoe",
     "Light's Hammer": "aoe",
     "Holy Prism": "aoe",
     "Dawnlight (HoT)": "aoe",
     "Dawnlight (AoE)": "aoe",
-    "Sun's Avatar": "aoe"
+    "Sun's Avatar": "aoe",
+    "Radiant Aura": "aoe",
 }

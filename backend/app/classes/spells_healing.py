@@ -1819,6 +1819,8 @@ class WordOfGlory(Spell):
                 sacred_word_heal, sacred_word_crit = SacredWord(caster).calculate_heal(caster)
                 targets[0].receive_heal(sacred_word_heal, caster)
                 update_spell_data_heals(caster.ability_breakdown, "Sacred Word", targets[0], sacred_word_heal, sacred_word_crit)
+                
+                caster.handle_beacon_healing("Sacred Word", targets[0], sacred_word_heal, current_time)
                     
         return cast_success, spell_crit, heal_amount, total_glimmer_healing, afterimage_heal, empyrean_legacy_light_of_dawn_healing
  
@@ -2424,6 +2426,8 @@ class LightOfDawn(Spell):
                     radiant_aura_heal, radiant_aura_crit = RadiantAura(caster).calculate_heal(caster)
                     target.receive_heal(radiant_aura_heal, caster)
                     update_spell_data_heals(caster.ability_breakdown, "Radiant Aura", target, radiant_aura_heal, radiant_aura_crit)
+                    
+                    caster.handle_beacon_healing("Radiant Aura", target, radiant_aura_heal, current_time)
             
             # second sunrise        
             if caster.is_talent_active("Second Sunrise") and initial_cast:
@@ -2629,7 +2633,7 @@ class LightOfTheMartyr(Spell):
 
 class DivineGuidanceHeal(Spell):
     
-    SPELL_POWER_COEFFICIENT = 2 * 1.04
+    SPELL_POWER_COEFFICIENT = 3 * 1.04
     
     def __init__(self, caster):
         super().__init__("Divine Guidance", off_gcd=True)

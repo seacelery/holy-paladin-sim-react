@@ -116,17 +116,10 @@ def check_cancellation(task_id):
 @celery.task(bind=True)
 def run_simulation_task(self, simulation_parameters): 
     try:
-        # redis = current_app.redis
-        # task_id = self.request.id
-        
-        print("simulation parameters")
-        sys.stdout.flush()
+        # sys.stdout.flush()
         
         paladin = pickle.loads(simulation_parameters.pop('paladin'))
         healing_targets = pickle.loads(simulation_parameters.pop('healing_targets_list'))
-        
-        print("light of the martyr parameter", simulation_parameters["light_of_the_martyr_uptime"])
-        sys.stdout.flush()
 
         simulation_parameters['paladin'] = paladin
         simulation_parameters['healing_targets'] = healing_targets

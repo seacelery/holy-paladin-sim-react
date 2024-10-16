@@ -2,7 +2,7 @@ import random
 
 from .spells import Spell
 from .spells_healing import HammerAndAnvilHeal, TruthPrevailsHeal
-from ..utils.misc_functions import format_time, increment_holy_power, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, append_spell_heal_event, update_spell_data_heals, update_self_buff_data, update_mana_gained, add_talent_healing_multipliers
+from ..utils.misc_functions import format_time, increment_holy_power, append_aura_applied_event, append_aura_removed_event, append_aura_stacks_decremented, append_spell_heal_event, update_spell_data_heals, update_self_buff_data, update_mana_gained, add_talent_healing_multipliers, handle_flat_cdr
 from .auras_debuffs import JudgmentOfLightDebuff, GreaterJudgmentDebuff
 from .auras_buffs import BlessingOfDawn, AvengingWrathAwakening, AvengingCrusaderAwakening, EmpyreanLegacy, Veneration
 from .summons import ConsecrationSummon, RighteousJudgmentSummon
@@ -10,7 +10,7 @@ from .summons import ConsecrationSummon, RighteousJudgmentSummon
 
 class Judgment(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1.125 / 1.04
+    SPELL_POWER_COEFFICIENT = 2.227 * 1.2375 / 1.04
     BASE_COOLDOWN = 12
     MANA_COST = 0.024
     HOLY_POWER_GAIN = 1
@@ -48,7 +48,7 @@ class Judgment(Spell):
                 self.spell_damage_modifier *= 1.4
         
         # avenging crusader        
-        if caster.is_talent_active("Avenging Crusader") and "Avenging Crusader" in caster.active_auras:
+        if caster.is_talent_active("Avenging Crusader") and ("Avenging Crusader" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras):
             self.spell_damage_modifier *= 1.3
            
         cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
@@ -121,7 +121,7 @@ class Judgment(Spell):
                     self.bonus_crit = 0
                     
             # avenging crusader        
-            if caster.is_talent_active("Avenging Crusader") and "Avenging Crusader" in caster.active_auras:
+            if caster.is_talent_active("Avenging Crusader") and ("Avenging Crusader" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras):
                 avenging_crusader_healing = spell_damage * 4.2 / 5
                 for avenging_crusader_target in random.sample(caster.potential_healing_targets, 5):
                     avenging_crusader_target.receive_heal(avenging_crusader_healing, caster)
@@ -202,7 +202,7 @@ class Judgment(Spell):
             # hammer and anvil               
             if caster.is_talent_active("Hammer and Anvil") and spell_crit:         
                 hammer_and_anvil_heal, hammer_and_anvil_crit = HammerAndAnvilHeal(caster).calculate_heal(caster)
-                hammer_and_anvil_heal = (1.5 * caster.spell_power * caster.versatility_multiplier) + (1.5 * caster.spell_power * 1.04)
+                hammer_and_anvil_heal = (3.75 * caster.spell_power * caster.versatility_multiplier) + (3.75 * caster.spell_power * 1.04)
                 
                 if hammer_and_anvil_crit:
                     hammer_and_anvil_heal *= 2 * caster.crit_healing_modifier * caster.crit_multiplier
@@ -214,6 +214,8 @@ class Judgment(Spell):
                 for target in chosen_targets:
                     target.receive_heal(hammer_and_anvil_heal, caster)
                     update_spell_data_heals(caster.ability_breakdown, "Hammer and Anvil", target, hammer_and_anvil_heal, hammer_and_anvil_crit)
+                    
+                    caster.handle_beacon_healing("Hammer and Anvil", target, hammer_and_anvil_heal, current_time)
                     
             # truth prevails
             if caster.is_talent_active("Truth Prevails"):
@@ -228,7 +230,7 @@ class Judgment(Spell):
 class CrusaderStrike(Spell):
     
     # uses attack power instead of spell power
-    SPELL_POWER_COEFFICIENT = 1.071 * 1.04 * 1.58
+    SPELL_POWER_COEFFICIENT = 1.071 * 1.04 * 1.77
     BASE_COOLDOWN = 7.75
     MANA_COST = 0.006
     HOLY_POWER_GAIN = 1
@@ -248,10 +250,10 @@ class CrusaderStrike(Spell):
             self.spell_damage_modifier *= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
             
         # avenging crusader        
-        if caster.is_talent_active("Avenging Crusader"):
+        if caster.is_talent_active("Avenging Crusader") and ("Avenging Crusader" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras):
             self.spell_damage_modifier *= 1.3
             
-        if "Avenging Crusader" in caster.active_auras:
+        if "Avenging Crusader" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras:
             if self.max_charges == 1:
                 self.max_charges = 2
                 if self.current_charges < self.max_charges:
@@ -261,7 +263,7 @@ class CrusaderStrike(Spell):
             
         # blessed assurance
         if caster.is_talent_active("Blessed Assurance") and "Blessed Assurance" in caster.active_auras:
-            self.spell_damage_modifier *= 1.2
+            self.spell_damage_modifier *= 3
         
         cast_success, spell_crit, spell_damage = super().cast_damage_spell(caster, targets, current_time)
         
@@ -277,7 +279,7 @@ class CrusaderStrike(Spell):
                 update_mana_gained(caster.ability_breakdown, "Reclamation (Crusader Strike)", reclamation_mana)
                 
             # avenging crusader        
-            if caster.is_talent_active("Avenging Crusader"):
+            if caster.is_talent_active("Avenging Crusader") and ("Avenging Crusader" in caster.active_auras or "Avenging Crusader (Awakening)" in caster.active_auras):
                 avenging_crusader_healing = spell_damage * 4.2 / 5
                 for avenging_crusader_target in random.sample(caster.potential_healing_targets, 5):
                     avenging_crusader_target.receive_heal(avenging_crusader_healing, caster)
@@ -313,7 +315,7 @@ class CrusaderStrike(Spell):
             # crusader's might 
             if caster.is_talent_active("Crusader's Might"):
                 caster.abilities["Holy Shock"].remaining_cooldown -= 2
-                caster.abilities["Judgment"].remaining_cooldown -= 2
+                handle_flat_cdr(caster.abilities["Judgment"], 2)
                     
                 if caster.abilities["Holy Shock"].remaining_cooldown <= 0 and caster.is_talent_active("Light's Conviction"):
                     caster.holy_shock_cooldown_overflow = abs(caster.abilities["Holy Shock"].remaining_cooldown)
@@ -323,7 +325,7 @@ class CrusaderStrike(Spell):
                         
             # blessed assurance
             if caster.is_talent_active("Blessed Assurance") and "Blessed Assurance" in caster.active_auras:
-                self.spell_damage_modifier /= 1.2
+                self.spell_damage_modifier /= 3
                 del caster.active_auras["Blessed Assurance"]                 
                 update_self_buff_data(caster.self_buff_breakdown, "Blessed Assurance", current_time, "expired")
                 

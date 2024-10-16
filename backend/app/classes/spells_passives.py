@@ -65,7 +65,7 @@ class RiteOfAdjurationSpell(Spell):
 
 class SacredWeapon(Spell):
     
-    SPELL_POWER_COEFFICIENT = 1 * 1.04 * 0.8
+    SPELL_POWER_COEFFICIENT = 1 * 1.04
     BASE_PPM = 8
     TARGET_COUNT = 5
     
@@ -82,6 +82,8 @@ class SacredWeapon(Spell):
             
             chosen_target.receive_heal(sacred_weapon_heal, caster)
             update_spell_data_heals(caster.ability_breakdown, self.name, chosen_target, sacred_weapon_heal, sacred_weapon_crit)
+            
+            caster.handle_beacon_healing("Sacred Weapon", chosen_target, sacred_weapon_heal, current_time)
         
 
 class AuthorityOfFieryResolve(Spell):
@@ -126,7 +128,7 @@ class DivineInspiration(Spell):
         
         chosen_target = random.choice(non_weapon_targets)
         if chosen_weapon == holy_bulwark:
-            holy_bulwark_initial_absorb = caster.max_health * 0.15
+            holy_bulwark_initial_absorb = 7000000 * 0.15
 
             chosen_target.receive_heal(holy_bulwark_initial_absorb, caster)
             update_spell_data_heals(caster.ability_breakdown, "Holy Bulwark", chosen_target, holy_bulwark_initial_absorb, False)

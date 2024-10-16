@@ -329,7 +329,7 @@ class HolyBulwarkSacredWeapon(Spell):
             if self.name == "Holy Bulwark":
                 update_spell_data_casts(caster.ability_breakdown, "Holy Bulwark", 0, 0, 0)
                 
-                holy_bulwark_initial_absorb = caster.max_health * 0.15
+                holy_bulwark_initial_absorb = 7000000 * 0.15
                 
                 if caster.is_talent_active("Solidarity"):
                     targets[0].receive_heal(holy_bulwark_initial_absorb, caster)

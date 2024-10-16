@@ -846,8 +846,8 @@ def start_simulation():
         "sureki_zealots_insignia_count": int(data['sureki_zealots_insignia_count']),
         "dawnlight_targets": int(data['dawnlight_targets']),
         "suns_avatar_targets": int(data['suns_avatar_targets']),
-        "light_of_the_martyr_uptime": float(data['light_of_the_martyr_uptime']) / 100,
-        "potion_bomb_of_power_uptime": float(data['potion_bomb_of_power_uptime']) / 100,
+        "light_of_the_martyr_uptime": float(data['light_of_the_martyr_uptime']),
+        "potion_bomb_of_power_uptime": float(data['potion_bomb_of_power_uptime']),
         "seasons": data["seasons"],
         "overhealing": data["overhealing"]
     }

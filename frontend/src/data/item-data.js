@@ -136441,7 +136441,7 @@ const itemData = [
                 "description": "Equip: Engrave a ritual seal into your skin binding you to the shadows, granting yourself *3023 <Primary Stat>.\n\nYour spells and abilities have a low chance to reduce one of your secondary stats by *3408 for 10 sec during combat.",
                 "effect_values": [
                     {"base_value": 3023, "effect_type": "scalar", "effect_coefficient": 0.56989997625, "allocation_type": "no_multiplier"},
-                    {"base_value": 3408, "effect_type": "scalar", "effect_coefficient": -1.3856575489, "allocation_type": "rating_multiplier"},
+                    {"base_value": 3408, "effect_type": "scalar", "effect_coefficient": 1.3856575489, "allocation_type": "rating_multiplier"},
                 ]
             }
         ],

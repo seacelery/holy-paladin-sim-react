@@ -527,7 +527,7 @@ class Simulation:
                 
         if "Source of Magic" in self.paladin.active_auras:
             self.source_of_magic_timer += self.tick_rate
-            if self.source_of_magic_timer >= 10:
+            if self.source_of_magic_timer >= 6:
                 self.source_of_magic_timer = 0
                 source_of_magic_mana_gain = self.paladin.max_mana * 0.0025
                 self.paladin.mana += source_of_magic_mana_gain

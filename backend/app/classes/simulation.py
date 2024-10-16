@@ -389,11 +389,11 @@ class Simulation:
                         suns_avatar.trigger_passive_heal(self.paladin, self.elapsed_time, target_count)
                         suns_avatar.timer = 0
                         
-        if "Ovinax's Mercurial Egg" in self.paladin.trinkets and "Ovinax's Mercurial Egg Paused" not in self.paladin.active_auras:
-            option = self.paladin.trinkets.get("Ovinax's Mercurial Egg", {}).get("option")
+        if "Ovi'nax's Mercurial Egg" in self.paladin.trinkets and "Ovi'nax's Mercurial Egg Paused" not in self.paladin.active_auras:
+            option = self.paladin.trinkets.get("Ovi'nax's Mercurial Egg", {}).get("option")
             if option is None:
                 option = "Low Movement"
-            ovinaxs_mercurial_egg = self.paladin.active_auras["Ovinax's Mercurial Egg"]
+            ovinaxs_mercurial_egg = self.paladin.active_auras["Ovi'nax's Mercurial Egg"]
             ovinaxs_mercurial_egg.timer += self.tick_rate
             
             probabilities = {"Low Movement": 0.47, "Some Movement": 0.5, "High Movement": 0.54}

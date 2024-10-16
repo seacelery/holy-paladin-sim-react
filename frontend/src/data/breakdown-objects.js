@@ -94,7 +94,7 @@ const abilityNames = [
     "Lay on Hands", "Blessing of the Seasons", "Tyr's Deliverance",
     "Avenging Wrath", "Avenging Crusader", "Judgment",
     "Crusader Strike", "Consecration", "Barrier of Faith", "Aura Mastery", 
-    "Hammer of Wrath", "Eternal Flame", "Ovinax's Mercurial Egg", "Treacherous Transmitter", 
+    "Hammer of Wrath", "Eternal Flame", "Ovi'nax's Mercurial Egg", "Treacherous Transmitter", 
     "Creeping Coagulum", "High Speaker's Accretion", "Siphoning Phylactery Shard", "Holy Armament",
     "Tempered Potion", "Algari Mana Potion", "Slumbering Soul Serum"
 ];

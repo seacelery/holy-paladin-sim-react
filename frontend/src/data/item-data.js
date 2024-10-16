@@ -18,7 +18,7 @@
 // trinkets
 // Gruesome Syringe (healing coefficient)
 // Creeping Coagulum
-// Ovinax's Mercurial Egg
+// Ovi'nax's Mercurial Egg
 // Treacherous Transmitter
 
 // unique items
@@ -122822,7 +122822,7 @@ const itemData = [
     {
         "effects": [
             {
-                "name": "Ovinax's Mercurial Egg",
+                "name": "Ovi'nax's Mercurial Egg",
                 "id": 445066,
                 "description": "Equip: Carefully balance the Egg's incubation. While stationary, gain *95 Intellect every 1 sec, up to 30 times. Diminishes while moving. While moving, gain *108 of your highest secondary stat every 1 sec, up to 30 times. Diminishes while stationary.\n\nAdditional stacks above 20 grant 60% reduced benefit.<br><br>Use: Suspend the Egg's incubation state for 20 sec. (2 Min Cooldown",
                 "effect_values": [
@@ -122831,7 +122831,7 @@ const itemData = [
                 ]
             }
         ],
-        "name": "Ovinax's Mercurial Egg",
+        "name": "Ovi'nax's Mercurial Egg",
         "item_slot": "Trinket",
         "base_item_level": 571,
         "quality": "Epic",
@@ -136429,6 +136429,31 @@ const itemData = [
         "id": 133305,
         "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_misc_cat_trinket09.jpg",
         "stats": {},
+        "gems": [],
+        "enchantments": [],
+        "limit": null
+    },
+    {
+        "effects": [
+            {
+                "name": "Shadow-Binding Ritual Knife",
+                "id": 435502,
+                "description": "Equip: Engrave a ritual seal into your skin binding you to the shadows, granting yourself *3023 <Primary Stat>.\n\nYour spells and abilities have a low chance to reduce one of your secondary stats by *3408 for 10 sec during combat.",
+                "effect_values": [
+                    {"base_value": 3023, "effect_type": "scalar", "effect_coefficient": 0.56989997625, "allocation_type": "no_multiplier"},
+                    {"base_value": 3408, "effect_type": "scalar", "effect_coefficient": -1.3856575489, "allocation_type": "rating_multiplier"},
+                ]
+            }
+        ],
+        "name": "Shadow-Binding Ritual Knife",
+        "item_slot": "Trinket",
+        "base_item_level": 606,
+        "quality": "Uncommon",
+        "id": 215178,
+        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_grimbatolraid_d_03.jpg",
+        "stats": {
+            "Mastery": 1229
+        },
         "gems": [],
         "enchantments": [],
         "limit": null

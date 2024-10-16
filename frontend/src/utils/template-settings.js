@@ -1205,7 +1205,7 @@ const templateEquipment = {
     "trinket_2": {
         "effects": [
             {
-                "name": "Ovinax's Mercurial Egg",
+                "name": "Ovi'nax's Mercurial Egg",
                 "id": 445066,
                 "description": "Equip: Carefully balance the Egg's incubation. While stationary, gain *145 Intellect every 1 sec, up to 30 times. Diminishes while moving. While moving, gain *140 of your highest secondary stat every 1 sec, up to 30 times. Diminishes while stationary.\n\nAdditional stacks above 20 grant 60% reduced benefit.<br><br>Use: Suspend the Egg's incubation state for 20 sec. (2 Min Cooldown",
                 "effect_values": [
@@ -1219,7 +1219,7 @@ const templateEquipment = {
         "item_id": 220305,
         "item_level": 616,
         "limit": null,
-        "name": "Ovinax's Mercurial Egg",
+        "name": "Ovi'nax's Mercurial Egg",
         "quality": "Epic",
         "stats": {
         }

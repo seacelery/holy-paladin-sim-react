@@ -206,8 +206,8 @@ const buffsToIconsMap = {
     
     "Deliberate Incubation": "https://wow.zamimg.com/images/wow/icons/large/inv_10_specialreagentfoozles_coolegg_red.jpg",
     "Reckless Incubation": "https://wow.zamimg.com/images/wow/icons/large/inv_10_specialreagentfoozles_coolegg_green.jpg",
-    "Ovinax's Mercurial Egg": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_purple.jpg",
-    "Ovinax's Mercurial Egg Paused": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_purple.jpg",
+    "Ovi'nax's Mercurial Egg": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_purple.jpg",
+    "Ovi'nax's Mercurial Egg Paused": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_purple.jpg",
 
     "Cryptic Instructions": "https://wow.zamimg.com/images/wow/icons/large/ability_racial_etherealconnection.jpg",
     "Ethereal Powerlink": "https://wow.zamimg.com/images/wow/icons/large/inv_etherealraid_communicator_color1.jpg",
@@ -217,6 +217,9 @@ const buffsToIconsMap = {
 
     "Fateweaved Needle": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_nerubianraid_d_02.jpg",
     "Sureki Zealot's Insignia": "https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_113.jpg",
+
+    "Shadow-Binding Ritual Knife": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_grimbatolraid_d_03.jpg",
+    "Shadow-Binding Ritual Knife Reduced": "https://render.worldofwarcraft.com/eu/icons/56/spell_chargenegative.jpg",
 
     // enchants
     "Sophic Devotion": "https://render.worldofwarcraft.com/eu/icons/56/inv_10_elementalcombinedfoozles_titan.jpg",

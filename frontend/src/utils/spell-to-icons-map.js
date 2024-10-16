@@ -119,7 +119,7 @@ const spellToIconsMap = {
     "Siphoning Phylactery Shard": "https://wow.zamimg.com/images/wow/icons/large/inv_enchanting_70_chaosshard.jpg",
     "High Speaker's Accretion": "https://wow.zamimg.com/images/wow/icons/large/inv_cosmicvoid_nova.jpg",
     "Viscous Coaglam": "https://wow.zamimg.com/images/wow/icons/large/spell_priest_shadoworbs.jpg",
-    "Ovinax's Mercurial Egg": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_purple.jpg",
+    "Ovi'nax's Mercurial Egg": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_mercurialegg_purple.jpg",
     "Creeping Coagulum": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_creepingcoagulum_purple.jpg",
     "Creeping Coagulum ": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_creepingcoagulum_purple.jpg",
     "Gruesome Syringe": "https://wow.zamimg.com/images/wow/icons/large/inv_raid_gruesomesyringe_red.jpg",

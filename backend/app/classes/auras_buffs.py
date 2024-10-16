@@ -2931,7 +2931,7 @@ class HighSpeakersAccretionIntellect(Buff):
 class OvinaxsMercurialEggBuff(Buff):
     
     def __init__(self, caster):
-        super().__init__("Ovinax's Mercurial Egg", 10000, base_duration=10000)
+        super().__init__("Ovi'nax's Mercurial Egg", 10000, base_duration=10000)
         self.moving = False
         self.timer = 0
         
@@ -2945,7 +2945,7 @@ class OvinaxsMercurialEggBuff(Buff):
 class OvinaxsMercurialEggPaused(Buff):
         
         def __init__(self, caster):
-            super().__init__("Ovinax's Mercurial Egg Paused", 20, base_duration=20)
+            super().__init__("Ovi'nax's Mercurial Egg Paused", 20, base_duration=20)
             
         def apply_effect(self, caster, current_time=None):
             pass
@@ -2958,7 +2958,7 @@ class DeliberateIncubation(Buff):
     
     def __init__(self, caster, stacks_to_apply=1):
         super().__init__("Deliberate Incubation", 10000, base_duration=10000, current_stacks=stacks_to_apply, max_stacks=30)
-        trinket_effect = caster.trinkets["Ovinax's Mercurial Egg"]["effect"]
+        trinket_effect = caster.trinkets["Ovi'nax's Mercurial Egg"]["effect"]
         trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
         
         self.trinket_intellect_value = trinket_values[0]
@@ -2980,7 +2980,7 @@ class RecklessIncubation(Buff):
     
     def __init__(self, caster):
         super().__init__("Reckless Incubation", 10000, base_duration=10000, current_stacks=1, max_stacks=30)
-        trinket_effect = caster.trinkets["Ovinax's Mercurial Egg"]["effect"]
+        trinket_effect = caster.trinkets["Ovi'nax's Mercurial Egg"]["effect"]
         trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
         
         self.trinket_secondary_stat_value = trinket_values[1]
@@ -3981,3 +3981,37 @@ class SpymastersWebBuff(Buff):
     def remove_effect(self, caster, current_time=None):
         caster.spell_power -= caster.get_effective_spell_power(self.trinket_second_value * self.stack_count)
         self.stack_count = 0
+        
+        
+class ShadowBindingRitualKnife(Buff):
+    
+    def __init__(self, caster):
+        super().__init__("Shadow-Binding Ritual Knife", 10000, base_duration=10000)   
+        trinket_effect = caster.trinkets["Shadow-Binding Ritual Knife"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_first_value = trinket_values[0]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.spell_power += self.trinket_first_value
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.spell_power -= self.trinket_first_value
+    
+
+class ShadowBindingRitualKnifeReduced(Buff):
+    
+    BASE_PPM = 0.5
+    
+    def __init__(self, caster):
+        super().__init__("Shadow-Binding Ritual Knife Reduced", 10, base_duration=10)   
+        trinket_effect = caster.trinkets["Shadow-Binding Ritual Knife"]["effect"]
+        trinket_values = [int(value.replace(",", "")) for value in re.findall(r"\*(\d+,?\d+)", trinket_effect)]
+        
+        self.trinket_second_value = trinket_values[1]
+        
+    def apply_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", -self.trinket_second_value)
+        
+    def remove_effect(self, caster, current_time=None):
+        caster.update_stat("versatility", self.trinket_second_value)

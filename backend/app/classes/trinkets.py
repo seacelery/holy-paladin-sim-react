@@ -239,7 +239,7 @@ class OvinaxsMercurialEgg(Trinket):
     BASE_COOLDOWN = 120
     
     def __init__(self, caster):
-        super().__init__("Ovinax's Mercurial Egg", cooldown=OvinaxsMercurialEgg.BASE_COOLDOWN, off_gcd=True)
+        super().__init__("Ovi'nax's Mercurial Egg", cooldown=OvinaxsMercurialEgg.BASE_COOLDOWN, off_gcd=True)
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)

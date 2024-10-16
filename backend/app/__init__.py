@@ -122,14 +122,10 @@ def run_simulation_task(self, simulation_parameters):
         print("simulation parameters")
         sys.stdout.flush()
         
-        print(simulation_parameters)
-        sys.stdout.flush()
-        
-        
         paladin = pickle.loads(simulation_parameters.pop('paladin'))
         healing_targets = pickle.loads(simulation_parameters.pop('healing_targets_list'))
         
-        print(simulation_parameters)
+        print("light of the martyr parameter", simulation_parameters["light_of_the_martyr_uptime"])
         sys.stdout.flush()
 
         simulation_parameters['paladin'] = paladin

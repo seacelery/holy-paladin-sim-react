@@ -55,6 +55,7 @@ class Simulation:
         self.iced_phial_timer = 0
         self.saving_graces_timer = 0
         self.light_of_the_martyr_uptime = float(light_of_the_martyr_uptime)
+        print(f"light of the martyr uptime: {self.light_of_the_martyr_uptime}")
         self.light_of_the_martyr_timer = 0
         self.bestow_light_timer = 0
         self.retribution_aura_timer = 40

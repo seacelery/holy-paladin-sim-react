@@ -167,7 +167,7 @@ class BroodkeepersPromiseHoT(HoT):
 class Dawnlight(HoT):
     
     # TODO verify 22.5% higher
-    SPELL_POWER_COEFFICIENT = 3.6 * 1.225
+    SPELL_POWER_COEFFICIENT = 3.6 * 1.225 * 1.3
     
     def __init__(self, caster, duration_to_apply=8):
         super().__init__("Dawnlight (HoT)", duration_to_apply, base_duration=duration_to_apply, base_tick_interval=1.5, initial_haste_multiplier=caster.haste_multiplier) 
@@ -180,14 +180,11 @@ class Dawnlight(HoT):
         target_count = caster.variable_target_counts["Dawnlight"]
         
         scaling_factor = calculate_sqrt_ability_scaling(target_count, 5) / target_count
-        # scaling is not currently working
-        scaling_factor = 1
         
         targets = random.sample(caster.potential_healing_targets, target_count)
         for target in targets:            
         
             radiation_healing = heal_amount * 0.08 * scaling_factor
-            # print(radiation_healing)
 
             target.receive_heal(radiation_healing, caster)
             update_spell_data_heals(caster.ability_breakdown, "Dawnlight (AoE)", target, radiation_healing, False)

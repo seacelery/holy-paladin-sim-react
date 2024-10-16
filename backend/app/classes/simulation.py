@@ -54,7 +54,7 @@ class Simulation:
         self.iced_phial_active = False
         self.iced_phial_timer = 0
         self.saving_graces_timer = 0
-        self.light_of_the_martyr_uptime = float(light_of_the_martyr_uptime) / 100
+        self.light_of_the_martyr_uptime = float(light_of_the_martyr_uptime)
         self.light_of_the_martyr_timer = 0
         self.bestow_light_timer = 0
         self.retribution_aura_timer = 40
@@ -62,7 +62,7 @@ class Simulation:
         self.symbol_of_hope_timer = 150 if encounter_length > 210 else 30
         self.mana_spring_totem_timer = 0
         self.mana_tide_totem_timer = 150 if encounter_length > 210 else 30
-        self.potion_bomb_of_power_uptime = float(potion_bomb_of_power_uptime) / 100
+        self.potion_bomb_of_power_uptime = float(potion_bomb_of_power_uptime)
         self.potion_bomb_of_power_timer = 0
         
         self.times_direct_healed = {}

@@ -126112,25 +126112,6 @@ const itemData = [
     {
         "effects": [
             {
-                "description": "Equip: Engrave a ritual seal into your skin binding you to the shadows, granting yourself 76 <Primary Stat>.\n\nYour spells and abilities have a low chance to reduce one of your secondary stats by 103 for 10 sec during combat."
-            }
-        ],
-        "name": "Shadow-Binding Ritual Knife",
-        "item_slot": "Trinket",
-        "base_item_level": 250,
-        "quality": "Uncommon",
-        "id": 215178,
-        "icon": "https://wow.zamimg.com/images/wow/icons/large/inv_knife_1h_grimbatolraid_d_03.jpg",
-        "stats": {
-            "Mastery": 96
-        },
-        "gems": [],
-        "enchantments": [],
-        "limit": null
-    },
-    {
-        "effects": [
-            {
                 "description": "Equip: Your ranged attacks have a chance to send a vengeful flame towards your target, dealing 1910 Fire damage when it reaches them.\n\nThe spirit grows as it travels towards the target, dealing up to 100% additional Fire damage."
             }
         ],

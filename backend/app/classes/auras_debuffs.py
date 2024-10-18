@@ -22,17 +22,14 @@ class JudgmentOfLightDebuff(Debuff):
             total_judgment_of_light_healing += heal_value
             
             update_spell_data_heals(caster.ability_breakdown, "Judgment of Light", healing_target, heal_value, is_crit)
-            append_spell_heal_event(caster.events, self.name, caster, healing_target, heal_value, current_time, is_crit)
             
             self.current_stacks -= 1
-            append_aura_stacks_decremented(caster.events, self.name, caster, current_time, self.current_stacks, target=judgment_of_light_target, duration=self.duration)
             
             # delete this if something bad happens
             current_time += 0.01
             
         if self.current_stacks == 0:
             del judgment_of_light_target.target_active_debuffs[self.name]
-            append_aura_removed_event(caster.events, self.name, caster, judgment_of_light_target, current_time)
             
         return total_judgment_of_light_healing
             
@@ -63,10 +60,8 @@ class GreaterJudgmentDebuff(Debuff):
         healing_target.receive_heal(heal_value, caster)
         
         update_spell_data_heals(caster.ability_breakdown, "Greater Judgment", healing_target, heal_value, is_crit)
-        append_spell_heal_event(caster.events, self.name, caster, healing_target, heal_value, current_time, is_crit, is_absorb=greater_judgment_spell.is_absorb)
         
         del greater_judgment_target.target_active_debuffs[self.name]
-        append_aura_removed_event(caster.events, self.name, caster, greater_judgment_target, current_time)
         
         # reset mastery to normal
         caster.mastery_multiplier = original_mastery_multiplier

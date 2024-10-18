@@ -169,7 +169,10 @@ const SimulateButton = () => {
                 const data = await response.json();
     
                 if (data.state === "PROGRESS") {
-                    const progressPercentage = Math.round((data.current / data.total) * 100);
+                    const progressPercentage = (data.current && data.total) 
+                        ? Math.round((data.current / data.total) * 100) 
+                        : 0;
+
                     setSimulationProgress(progressPercentage);                   
                 } else if (data.state === "SUCCESS" && !successHandledRef.current && data.status !== "COMPLETED") {
                     clearSimulation();

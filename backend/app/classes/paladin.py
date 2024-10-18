@@ -533,11 +533,10 @@ class Paladin:
         if self.is_talent_active("Light of Dawn"):
             self.abilities["Light of Dawn"] = LightOfDawn(self)
             
-        if self.is_talent_active("Avenging Wrath"):
-            if self.is_talent_active("Avenging Crusader"):
-                self.abilities["Avenging Crusader"] = AvengingCrusaderSpell(self)
-            else:
-                self.abilities["Avenging Wrath"] = AvengingWrathSpell(self)
+        if self.is_talent_active("Avenging Crusader"):
+            self.abilities["Avenging Crusader"] = AvengingCrusaderSpell(self)
+        else:
+            self.abilities["Avenging Wrath"] = AvengingWrathSpell(self)
             
         if self.is_talent_active("Hammer of Wrath"):
             self.abilities["Hammer of Wrath"] = HammerOfWrath(self)
@@ -566,8 +565,8 @@ class Paladin:
         if self.is_talent_active("Blessing of Summer"):
             self.abilities["Blessing of the Seasons"] = BlessingOfTheSeasons(self)
                 
-        if self.is_talent_active("Holy Bulwark"):
-            self.abilities["Holy Armament"] = HolyBulwarkSacredWeapon(self)
+        if self.is_talent_active("Holy Armaments"):
+            self.abilities["Holy Armaments"] = HolyBulwarkSacredWeapon(self)
             
         # trinkets
         if self.is_trinket_equipped("Miniature Singing Stone"):
@@ -763,9 +762,9 @@ class Paladin:
         spell_power *= 1.05
         
         # seal of might bonus
-        if self.is_talent_active("Seal of Might") and self.class_talents["row8"]["Seal of Might"]["ranks"]["current rank"] == 1:
+        if self.is_talent_active("Seal of Might") and self.class_talents["row9"]["Seal of Might"]["ranks"]["current rank"] == 1:
             return spell_power * 1.02
-        elif self.is_talent_active("Seal of Might") and self.class_talents["row8"]["Seal of Might"]["ranks"]["current rank"] == 2:
+        elif self.is_talent_active("Seal of Might") and self.class_talents["row9"]["Seal of Might"]["ranks"]["current rank"] == 2:
             return spell_power * 1.04
         return spell_power
             
@@ -786,9 +785,7 @@ class Paladin:
                 beacon_target.receive_beacon_heal(beacon_healing)
                 self.healing_by_ability["Beacon of Light"] = self.healing_by_ability.get("Beacon of Light", 0) + beacon_healing    
                 
-                update_spell_data_beacon_heals(self.ability_breakdown, beacon_target, beacon_healing, spell_display_name if spell_display_name else spell_name)
-                
-                append_spell_beacon_event(self.beacon_events, spell_display_name if spell_display_name else spell_name, self, beacon_target, initial_heal, beacon_healing, current_time)   
+                update_spell_data_beacon_heals(self.ability_breakdown, beacon_target, beacon_healing, spell_display_name if spell_display_name else spell_name)            
         
     def update_gcd(self, tick_rate):     
         self.hasted_global_cooldown = self.base_global_cooldown / self.haste_multiplier
@@ -809,12 +806,10 @@ class Paladin:
     # handle auras and summons on self
     def apply_summon(self, summon, current_time):
         self.active_summons[summon.name] = summon
-        self.events.append(f"{format_time(current_time)}: {summon.name} created: {summon.duration}s")
         summon.apply_effect(self, current_time)
    
     def apply_buff_to_self(self, buff, current_time, stacks_to_apply=1, max_stacks=1, reapply=False, apply_effect_at_max_stacks=True): 
         if buff.name in self.active_auras and not reapply:
-            append_aura_applied_event(self.events, f"{self.active_auras[buff.name].name} reapplied", self, self, current_time, self.active_auras[buff.name].duration)
             if not apply_effect_at_max_stacks and buff.current_stacks == max_stacks:
                 pass
             else:
@@ -827,7 +822,6 @@ class Paladin:
         else:
             self.active_auras[buff.name] = buff
             buff.apply_effect(self, current_time)
-            append_aura_applied_event(self.events, self.active_auras[buff.name].name, self, self, current_time, self.active_auras[buff.name].duration)
         
         buff.times_applied += 1
         update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "applied", buff.duration, buff.current_stacks)
@@ -835,16 +829,13 @@ class Paladin:
     def extend_buff_on_self(self, buff, current_time, time_extension):
         if buff.name in self.active_auras:
             self.active_auras[buff.name].duration += time_extension
-            self.events.append(f"{format_time(current_time)}: {buff.name} extended by {time_extension}s to {round(self.active_auras[buff.name].duration, 2)}s")
             
         update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "extended", buff.duration, buff.current_stacks, time_extension)
     
     def remove_or_decrement_buff_on_self(self, buff, current_time, max_stacks=1, replaced=False):
         if buff.name in self.active_auras:
             if buff.current_stacks > 1:
-                buff.current_stacks -= 1
-                append_aura_stacks_decremented(self.events, buff.name, self, current_time, buff.current_stacks, duration=self.active_auras[buff.name].duration)
-                
+                buff.current_stacks -= 1           
                 update_self_buff_data(self.self_buff_breakdown, buff.name, current_time, "stacks_decremented", buff.duration, buff.current_stacks)
             else:
                 del self.active_auras[buff.name]
@@ -1009,9 +1000,9 @@ class Paladin:
         stat_values_from_equipment["intellect"] += 17647
         
         stat_values_from_equipment["stamina"] += 3848
-        if self.is_talent_active("Sanctified Plates") and self.class_talents["row6"]["Sanctified Plates"]["ranks"]["current rank"] == 1:
+        if self.is_talent_active("Sanctified Plates") and self.class_talents["row5"]["Sanctified Plates"]["ranks"]["current rank"] == 1:
             stat_values_from_equipment["stamina"] *= 1.03
-        elif self.is_talent_active("Sanctified Plates") and self.class_talents["row6"]["Sanctified Plates"]["ranks"]["current rank"] == 2:
+        elif self.is_talent_active("Sanctified Plates") and self.class_talents["row5"]["Sanctified Plates"]["ranks"]["current rank"] == 2:
             stat_values_from_equipment["stamina"] *= 1.06
         
         return stat_values_from_equipment, bonus_effect_enchants

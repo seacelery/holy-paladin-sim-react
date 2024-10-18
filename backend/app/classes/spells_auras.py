@@ -107,9 +107,7 @@ class TyrsDeliveranceHeal(Spell):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         if cast_success:
             target = targets[0]
-            target.apply_buff_to_target(TyrsDeliveranceTargetBuff(), current_time, caster=caster)  
-            
-            append_aura_applied_event(caster.events, "Tyr's Deliverance", caster, target, current_time, target.target_active_buffs["Tyr's Deliverance (target)"][0].duration)   
+            target.apply_buff_to_target(TyrsDeliveranceTargetBuff(), current_time, caster=caster)     
         
         return cast_success, spell_crit, heal_amount   
     
@@ -264,7 +262,6 @@ class BlessingOfTheSeasons(Spell):
                 update_spell_data_initialise_spell(caster.ability_breakdown, "Blessing of the Seasons")
                 self.initial_cast = False
             
-            caster.events.append(f"{format_time(current_time)}: {self.name} cast on {caster.name}")
             if self.name == "Blessing of Summer":
                 if caster.seasons[self.name]:
                     caster.apply_buff_to_self(BlessingOfSummer(), current_time)
@@ -329,7 +326,7 @@ class HolyBulwarkSacredWeapon(Spell):
             if self.name == "Holy Bulwark":
                 update_spell_data_casts(caster.ability_breakdown, "Holy Bulwark", 0, 0, 0)
                 
-                holy_bulwark_initial_absorb = 7000000 * 0.15
+                holy_bulwark_initial_absorb = 10000000 * 0.15
                 
                 if caster.is_talent_active("Solidarity"):
                     targets[0].receive_heal(holy_bulwark_initial_absorb, caster)

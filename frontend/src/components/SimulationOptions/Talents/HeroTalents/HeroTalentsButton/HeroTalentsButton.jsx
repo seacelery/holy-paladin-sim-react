@@ -19,7 +19,7 @@ const HeroTalentsButton = forwardRef(({
                                 ? "hero-talents-button-icon-highlighted"
                                 : ""
                         }`}
-                        src={talentsToIcons["Holy Bulwark"]}
+                        src={talentsToIcons["Holy Armaments"]}
                         alt="Lightsmith Icon"
                         draggable="false"
                     />

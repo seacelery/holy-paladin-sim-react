@@ -11,17 +11,17 @@ from .summons import ConsecrationSummon, RighteousJudgmentSummon
 class Judgment(Spell):
     
     SPELL_POWER_COEFFICIENT = 2.227 * 1.2375 / 1.04
-    BASE_COOLDOWN = 12
+    BASE_COOLDOWN = 11
     MANA_COST = 0.024
     HOLY_POWER_GAIN = 1
     BONUS_CRIT = 0.08
     
     def __init__(self, caster):
-        # seal of alacrity cdr
-        if caster.is_talent_active("Seal of Alacrity") and caster.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 1:
-            self.BASE_COOLDOWN -= 0.5
-        elif caster.is_talent_active("Seal of Alacrity") and caster.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 2:
-            self.BASE_COOLDOWN -= 1
+        # seal of alacrity cdr (removed)
+        # if caster.is_talent_active("Seal of Alacrity") and caster.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 1:
+        #     self.BASE_COOLDOWN -= 0.5
+        # elif caster.is_talent_active("Seal of Alacrity") and caster.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 2:
+        #     self.BASE_COOLDOWN -= 1
         
         super().__init__("Judgment", mana_cost=Judgment.MANA_COST, cooldown=self.BASE_COOLDOWN, holy_power_gain=Judgment.HOLY_POWER_GAIN, hasted_cooldown=True) 
         self.is_damage_spell = True
@@ -35,9 +35,9 @@ class Judgment(Spell):
         if caster.is_talent_active("Divine Glimpse"):
             self.bonus_crit = Judgment.BONUS_CRIT
         
-        # justification
-        if caster.is_talent_active("Justification"):
-            self.spell_damage_modifier = 1.1
+        # # justification (removed)
+        # if caster.is_talent_active("Justification"):
+        #     self.spell_damage_modifier = 1.1
             
     def cast_damage_spell(self, caster, targets, current_time, healing_targets=None):        
         # awakening
@@ -113,8 +113,6 @@ class Judgment(Spell):
                     del caster.active_auras["Awakening Ready"]
                         
                     update_self_buff_data(caster.self_buff_breakdown, "Awakening Ready", current_time, "expired")
-             
-                    append_aura_removed_event(caster.events, "Awakening Ready", caster, caster, current_time)
                     
                     # remove 30% damage buff
                     self.spell_damage_modifier /= 1.4
@@ -139,14 +137,12 @@ class Judgment(Spell):
             if caster.is_talent_active("Greater Judgment"):
                 greater_judgment_debuff = GreaterJudgmentDebuff()
                 target.apply_debuff_to_target(greater_judgment_debuff, current_time)
-                append_aura_applied_event(caster.events, "Greater Judgment", caster, target, current_time)
                 greater_judgment_healing = greater_judgment_debuff.consume_greater_judgment(caster, target, healing_targets, current_time)
             
             # judgment of light
             if caster.is_talent_active("Judgment of Light"):
                 judgment_of_light_debuff = JudgmentOfLightDebuff()
                 target.apply_debuff_to_target(judgment_of_light_debuff, current_time, stacks_to_apply=5, max_stacks=5)
-                append_aura_applied_event(caster.events, "Judgment of Light", caster, target, current_time, current_stacks=5, max_stacks=5)
                 judgment_of_light_healing = judgment_of_light_debuff.consume_stacks(caster, target, healing_targets, current_time)
                 
             # righteous judgment
@@ -171,7 +167,6 @@ class Judgment(Spell):
                     caster.active_auras["Infusion of Light"].current_stacks -= 1
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "stacks_decremented", caster.active_auras['Infusion of Light'].duration, caster.active_auras["Infusion of Light"].current_stacks)
-                    append_aura_stacks_decremented(caster.buff_events, "Infusion of Light", caster, current_time, caster.active_auras["Infusion of Light"].current_stacks, duration=caster.active_auras['Infusion of Light'].duration)
                 else:
                     caster.active_auras["Infusion of Light"].remove_effect(caster)
                     del caster.active_auras["Infusion of Light"]
@@ -273,7 +268,6 @@ class CrusaderStrike(Spell):
             # reset reclamation
             if caster.is_talent_active("Reclamation"):
                 self.spell_damage_modifier /= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
-                caster.events.append(f"{format_time(current_time)}: {round(self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1), 2)} mana restored by Reclamation ({self.name})")
                 reclamation_mana = self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
                 caster.mana += reclamation_mana
                 update_mana_gained(caster.ability_breakdown, "Reclamation (Crusader Strike)", reclamation_mana)
@@ -304,13 +298,12 @@ class CrusaderStrike(Spell):
             
             increment_holy_power(self, caster, current_time)
             
-            # crusader's reprieve is not affected by stats except health
-            if caster.is_talent_active("Crusader's Reprieve"):
-                crusaders_reprieve_heal = caster.max_health * 0.02
-                caster.receive_self_heal(crusaders_reprieve_heal)
+            # crusader's reprieve (removed)
+            # if caster.is_talent_active("Crusader's Reprieve"):
+            #     crusaders_reprieve_heal = caster.max_health * 0.02
+            #     caster.receive_self_heal(crusaders_reprieve_heal)
                 
-                update_spell_data_heals(caster.ability_breakdown, "Crusader's Reprieve", caster, crusaders_reprieve_heal, False)
-                append_spell_heal_event(caster.events, "Crusader's Reprieve", caster, caster, crusaders_reprieve_heal, current_time, is_crit=False)
+            #     update_spell_data_heals(caster.ability_breakdown, "Crusader's Reprieve", caster, crusaders_reprieve_heal, False)
                
             # crusader's might 
             if caster.is_talent_active("Crusader's Might"):

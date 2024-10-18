@@ -1,311 +1,82 @@
 const templateClassTalents = {
     "row1": {
-        "Blessing of Freedom": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Hammer of Wrath": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Lay on Hands": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        }
-    },
-    "row10": {
-        "Divine Resonance": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Fading Light": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
-        "Quickened Invocation": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
-        "Seal of Order": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Vanguard's Momentum": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        }
+        "Lay on Hands": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Auras of the Resolute": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Hammer of Wrath": {"ranks": {"current rank": 1, "max rank": 1}}
     },
     "row2": {
-        "Crusader Aura": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Auras of the Resolute": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Improved Cleanse": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
-        "Obduracy": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Turn Evil": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        }
+        "Improved Cleanse": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Empyreal Ward": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Fist of Justice": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Repentance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Blinding Light": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Turn Evil": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row3": {
-        "Divine Steed": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Fist of Justice": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 2
-            }
-        },
-        "Greater Judgment": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        }
+        "A Just Reward": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Afterimage": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Divine Steed": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Light's Countenance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Greater Judgment": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Wrench Evil": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Stand Against Evil": {"ranks": {"current rank": 0, "max rank": 1}},
     },
     "row4": {
-        "Blinding Light": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
-        "Cavalier": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Rebuke": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Repentance": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
-        "Seasoned Warhorse": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        }
+        "Holy Reprieve": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Cavalier": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Divine Spurs": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Steed of Liberty": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Blessing of Freedom": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Rebuke": {"ranks": {"current rank": 1, "max rank": 1}}
     },
     "row5": {
-        "Avenging Wrath": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Holy Aegis": {
-            "ranks": {
-                "current rank": 2,
-                "max rank": 2
-            }
-        },
-        "Justification": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
-        "Punishment": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        }
+        "Obduracy": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Divine Toll": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Echoing Blessings": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Sanctified Plates": {"ranks": {"current rank": 2, "max rank": 2}},
+        "Punishment": {"ranks": {"current rank": 0, "max rank": 1}},
     },
     "row6": {
-        "Blessing of Protection": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Blessing of Sacrifice": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Echoing Blessings": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Golden Path": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
-        "Lightforged Blessing": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
-        "Sanctified Plates": {
-            "ranks": {
-                "current rank": 2,
-                "max rank": 2
-            }
-        }
+        "Divine Reach": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Blessing of Sacrifice": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Divine Resonance": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Quickened Invocation": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Blessing of Protection": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Consecrated Ground": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row7": {
-        "Afterimage": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Improved Blessing of Protection": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
-        "Recompense": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
-        "Sacrifice of the Just": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Seal of Mercy": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
-        "Unbreakable Spirit": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        }
+        "Holy Aegis": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Sacrifice of the Just": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Recompense": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Sacred Strength": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Purpose": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Improved Blessing of Protection": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Unbreakable Spirit": {"ranks": {"current rank": 1, "max rank": 1}},
     },
     "row8": {
-        "Divine Purpose": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Faith's Armor": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
-        "Incandescence": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 1
-            }
-        },
-        "Judgment of Light": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Seal of Alacrity": {
-            "ranks": {
-                "current rank": 2,
-                "max rank": 2
-            }
-        },
-        "Seal of Might": {
-            "ranks": {
-                "current rank": 2,
-                "max rank": 2
-            }
-        },
-        "Strength of Conviction": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 2
-            }
-        },
-        "Touch of Light": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        }
+        "Lightforged Blessing": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Lead the Charge": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Worthy Sacrifice": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Righteous Protection": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Holy Ritual": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Blessed Calling": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Inspired Guard": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Judgment of Light": {"ranks": {"current rank": 1, "max rank": 1}},
     },
     "row9": {
-        "Divine Toll": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Of Dusk and Dawn": {
-            "ranks": {
-                "current rank": 1,
-                "max rank": 1
-            }
-        },
-        "Seal of the Crusader": {
-            "ranks": {
-                "current rank": 0,
-                "max rank": 2
-            }
-        }
+        "Faith's Armor": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Stoicism": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Seal of Might": {"ranks": {"current rank": 2, "max rank": 2}},
+        "Seal of the Crusader": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Vengeful Wrath": {"ranks": {"current rank": 0, "max rank": 2}},
+        "Eye for an Eye": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Golden Path": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Selfless Healer": {"ranks": {"current rank": 0, "max rank": 1}},
+    },
+    "row10": {
+        "Of Dusk and Dawn": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Lightbearer": {"ranks": {"current rank": 1, "max rank": 1}},
+        "Light's Revocation": {"ranks": {"current rank": 0, "max rank": 1}}
     }
 }
 
@@ -705,13 +476,13 @@ const templateLightsmithTalents = {
                 "max rank": 1
             }
         },
-        "Fear No Evil": {
+        "Authoritative Rebuke": {
             "ranks": {
                 "current rank": 0,
                 "max rank": 1
             }
         },
-        "Excoriation": {
+        "Tempered in Battle": {
             "ranks": {
                 "current rank": 0,
                 "max rank": 1
@@ -868,7 +639,7 @@ const templateUpdateClassTalents = {
     "Repentance": 0,
     "Seasoned Warhorse": 1,
     "Avenging Wrath": 1,
-    "Holy Aegis": 2,
+    "Holy Aegis": 1,
     "Justification": 0,
     "Punishment": 0,
     "Blessing of Protection": 1,

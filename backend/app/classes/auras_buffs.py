@@ -38,11 +38,6 @@ class HoT(Buff):
         caster.handle_beacon_healing(self.name, target, total_heal_value, current_time)
         
         self.trigger_on_periodic_heal_effect(caster, current_time, target)
-        
-        if is_crit and self.name == "Holy Reverberation":
-            caster.events.append(f"{format_time(current_time)}: Holy Reverberation crit healed {target.name} for {round(total_heal_value)}")
-        elif self.name == "Holy Reverberation":
-            caster.events.append(f"{format_time(current_time)}: Holy Reverberation healed {target.name} for {round(total_heal_value)}")
             
         self.total_ticks += 1 if not is_partial_tick else self.time_until_next_tick / self.base_tick_interval
         
@@ -219,11 +214,11 @@ class SunSear(HoT):
 class HolyBulwarkBuff(HoT):
     
     def __init__(self, caster):
-        super().__init__("Holy Bulwark", 20, base_duration=20, base_tick_interval=2, initial_haste_multiplier=caster.haste_multiplier, hasted=False)
-        self.time_until_next_tick = self.base_tick_interval
+        super().__init__("Holy Bulwark", 20, base_duration=20, base_tick_interval=2, initial_haste_multiplier=caster.haste_multiplier, hasted=True)
+        self.time_until_next_tick = self.base_tick_interval / caster.haste_multiplier
         
     def calculate_tick_healing(self, caster):      
-        healing_per_tick = 7000000 * 0.02
+        healing_per_tick = 10000000 * 0.02
 
         return healing_per_tick, False
     
@@ -885,9 +880,6 @@ class BlessingOfWinter(Buff):
             self.mana_gained += caster.max_mana * 0.01
             
             self.last_winter_tick_time = 0
-            
-        if caster.active_auras["Blessing of Winter"].duration < 0.01:
-            caster.events.append(f"{format_time(current_time)}: {caster.name} gained {round(self.mana_gained)} mana from Blessing of Winter")
     
     
 class BlessingOfSpring(Buff):
@@ -3596,10 +3588,10 @@ class RiteOfSanctification(Buff):
         super().__init__("Rite of Sanctification", 10000, base_duration=10000)   
         
     def apply_effect(self, caster, current_time=None):
-        caster.spell_power *= 1.01
+        caster.spell_power *= 1.02
         
     def remove_effect(self, caster, current_time=None):
-        caster.spell_power /= 1.01
+        caster.spell_power /= 1.02
         
 
 class RiteOfAdjurationBuff(Buff):

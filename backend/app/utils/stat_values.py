@@ -67,20 +67,18 @@ def calculate_stat_percent_with_dr(caster, stat, rating, flat_percent):
         rating_to_percent = rating / stat_conversions[stat]
     
     if stat == "mastery":
-        if caster.is_talent_active("Seal of Might") and caster.class_talents["row8"]["Seal of Might"]["ranks"]["current rank"] == 1:
+        if caster.is_talent_active("Seal of Might") and caster.class_talents["row9"]["Seal of Might"]["ranks"]["current rank"] == 1:
             rating_to_percent += 3
-        elif caster.is_talent_active("Seal of Might") and caster.class_talents["row8"]["Seal of Might"]["ranks"]["current rank"] == 2:
+        elif caster.is_talent_active("Seal of Might") and caster.class_talents["row9"]["Seal of Might"]["ranks"]["current rank"] == 2:
             rating_to_percent += 6
     elif stat == "crit":
-        if caster.is_talent_active("Holy Aegis") and caster.class_talents["row5"]["Holy Aegis"]["ranks"]["current rank"] == 1:
-            rating_to_percent += 2
-        elif caster.is_talent_active("Holy Aegis") and caster.class_talents["row5"]["Holy Aegis"]["ranks"]["current rank"] == 2:
+        if caster.is_talent_active("Holy Aegis") and caster.class_talents["row7"]["Holy Aegis"]["ranks"]["current rank"] >= 1:
             rating_to_percent += 4
-    elif stat == "haste":
-        if caster.is_talent_active("Seal of Alacrity") and caster.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 1:
-            rating_to_percent = rating_to_percent * 1.02 + 2
-        elif caster.is_talent_active("Seal of Alacrity") and caster.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 2:
-            rating_to_percent = rating_to_percent * 1.04 + 4
+    # elif stat == "haste": (removed)
+    #     if caster.is_talent_active("Seal of Alacrity") and caster.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 1:
+    #         rating_to_percent = rating_to_percent * 1.02 + 2
+    #     elif caster.is_talent_active("Seal of Alacrity") and caster.class_talents["row8"]["Seal of Alacrity"]["ranks"]["current rank"] == 2:
+    #         rating_to_percent = rating_to_percent * 1.04 + 4
     
     if stat == "haste":
         rating_to_percent = (((1 + rating_to_percent / 100) * caster.multiplicative_haste) - 1) * 100  

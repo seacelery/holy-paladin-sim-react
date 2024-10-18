@@ -90,9 +90,9 @@ class ConsecrationSummon(Summon):
             
         GoldenPathHeal(caster).cast_healing_spell(caster, targets, current_time, is_heal=True)
         
-        # seal of mercy
-        if caster.is_talent_active("Seal of Mercy"):
-            self.trigger_seal_of_mercy_tick(caster, current_time, targets)
+        # seal of mercy (removed)
+        # if caster.is_talent_active("Seal of Mercy"):
+        #     self.trigger_seal_of_mercy_tick(caster, current_time, targets)
         
     def trigger_seal_of_mercy_tick(self, caster, current_time, targets):
         from .spells_healing import SealOfMercyHeal
@@ -135,9 +135,9 @@ class RighteousJudgmentSummon(Summon):
             
         GoldenPathHeal(caster).cast_healing_spell(caster, targets, current_time, is_heal=True)
         
-        # seal of mercy
-        if caster.is_talent_active("Seal of Mercy"):
-            self.trigger_seal_of_mercy_tick(caster, current_time, targets)
+        # seal of mercy (removed)
+        # if caster.is_talent_active("Seal of Mercy"):
+        #     self.trigger_seal_of_mercy_tick(caster, current_time, targets)
         
     def trigger_seal_of_mercy_tick(self, caster, current_time, targets):
         from .spells_healing import SealOfMercyHeal

@@ -14,13 +14,7 @@ def handle_glimmer_removal(caster, glimmer_targets, current_time, max_glimmer_ta
         
         if caster.set_bonuses["dragonflight_season_3"] >= 2:
             oldest_active_glimmer.apply_buff_to_target(HolyReverberation(caster), current_time, caster=caster)
-            
-            longest_reverberation_duration = max(buff_instance.duration for buff_instance in oldest_active_glimmer.target_active_buffs["Holy Reverberation"]) if "Holy Reverberation" in oldest_active_glimmer.target_active_buffs and oldest_active_glimmer.target_active_buffs["Holy Reverberation"] else None
-            if "Holy Reverberation" in oldest_active_glimmer.target_active_buffs:
-                if len(oldest_active_glimmer.target_active_buffs["Holy Reverberation"]) > 0:
-                    caster.buff_events.append(f"{format_time(current_time)}: Holy Reverberation ({len(oldest_active_glimmer.target_active_buffs['Holy Reverberation'])}) applied to {oldest_active_glimmer.name}: {longest_reverberation_duration}s duration")
         
-        append_aura_removed_event(caster.buff_events, "Glimmer of Light", caster, oldest_active_glimmer, current_time, oldest_active_glimmer.target_active_buffs["Glimmer of Light"][0].duration)
         del oldest_active_glimmer.target_active_buffs["Glimmer of Light"]
         
         update_target_buff_data(caster.target_buff_breakdown, "Glimmer of Light", current_time, "expired", oldest_active_glimmer.name)
@@ -114,7 +108,6 @@ class HolyShock(Spell):
             # reset reclamation
             if caster.is_talent_active("Reclamation"):
                 self.spell_healing_modifier /= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
-                caster.events.append(f"{format_time(current_time)}: {round(self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1), 2)} mana restored by Reclamation ({self.name})")
                 reclamation_mana = self.get_base_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
                 caster.mana += reclamation_mana
                 update_mana_gained(caster.ability_breakdown, "Reclamation (Holy Shock)", reclamation_mana)
@@ -207,7 +200,6 @@ class HolyShock(Spell):
                     
                     update_spell_data_casts(caster.ability_breakdown, "Glimmer of Light")
                     update_spell_data_heals(caster.ability_breakdown, "Glimmer of Light", glimmer_target, glimmer_heal_value, glimmer_crit)
-                    append_spell_heal_event(caster.events, "Glimmer of Light", caster, glimmer_target, glimmer_heal_value, current_time, glimmer_crit)
                     
                     # overflowing light
                     if caster.is_talent_active("Overflowing Light"):
@@ -216,26 +208,21 @@ class HolyShock(Spell):
                         caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                         
                         update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", glimmer_target, overflowing_light_absorb_value, False)
-                        append_spell_heal_event(caster.events, "Overflowing Light", caster, glimmer_target, overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                     
                     # beacon of light
                     caster.handle_beacon_healing("Glimmer of Light", glimmer_target, glimmer_heal_value, current_time, spell_display_name="Glimmer of Light (Holy Shock)")
                     
                 target = targets[0]
                 if target in glimmer_targets:
-                    append_aura_removed_event(caster.buff_events, "Glimmer of Light", caster, target, current_time)
                     del target.target_active_buffs["Glimmer of Light"]
                     update_target_buff_data(caster.target_buff_breakdown, "Glimmer of Light", current_time, "expired", target.name)
                     
                     target.apply_buff_to_target(GlimmerOfLightBuff(), current_time, caster=caster)
-                    append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                     caster.glimmer_application_counter += 1
                     glimmer_targets.append(targets[0])
                     self.apply_holy_reverberation(caster, target, current_time)
-                    # append_aura_applied_event(caster.buff_events, "Holy Reverberation", caster, target, current_time, longest_reverberation_duration)
                 else:
                     target.apply_buff_to_target(GlimmerOfLightBuff(), current_time, caster=caster)
-                    append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                     caster.glimmer_application_counter += 1
                     
                     glimmer_targets.append(targets[0])
@@ -252,7 +239,6 @@ class HolyShock(Spell):
                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                 
                 update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", targets[0], overflowing_light_absorb_value, False)
-                append_spell_heal_event(caster.events, "Overflowing Light", caster, targets[0], overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                         
             # rising sunlight  
             if caster.is_talent_active("Rising Sunlight") and initial_cast:
@@ -264,13 +250,11 @@ class HolyShock(Spell):
                         caster.active_auras["Rising Sunlight"].current_stacks -= 1
                         
                         update_self_buff_data(caster.self_buff_breakdown, "Rising Sunlight", current_time, "stacks_decremented", caster.active_auras['Rising Sunlight'].duration, caster.active_auras["Rising Sunlight"].current_stacks)
-                        append_aura_stacks_decremented(caster.buff_events, "Rising Sunlight", caster, current_time, caster.active_auras["Rising Sunlight"].current_stacks, duration=caster.active_auras["Rising Sunlight"].duration)
                     else:
                         caster.active_auras["Rising Sunlight"].remove_effect(caster)
                         del caster.active_auras["Rising Sunlight"]
                         
                         update_self_buff_data(caster.self_buff_breakdown, "Rising Sunlight", current_time, "expired")
-                        append_aura_removed_event(caster.buff_events, "Rising Sunlight", caster, caster, current_time)
                         
             # barrier of faith
             if caster.is_talent_active("Barrier of Faith"):
@@ -333,9 +317,7 @@ class Daybreak(Spell):
     def cast_healing_spell(self, caster, targets, current_time, is_heal, glimmer_targets):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         total_glimmer_healing = 0
-        if cast_success:
-            caster.events.append(f"{format_time(current_time)}: {caster.name} cast {self.name}")
-            
+        if cast_success:            
             number_of_glimmers_removed = len(glimmer_targets)
             caster.glimmer_removal_counter += number_of_glimmers_removed
             if caster.ptr:
@@ -376,7 +358,6 @@ class Daybreak(Spell):
                 
                 update_spell_data_casts(caster.ability_breakdown, "Glimmer of Light (Daybreak)")
                 update_spell_data_heals(caster.ability_breakdown, "Glimmer of Light (Daybreak)", glimmer_target, glimmer_heal_value, glimmer_crit)
-                append_spell_heal_event(caster.events, "Glimmer of Light", caster, glimmer_target, glimmer_heal_value, current_time, glimmer_crit)
                 
                 # overflowing light
                 if caster.is_talent_active("Overflowing Light"):
@@ -385,24 +366,17 @@ class Daybreak(Spell):
                     caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                     
                     update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", glimmer_target, overflowing_light_absorb_value, False)
-                    append_spell_heal_event(caster.events, "Overflowing Light", caster, glimmer_target, overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                 
                 # beacon of light
                 caster.handle_beacon_healing("Glimmer of Light", glimmer_target, glimmer_heal_value, current_time, spell_display_name="Glimmer of Light (Daybreak)")
             
             for target in glimmer_targets[:]:
-                append_aura_removed_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                 del target.target_active_buffs["Glimmer of Light"]
                 update_target_buff_data(caster.target_buff_breakdown, "Glimmer of Light", current_time, "expired", target.name)
                 glimmer_targets.remove(target)
                 
                 if caster.set_bonuses["dragonflight_season_3"] >= 2:
                     target.apply_buff_to_target(HolyReverberation(caster), current_time, caster=caster)
-                    
-                    longest_reverberation_duration = max(buff_instance.duration for buff_instance in target.target_active_buffs["Holy Reverberation"]) if "Holy Reverberation" in target.target_active_buffs and target.target_active_buffs["Holy Reverberation"] else None
-                    if "Holy Reverberation" in target.target_active_buffs:
-                        if len(target.target_active_buffs["Holy Reverberation"]) > 0:
-                            caster.buff_events.append(f"{format_time(current_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
         
         return cast_success, spell_crit, heal_amount, total_glimmer_healing
             
@@ -487,7 +461,6 @@ class RisingSunlightHolyShock(Spell):
             # reset reclamation
             if caster.is_talent_active("Reclamation"):
                 self.spell_healing_modifier /= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
-                caster.events.append(f"{format_time(current_time)}: {round(self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1), 2)} mana restored by Reclamation ({self.name})")
                 reclamation_mana = self.get_base_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
                 caster.mana += reclamation_mana
                 update_mana_gained(caster.ability_breakdown, "Reclamation (Holy Shock)", reclamation_mana)
@@ -569,7 +542,6 @@ class RisingSunlightHolyShock(Spell):
                     
                     update_spell_data_casts(caster.ability_breakdown, "Glimmer of Light (Rising Sunlight)")
                     update_spell_data_heals(caster.ability_breakdown, "Glimmer of Light (Rising Sunlight)", glimmer_target, glimmer_heal_value, glimmer_crit)
-                    append_spell_heal_event(caster.events, "Glimmer of Light", caster, glimmer_target, glimmer_heal_value, current_time, glimmer_crit)
                     
                     # overflowing light
                     if caster.is_talent_active("Overflowing Light"):
@@ -578,25 +550,20 @@ class RisingSunlightHolyShock(Spell):
                         caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                         
                         update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", glimmer_target, overflowing_light_absorb_value, False)
-                        append_spell_heal_event(caster.events, "Overflowing Light", caster, glimmer_target, overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                     
                     # beacon of light
                     caster.handle_beacon_healing("Glimmer of Light", glimmer_target, glimmer_heal_value, current_time, spell_display_name="Glimmer of Light (Rising Sunlight)")
                     
                 target = targets[0]
                 if target in glimmer_targets:
-                    # caster.events.append(f"{current_time}: {glimmer_targets}")
-                    append_aura_removed_event(caster.buff_events, "Glimmer of Light", caster, target, current_time)
                     del target.target_active_buffs["Glimmer of Light"]
                     update_target_buff_data(caster.target_buff_breakdown, "Glimmer of Light", current_time, "expired", target.name)
                     target.apply_buff_to_target(GlimmerOfLightBuff(), current_time, caster=caster)
-                    append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                     caster.glimmer_application_counter += 1
                     glimmer_targets.append(targets[0])
                     self.apply_holy_reverberation(caster, target, current_time)
                 else:
                     target.apply_buff_to_target(GlimmerOfLightBuff(), current_time, caster=caster)
-                    append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                     caster.glimmer_application_counter += 1
                     
                     glimmer_targets.append(targets[0])
@@ -614,7 +581,6 @@ class RisingSunlightHolyShock(Spell):
                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                 
                 update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", targets[0], overflowing_light_absorb_value, False)
-                append_spell_heal_event(caster.events, "Overflowing Light", caster, targets[0], overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                         
             # barrier of faith
             if caster.is_talent_active("Barrier of Faith"):
@@ -678,8 +644,6 @@ class DivineToll(Spell):
         if cast_success:
             original_gcd = caster.hasted_global_cooldown
             
-            caster.events.append(f"{format_time(current_time)}: {caster.name} cast {self.name}")
-
             # each holy shock procs glimmer exactly once on its target
             # bugged to heal 6 targets instead of 5 (usually)
             for i in range(6):
@@ -783,7 +747,6 @@ class DivineTollHolyShock(Spell):
             # reset reclamation
             if caster.is_talent_active("Reclamation"):
                 self.spell_healing_modifier /= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
-                caster.events.append(f"{format_time(current_time)}: {round(self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1), 2)} mana restored by Reclamation ({self.name})")
                 reclamation_mana = self.get_base_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
                 caster.mana += reclamation_mana
                 update_mana_gained(caster.ability_breakdown, "Reclamation (Holy Shock)", reclamation_mana)
@@ -843,17 +806,14 @@ class DivineTollHolyShock(Spell):
             if caster.is_talent_active("Glimmer of Light"):       
                 target = targets[0]
                 if target in glimmer_targets:
-                    append_aura_removed_event(caster.buff_events, "Glimmer of Light", caster, target, current_time)
                     del target.target_active_buffs["Glimmer of Light"]
                     update_target_buff_data(caster.target_buff_breakdown, "Glimmer of Light", current_time, "expired", target.name)
                     target.apply_buff_to_target(GlimmerOfLightBuff(), current_time, caster=caster)
-                    append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                     caster.glimmer_application_counter += 1
                     glimmer_targets.append(targets[0])
                     self.apply_holy_reverberation(caster, target, current_time)
                 else:
                     target.apply_buff_to_target(GlimmerOfLightBuff(), current_time, caster=caster)
-                    append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                     caster.glimmer_application_counter += 1
                     
                     glimmer_targets.append(targets[0])
@@ -887,7 +847,6 @@ class DivineTollHolyShock(Spell):
                     for target in glimmer_targets:    
                         target.receive_heal(glimmer_heal_value, caster)
                         caster.healing_by_ability["Glimmer of Light"] = caster.healing_by_ability.get("Glimmer of Light", 0) + glimmer_heal_value
-                        append_spell_heal_event(caster.events, "Glimmer of Light", caster, target, glimmer_heal_value, current_time, glimmer_crit)
                         
                         update_spell_data_casts(caster.ability_breakdown, "Glimmer of Light (Divine Toll)")
                         update_spell_data_heals(caster.ability_breakdown, "Glimmer of Light (Divine Toll)", target, glimmer_heal_value, glimmer_crit)
@@ -899,7 +858,6 @@ class DivineTollHolyShock(Spell):
                             caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                             
                             update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", target, overflowing_light_absorb_value, False)
-                            append_spell_heal_event(caster.events, "Overflowing Light", caster, target, overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                         
                         # beacon of light 
                         caster.handle_beacon_healing("Glimmer of Light", target, glimmer_heal_value, current_time, spell_display_name="Glimmer of Light (Divine Toll)")
@@ -913,7 +871,6 @@ class DivineTollHolyShock(Spell):
                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                 
                 update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", targets[0], overflowing_light_absorb_value, False)
-                append_spell_heal_event(caster.events, "Overflowing Light", caster, targets[0], overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                     
             # barrier of faith
             if caster.is_talent_active("Barrier of Faith"):
@@ -1041,7 +998,6 @@ class DivineResonanceHolyShock(Spell):
             # reclamation
             if caster.is_talent_active("Reclamation"):
                 self.spell_healing_modifier /= ((1 - caster.average_raid_health_percentage) * 0.5) + 1
-                caster.events.append(f"{format_time(current_time)}: {round(self.get_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1), 2)} mana restored by Reclamation ({self.name})")
                 reclamation_mana = self.get_base_mana_cost(caster) * ((1 - caster.average_raid_health_percentage) * 0.1)
                 caster.mana += reclamation_mana
                 update_mana_gained(caster.ability_breakdown, "Reclamation (Holy Shock)", reclamation_mana)
@@ -1099,18 +1055,14 @@ class DivineResonanceHolyShock(Spell):
             if caster.is_talent_active("Glimmer of Light"):
                 target = targets[0]
                 if target in glimmer_targets:
-                    append_aura_removed_event(caster.buff_events, "Glimmer of Light", caster, target, current_time)
                     del target.target_active_buffs["Glimmer of Light"]
                     update_target_buff_data(caster.target_buff_breakdown, "Glimmer of Light", current_time, "expired", target.name)
                     target.apply_buff_to_target(GlimmerOfLightBuff(), current_time, caster=caster)
-                    append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                     caster.glimmer_application_counter += 1
                     glimmer_targets.append(targets[0])
                     self.apply_holy_reverberation(caster, target, current_time)
-                    # append_aura_applied_event(caster.buff_events, "Holy Reverberation", caster, target, current_time, longest_reverberation_duration)
                 else:
                     target.apply_buff_to_target(GlimmerOfLightBuff(), current_time, caster=caster)
-                    append_aura_applied_event(caster.buff_events, "Glimmer of Light", caster, target, current_time, target.target_active_buffs["Glimmer of Light"][0].duration)
                     caster.glimmer_application_counter += 1
                     
                     glimmer_targets.append(targets[0])
@@ -1128,7 +1080,6 @@ class DivineResonanceHolyShock(Spell):
                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                 
                 update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", targets[0], overflowing_light_absorb_value, False)
-                append_spell_heal_event(caster.events, "Overflowing Light", caster, targets[0], overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                         
             # barrier of faith
             if caster.is_talent_active("Barrier of Faith"):
@@ -1188,6 +1139,10 @@ class HolyLight(Spell):
         # tower of radiance
         if caster.is_talent_active("Tower of Radiance"):
             self.holy_power_gain = 1
+            
+        # selfless healer
+        if caster.is_talent_active("Selfless Healer"):
+            self.spell_healing_modifier *= 1.1
     
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         # tyr's deliverance
@@ -1210,6 +1165,11 @@ class HolyLight(Spell):
         resplendent_light_healing = 0
         barrier_of_faith_absorb = 0
         if cast_success:
+            # selfless healer
+            if caster.is_talent_active("Selfless Healer"):
+                selfless_healer_healing = heal_amount * 0.1
+                update_spell_data_heals(caster.ability_breakdown, "Selfless Healer", caster, selfless_healer_healing, False) 
+            
             # veneration
             if caster.is_talent_active("Veneration"):
                 if spell_crit:
@@ -1250,7 +1210,6 @@ class HolyLight(Spell):
                     target = random.choice(target_pool)
                     target.receive_heal(resplendent_light_healing, caster)
                     target_pool.remove(target)
-                    append_spell_heal_event(caster.events, "Resplendent Light", caster, target, resplendent_light_healing, current_time, is_crit=False) 
                     
                     update_spell_data_heals(caster.ability_breakdown, "Resplendent Light", target, resplendent_light_healing, False) 
                     
@@ -1294,13 +1253,11 @@ class HolyLight(Spell):
                 
                 if caster.active_auras["Infusion of Light"].current_stacks > 1:
                     caster.active_auras["Infusion of Light"].current_stacks -= 1
-                    append_aura_stacks_decremented(caster.events, "Infusion of Light", caster, current_time, caster.active_auras["Infusion of Light"].current_stacks, duration=caster.active_auras['Infusion of Light'].duration)
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "stacks_decremented", caster.active_auras['Infusion of Light'].duration, caster.active_auras["Infusion of Light"].current_stacks)
                 else:
                     caster.active_auras["Infusion of Light"].remove_effect(caster)
                     del caster.active_auras["Infusion of Light"]
-                    append_aura_removed_event(caster.events, "Infusion of Light", caster, caster, current_time)
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "expired")
                     
@@ -1330,7 +1287,6 @@ class HolyLight(Spell):
             
             # remove divine favor, start divine favor spell cd
             if "Divine Favor" in caster.active_auras:
-                append_aura_removed_event(caster.events, "Divine Favor", caster, caster, current_time)
             
                 caster.active_auras["Divine Favor"].remove_effect(caster)
                 del caster.active_auras["Divine Favor"]
@@ -1367,6 +1323,10 @@ class FlashOfLight(Spell):
         # tower of radiance
         if caster.is_talent_active("Tower of Radiance"):
             self.holy_power_gain = 1
+            
+        # selfless healer
+        if caster.is_talent_active("Selfless Healer"):
+            self.spell_healing_modifier *= 1.1
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         # tyr's deliverance
@@ -1391,6 +1351,11 @@ class FlashOfLight(Spell):
         cast_success, spell_crit, heal_amount = super().cast_healing_spell(caster, targets, current_time, is_heal)
         barrier_of_faith_absorb = 0
         if cast_success:
+            # selfless healer
+            if caster.is_talent_active("Selfless Healer"):
+                selfless_healer_healing = heal_amount * 0.1
+                update_spell_data_heals(caster.ability_breakdown, "Selfless Healer", caster, selfless_healer_healing, False) 
+            
             # veneration
             if caster.is_talent_active("Veneration"):
                 if spell_crit:
@@ -1455,14 +1420,12 @@ class FlashOfLight(Spell):
                 if caster.active_auras["Infusion of Light"].current_stacks > 1:
                     caster.active_auras["Infusion of Light"].current_stacks -= 1
                     
-                    append_aura_stacks_decremented(caster.events, "Infusion of Light", caster, current_time, caster.active_auras["Infusion of Light"].current_stacks, duration=caster.active_auras['Infusion of Light'].duration)
                     update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "stacks_decremented", caster.active_auras['Infusion of Light'].duration, caster.active_auras["Infusion of Light"].current_stacks)
                 else:
                     caster.active_auras["Infusion of Light"].remove_effect(caster)
                     del caster.active_auras["Infusion of Light"]
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Infusion of Light", current_time, "expired")
-                    append_aura_removed_event(caster.events, "Infusion of Light", caster, caster, current_time)
                     
                 if caster.is_talent_active("Valiance"):
                     # extended version (removed for now)
@@ -1486,8 +1449,6 @@ class FlashOfLight(Spell):
                 
             # remove divine favor
             if "Divine Favor" in caster.active_auras:
-                append_aura_removed_event(caster.events, "Divine Favor", caster, caster, current_time)
-
                 caster.active_auras["Divine Favor"].remove_effect(caster)
                 del caster.active_auras["Divine Favor"]
                 
@@ -1507,13 +1468,16 @@ class FlashOfLight(Spell):
 # spenders
 class WordOfGlory(Spell):
     
-    SPELL_POWER_COEFFICIENT = 3.15 * 1.58 * 1.1
+    SPELL_POWER_COEFFICIENT = 3.15 * 1.58 * 1.1 * 1.05
     MANA_COST = 0.006
     HOLY_POWER_COST = 3
     BASE_COOLDOWN = 0
     
     def __init__(self, caster):
         super().__init__("Word of Glory", mana_cost=WordOfGlory.MANA_COST, holy_power_cost=WordOfGlory.HOLY_POWER_COST, max_charges=0, is_heal=True)
+        
+        if caster.is_talent_active("Sacred Strength"):
+            self.spell_healing_modifier *= 1.02
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         # extrication
@@ -1536,9 +1500,9 @@ class WordOfGlory(Spell):
         if caster.is_talent_active("Of Dusk and Dawn"):
             if "Blessing of Dawn" in caster.active_auras:
                 if caster.active_auras["Blessing of Dawn"].current_stacks == 1:
-                    self.spell_healing_modifier *= 1.1
+                    self.spell_healing_modifier *= 1.15
                 elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
-                    self.spell_healing_modifier *= 1.2
+                    self.spell_healing_modifier *= 1.3
         
         # unending light
         unending_light_modifier = 1           
@@ -1593,13 +1557,12 @@ class WordOfGlory(Spell):
             if caster.is_talent_active("Of Dusk and Dawn"):
                 if "Blessing of Dawn" in caster.active_auras:
                     if caster.active_auras["Blessing of Dawn"].current_stacks == 1:
-                        self.spell_healing_modifier /= 1.1
+                        self.spell_healing_modifier /= 1.15
                     elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
-                        self.spell_healing_modifier /= 1.2
+                        self.spell_healing_modifier /= 1.3
                     del caster.active_auras["Blessing of Dawn"]
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Blessing of Dawn", current_time, "expired")
-                    append_aura_removed_event(caster.buff_events, "Blessing of Dawn", caster, caster, current_time)
                     caster.apply_buff_to_self(BlessingOfDusk(), current_time, reapply=True)
                     
             # strength of conviction
@@ -1650,7 +1613,6 @@ class WordOfGlory(Spell):
                                                  
                             update_spell_data_casts(caster.ability_breakdown, "Glimmer of Light (Glistening Radiance (Word of Glory))")
                             update_spell_data_heals(caster.ability_breakdown, "Glimmer of Light (Glistening Radiance (Word of Glory))", glimmer_target, glimmer_heal_value, glimmer_crit)
-                            append_spell_heal_event(caster.events, "Glimmer of Light", caster, glimmer_target, glimmer_heal_value, current_time, glimmer_crit)
                             
                             # overflowing light
                             if caster.is_talent_active("Overflowing Light"):
@@ -1659,7 +1621,6 @@ class WordOfGlory(Spell):
                                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                                 
                                 update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", glimmer_target, overflowing_light_absorb_value, False)
-                                append_spell_heal_event(caster.events, "Overflowing Light", caster, glimmer_target, overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                             
                             # beacon of light
                             caster.handle_beacon_healing("Glimmer of Light", glimmer_target, glimmer_heal_value, current_time, spell_display_name="Glimmer of Light (Glistening Radiance)")
@@ -1678,7 +1639,6 @@ class WordOfGlory(Spell):
                 # process afterimage heal
                 if "Divine Purpose" not in caster.active_auras:
                     caster.afterimage_counter += self.holy_power_cost
-                    caster.events.append(f"{format_time(current_time)}: Afterimage ({caster.afterimage_counter})")
                     
                 if caster.afterimage_counter >= 20:
                     caster.afterimage_counter = caster.afterimage_counter % 20
@@ -1688,7 +1648,6 @@ class WordOfGlory(Spell):
                     targets[0].receive_heal(afterimage_heal, caster)
                     
                     update_spell_data_heals(caster.ability_breakdown, "Afterimage (Word of Glory)", targets[0], afterimage_heal, afterimage_crit)
-                    append_spell_heal_event(caster.events, "Afterimage (Word of Glory)", caster, targets[0], afterimage_heal, current_time, is_crit=False)
                     
                     # beacon of light
                     caster.handle_beacon_healing("Afterimage (Word of Glory)", targets[0], afterimage_heal, current_time)
@@ -1699,7 +1658,6 @@ class WordOfGlory(Spell):
                     del caster.active_auras["Divine Purpose"]
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Divine Purpose", current_time, "expired")
-                    append_aura_removed_event(caster.events, "Divine Purpose", caster, caster, current_time)
                     self.spell_healing_modifier /= 1.15
                     self.holy_power_cost = 3
                     self.mana_cost = WordOfGlory.MANA_COST
@@ -1716,7 +1674,6 @@ class WordOfGlory(Spell):
                         del caster.active_auras["Awakening"]
                         
                         update_self_buff_data(caster.self_buff_breakdown, "Awakening", current_time, "expired")
-                        append_aura_removed_event(caster.events, "Awakening", caster, caster, current_time)
                         caster.apply_buff_to_self(AwakeningTrigger(), current_time)
                         caster.awakening_trigger_times.update({round(current_time): 1})
                 else:
@@ -1827,13 +1784,16 @@ class WordOfGlory(Spell):
 
 class EternalFlame(Spell):
     
-    SPELL_POWER_COEFFICIENT = 3.15 * 1.58 * 1.1
+    SPELL_POWER_COEFFICIENT = 3.15 * 1.58 * 1.1 * 1.05
     MANA_COST = 0.006
     HOLY_POWER_COST = 3
     BASE_COOLDOWN = 0
     
     def __init__(self, caster):
         super().__init__("Eternal Flame", mana_cost=EternalFlame.MANA_COST, holy_power_cost=EternalFlame.HOLY_POWER_COST, max_charges=0, is_heal=True)
+        
+        if caster.is_talent_active("Sacred Strength"):
+            self.spell_healing_modifier *= 1.02
         
     def cast_healing_spell(self, caster, targets, current_time, is_heal):
         # extrication
@@ -1856,9 +1816,9 @@ class EternalFlame(Spell):
         if caster.is_talent_active("Of Dusk and Dawn"):
             if "Blessing of Dawn" in caster.active_auras:
                 if caster.active_auras["Blessing of Dawn"].current_stacks == 1:
-                    self.spell_healing_modifier *= 1.1
+                    self.spell_healing_modifier *= 1.15
                 elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
-                    self.spell_healing_modifier *= 1.2
+                    self.spell_healing_modifier *= 1.3
         
         # unending light
         unending_light_modifier = 1           
@@ -1916,13 +1876,12 @@ class EternalFlame(Spell):
             if caster.is_talent_active("Of Dusk and Dawn"):
                 if "Blessing of Dawn" in caster.active_auras:
                     if caster.active_auras["Blessing of Dawn"].current_stacks == 1:
-                        self.spell_healing_modifier /= 1.1
+                        self.spell_healing_modifier /= 1.15
                     elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
-                        self.spell_healing_modifier /= 1.2
+                        self.spell_healing_modifier /= 1.3
                     del caster.active_auras["Blessing of Dawn"]
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Blessing of Dawn", current_time, "expired")
-                    append_aura_removed_event(caster.buff_events, "Blessing of Dawn", caster, caster, current_time)
                     caster.apply_buff_to_self(BlessingOfDusk(), current_time, reapply=True)
                     
             # strength of conviction
@@ -1973,7 +1932,6 @@ class EternalFlame(Spell):
                             
                             update_spell_data_casts(caster.ability_breakdown, "Glimmer of Light (Glistening Radiance (Eternal Flame))")
                             update_spell_data_heals(caster.ability_breakdown, "Glimmer of Light (Glistening Radiance (Eternal Flame))", glimmer_target, glimmer_heal_value, glimmer_crit)
-                            append_spell_heal_event(caster.events, "Glimmer of Light", caster, glimmer_target, glimmer_heal_value, current_time, glimmer_crit)
                             
                             # overflowing light
                             if caster.is_talent_active("Overflowing Light"):
@@ -1982,7 +1940,6 @@ class EternalFlame(Spell):
                                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                                 
                                 update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", glimmer_target, overflowing_light_absorb_value, False)
-                                append_spell_heal_event(caster.events, "Overflowing Light", caster, glimmer_target, overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                             
                             # beacon of light
                             caster.handle_beacon_healing("Glimmer of Light", glimmer_target, glimmer_heal_value, current_time, spell_display_name="Glimmer of Light (Glistening Radiance)")
@@ -2001,7 +1958,6 @@ class EternalFlame(Spell):
                 # process afterimage heal
                 if "Divine Purpose" not in caster.active_auras:
                     caster.afterimage_counter += self.holy_power_cost
-                    caster.events.append(f"{format_time(current_time)}: Afterimage ({caster.afterimage_counter})")
                     
                 if caster.afterimage_counter >= 20:
                     caster.afterimage_counter = caster.afterimage_counter % 20
@@ -2011,7 +1967,6 @@ class EternalFlame(Spell):
                     targets[0].receive_heal(afterimage_heal, caster)
                     
                     update_spell_data_heals(caster.ability_breakdown, "Afterimage (Eternal Flame)", targets[0], afterimage_heal, afterimage_crit)
-                    append_spell_heal_event(caster.events, "Afterimage (Eternal Flame)", caster, targets[0], afterimage_heal, current_time, is_crit=False)
                     
                     # afterimage ef
                     non_ef_targets = [target for target in caster.potential_healing_targets if "Eternal Flame" not in target.target_active_buffs]
@@ -2027,7 +1982,6 @@ class EternalFlame(Spell):
                     del caster.active_auras["Divine Purpose"]
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Divine Purpose", current_time, "expired")
-                    append_aura_removed_event(caster.events, "Divine Purpose", caster, caster, current_time)
                     self.spell_healing_modifier /= 1.15
                     self.holy_power_cost = 3
                     self.mana_cost = WordOfGlory.MANA_COST
@@ -2044,7 +1998,6 @@ class EternalFlame(Spell):
                         del caster.active_auras["Awakening"]
                         
                         update_self_buff_data(caster.self_buff_breakdown, "Awakening", current_time, "expired")
-                        append_aura_removed_event(caster.events, "Awakening", caster, caster, current_time)
                         caster.apply_buff_to_self(AwakeningTrigger(), current_time)
                         caster.awakening_trigger_times.update({round(current_time): 1})
                 else:
@@ -2156,6 +2109,9 @@ class LightOfDawn(Spell):
     def __init__(self, caster):
         super().__init__("Light of Dawn", mana_cost=LightOfDawn.MANA_COST, holy_power_cost=LightOfDawn.HOLY_POWER_COST, healing_target_count=LightOfDawn.TARGET_COUNT, is_heal=True)
         
+        if caster.is_talent_active("Sacred Strength"):
+            self.spell_healing_modifier *= 1.02
+        
     def cast_healing_spell(self, caster, targets, current_time, is_heal, initial_cast=True):
         bonus_crit = 0
 
@@ -2185,9 +2141,9 @@ class LightOfDawn(Spell):
         if caster.is_talent_active("Of Dusk and Dawn"):
             if "Blessing of Dawn" in caster.active_auras:
                 if caster.active_auras["Blessing of Dawn"].current_stacks == 1:
-                    self.spell_healing_modifier *= 1.1
+                    self.spell_healing_modifier *= 1.15
                 elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
-                    self.spell_healing_modifier *= 1.2
+                    self.spell_healing_modifier *= 1.3
                     
         # tww season 1 tier 4pc
         if caster.set_bonuses["tww_season_1"] >= 4:            
@@ -2228,13 +2184,12 @@ class LightOfDawn(Spell):
             if caster.is_talent_active("Of Dusk and Dawn"):
                 if "Blessing of Dawn" in caster.active_auras:
                     if caster.active_auras["Blessing of Dawn"].current_stacks == 1:
-                        self.spell_healing_modifier /= 1.1
+                        self.spell_healing_modifier /= 1.15
                     elif caster.active_auras["Blessing of Dawn"].current_stacks == 2:
-                        self.spell_healing_modifier /= 1.2
+                        self.spell_healing_modifier /= 1.3
                     del caster.active_auras["Blessing of Dawn"]
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Blessing of Dawn", current_time, "expired")
-                    append_aura_removed_event(caster.buff_events, "Blessing of Dawn", caster, caster, current_time)
                     caster.apply_buff_to_self(BlessingOfDusk(), current_time, reapply=True)
             
             # glistening radiance
@@ -2274,7 +2229,6 @@ class LightOfDawn(Spell):
                             
                             update_spell_data_casts(caster.ability_breakdown, "Glimmer of Light (Glistening Radiance (Light of Dawn))")
                             update_spell_data_heals(caster.ability_breakdown, "Glimmer of Light (Glistening Radiance (Light of Dawn))", glimmer_target, glimmer_heal_value, glimmer_crit)
-                            append_spell_heal_event(caster.events, "Glimmer of Light", caster, glimmer_target, glimmer_heal_value, current_time, glimmer_crit)
                             
                             # overflowing light
                             if caster.is_talent_active("Overflowing Light"):
@@ -2283,7 +2237,6 @@ class LightOfDawn(Spell):
                                 caster.healing_by_ability["Overflowing Light"] = caster.healing_by_ability.get("Overflowing Light", 0) + overflowing_light_absorb_value
                                 
                                 update_spell_data_heals(caster.ability_breakdown, "Overflowing Light", glimmer_target, overflowing_light_absorb_value, False)
-                                append_spell_heal_event(caster.events, "Overflowing Light", caster, glimmer_target, overflowing_light_absorb_value, current_time, is_crit=False, is_absorb=True)
                             
                             # beacon of light
                             caster.handle_beacon_healing("Glimmer of Light", glimmer_target, glimmer_heal_value, current_time, spell_display_name="Glimmer of Light (Glistening Radiance)")                   
@@ -2301,15 +2254,13 @@ class LightOfDawn(Spell):
             if caster.is_talent_active("Afterimage"):
                 if "Divine Purpose" not in caster.active_auras:
                     caster.afterimage_counter += self.holy_power_cost
-                caster.events.append(f"{format_time(current_time)}: Afterimage ({caster.afterimage_counter})")
-            
+
             # divine purpose
             if caster.is_talent_active("Divine Purpose") and initial_cast: 
                 if "Divine Purpose" in caster.active_auras:
                     del caster.active_auras["Divine Purpose"]
                     
                     update_self_buff_data(caster.self_buff_breakdown, "Divine Purpose", current_time, "expired")
-                    append_aura_removed_event(caster.events, "Divine Purpose", caster, caster, current_time)
                     self.spell_healing_modifier /= 1.15
                     self.holy_power_cost = 3
                     self.mana_cost = LightOfDawn.MANA_COST
@@ -2326,7 +2277,6 @@ class LightOfDawn(Spell):
                         del caster.active_auras["Awakening"]
                         
                         update_self_buff_data(caster.self_buff_breakdown, "Awakening", current_time, "expired")
-                        append_aura_removed_event(caster.events, "Awakening", caster, caster, current_time)
                         caster.apply_buff_to_self(AwakeningTrigger(), current_time)
                         caster.awakening_trigger_times.update({round(current_time): 1})
                 else:

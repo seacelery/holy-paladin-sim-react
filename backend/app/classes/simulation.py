@@ -585,9 +585,7 @@ class Simulation:
             if buff.duration <= 0:
                 expired_buffs.append(buff_name)
                   
-        for buff_name in expired_buffs:
-            append_aura_removed_event(self.paladin.events, buff_name, self.paladin, self.paladin, self.elapsed_time)
-            
+        for buff_name in expired_buffs: 
             if buff_name == "Tyr's Deliverance (self)":
                 self.paladin.active_auras["Tyr's Deliverance (self)"].trigger_partial_tick(self.paladin, self.elapsed_time)
                                   
@@ -670,10 +668,7 @@ class Simulation:
                         if "Glimmer of Light" in target.target_active_buffs and buff_name == "Glimmer of Light" and self.paladin.set_bonuses["dragonflight_season_3"] >= 2:
                             target.apply_buff_to_target(HolyReverberation(self.paladin), self.elapsed_time, caster=self.paladin)
                             longest_reverberation_duration = max(buff_instance.duration for buff_instance in target.target_active_buffs["Holy Reverberation"]) if "Holy Reverberation" in target.target_active_buffs and target.target_active_buffs["Holy Reverberation"] else None
-                            if "Holy Reverberation" in target.target_active_buffs:
-                                if len(target.target_active_buffs["Holy Reverberation"]) > 0:
-                                    self.paladin.events.append(f"{format_time(self.elapsed_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
-                        append_aura_removed_event(self.paladin.events, buff_name, self.paladin, target, self.elapsed_time)
+                            
                         del target.target_active_buffs[buff_name]
                         
                         if buff_name == "Beacon of Light":
@@ -683,11 +678,6 @@ class Simulation:
                             target.apply_buff_to_target(EternalFlameBuff(self.paladin, 6), self.elapsed_time, caster=self.paladin)
                         
                         update_target_buff_data(self.paladin.target_buff_breakdown, buff_name, self.elapsed_time, "expired", target.name)
-            
-            if "Holy Reverberation" in target.target_active_buffs:
-                longest_reverberation_duration = max(buff_instance.duration for buff_instance in target.target_active_buffs["Holy Reverberation"]) if "Holy Reverberation" in target.target_active_buffs and target.target_active_buffs["Holy Reverberation"] else None            
-                if len(target.target_active_buffs["Holy Reverberation"]) < initial_holy_reverberation_count:
-                    self.paladin.events.append(f"{format_time(self.elapsed_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) on {target.name}: {round(longest_reverberation_duration, 2)}s remaining")             
     
     def decrement_debuffs_on_targets(self):
         for target in self.enemy_targets_list:
@@ -700,12 +690,8 @@ class Simulation:
 
                 if new_debuff_instances:
                     target.target_active_debuffs[debuff_name] = new_debuff_instances
-                    # if "Holy Reverberation" in target.target_active_buffs:
-                    #     self.paladin.events.append(f"{self.elapsed_time}: {len(target.target_active_buffs['Holy Reverberation'])}")
                 else:
                     if debuff_name in target.target_active_debuffs:
-                        self.paladin.events.append(f"{self.elapsed_time}: {debuff_name} REMOVING")
-                        append_aura_removed_event(self.paladin.events, debuff_name, self.paladin, target, self.elapsed_time)
                         del target.target_active_debuffs[debuff_name]
     
     def decrement_summons(self):
@@ -716,9 +702,7 @@ class Simulation:
             if summon.duration <= -0.001:
                 expired_summons.append(summon_name)
                   
-        for summon_name in expired_summons:
-            self.paladin.events.append(f"{format_time(self.elapsed_time)}: {summon_name} ended")
-                
+        for summon_name in expired_summons:         
             self.paladin.active_summons[summon_name].remove_effect(self.paladin)
             del self.paladin.active_summons[summon_name]
             

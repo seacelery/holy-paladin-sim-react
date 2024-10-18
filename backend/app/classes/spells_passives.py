@@ -113,26 +113,30 @@ class AuthorityOfFieryResolve(Spell):
 
 class DivineInspiration(Spell):
     
-    BASE_PPM = 1
+    BASE_PPM = 1.2
     
     def __init__(self, caster):
         super().__init__("Divine Inspiration")
         
-    def apply_effect(self, caster, target, current_time):
-        sacred_weapon = SacredWeaponBuff(caster)
-        holy_bulwark = HolyBulwarkBuff(caster)
+    def apply_effect(self, caster, target, current_time):    
+        chosen_weapon_name = random.choice(["Holy Bulwark", "Sacred Weapon"])
         
-        chosen_weapon = random.choice([sacred_weapon, holy_bulwark])
-        
-        non_weapon_targets = [target for target in caster.potential_healing_targets if chosen_weapon.name not in target.target_active_buffs]
-        
-        chosen_target = random.choice(non_weapon_targets)
-        if chosen_weapon == holy_bulwark:
-            holy_bulwark_initial_absorb = 7000000 * 0.15
+        for _ in range(2):
+            if chosen_weapon_name == "Holy Bulwark":
+                chosen_weapon = HolyBulwarkBuff(caster)
+            else:
+                chosen_weapon = SacredWeaponBuff(caster)
+            
+            non_weapon_targets = [target for target in caster.potential_healing_targets if chosen_weapon.name not in target.target_active_buffs]
+            
+            chosen_target = random.choice(non_weapon_targets)
+            
+            if chosen_weapon_name == "Holy Bulwark":
+                holy_bulwark_initial_absorb = 10000000 * 0.15
 
-            chosen_target.receive_heal(holy_bulwark_initial_absorb, caster)
-            update_spell_data_heals(caster.ability_breakdown, "Holy Bulwark", chosen_target, holy_bulwark_initial_absorb, False)
-        chosen_target.apply_buff_to_target(chosen_weapon, current_time, caster=caster)
+                chosen_target.receive_heal(holy_bulwark_initial_absorb, caster)
+                update_spell_data_heals(caster.ability_breakdown, "Holy Bulwark", chosen_target, holy_bulwark_initial_absorb, False)
+            chosen_target.apply_buff_to_target(chosen_weapon, current_time, caster=caster)
         
         
 class ChirpingRune(Spell):

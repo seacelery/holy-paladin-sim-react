@@ -1,27 +1,27 @@
 const classTalentsLive = [
-    "", "Lay on Hands", "", "Blessing of Freedom", "", "Hammer of Wrath", "",
-    "Improved Cleanse", "", "Auras of the Resolute", "Obduracy", "Crusader Aura", "", "Turn Evil",
-    "", "Fist of Justice", "", "Divine Steed", "", "Greater Judgment", "",
-    "Repentance/Blinding Light", "", "Cavalier", "", "Seasoned Warhorse", "", "Rebuke",
-    "", "Holy Aegis", "", "Avenging Wrath", "", "Justification", "Punishment",
-    "Golden Path", "Echoing Blessings", "Blessing of Sacrifice", "Sanctified Plates", "Blessing of Protection", "", "Lightforged Blessing",
-    "Seal of Mercy", "Afterimage", "Sacrifice of the Just/Recompense", "Unbreakable Spirit", "Improved Blessing of Protection", "Touch of Light", "",
-    "Strength of Conviction", "Judgment of Light", "Seal of Might", "Divine Purpose", "Seal of Alacrity", "Incandescence", "Faith's Armor",
-    "", "Of Dusk and Dawn", "", "Divine Toll", "", "Seal of the Crusader", "",
-    "", "Seal of Order/Fading Light", "", "Divine Resonance/Quickened Invocation", "", "Vanguard's Momentum", ""
+    "", "Lay on Hands", "", "Auras of the Resolute", "", "Hammer of Wrath", "", // 1
+    "Improved Cleanse", "Empyreal Ward", "Fist of Justice", "", "Repentance/Blinding Light", "", "Turn Evil", // 2
+    "A Just Reward", "Afterimage", "", "Divine Steed", "Light's Countenance", "Greater Judgment", "Wrench Evil/Stand Against Evil", // 3
+    "Holy Reprieve", "", "Cavalier", "Divine Spurs", "Steed of Liberty/Blessing of Freedom", "", "Rebuke", // 4
+    "", "Obduracy", "", "Divine Toll", "Echoing Blessings", "Sanctified Plates", "Punishment", // 5
+    "Divine Reach", "", "Blessing of Sacrifice", "Divine Resonance/Quickened Invocation", "Blessing of Protection", "", "Consecrated Ground", // 6
+    "", "Holy Aegis", "Sacrifice of the Just/Recompense", "Sacred Strength/Divine Purpose", "Improved Blessing of Protection", "Unbreakable Spirit", "", // 7
+    "Lightforged Blessing", "Lead the Charge", "Worthy Sacrifice/Righteous Protection", "Holy Ritual", "Blessed Calling", "Inspired Guard", "Judgment of Light", // 8
+    "Faith's Armor", "Stoicism", "Seal of Might", "Seal of the Crusader", "Vengeful Wrath", "Eye for an Eye", "Golden Path/Selfless Healer", // 9
+    "", "Of Dusk and Dawn", "", "Lightbearer", "", "Light's Revocation", "" // 10
 ];
 
 const classTalentsPTR = [
-    "", "Lay on Hands", "", "Blessing of Freedom", "", "Hammer of Wrath", "",
-    "Improved Cleanse", "", "Auras of the Resolute", "Obduracy", "Crusader Aura", "", "Turn Evil",
-    "", "Fist of Justice", "", "Divine Steed", "", "Greater Judgment", "",
-    "Repentance/Blinding Light", "", "Cavalier", "", "Seasoned Warhorse", "", "Rebuke",
-    "", "Holy Aegis", "", "Avenging Wrath", "", "Justification", "Punishment",
-    "Golden Path", "Echoing Blessings", "Blessing of Sacrifice", "Sanctified Plates", "Blessing of Protection", "", "Lightforged Blessing",
-    "Seal of Mercy", "Afterimage", "Sacrifice of the Just/Recompense", "Unbreakable Spirit", "Improved Blessing of Protection", "Touch of Light", "",
-    "Strength of Conviction", "Judgment of Light", "Seal of Might", "Divine Purpose", "Seal of Alacrity", "Incandescence", "Faith's Armor",
-    "", "Of Dusk and Dawn", "", "Divine Toll", "", "Seal of the Crusader", "",
-    "", "Seal of Order/Fading Light", "", "Divine Resonance/Quickened Invocation", "", "Vanguard's Momentum", ""
+    "", "Lay on Hands", "", "Auras of the Resolute", "", "Hammer of Wrath", "", // 1
+    "Improved Cleanse", "Empyreal Ward", "Fist of Justice", "", "Repentance/Blinding Light", "", "Turn Evil", // 2
+    "A Just Reward", "Afterimage", "", "Divine Steed", "Light's Countenance", "Greater Judgment", "Wrench Evil/Stand Against Evil", // 3
+    "Holy Reprieve", "", "Cavalier", "Divine Spurs", "Steed of Liberty/Blessing of Freedom", "", "Rebuke", // 4
+    "", "Obduracy", "", "Divine Toll", "Echoing Blessings", "Sanctified Plates", "Punishment", // 5
+    "Divine Reach", "", "Blessing of Sacrifice", "Divine Resonance/Quickened Invocation", "Blessing of Protection", "", "Consecrated Ground", // 6
+    "", "Holy Aegis", "Sacrifice of the Just/Recompense", "Sacred Strength/Divine Purpose", "Improved Blessing of Protection", "Unbreakable Spirit", "", // 7
+    "Lightforged Blessing", "Lead the Charge", "Worthy Sacrifice/Righteous Protection", "Holy Ritual", "Blessed Calling", "Inspired Guard", "Judgment of Light", // 8
+    "Faith's Armor", "Stoicism", "Seal of Might", "Seal of the Crusader", "Vengeful Wrath", "Eye for an Eye", "Golden Path/Selfless Healer", // 9
+    "", "Of Dusk and Dawn", "", "Lightbearer", "", "Light's Revocation", "" // 10
 ];
 
 const specTalentsLive = [
@@ -53,142 +53,164 @@ const specTalentsPTR = [
 let baseClassTalentsLive = {
     "row1": {
         "Lay on Hands": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Blessing of Freedom": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Auras of the Resolute": {"ranks": {"current rank": 0, "max rank": 1}},
         "Hammer of Wrath": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row2": {
         "Improved Cleanse": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Auras of the Resolute": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Obduracy": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Crusader Aura": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Empyreal Ward": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Fist of Justice": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Repentance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Blinding Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Turn Evil": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row3": {
-        "Fist of Justice": {"ranks": {"current rank": 0, "max rank": 2}},
+        "A Just Reward": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Afterimage": {"ranks": {"current rank": 0, "max rank": 1}},
         "Divine Steed": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Greater Judgment": {"ranks": {"current rank": 0, "max rank": 1}}
+        "Light's Countenance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Greater Judgment": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Wrench Evil": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Stand Against Evil": {"ranks": {"current rank": 0, "max rank": 1}},
     },
     "row4": {
-        "Repentance": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Blinding Light": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Holy Reprieve": {"ranks": {"current rank": 0, "max rank": 1}},
         "Cavalier": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Seasoned Warhorse": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Spurs": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Steed of Liberty": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Blessing of Freedom": {"ranks": {"current rank": 0, "max rank": 1}},
         "Rebuke": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row5": {
-        "Holy Aegis": {"ranks": {"current rank": 0, "max rank": 2}},
-        "Avenging Wrath": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Justification": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Punishment": {"ranks": {"current rank": 0, "max rank": 1}}
+        "Obduracy": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Toll": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Echoing Blessings": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Sanctified Plates": {"ranks": {"current rank": 0, "max rank": 2}},
+        "Punishment": {"ranks": {"current rank": 0, "max rank": 1}},
     },
     "row6": {
-        "Golden Path": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Echoing Blessings": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Reach": {"ranks": {"current rank": 0, "max rank": 1}},
         "Blessing of Sacrifice": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Sanctified Plates": {"ranks": {"current rank": 0, "max rank": 2}},
-        "Blessing of Protection": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Lightforged Blessing": {"ranks": {"current rank": 0, "max rank": 1}}
-    },
-    "row7": {
-        "Seal of Mercy": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Afterimage": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Sacrifice of the Just": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Recompense": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Unbreakable Spirit": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Improved Blessing of Protection": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Touch of Light": {"ranks": {"current rank": 0, "max rank": 1}}
-    },
-    "row8": {
-        "Strength of Conviction": {"ranks": {"current rank": 0, "max rank": 2}},
-        "Judgment of Light": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Seal of Might": {"ranks": {"current rank": 0, "max rank": 2}},
-        "Divine Purpose": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Seal of Alacrity": {"ranks": {"current rank": 0,"max rank": 2}},
-        "Incandescence": {"ranks": {"current rank": 0,"max rank": 1}},
-        "Faith's Armor": {"ranks": {"current rank": 0,"max rank": 1}}
-    },
-    "row9": {
-        "Of Dusk and Dawn": {"ranks": {"current rank": 0,"max rank": 1}},
-        "Divine Toll": {"ranks": {"current rank": 0,"max rank": 1}},
-        "Seal of the Crusader": {"ranks": {"current rank": 0,"max rank": 2}}
-    },
-    "row10": {
-        "Seal of Order": {"ranks": {"current rank": 0,"max rank": 1}},
-        "Fading Light": {"ranks": {"current rank": 0,"max rank": 1}},
         "Divine Resonance": {"ranks": {"current rank": 0,"max rank": 1}},
         "Quickened Invocation": {"ranks": {"current rank": 0,"max rank": 1}},
-        "Vanguard's Momentum": {"ranks": {"current rank": 0,"max rank": 1}}
+        "Blessing of Protection": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Consecrated Ground": {"ranks": {"current rank": 0, "max rank": 1}}
+    },
+    "row7": {
+        "Holy Aegis": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Sacrifice of the Just": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Recompense": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Sacred Strength": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Purpose": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Improved Blessing of Protection": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Unbreakable Spirit": {"ranks": {"current rank": 0, "max rank": 1}},
+    },
+    "row8": {
+        "Lightforged Blessing": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Lead the Charge": {"ranks": {"current rank": 0,"max rank": 2}},
+        "Worthy Sacrifice": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Righteous Protection": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Holy Ritual": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Blessed Calling": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Inspired Guard": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Judgment of Light": {"ranks": {"current rank": 0, "max rank": 1}},
+    },
+    "row9": {
+        "Faith's Armor": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Stoicism": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Seal of Might": {"ranks": {"current rank": 0, "max rank": 2}},
+        "Seal of the Crusader": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Vengeful Wrath": {"ranks": {"current rank": 0, "max rank": 2}},
+        "Eye for an Eye": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Golden Path": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Selfless Healer": {"ranks": {"current rank": 0,"max rank": 1}},
+    },
+    "row10": {
+        "Of Dusk and Dawn": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Lightbearer": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Light's Revocation": {"ranks": {"current rank": 0,"max rank": 1}}
     }
 };
 
 let baseClassTalentsPTR = {
     "row1": {
         "Lay on Hands": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Blessing of Freedom": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Auras of the Resolute": {"ranks": {"current rank": 0, "max rank": 1}},
         "Hammer of Wrath": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row2": {
         "Improved Cleanse": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Auras of the Resolute": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Obduracy": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Crusader Aura": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Empyreal Ward": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Fist of Justice": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Repentance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Blinding Light": {"ranks": {"current rank": 0, "max rank": 1}},
         "Turn Evil": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row3": {
-        "Fist of Justice": {"ranks": {"current rank": 0, "max rank": 2}},
+        "A Just Reward": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Afterimage": {"ranks": {"current rank": 0, "max rank": 1}},
         "Divine Steed": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Greater Judgment": {"ranks": {"current rank": 0, "max rank": 1}}
+        "Light's Countenance": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Greater Judgment": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Wrench Evil": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Stand Against Evil": {"ranks": {"current rank": 0, "max rank": 1}},
     },
     "row4": {
-        "Repentance": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Blinding Light": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Holy Reprieve": {"ranks": {"current rank": 0, "max rank": 1}},
         "Cavalier": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Seasoned Warhorse": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Spurs": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Steed of Liberty": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Blessing of Freedom": {"ranks": {"current rank": 0, "max rank": 1}},
         "Rebuke": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row5": {
-        "Holy Aegis": {"ranks": {"current rank": 0, "max rank": 2}},
-        "Avenging Wrath": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Justification": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Punishment": {"ranks": {"current rank": 0, "max rank": 1}}
+        "Obduracy": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Toll": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Echoing Blessings": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Sanctified Plates": {"ranks": {"current rank": 0, "max rank": 2}},
+        "Punishment": {"ranks": {"current rank": 0, "max rank": 1}},
     },
     "row6": {
-        "Golden Path": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Echoing Blessings": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Reach": {"ranks": {"current rank": 0, "max rank": 1}},
         "Blessing of Sacrifice": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Sanctified Plates": {"ranks": {"current rank": 0, "max rank": 2}},
-        "Blessing of Protection": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Lightforged Blessing": {"ranks": {"current rank": 0, "max rank": 1}}
-    },
-    "row7": {
-        "Seal of Mercy": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Afterimage": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Sacrifice of the Just": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Recompense": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Unbreakable Spirit": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Improved Blessing of Protection": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Touch of Light": {"ranks": {"current rank": 0, "max rank": 1}}
-    },
-    "row8": {
-        "Strength of Conviction": {"ranks": {"current rank": 0, "max rank": 2}},
-        "Judgment of Light": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Seal of Might": {"ranks": {"current rank": 0, "max rank": 2}},
-        "Divine Purpose": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Seal of Alacrity": {"ranks": {"current rank": 0,"max rank": 2}},
-        "Incandescence": {"ranks": {"current rank": 0,"max rank": 1}},
-        "Faith's Armor": {"ranks": {"current rank": 0,"max rank": 1}}
-    },
-    "row9": {
-        "Of Dusk and Dawn": {"ranks": {"current rank": 0,"max rank": 1}},
-        "Divine Toll": {"ranks": {"current rank": 0,"max rank": 1}},
-        "Seal of the Crusader": {"ranks": {"current rank": 0,"max rank": 2}}
-    },
-    "row10": {
-        "Seal of Order": {"ranks": {"current rank": 0,"max rank": 1}},
-        "Fading Light": {"ranks": {"current rank": 0,"max rank": 1}},
         "Divine Resonance": {"ranks": {"current rank": 0,"max rank": 1}},
         "Quickened Invocation": {"ranks": {"current rank": 0,"max rank": 1}},
-        "Vanguard's Momentum": {"ranks": {"current rank": 0,"max rank": 1}}
+        "Blessing of Protection": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Consecrated Ground": {"ranks": {"current rank": 0, "max rank": 1}}
+    },
+    "row7": {
+        "Holy Aegis": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Sacrifice of the Just": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Recompense": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Sacred Strength": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Divine Purpose": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Improved Blessing of Protection": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Unbreakable Spirit": {"ranks": {"current rank": 0, "max rank": 1}},
+    },
+    "row8": {
+        "Lightforged Blessing": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Lead the Charge": {"ranks": {"current rank": 0,"max rank": 2}},
+        "Worthy Sacrifice": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Righteous Protection": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Holy Ritual": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Blessed Calling": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Inspired Guard": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Judgment of Light": {"ranks": {"current rank": 0, "max rank": 1}},
+    },
+    "row9": {
+        "Faith's Armor": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Stoicism": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Seal of Might": {"ranks": {"current rank": 0, "max rank": 2}},
+        "Seal of the Crusader": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Vengeful Wrath": {"ranks": {"current rank": 0, "max rank": 2}},
+        "Eye for an Eye": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Golden Path": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Selfless Healer": {"ranks": {"current rank": 0,"max rank": 1}},
+    },
+    "row10": {
+        "Of Dusk and Dawn": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Lightbearer": {"ranks": {"current rank": 0,"max rank": 1}},
+        "Light's Revocation": {"ranks": {"current rank": 0,"max rank": 1}}
     }
 };
         
@@ -344,51 +366,59 @@ let baseSpecTalentsPTR = {
 
 const classTalentsArrowsLive = {
     "down": [
-        "Blessing of Freedom", "Obduracy", "Rebuke", "Holy Aegis", "Avenging Wrath", "Punishment", "Golden Path", "Echoing Blessings",
-        "Blessing of Sacrifice", "Sanctified Plates", "Blessing of Protection", "Seal of Mercy", "Afterimage",
-        "Sacrifice of the Just/Recompense", "Unbreakable Spirit", "Improved Blessing of Protection", "Touch of Light", "Judgment of Light",
-        "Divine Purpose", "Incandescence", "Of Dusk and Dawn", "Divine Toll", "Seal of the Crusader"
+        "Lay on Hands", "Improved Cleanse", "Empyreal Ward", "Repentance/Blinding Light", "Turn Evil", "A Just Reward",
+        "Divine Steed", "Wrench Evil/Stand Against Evil", "Steed of Liberty/Blessing of Freedom", "Rebuke", "Divine Toll", 
+        "Echoing Blessings", "Punishment", "Blessing of Sacrifice", "Blessing of Protection", "Holy Aegis", 
+        "Sacrifice of the Just/Recompense", "Sacred Strength/Divine Purpose", "Improved Blessing of Protection", 
+        "Unbreakable Spirit", "Lightforged Blessing", "Lead the Charge", "Worthy Sacrifice/Righteous Protection",
+        "Holy Ritual", "Blessed Calling", "Inspired Guard", "Judgment of Light", "Stoicism", "Seal of the Crusader",
+        "Eye for an Eye"
     ],
     "downLong": [
-        "Lay on Hands", "Hammer of Wrath", "Improved Cleanse", "Turn Evil", "Fist of Justice", "Greater Judgment", "Repentance/Blinding Light",
-        "Lightforged Blessing",
+        "Auras of the Resolute", "Hammer of Wrath", "Afterimage", "Greater Judgment", "Holy Reprieve", "Cavalier", "Obduracy",
+        "Sanctified Plates", "Divine Reach", "Consecrated Ground", 
     ],
     "left": [
-        "Lay on Hands", "Blessing of Freedom", "Hammer of Wrath", "Auras of the Resolute", "Crusader Aura", "Turn Evil", "Fist of Justice", 
-        "Cavalier", "Divine Steed", "Seasoned Warhorse", "Rebuke", "Holy Aegis", "Avenging Wrath", "Justification", "Blessing of Sacrifice", 
-        "Blessing of Protection", "Lightforged Blessing", "Afterimage", "Sacrifice of the Just/Recompense", "Unbreakable Spirit", "Seal of Might", 
-        "Seal of Alacrity", "Faith's Armor"
+        "Lay on Hands", "Auras of the Resolute", "Hammer of Wrath", "Fist of Justice", "Repentance/Blinding Light", "Afterimage",
+        "Divine Steed", "Cavalier", "Steed of Liberty/Blessing of Freedom", "Rebuke", "Obduracy", "Divine Toll", "Sanctified Plates", 
+        "Blessing of Sacrifice", "Blessing of Protection", "Consecrated Ground", "Holy Aegis", "Sacrifice of the Just/Recompense", 
+        "Lead the Charge", "Holy Ritual", "Inspired Guard", "Seal of Might", "Vengeful Wrath", "Golden Path/Selfless Healer"
     ],
     "right": [
-        "Lay on Hands", "Blessing of Freedom", "Hammer of Wrath", "Auras of the Resolute", "Crusader Aura", "Divine Steed",
-        "Greater Judgment", "Repentance/Blinding Light", "Cavalier", "Seasoned Warhorse", "Holy Aegis", "Avenging Wrath", "Justification",
-        "Golden Path", "Blessing of Sacrifice", "Blessing of Protection", "Unbreakable Spirit", "Improved Blessing of Protection",
-        "Touch of Light", "Strength of Conviction", "Seal of Might", "Seal of Alacrity"
+        "Lay on Hands", "Auras of the Resolute", "Hammer of Wrath", "Improved Cleanse", "Fist of Justice", "Repentance/Blinding Light", 
+        "Divine Steed", "Greater Judgment", "Holy Reprieve", "Cavalier", "Steed of Liberty/Blessing of Freedom", "Obduracy",
+        "Divine Toll", "Sanctified Plates", "Divine Reach", "Blessing of Sacrifice", "Blessing of Protection", "Sacrifice of the Just/Recompense", 
+        "Sacred Strength/Divine Purpose", "Improved Blessing of Protection", "Unbreakable Spirit", "Lead the Charge", "Holy Ritual", 
+        "Inspired Guard", "Faith's Armor", "Seal of Might", "Vengeful Wrath"
     ]
 };
 
 const classTalentsArrowsPTR = {
     "down": [
-        "Blessing of Freedom", "Obduracy", "Rebuke", "Holy Aegis", "Avenging Wrath", "Punishment", "Golden Path", "Echoing Blessings",
-        "Blessing of Sacrifice", "Sanctified Plates", "Blessing of Protection", "Seal of Mercy", "Afterimage",
-        "Sacrifice of the Just/Recompense", "Unbreakable Spirit", "Improved Blessing of Protection", "Touch of Light", "Judgment of Light",
-        "Divine Purpose", "Incandescence", "Of Dusk and Dawn", "Divine Toll", "Seal of the Crusader"
+        "Lay on Hands", "Improved Cleanse", "Empyreal Ward", "Repentance/Blinding Light", "Turn Evil", "A Just Reward",
+        "Divine Steed", "Wrench Evil/Stand Against Evil", "Steed of Liberty/Blessing of Freedom", "Rebuke", "Divine Toll", 
+        "Echoing Blessings", "Punishment", "Blessing of Sacrifice", "Blessing of Protection", "Holy Aegis", 
+        "Sacrifice of the Just/Recompense", "Sacred Strength/Divine Purpose", "Improved Blessing of Protection", 
+        "Unbreakable Spirit", "Lightforged Blessing", "Lead the Charge", "Worthy Sacrifice/Righteous Protection",
+        "Holy Ritual", "Blessed Calling", "Inspired Guard", "Judgment of Light", "Stoicism", "Seal of the Crusader",
+        "Eye for an Eye"
     ],
     "downLong": [
-        "Lay on Hands", "Hammer of Wrath", "Improved Cleanse", "Turn Evil", "Fist of Justice", "Greater Judgment", "Repentance/Blinding Light",
-        "Lightforged Blessing",
+        "Auras of the Resolute", "Hammer of Wrath", "Afterimage", "Greater Judgment", "Holy Reprieve", "Cavalier", "Obduracy",
+        "Sanctified Plates", "Divine Reach", "Consecrated Ground", 
     ],
     "left": [
-        "Lay on Hands", "Blessing of Freedom", "Hammer of Wrath", "Auras of the Resolute", "Crusader Aura", "Turn Evil", "Fist of Justice", 
-        "Cavalier", "Divine Steed", "Seasoned Warhorse", "Rebuke", "Holy Aegis", "Avenging Wrath", "Justification", "Blessing of Sacrifice", 
-        "Blessing of Protection", "Lightforged Blessing", "Afterimage", "Sacrifice of the Just/Recompense", "Unbreakable Spirit", "Seal of Might", 
-        "Seal of Alacrity", "Faith's Armor"
+        "Lay on Hands", "Auras of the Resolute", "Hammer of Wrath", "Fist of Justice", "Repentance/Blinding Light", "Afterimage",
+        "Divine Steed", "Cavalier", "Steed of Liberty/Blessing of Freedom", "Rebuke", "Obduracy", "Divine Toll", "Sanctified Plates", 
+        "Blessing of Sacrifice", "Blessing of Protection", "Consecrated Ground", "Holy Aegis", "Sacrifice of the Just/Recompense", 
+        "Lead the Charge", "Holy Ritual", "Inspired Guard", "Seal of Might", "Vengeful Wrath", "Golden Path/Selfless Healer"
     ],
     "right": [
-        "Lay on Hands", "Blessing of Freedom", "Hammer of Wrath", "Auras of the Resolute", "Crusader Aura", "Divine Steed",
-        "Greater Judgment", "Repentance/Blinding Light", "Cavalier", "Seasoned Warhorse", "Holy Aegis", "Avenging Wrath", "Justification",
-        "Golden Path", "Blessing of Sacrifice", "Blessing of Protection", "Unbreakable Spirit", "Improved Blessing of Protection",
-        "Touch of Light", "Strength of Conviction", "Seal of Might", "Seal of Alacrity"
+        "Lay on Hands", "Auras of the Resolute", "Hammer of Wrath", "Improved Cleanse", "Fist of Justice", "Repentance/Blinding Light", 
+        "Divine Steed", "Greater Judgment", "Holy Reprieve", "Cavalier", "Steed of Liberty/Blessing of Freedom", "Obduracy",
+        "Divine Toll", "Sanctified Plates", "Divine Reach", "Blessing of Sacrifice", "Blessing of Protection", "Sacrifice of the Just/Recompense", 
+        "Sacred Strength/Divine Purpose", "Improved Blessing of Protection", "Unbreakable Spirit", "Lead the Charge", "Holy Ritual", 
+        "Inspired Guard", "Faith's Armor", "Seal of Might", "Vengeful Wrath"
     ]
 };
 
@@ -449,9 +479,17 @@ const specTalentsArrowsPTR = {
 };
 
 const heroTalentsLightsmithLive = [
-    "", "Holy Bulwark", "",
+    "", "Holy Armaments", "",
     "Rite of Sanctification/Rite of Adjuration", "Solidarity", "Divine Guidance/Blessed Assurance",
-    "Laying Down Arms", "Divine Inspiration/Forewarning", "Fear No Evil/Excoriation",
+    "Laying Down Arms", "Divine Inspiration/Forewarning", "Authoritative Rebuke/Tempered in Battle",
+    "Shared Resolve", "Valiance", "Hammer and Anvil",
+    "", "Blessing of the Forge", ""
+];
+
+const heroTalentsLightsmithPTR = [
+    "", "Holy Armaments", "",
+    "Rite of Sanctification/Rite of Adjuration", "Solidarity", "Divine Guidance/Blessed Assurance",
+    "Laying Down Arms", "Divine Inspiration/Forewarning", "Authoritative Rebuke/Tempered in Battle",
     "Shared Resolve", "Valiance", "Hammer and Anvil",
     "", "Blessing of the Forge", ""
 ];
@@ -464,14 +502,6 @@ const heroTalentsHeraldOfTheSunLive = [
     "", "Sun's Avatar", ""
 ];
 
-const heroTalentsLightsmithPTR = [
-    "", "Holy Bulwark", "",
-    "Rite of Sanctification/Rite of Adjuration", "Solidarity", "Divine Guidance/Blessed Assurance",
-    "Laying Down Arms", "Divine Inspiration/Forewarning", "Fear No Evil/Excoriation",
-    "Shared Resolve", "Valiance", "Hammer and Anvil",
-    "", "Blessing of the Forge", ""
-];
-
 const heroTalentsHeraldOfTheSunPTR = [
     "", "Dawnlight", "",
     "Morning Star/Gleaming Rays", "Eternal Flame", "Luminosity",
@@ -482,7 +512,7 @@ const heroTalentsHeraldOfTheSunPTR = [
 
 let baseLightsmithTalents = {
     "row1": {
-        "Holy Bulwark": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Holy Armaments": {"ranks": {"current rank": 0, "max rank": 1}},
     },
     "row2": {
         "Rite of Sanctification": {"ranks": {"current rank": 0, "max rank": 1}},
@@ -495,8 +525,8 @@ let baseLightsmithTalents = {
         "Laying Down Arms": {"ranks": {"current rank": 0, "max rank": 1}},
         "Divine Inspiration": {"ranks": {"current rank": 0, "max rank": 1}},
         "Forewarning": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Fear No Evil": {"ranks": {"current rank": 0, "max rank": 1}},
-        "Excoriation": {"ranks": {"current rank": 0, "max rank": 1}}
+        "Authoritative Rebuke": {"ranks": {"current rank": 0, "max rank": 1}},
+        "Tempered in Battle": {"ranks": {"current rank": 0, "max rank": 1}}
     },
     "row4": {
         "Shared Resolve": {"ranks": {"current rank": 0, "max rank": 1}},
@@ -510,27 +540,27 @@ let baseLightsmithTalents = {
 
 const lightsmithTalentsArrowsLive = {
     "down": [
-        "Holy Bulwark", "Rite of Sanctification/Rite of Adjuration", "Solidarity", "Divine Guidance/Blessed Assurance",
-        "Laying Down Arms", "Divine Inspiration/Forewarning", "Fear No Evil/Excoriation", "Valiance"
+        "Holy Armaments", "Rite of Sanctification/Rite of Adjuration", "Solidarity", "Divine Guidance/Blessed Assurance",
+        "Laying Down Arms", "Divine Inspiration/Forewarning", "Authoritative Rebuke/Tempered in Battle", "Valiance"
     ],
     "left": [
-        "Holy Bulwark", "Hammer and Anvil"
+        "Holy Armaments", "Hammer and Anvil"
     ],
     "right": [
-        "Holy Bulwark", "Shared Resolve"
+        "Holy Armaments", "Shared Resolve"
     ]
 };
 
 const lightsmithTalentsArrowsPTR = {
     "down": [
-        "Holy Bulwark", "Rite of Sanctification/Rite of Adjuration", "Solidarity", "Divine Guidance/Blessed Assurance",
-        "Laying Down Arms", "Divine Inspiration/Forewarning", "Fear No Evil/Excoriation", "Valiance"
+        "Holy Armaments", "Rite of Sanctification/Rite of Adjuration", "Solidarity", "Divine Guidance/Blessed Assurance",
+        "Laying Down Arms", "Divine Inspiration/Forewarning", "Authoritative Rebuke/Tempered in Battle", "Valiance"
     ],
     "left": [
-        "Holy Bulwark", "Hammer and Anvil"
+        "Holy Armaments", "Hammer and Anvil"
     ],
     "right": [
-        "Holy Bulwark", "Shared Resolve"
+        "Holy Armaments", "Shared Resolve"
     ]
 };
 

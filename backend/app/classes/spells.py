@@ -50,7 +50,6 @@ class Spell:
     def start_cast_time(self, caster, ability, current_time):
         caster.currently_casting = ability.name
         caster.remaining_cast_time = self.calculate_cast_time(caster, ability.hasted_cast_time)
-        append_spell_started_casting_event(caster.events, caster, ability, current_time)
         
         self_auras, _, total_target_aura_counts, spell_cooldowns, current_stats = self.collect_priority_breakdown_data(caster, exclude_target_auras=True)
         
@@ -112,9 +111,6 @@ class Spell:
                 caster.mana -= mana_cost
             update_spell_data_casts(caster.ability_breakdown, self.name, mana_cost, self.holy_power_gain, self.holy_power_cost)
             update_spell_data_heals(caster.ability_breakdown, self.name, target, 0, is_crit)        
-            
-            append_spell_damage_event(caster.events, self.name, caster, target, damage_value, current_time, is_crit, spends_mana=True)     
-            append_spell_cast_event(caster.ability_cast_events, self.name, caster, current_time, target) 
             
             if is_crit:
                 spell_crit = True   
@@ -228,10 +224,6 @@ class Spell:
         
                 # add the target, healing, crit status, and increment hits
                 update_spell_data_heals(caster.ability_breakdown, self.name, target, ability_healing, is_crit)
-                
-                append_spell_heal_event(caster.events, self.name, caster, target, ability_healing, current_time, is_crit, spends_mana=True)   
-                append_spell_cast_event(caster.ability_cast_events, self.name, caster, current_time, target)    
-                
                 caster.handle_beacon_healing(self.name, target, healing_value, current_time)
                    
             if self.healing_target_count > 1:
@@ -308,7 +300,7 @@ class Spell:
             caster.active_auras["Power of the Silver Hand Stored Healing"].stored_healing += heal_amount * 0.2 * spell_overhealing_multiplier
             caster.active_auras["Power of the Silver Hand Stored Healing"].duration = caster.active_auras["Power of the Silver Hand Stored Healing"].base_duration
         
-        heal_amount *= 0.94
+        heal_amount *= 0.9682
             
         if self.name in leech_abilities:   
             leech_multiplier = 0.7
@@ -353,7 +345,6 @@ class Spell:
     def reset_cooldown(self, caster, current_time):
         caster.holy_shock_resets += 1
         
-        caster.events.append(f"{format_time(current_time)}: {self.name}'s cooldown was reset")
         if self.current_charges < self.max_charges:
             self.current_charges += 1
             if self.current_charges == self.max_charges:
@@ -380,7 +371,6 @@ class Spell:
             update_target_buff_data(caster.target_buff_breakdown, new_buff.name, current_time, "applied", target.name, new_buff.duration, new_buff.current_stacks)
 
         longest_reverberation_duration = max(buff.duration for buff in target.target_active_buffs["Holy Reverberation"])
-        caster.events.append(f"{format_time(current_time)}: Holy Reverberation ({len(target.target_active_buffs['Holy Reverberation'])}) applied to {target.name}: {longest_reverberation_duration}s duration")
         
     def try_trigger_rppm_effects(self, caster, targets, current_time):
         from .spells_passives import (
@@ -426,7 +416,6 @@ class Spell:
                     target.receive_heal(effect_heal, caster)
                     
                     update_spell_data_heals(caster.ability_breakdown, effect.name, target, effect_heal, is_crit)
-                    append_spell_heal_event(caster.events, effect.name, caster, target, effect_heal, current_time, is_crit)
                 elif is_other_effect:
                     effect.apply_effect(caster, target, current_time)
                     
@@ -448,15 +437,16 @@ class Spell:
             return proc_occurred
         
         # talents
-        if caster.is_talent_active("Touch of Light"):        
-            touch_of_light = TouchOfLight(caster)        
-            try_proc_rppm_effect(touch_of_light, is_heal=True, exclude_mastery=True)
+        # touch of light (removed)
+        # if caster.is_talent_active("Touch of Light"):        
+        #     touch_of_light = TouchOfLight(caster)        
+        #     try_proc_rppm_effect(touch_of_light, is_heal=True, exclude_mastery=True)
             
         if caster.is_talent_active("Power of the Silver Hand") and (self.name == "Holy Light" or self.name == "Flash of Light" or self.name == "Judgment"):
             power_of_the_silver_hand = PowerOfTheSilverHand()
             try_proc_rppm_effect(power_of_the_silver_hand, is_hasted=False, is_self_buff=True)
             
-        if caster.is_talent_active("Holy Bulwark"):
+        if caster.is_talent_active("Holy Armaments"):
             sacred_weapon_targets = [target for target in caster.potential_healing_targets if "Sacred Weapon" in target.target_active_buffs]
             if len(sacred_weapon_targets) == 2:
                 sacred_weapon_1 = SacredWeapon(caster, 1)
@@ -470,7 +460,7 @@ class Spell:
         
         if caster.is_talent_active("Divine Inspiration"):
             divine_inspiration = DivineInspiration(caster)
-            try_proc_rppm_effect(divine_inspiration, is_hasted=False, is_other_effect=True)
+            try_proc_rppm_effect(divine_inspiration, is_hasted=True, is_other_effect=True)
             
         if caster.is_talent_active("Rite of Adjuration") and (self.name == "Light of Dawn" or self.name == "Word of Glory"):
             rite_of_adjuration = RiteOfAdjurationSpell(caster)

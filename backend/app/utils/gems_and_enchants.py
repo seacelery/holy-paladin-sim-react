@@ -64,6 +64,8 @@ def return_enchants_stats(player, formatted_enchants, bonus_effect_enchants, sta
             stat_values_from_equipment["leech"] += 200
         elif enchant == "Chant of Armored Leech":
             stat_values_from_equipment["leech"] += 2040
+        elif enchant == "+2040 Leech":
+            stat_values_from_equipment["leech"] += 2040
         elif enchant == "Watcher's Loam":
             stat_values_from_equipment["stamina"] += 131
         elif enchant == "Defender's March":
